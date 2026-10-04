@@ -1,0 +1,82 @@
+{
+  "schema": 1,
+  "device": "xiaomi-sea",
+  "sources": [
+    {
+      "name": "Xiaomi official kernel source",
+      "origin": "official",
+      "url": "https://github.com/MiCode/Xiaomi_Kernel_OpenSource.git",
+      "ref": "sea-t-oss",
+      "commit": "6f6b84e0e2fa8d474db66798a051ec1835257729",
+      "license": "GPL-2.0-only with Linux syscall exception as supplied by source",
+      "redistribution": "public-source",
+      "use": "authoritative kernel/DTS baseline",
+      "file_sha256": {
+        "arch/arm64/boot/dts/mediatek/sea.dts": "a17e4aa238006313dccea87e051fdada7ae6a97d97c8f56a46fa6cf52297bb85",
+        "arch/arm64/boot/dts/mediatek/k6781v1_64_k419.dts": "d5c56bd88161484e682876674f1014cf76e17b98f2cc682702a2edf85d676a1b"
+      }
+    },
+    {
+      "name": "Android Clang prebuilt",
+      "origin": "official",
+      "url": "https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+/refs/tags/android-s-v2-beta-2/clang-r433403b",
+      "ref": "android-s-v2-beta-2",
+      "commit": "0625305092d0cfa7e28b0e1b268aff1d3d751eca",
+      "version": "Android clang 13.0.3 based on LLVM d3e1bef2bc2bdec355d4fd0163aeb0aabbe4b66c",
+      "license": "Apache-2.0 and component licenses in prebuilt NOTICE files",
+      "redistribution": "public-prebuilt",
+      "use": "vendor LLVM build profile for Android T",
+      "sha256": {
+        "clang": "ea2fd6ab23df6601d88d0198fd3444e608b08341a2da5c0d219f708ac93c944e",
+        "ld.lld": "a2abf2aca9ff6e7545676cac2cbd2759dd11d98572c84c13e5709d192a430b74",
+        "clang_source_info.md": "a0c91e1ff82e9c3da3b335f056dc14c9afa5a89e75c3c01ebe42d2480dea86d"
+      }
+    },
+    {
+      "name": "GNU AArch64 cross compiler",
+      "origin": "vendor build profile",
+      "url": "https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-gnu-6.3.1/",
+      "ref": "6.3.1",
+      "license": "GCC runtime and component licenses",
+      "redistribution": "source-only",
+      "use": "legacy GCC fallback declared by build.config.mtk.aarch64.gcc; not the preferred Android T profile"
+    },
+    {
+      "name": "mt6781-sea community kernel tree",
+      "origin": "community",
+      "url": "https://github.com/mt6781-sea/android_kernel_xiaomi_mt6781",
+      "ref": "lineage-23.2",
+      "commit": "ae44e42c393b44b1534a7fcd7065366abe6bfe65",
+      "license": "GPL-2.0-only as supplied by kernel COPYING",
+      "redistribution": "public-source",
+      "use": "research comparison only; never copied into official source",
+      "cust_dtsi_sha256": "9ba54ed35a7ecb82c9b2d9ee5ed651162d8ca689174b0ca2ec29123189528216"
+    },
+    {
+      "name": "mt6781-sea community Android device tree",
+      "origin": "community",
+      "url": "https://github.com/mt6781-sea/android_device_xiaomi_sea",
+      "ref": "lineage-23.2",
+      "commit": "5bb6ea26756658687da2189dceb4d76b923ba7d3",
+      "license": "Apache-2.0 as declared by the tree",
+      "redistribution": "public-source",
+      "use": "research only for boot offsets, partition declarations and proprietary dependency inventory"
+    }
+  ],
+  "policy": {
+    "proprietary_blobs_in_repository": false,
+    "community_cust_dtsi_imported": false,
+    "boot_image_generated": false,
+    "writes_to_device": false,
+    "artifacts": [
+      {
+        "name": "sea-community-candidate.dtbo",
+        "status": "DTBO_CANDIDATE / BUILT_UNTESTED",
+        "size": 67869,
+        "sha256": "34febe33284575825169a1b46f6f438491bd5f7ffd7931ed44dc746f0f1b01ab",
+        "mixed_provenance": true,
+        "installable": false
+      }
+    ]
+  }
+}

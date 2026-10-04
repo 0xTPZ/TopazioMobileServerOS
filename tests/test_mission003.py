@@ -28,6 +28,9 @@ class Mission003Tests(unittest.TestCase):
         cls.manifest = json.loads((ROOT / "devices/xiaomi-sea/device.json").read_text(encoding="utf-8"))
         cls.probe = load_tool("host_probe")
         cls.pipeline = load_tool("device_artifact_pipeline")
+        cls.dts = load_tool("dts_graph")
+        cls.toolchain = load_tool("toolchain_provenance")
+        cls.sea_artifacts = load_tool("validate_sea_artifacts")
 
     def test_manifest_is_research_only(self):
         self.assertEqual(self.manifest["support_state"], "RESEARCH")
@@ -70,6 +73,40 @@ class Mission003Tests(unittest.TestCase):
             path.write_bytes(b"test artifact")
             digest = self.pipeline.sha256(path)
             self.assertEqual(len(digest), 64)
+
+    def test_mission004_provenance_is_pinned_without_binaries_in_repo(self):
+        record = self.toolchain.load(ROOT / "devices/xiaomi-sea/provenance.json")
+        self.assertEqual(self.toolchain.validate(record), [])
+        self.assertEqual(record["policy"]["proprietary_blobs_in_repository"], False)
+        clang = next(item for item in record["sources"] if item["name"] == "Android Clang prebuilt")
+        self.assertEqual(len(clang["sha256"]["clang"]), 64)
+        self.assertEqual(len(clang["sha256"]["ld.lld"]), 64)
+
+    def test_mission004_dts_graph_fails_closed_on_missing_include(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            entry = root / "sea.dts"
+            entry.write_text('#include "present.dtsi"\n#include <sea/cust.dtsi>\n', encoding="utf-8")
+            (root / "present.dtsi").write_text("/ { compatible = \"xiaomi,sea\"; };\n", encoding="utf-8")
+            graph = self.dts.build_graph(entry, [root])
+            self.assertEqual(graph["status"], "BLOCKED")
+            self.assertEqual(graph["missing"][0]["include"], "sea/cust.dtsi")
+
+    def test_mission004_manifest_keeps_recovery_blocked(self):
+        self.assertEqual(self.manifest["recovery"]["status"], "BLOCKED")
+        self.assertEqual(self.manifest["reconstruction"]["dtb"], "BLOCKED")
+        self.assertFalse(self.manifest["reconstruction"]["cust_dtsi"]["imported"])
+
+    def test_mission004_static_artifact_validation_is_fail_closed(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            dtbo = root / "candidate.dtbo"
+            dtbo.write_bytes(b"\xd0\x0d\xfe\xed" + b"candidate")
+            self.assertEqual(self.sea_artifacts.validate(dtbo, "dtbo"), [])
+            self.assertTrue(self.sea_artifacts.validate(root / "boot.img", "dtbo"))
+            bad = root / "bad.dtbo"
+            bad.write_bytes(b"not-fdt")
+            self.assertTrue(self.sea_artifacts.validate(bad, "dtbo"))
 
 
 if __name__ == "__main__":

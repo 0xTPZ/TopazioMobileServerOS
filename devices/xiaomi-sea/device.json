@@ -34,15 +34,27 @@
     ],
     "source_status": "CONFIRMED",
     "build_status": "BLOCKED",
+    "toolchain_profile": {
+      "config": "build.config.mtk.aarch64.tiramisu",
+      "compiler": "clang-r433403b",
+      "llvm": true,
+      "llvm_ias": true,
+      "gcc_fallback": "aarch64-linux-gnu-6.3.1",
+      "provenance": "provenance.json"
+    },
     "build_blockers": [
       "public-tree-sea-dts-is-an-overlay",
       "included-sea/cust.dtsi-is-not-present-in-public-branch",
+      "included-k6781v1_64_k419/cust.dtsi-is-not-present-in-public-branch",
       "mediatek-dts-makefile-has-no-sea-target",
-      "gcc-13-build-stops-in-kernel/sched/tune.c"
+      "sea_defconfig-references-missing-client-firmware-fw_sample.i",
+      "community-cust-dtsi-is-not-confirmed-vendor-snapshot"
     ],
     "observations": [
       "CONFIG_MACH_MT6781=y",
       "CONFIG_MTK_PLATFORM=mt6785",
+      "vendor-Android-T-build-profile-selects-LLVM-clang-r433403b",
+      "GCC13-reproduced-always-inline-failure-in-kernel/sched/tune.c",
       "source-tree-inconsistency-requires-vendor-build-context"
     ]
   },
@@ -64,6 +76,20 @@
     "required_evidence": ["read-only-fastboot-getvar", "read-only-adb-shell", "official-stock-layout"]
   },
   "capabilities": "capabilities.json",
+  "reconstruction": {
+    "status": "PARTIAL",
+    "provenance": "provenance.json",
+    "dts_graph": "docs/DTS-DEPENDENCY-GRAPH.md",
+    "kernel_reconstruction": "docs/KERNEL-RECONSTRUCTION.md",
+    "cust_dtsi": {
+      "status": "STRONG_CANDIDATE",
+      "imported": false,
+      "community_sha256": "9ba54ed35a7ecb82c9b2d9ee5ed651162d8ca689174b0ca2ec29123189528216"
+    },
+    "dtb": "BLOCKED",
+    "dtbo": "BLOCKED",
+    "boot_image": "BLOCKED"
+  },
   "required_firmware": {
     "status": "UNKNOWN",
     "items": [],
