@@ -19,6 +19,31 @@ firmware e recuperação comprovados.
 arm64 bootável só pela CPU; flash nativo no telefone; copiar firmware para o
 repositório.
 
+## 005 — Primeiro alvo executável: Debian arm64 em QEMU
+
+**Status:** aceita para a Missão 002.
+
+O primeiro artefato executável é um userspace Debian 13/trixie arm64 com
+systemd, kernel Debian arm64, initramfs, SSH, Git, Python, Node.js, SQLite e
+os quatro serviços Topazio. O transporte de validação é a máquina virtual
+genérica `virt` do QEMU com TCG, disco virtio e rede user-mode. O processo
+gera um manifesto com a lista de pacotes e hashes e termina com smoke test
+de console, HTTP e SSH.
+
+Essa decisão prova um produto executável do Core sem transformar a prova de
+QEMU em alegação de compatibilidade com o `sea`. O artefato não é gravado no
+telefone e imagens grandes permanecem fora do repositório.
+
+## 006 — Build nativo no WSL e armazenamento de chaves de teste
+
+**Status:** aceita para a Missão 002.
+
+O rootfs é construído em `/tmp` dentro do WSL e somente os resultados são
+exportados para `build/out/arm64`. Isso evita colisões de nomes entre arquivos
+case-sensitive durante a montagem em `E:`. O smoke test mantém a chave
+privada efêmera em `/tmp` Linux, pois o OpenSSH rejeita chaves armazenadas em
+um caminho Windows montado com permissões efetivas `0777`.
+
 ## 002 — Licença
 
 Código original sob Apache-2.0, uma licença permissiva compatível com a

@@ -9,7 +9,7 @@ remotos: SSH, Git, Python, Node.js, SQLite, HTTP/API e aplicações do usuário.
 
 ## Estado atual
 
-**RESEARCH / protótipo de PC — não há suporte de boot publicado.**
+**PARTIAL / QEMU ARM64 validado — suporte ao telefone continua RESEARCH.**
 
 O Redmi Note 12S (`sea`) é o `REFERENCE DEVICE #001`. A auditoria local
 confirmou o modelo e o ecossistema MediaTek/vendor, mas não confirmou o
@@ -20,9 +20,18 @@ O que é executável hoje:
 
 - protótipo de status e métricas em Python, sem dependências externas;
 - serviço HTTP local com `/healthz`, `/status` e `/metrics`;
+- imagem Debian 13/trixie ARM64 gerada por script reprodutível;
+- kernel, initramfs e disco ext4 inicializáveis no `qemu-system-aarch64`;
+- smoke test que comprova boot, `TOPAZIO_BOOT_OK`, HTTP e SSH por chave;
+- usuário `admin` sem senha padrão; a chave SSH é injetada somente no clone
+  descartável usado pelo smoke test;
 - planejador de instalação somente leitura, com abortos por ambiguidade;
 - relatório de recovery-readiness e scanner básico contra segredos/artefatos;
 - testes de contrato e validação de documentação.
+
+A prova de boot é exclusivamente para a máquina virtual QEMU `virt`. Ela não
+é uma imagem para o Redmi Note 12S, não contém suporte de boot para o `sea` e
+não autoriza qualquer operação de gravação no telefone.
 
 ## Arquitetura em camadas
 
@@ -64,15 +73,28 @@ Leia [`SECURITY.md`](SECURITY.md), [`AGENTS.md`](AGENTS.md) e
 
 ## Desenvolvimento
 
-Requisitos para o protótipo: Git e Python 3.11+; não é necessário QEMU, Android
-SDK ou dependência pesada para executar as verificações iniciais.
+Requisitos para as verificações de código: Git e Python 3.11+. Para construir
+e executar a imagem ARM64 no Windows, use WSL2 com Ubuntu 24.04 e as
+dependências descritas em [`docs/QEMU-LAB.md`](docs/QEMU-LAB.md).
 
 ```text
 python host-tools/verify_repo.py
 python host-tools/secret_scan.py --working-tree
 python -m unittest discover -s tests -v
 python services/http/topazio_http.py --once
+python host-tools/validate_arm64_artifact.py build/out/arm64
 ```
+
+No WSL/Linux, a imagem e o manifesto são gerados com:
+
+```text
+sudo scripts/build-arm64.sh
+sudo scripts/smoke-qemu.sh
+```
+
+O resultado fica em `build/out/arm64/` e é ignorado pelo Git por conter
+artefatos binários. O manifesto registra hashes, pacotes, kernel, initramfs e
+o escopo de validação.
 
 Contribuições são bem-vindas. Consulte [`CONTRIBUTING.md`](CONTRIBUTING.md) e
 o guia de criação de Device Support Package em

@@ -1,0 +1,14 @@
+[Unit]
+Description=Topazio HTTP diagnostic service
+After=network-online.target topazio-metrics.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=admin
+ExecStart=/usr/local/bin/topazio-http --host 0.0.0.0 --port 8787
+Restart=always
+RestartSec=2
+
+[Install]
+WantedBy=multi-user.target

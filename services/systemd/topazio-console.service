@@ -1,0 +1,14 @@
+[Unit]
+Description=Topazio local status console
+After=multi-user.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/topazio-console
+Restart=always
+RestartSec=2
+StandardOutput=journal+console
+StandardError=journal+console
+
+[Install]
+WantedBy=multi-user.target

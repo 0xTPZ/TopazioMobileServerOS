@@ -25,6 +25,28 @@ arm64 é uma base conceitual válida para userspace, mas a documentação Debian
 ressalta que suporte depende do kernel/device tree da plataforma; isso não
 prova boot no `sea`.
 
+## Laboratório QEMU da Missão 002
+
+**CONFIRMED:** o script `scripts/build-arm64.sh` gera um rootfs Debian
+13/trixie arm64 com kernel/initramfs, disco ext4 e manifesto de pacotes. O
+script `scripts/smoke-qemu.sh` iniciou esse artefato em `qemu-system-aarch64`
+com a máquina virtual `virt`, confirmou o marcador serial
+`TOPAZIO_BOOT_OK`, o endpoint HTTP e o acesso SSH por chave. **INFERRED:**
+isso valida a arquitetura do Core e o processo de empacotamento; não valida
+drivers, boot chain, particionamento ou compatibilidade do Redmi Note 12S.
+
+Fontes oficiais usadas para o laboratório:
+
+- QEMU ARM system emulation: https://www.qemu.org/docs/master/system/target-arm
+- QEMU ARM `virt`: https://www.qemu.org/docs/master/system/arm/virt
+- QEMU introduction: https://www.qemu.org/docs/master/system/introduction.html
+- Debian arm64 installation guide:
+  https://www.debian.org/releases/stable/arm64/install.en.pdf
+- Debian arm64 hardware requirements:
+  https://www.debian.org/releases/stable/arm64/ch02s01.en.html
+- Debian `openssh-server` arm64:
+  https://packages.debian.org/trixie/arm64/openssh-server
+
 ## Fontes técnicas
 
 - Xiaomi FAQ: https://www.mi.com/global/support/faq/details/KA-13546/

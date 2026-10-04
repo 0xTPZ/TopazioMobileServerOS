@@ -9,14 +9,16 @@
 - [x] testes, secret scan, validação de docs e CI;
 - [x] checkpoint público no GitHub.
 
-## Missão 002 — laboratório reversível
+## Missão 002 — primeiro executável ARM64/QEMU
 
-- validar Termux/SSH sem substituir Android;
-- coletar métricas de rede, temperatura, bateria, I/O e suspensão;
-- melhorar diagnóstico USB com fonte oficial e somente consultas;
-- definir backup externo e procedimento de recuperação manual.
+- [x] gerar Debian arm64 com rootfs, kernel e initramfs;
+- [x] instalar SSH sem senha padrão, usuário `admin` e serviços Topazio;
+- [x] exportar imagem ext4, rootfs tar, manifesto e hashes;
+- [x] iniciar no QEMU `virt` com rede e console serial;
+- [x] comprovar `TOPAZIO_BOOT_OK`, `/healthz` e login SSH no smoke test;
+- [x] manter o `sea` intocado e em `RESEARCH`.
 
-## Missão 003 — imagem de desenvolvimento
+## Missão 003 — imagem de desenvolvimento (planejada; não iniciada)
 
 - produzir rootfs ARM64 reproduzível em PC/CI;
 - testar em QEMU ou placa compatível, sem inferir suporte ao `sea`;

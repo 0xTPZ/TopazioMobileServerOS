@@ -1,0 +1,11 @@
+[Unit]
+Description=Topazio status snapshot
+After=local-fs.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/topazio-status --json
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

@@ -7,6 +7,7 @@
 - `/status`: Core status JSON;
 - `/metrics`: small Prometheus-compatible text sample.
 
-It is not an authenticated production API. A future target image must put
-authentication, network policy, rate limits and TLS/SSH tunneling around any
-non-local administration endpoint.
+It is not an authenticated production API. The QEMU lab binds it to the guest
+network for smoke testing; a future target image must put authentication,
+network policy, rate limits and TLS/SSH tunneling around any non-local
+administration endpoint.

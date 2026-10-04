@@ -17,6 +17,8 @@
     "http": {"endpoint": "/healthz", "required": true},
     "metrics": {"endpoint": "/metrics", "required": true}
   },
-  "status": "prototype-contract-only",
-  "bootable": false
+  "status": "qemu-arm64-validated",
+  "bootable": true,
+  "validation_scope": "qemu-virt-only",
+  "phone_support": false
 }
