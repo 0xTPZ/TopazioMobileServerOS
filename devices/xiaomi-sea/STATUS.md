@@ -7,7 +7,7 @@
 | kernel vendor público | CONFIRMED | `sea-t-oss`, commit fixado e arquivos `sea_*` presentes |
 | versão da fonte | CONFIRMED | Linux `4.19.191` no Makefile vendor |
 | kernel `sea_defconfig` | CONFIRMED | defconfig gera configuração out-of-tree |
-| kernel/device DTB | BLOCKED | overlay, include vendor ausente, build para em `tune.c` |
+| kernel/device DTB | BLOCKED | Clang correto supera `tune.c`, mas faltam firmware cliente, `cust.dtsi` vendor e target DTS |
 | ADB/fastboot live | BLOCKED | transporte/driver indisponível |
 | bootloader da unidade | UNKNOWN | nenhuma consulta acessível |
 | Linux mainline | UNKNOWN | não há validação neste projeto |
@@ -18,3 +18,7 @@
 
 O pacote permanece em `RESEARCH` até haver evidência reproduzível de boot e
 serviços mínimos com recuperação.
+
+Missão 004 identificou `clang-r433403b` como perfil Android T da própria
+árvore Xiaomi. Um DTBO candidato foi compilado apenas para validação estática
+com include comunitário externo; ele não é artefato de boot.

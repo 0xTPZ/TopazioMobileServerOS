@@ -9,8 +9,10 @@ possível consultar `getvar`, estado do bootloader ou partições.
 A árvore pública Xiaomi `sea-t-oss` prova disponibilidade de código-fonte
 vendor, não uma imagem Topazio, um boot chain reproduzível ou suporte mainline.
 `sea.dts` é um overlay e depende de arquivos vendor ausentes na branch pública;
-o `Makefile` não gera um alvo `sea` diretamente. O build diagnosticado também
-falha em `kernel/sched/tune.c` com GCC 13.
+o `Makefile` não gera um alvo `sea` diretamente. O perfil Android T correto é
+Clang `clang-r433403b`; GCC 13 falha antes por incompatibilidade no
+`always_inline` de `kernel/sched/tune.c`, e Clang depois encontra firmware e
+warnings de código legado que ainda impedem um kernel completo.
 
 O layout A/B/dynamic, `boot`, `vendor_boot`, `init_boot`, `dtbo`, `vbmeta`,
 `super`, `vendor` e `recovery` da unidade permanece `UNKNOWN/BLOCKED`.

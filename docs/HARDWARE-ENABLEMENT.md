@@ -25,7 +25,10 @@ Há duas limitações relevantes na fonte pública:
 - `sea.dts` é `/plugin/` e inclui `sea/cust.dtsi`, que não está disponível na
   branch pública analisada;
 - `arch/arm64/boot/dts/mediatek/Makefile` não registra um alvo `sea` para
-  produzir o DTB; o build com GCC 13 também para em `kernel/sched/tune.c`.
+  produzir o DTB. O build com GCC 13 para em `kernel/sched/tune.c`; a
+  investigação da Missão 004 mostrou que o perfil correto é LLVM/Clang
+  `clang-r433403b`, mas o source público ainda referencia firmware Focaltech
+  ausente e includes DTS vendor ausentes.
 
 Esses fatos deixam o build do kernel como **BLOCKED**, sem editar ou “corrigir”
 a árvore oficial.

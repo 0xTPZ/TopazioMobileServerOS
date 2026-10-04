@@ -9,8 +9,9 @@ remotos: SSH, Git, Python, Node.js, SQLite, HTTP/API e aplicações do usuário.
 
 ## Estado atual
 
-**PARTIAL / QEMU ARM64 validado — Missão 003 confirmou fonte vendor, mas o
-suporte ao telefone continua RESEARCH e o boot nativo está BLOCKED.**
+**PARTIAL / QEMU ARM64 validado — Missão 004 identificou a toolchain LLVM
+vendor e produziu um DTBO candidato estático, mas o suporte ao telefone
+continua RESEARCH e o boot nativo está BLOCKED.**
 
 O Redmi Note 12S (`sea`) é o `REFERENCE DEVICE #001`. A auditoria local
 confirmou o modelo e o ecossistema MediaTek/vendor, mas não confirmou o
@@ -31,6 +32,8 @@ O que é executável hoje:
 - manifest v2, matriz de capabilities, host probe somente leitura e pipeline
   de artefatos que bloqueia sem inputs reais;
 - análise da fonte oficial Xiaomi `sea-t-oss` e tentativa de build out-of-tree;
+- reprodução documentada do perfil Android T `clang-r433403b`, grafo DTS
+  fail-closed e proveniência de fontes/artefatos;
 - testes de contrato e validação de documentação.
 
 A prova de boot é exclusivamente para a máquina virtual QEMU `virt`. Ela não
