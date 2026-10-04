@@ -1,0 +1,5 @@
+#!/bin/sh
+set -eu
+python host-tools/verify_repo.py
+python host-tools/secret_scan.py --staged
+git diff --cached --check

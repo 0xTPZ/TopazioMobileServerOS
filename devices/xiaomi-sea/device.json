@@ -1,0 +1,22 @@
+{
+  "schema": 1,
+  "vendor": "xiaomi",
+  "model": "Redmi Note 12S",
+  "codename": "sea",
+  "architecture": "arm64",
+  "support_state": "RESEARCH",
+  "installable": false,
+  "bootloader_state": "UNKNOWN",
+  "evidence": [
+    "local-audit-2026-10-04",
+    "https://www.mi.com/global/support/faq/details/KA-13546/",
+    "https://github.com/MiCode/Xiaomi_Kernel_OpenSource/blob/README/README.md"
+  ],
+  "prohibited_in_mission_001": [
+    "flash",
+    "erase",
+    "format",
+    "unlock",
+    "partition-write"
+  ]
+}

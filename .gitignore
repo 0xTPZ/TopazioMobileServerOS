@@ -1,0 +1,53 @@
+# Generated build output and local experiments
+build/out/
+build/artifacts/
+*.log
+*.tmp
+*.swp
+
+# Python and local environments
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+env/
+
+# Secrets and personal material
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx
+id_rsa*
+credentials.json
+token.json
+secrets.*
+
+# Phone dumps, captures, and proprietary firmware/blobs
+audit/
+dumps/
+captures/
+**/*dump*
+**/*backup*
+*.img
+*.bin
+*.elf
+*.dtb
+*.dtbo
+*.zip
+*.7z
+*.tar
+*.tar.gz
+*.tgz
+*.xz
+*.iso
+**/firmware/**
+**/blobs/**
+
+# OS/editor files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

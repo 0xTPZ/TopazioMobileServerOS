@@ -1,0 +1,18 @@
+{
+  "schema": 1,
+  "screen": "status",
+  "fields": [
+    "device",
+    "hostname",
+    "ip",
+    "ssh",
+    "cpu",
+    "memory",
+    "storage",
+    "temperature",
+    "uptime",
+    "recovery_state"
+  ],
+  "actions": ["open-console", "show-help"],
+  "forbidden_actions": ["unlock", "flash", "erase", "partition-write"]
+}

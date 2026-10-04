@@ -1,0 +1,23 @@
+name: verify
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  repository:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate repository
+        run: python host-tools/verify_repo.py
+      - name: Scan for secrets and forbidden artifacts
+        run: python host-tools/secret_scan.py --working-tree
+      - name: Run tests
+        run: python -m unittest discover -s tests -v

@@ -1,0 +1,9 @@
+{
+  "hostname": "topazio-device",
+  "device_package": "provided-at-install-time",
+  "support_state": "RESEARCH",
+  "ssh_port": 22,
+  "services": ["ssh", "git", "python", "sqlite", "http"],
+  "metrics": ["cpu", "memory", "storage", "temperature", "uptime"],
+  "installable": false
+}
