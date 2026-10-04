@@ -72,3 +72,24 @@ unidade não foram observados e o recovery-readiness está bloqueado. O pipeline
 aceita apenas artefatos explícitos e hashados; nunca monta um `boot.img`
 inventado nem grava no telefone. O build usa `O=` fora da árvore-fonte e
 registra falhas como diagnóstico reproduzível.
+
+## 008 — Perfil `SERVER_MINIMAL` do `sea`
+
+**Status:** aceita para a Missão 006, `PARTIAL / BLOCKED`.
+
+O contrato genérico `TOPAZIO_SERVER_PROFILE` exige CPU/SMP, RAM, timers,
+interrupções, UFS, USB, Wi-Fi/rede, bateria, charging, thermal, display,
+touch/input, filesystem e console/SSH. O perfil `SERVER_MINIMAL` parte de
+`sea_defconfig` e vive numa camada externa auditável. Ele desabilita somente
+CCCI/ECCCI/DPMAIF/MD1, pois conectividade celular não é requisito do primeiro
+produto servidor; `VENDOR_REFERENCE` permanece imutável e `BLOCKED`.
+
+O `fw_sample.i` ausente não é tratado como firmware falso. A evidência do
+driver separa a leitura de touch/input da atualização automática: o trabalho
+de auto-upgrade retorna quando `FTS_AUTO_UPGRADE_EN=0`. Por isso a camada
+SERVER_MINIMAL desabilita apenas essa atualização embutida e preserva
+`CONFIG_TOUCHSCREEN_FTS`, sem redistribuir bytes proprietários.
+
+O perfil não autoriza inventar DTB, GPIO, regulador, phandle, blob Wi-Fi ou
+`boot.img`. Kernel completo, módulos e DTB continuam bloqueados neste
+checkpoint; nenhuma escrita física, recovery ou operação de boot foi feita.

@@ -1,0 +1,9 @@
+# Explicit delta applied to arch/arm64/configs/sea_defconfig.
+# Critical storage, USB, Wi-Fi, power, thermal, display and touch symbols are
+# intentionally absent: they are inherited unchanged from sea_defconfig.
+# Cellular modem support is not part of the initial server product.
+
+# CONFIG_MTK_CCCI_DEVICES is not set
+# CONFIG_MTK_ECCCI_DRIVER is not set
+# CONFIG_MTK_ECCCI_C2K is not set
+CONFIG_MTK_MD1_SUPPORT=0

@@ -1,0 +1,68 @@
+{
+  "schema": 1,
+  "profile": "SERVER_MINIMAL",
+  "device": "xiaomi-sea",
+  "status": "SOURCE_ONLY",
+  "base": {
+    "source_id": "xiaomi-kernel-sea-t-oss",
+    "repository": "https://github.com/MiCode/Xiaomi_Kernel_OpenSource.git",
+    "branch": "sea-t-oss",
+    "commit": "6f6b84e0e2fa8d474db66798a051ec1835257729",
+    "defconfig": "arch/arm64/configs/sea_defconfig",
+    "toolchain": "clang-r433403b",
+    "toolchain_commit": "0625305092d0cfa7e28b0e1b268aff1d3d751eca"
+  },
+  "generic_profile": "profiles/TOPAZIO_SERVER_PROFILE.json",
+  "licenses": {
+    "project_layer": "Apache-2.0",
+    "official_kernel": "GPL-2.0-only as supplied by Xiaomi/Linux source",
+    "clang": "Apache-2.0 and component notices from the AOSP prebuilt",
+    "focaltech_firmware": "not redistributed; license and bytes unresolved"
+  },
+  "config": {
+    "fragment": "devices/xiaomi-sea/server-minimal/config/topazio_sea_server_defconfig",
+    "derivation": "python host-tools/server_minimal_config.py --base arch/arm64/configs/sea_defconfig --fragment devices/xiaomi-sea/server-minimal/config/topazio_sea_server_defconfig --output topazio_sea_server.config --report topazio_sea_server.config.json",
+    "expected_changes": [
+      {"symbol": "CONFIG_MTK_CCCI_DEVICES", "new": "n", "reason": "remove modem CCCI/DPMAIF path"},
+      {"symbol": "CONFIG_MTK_ECCCI_DRIVER", "new": "n", "reason": "remove modem CCCI/DPMAIF path"},
+      {"symbol": "CONFIG_MTK_ECCCI_C2K", "new": "n", "reason": "remove modem CCCI/DPMAIF path"},
+      {"symbol": "CONFIG_MTK_MD1_SUPPORT", "new": "0", "reason": "no cellular modem in initial server product"}
+    ]
+  },
+  "patches": [
+    {
+      "order": 1,
+      "id": "0001-focaltech-no-auto-upgrade",
+      "path": "devices/xiaomi-sea/server-minimal/patches/0001-focaltech-no-auto-upgrade.patch",
+      "sha256": "412e87de8e789fca7a12c56da30725bd7886f40bebff143aef2968a58134ce72",
+      "reason": "avoid unavailable embedded firmware include while preserving touch input",
+      "changes_vendor_reference": false
+    }
+  ],
+  "capabilities": {
+    "critical_preserved_in_config": [
+      "cpu_smp", "ram", "timers", "interrupt_controller", "ufs", "usb",
+      "wifi", "battery", "charging", "thermal", "display", "touchscreen",
+      "input", "filesystem", "console", "networking"
+    ],
+    "important_preserved_in_config": ["bluetooth", "microsd", "watchdog", "rtc"],
+    "optional_initially_omitted": [
+      "cellular_modem", "telephony", "camera", "audio", "gps_gnss", "nfc",
+      "fm_radio", "biometrics", "vibration", "android_consumer_features"
+    ]
+  },
+  "outputs": {
+    "kernel": "BLOCKED",
+    "modules": "BLOCKED",
+    "dtb": "BLOCKED",
+    "dtbo": "SOURCE_ONLY",
+    "boot_image": "BLOCKED"
+  },
+  "build_policy": {
+    "workspace": "PC/WSL only",
+    "write_device": false,
+    "create_boot_image": false,
+    "maximum_artifact_state": "BUILT_UNTESTED",
+    "warnings_and_errors": "record all; do not treat a partial object build as success"
+  }
+}

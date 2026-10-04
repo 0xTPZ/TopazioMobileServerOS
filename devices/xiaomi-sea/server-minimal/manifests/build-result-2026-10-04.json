@@ -1,0 +1,55 @@
+{
+  "schema": 1,
+  "device": "xiaomi-sea",
+  "profile": "SERVER_MINIMAL",
+  "status": "BLOCKED",
+  "source_commit": "6f6b84e0e2fa8d474db66798a051ec1835257729",
+  "toolchain": {
+    "name": "clang-r433403b",
+    "commit": "0625305092d0cfa7e28b0e1b268aff1d3d751eca",
+    "status": "VERIFIED"
+  },
+  "config": {
+    "base": "arch/arm64/configs/sea_defconfig",
+    "fragment": "devices/xiaomi-sea/server-minimal/config/topazio_sea_server_defconfig",
+    "explicit_difference_count": 4,
+    "differences": [
+      {"symbol": "CONFIG_MTK_CCCI_DEVICES", "old": "y", "new": "n"},
+      {"symbol": "CONFIG_MTK_ECCCI_C2K", "old": "y", "new": "n"},
+      {"symbol": "CONFIG_MTK_ECCCI_DRIVER", "old": "y", "new": "n"},
+      {"symbol": "CONFIG_MTK_MD1_SUPPORT", "old": "11", "new": "0"}
+    ],
+    "critical_validation": "PASS"
+  },
+  "patches": [
+    {
+      "path": "devices/xiaomi-sea/server-minimal/patches/0001-focaltech-no-auto-upgrade.patch",
+      "sha256": "412e87de8e789fca7a12c56da30725bd7886f40bebff143aef2968a58134ce72",
+      "apply_check": "PASS against the pinned source; temporary vendor CRLF normalization was required"
+    }
+  ],
+  "focaltech_compile_observation": "focaltech_flash.o and its upgrade subdirectory reached compilation; no fw_sample.i error occurred before unrelated build failures",
+  "command_template": "make -C <patched-source> O=<build-dir> ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- LLVM=1 LLVM_IAS=1 CC=clang LD=ld.lld KCONFIG_CONFIG=<build-dir>/.config CFLAGS_KERNEL=-Wno-unused-but-set-variable -j2 olddefconfig Image.gz modules dtbs",
+  "duration_seconds": 1393,
+  "make_exit_code": 2,
+  "warnings_count": 91,
+  "errors": [
+    "sound/soc/codecs/mt6357-accdet.c:619,702,1566,1975: -Werror,-Wunused-but-set-variable",
+    "sound/soc/codecs/mt6357-accdet.c:1496: -Werror,-Wunused-but-set-variable for acc_sts/eint_sts",
+    "drivers/power/supply/mediatek/charger/bq2589x_charger.c:117: -Werror,-Wstrict-prototypes"
+  ],
+  "outputs": {
+    "Image.gz": "NOT_PRODUCED",
+    "modules": "NOT_PRODUCED",
+    "dtb": "BLOCKED_INDEPENDENTLY",
+    "dtbo": "NOT_PRODUCED",
+    "boot_image": "PROHIBITED"
+  },
+  "kernel_size_bytes": null,
+  "sha256": {
+    "config_fragment": "face6ceb4314bda2ef12bfb93b2a386a5c74f181387f7a986be8b855b3a21018",
+    "focaltech_patch": "412e87de8e789fca7a12c56da30725bd7886f40bebff143aef2968a58134ce72"
+  },
+  "hardware_test": "NOT_RUN",
+  "writes_to_device": false
+}

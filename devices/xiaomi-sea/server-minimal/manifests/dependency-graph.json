@@ -1,0 +1,102 @@
+{
+  "schema": 1,
+  "profile": "SERVER_MINIMAL",
+  "device": "xiaomi-sea",
+  "nodes": [
+    {
+      "id": "cpu-memory-interrupts",
+      "critical": true,
+      "config_symbols": ["CONFIG_SMP", "CONFIG_NR_CPUS"],
+      "source_directories": ["arch/arm64", "kernel", "mm", "kernel/irq"],
+      "device_tree": "SoC CPU, timer and interrupt-controller nodes from the official DTS include chain",
+      "firmware": "none identified",
+      "modules": "built into kernel profile",
+      "relationships": ["foundation for every node"]
+    },
+    {
+      "id": "ufs-storage",
+      "critical": true,
+      "config_symbols": ["CONFIG_SCSI_UFSHCD", "CONFIG_SCSI_UFSHCD_PLATFORM", "CONFIG_SCSI_UFS_MEDIATEK"],
+      "source_directories": ["drivers/scsi/ufs", "drivers/scsi"],
+      "device_tree": "official mt6781.dts ufshci@11270000, clocks, resets, regulators and PHY dependencies; complete sea cust.dtsi is missing",
+      "firmware": "no UFS firmware dependency identified in the inspected driver path",
+      "modules": "SCSI/UFS core and MediaTek platform driver",
+      "relationships": ["filesystem", "rootfs", "long-running server storage"]
+    },
+    {
+      "id": "usb",
+      "critical": true,
+      "config_symbols": ["CONFIG_USB_MTK_HDRC", "CONFIG_USB_MTK_OTG", "CONFIG_USB_USBNET", "CONFIG_USB_POWER_DELIVERY"],
+      "source_directories": ["drivers/usb", "drivers/usb/host", "drivers/usb/phy"],
+      "device_tree": "official sea USB/OTG/PD nodes; final phandles remain blocked with DTB",
+      "firmware": "not established",
+      "modules": "USB host/OTG and USB networking",
+      "relationships": ["console and provisioning path", "networking", "charging"]
+    },
+    {
+      "id": "wifi-networking",
+      "critical": true,
+      "config_symbols": ["CONFIG_CFG80211", "CONFIG_MTK_COMBO", "CONFIG_MTK_COMBO_WIFI", "CONFIG_NET", "CONFIG_INET"],
+      "source_directories": ["net/wireless", "drivers/misc/mediatek/connectivity", "net/ipv4"],
+      "device_tree": "connectivity nodes are vendor DTS-dependent",
+      "firmware": "vendor Wi-Fi driver/firmware provenance and acquisition path remain unresolved; no blob is imported",
+      "modules": "MediaTek combo adapter plus possible external vendor WLAN module",
+      "relationships": ["SSH capability", "Topazio networking"]
+    },
+    {
+      "id": "battery-charging",
+      "critical": true,
+      "config_symbols": ["CONFIG_MTK_CHARGER", "CONFIG_CHARGER_BQ2589X", "CONFIG_USB_POWER_DELIVERY"],
+      "source_directories": ["drivers/power/supply", "drivers/misc/mediatek/power"],
+      "device_tree": "official charger, battery-table, USB-PD and regulator nodes; final DTB blocked",
+      "firmware": "none identified",
+      "modules": "power-supply, charger and vendor power paths",
+      "relationships": ["thermal safety", "battery monitoring", "safe long-running operation"]
+    },
+    {
+      "id": "thermal-watchdog",
+      "critical": true,
+      "config_symbols": ["CONFIG_THERMAL", "CONFIG_CPU_THERMAL", "CONFIG_WATCHDOG", "CONFIG_RTC_DRV_MT6358"],
+      "source_directories": ["drivers/thermal", "drivers/watchdog", "drivers/rtc"],
+      "device_tree": "thermal zones and PMIC/watchdog nodes in official DTS include chain",
+      "firmware": "none identified",
+      "modules": "thermal governors, watchdog and RTC drivers",
+      "relationships": ["CPU throttling", "shutdown protection", "service uptime"]
+    },
+    {
+      "id": "display-touch-input",
+      "critical": true,
+      "config_symbols": ["CONFIG_DRM", "CONFIG_DRM_MEDIATEK", "CONFIG_INPUT_TOUCHSCREEN", "CONFIG_TOUCHSCREEN_FTS"],
+      "source_directories": ["drivers/gpu/drm/mediatek", "drivers/input/touchscreen/mediatek/ft3418_i2c", "drivers/input"],
+      "device_tree": "official DSI panel and Focaltech i2c0/touch@0 nodes; GPIO/pinctrl values are not recreated here",
+      "firmware": "fw_sample.i is only the embedded auto-update fallback in the inspected path; real customer firmware is not redistributed",
+      "modules": "DRM/Mediatek display and Focaltech input stack",
+      "relationships": ["headless console fallback", "touch keyboard/input"]
+    },
+    {
+      "id": "console-filesystem",
+      "critical": true,
+      "config_symbols": ["CONFIG_SERIAL_8250", "CONFIG_SERIAL_8250_CONSOLE", "CONFIG_EXT4_FS", "CONFIG_VFAT_FS"],
+      "source_directories": ["drivers/tty/serial", "fs", "init"],
+      "device_tree": "serial console alias/uart properties remain DT-dependent",
+      "firmware": "none identified",
+      "modules": "TTY/serial and filesystem support",
+      "relationships": ["SSH bootstrap", "rootfs mount", "admin@sea console"]
+    },
+    {
+      "id": "cellular-ccci-dpmaif",
+      "critical": false,
+      "config_symbols": ["CONFIG_MTK_CCCI_DEVICES", "CONFIG_MTK_ECCCI_DRIVER", "CONFIG_MTK_ECCCI_C2K", "CONFIG_MTK_MD1_SUPPORT"],
+      "source_directories": ["drivers/misc/mediatek/ccci", "drivers/misc/mediatek/eccci", "drivers/misc/mediatek/eccci/hif"],
+      "device_tree": "modem nodes are not required by the initial server contract, but source-level independence is not a boot proof",
+      "firmware": "modem firmware not imported",
+      "modules": "CCCI/DPMAIF path removed in SERVER_MINIMAL config only",
+      "relationships": ["cellular telephony only; no intentional dependency on UFS, USB, Wi-Fi, power, thermal or touch in the audited Kconfig path"]
+    }
+  ],
+  "edge_policy": {
+    "dtb": "independently BLOCKED until all required cust.dtsi and phandles are evidenced",
+    "firmware": "unknown or proprietary firmware cannot be replaced with placeholders",
+    "vendor_reference": "never mutate; all changes stay in the external profile layer"
+  }
+}

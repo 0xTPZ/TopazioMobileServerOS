@@ -1,0 +1,54 @@
+{
+  "schema": 1,
+  "id": "TOPAZIO_SERVER_PROFILE",
+  "kind": "generic-smartphone-server-contract",
+  "status": "CONTRACT_ONLY",
+  "required_capabilities": {
+    "cpu_smp": true,
+    "ram": true,
+    "timers": true,
+    "interrupt_controller": true,
+    "storage": true,
+    "filesystem": true,
+    "usb": true,
+    "networking": true,
+    "wifi": true,
+    "battery": true,
+    "charging": true,
+    "thermal": true,
+    "console": true,
+    "ssh_capability": true,
+    "display": true,
+    "touchscreen_input": true
+  },
+  "important_capabilities": {
+    "bluetooth": true,
+    "microsd": true,
+    "hardware_watchdog": true,
+    "rtc": true
+  },
+  "optional_initially": [
+    "cellular_modem",
+    "telephony",
+    "camera",
+    "audio",
+    "gps_gnss",
+    "nfc",
+    "fm_radio",
+    "biometrics",
+    "vibration",
+    "android_consumer_features"
+  ],
+  "runtime_contract": {
+    "console": "TTY or equivalent headless console",
+    "network": "at least one supported network interface with documented firmware provenance",
+    "storage": "stable block storage and filesystem support without changing partition layout",
+    "power": "battery, charging, thermal zones, throttling and shutdown protection",
+    "administration": "SSH-capable userspace; no GUI requirement"
+  },
+  "policy": {
+    "device_tree_must_be_evidence_based": true,
+    "proprietary_firmware_must_not_be_committed": true,
+    "physical_device_writes_require_separate_authorization": true
+  }
+}

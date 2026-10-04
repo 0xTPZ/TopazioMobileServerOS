@@ -49,10 +49,11 @@ def validate(record: dict[str, Any]) -> list[str]:
             numbers = [item.get("order") for item in patches if isinstance(item, dict)]
             if numbers != list(range(1, len(numbers) + 1)):
                 errors.append(f"patch order is not contiguous: {name}")
-    if profiles.get("VENDOR_REFERENCE", {}).get("status") == "WORKING":
-        errors.append("VENDOR_REFERENCE cannot be WORKING in mission 005")
-    if profiles.get("SERVER_MINIMAL", {}).get("status") != "DESIGN_ONLY":
-        errors.append("SERVER_MINIMAL must remain DESIGN_ONLY")
+    if profiles.get("VENDOR_REFERENCE", {}).get("status") != "BLOCKED":
+        errors.append("VENDOR_REFERENCE must remain BLOCKED")
+    server_status = profiles.get("SERVER_MINIMAL", {}).get("status")
+    if server_status in {"WORKING", "HARDWARE_TEST_REQUIRED"}:
+        errors.append("SERVER_MINIMAL cannot claim hardware validation")
     top_order = record.get("patch_order")
     if not isinstance(top_order, list):
         errors.append("patch_order must be a list")

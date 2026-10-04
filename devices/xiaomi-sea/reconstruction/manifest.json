@@ -48,25 +48,35 @@
       }
     },
     "SERVER_MINIMAL": {
-      "objective": "Future server-oriented kernel profile with modem-dependent paths evaluated explicitly.",
-      "status": "DESIGN_ONLY",
+      "objective": "Experimental server-oriented kernel profile with modem-dependent paths removed only after dependency audit.",
+      "status": "SOURCE_ONLY",
       "base_profile": "VENDOR_REFERENCE",
-      "changes_allowed_in_future": [
-        "disable modem/CCCI only after a configuration dependency audit",
-        "retain display, storage, USB, thermal and power dependencies needed by the server contract",
-        "record every config delta and build result separately from VENDOR_REFERENCE"
+      "generic_profile": "profiles/TOPAZIO_SERVER_PROFILE.json",
+      "server_minimal_layer": "devices/xiaomi-sea/server-minimal",
+      "dependency_graph": "devices/xiaomi-sea/server-minimal/manifests/dependency-graph.json",
+      "config_fragment": "devices/xiaomi-sea/server-minimal/config/topazio_sea_server_defconfig",
+      "changes_applied": [
+        "disable CONFIG_MTK_CCCI_DEVICES and its ECCCI/DPMAIF modem path",
+        "disable CONFIG_MTK_ECCCI_DRIVER and CONFIG_MTK_ECCCI_C2K",
+        "set CONFIG_MTK_MD1_SUPPORT=0",
+        "disable only Focaltech embedded auto-upgrade while retaining touch input"
       ],
-      "changes_not_yet_applied": [
-        "CONFIG_MTK_CCCI_DEVICES",
-        "CONFIG_MTK_ECCCI_DRIVER",
-        "CONFIG_MTK_MD1_SUPPORT",
-        "CONFIG_TOUCHSCREEN_FTS"
+      "critical_capabilities_preserved": [
+        "cpu_smp", "ram", "timers", "interrupt_controller", "ufs", "usb",
+        "wifi", "battery", "charging", "thermal", "display", "touchscreen",
+        "input", "filesystem", "console", "networking"
       ],
-      "patches": [],
+      "patches": [
+        {
+          "order": 1,
+          "id": "0001-focaltech-no-auto-upgrade",
+          "path": "devices/xiaomi-sea/server-minimal/patches/0001-focaltech-no-auto-upgrade.patch"
+        }
+      ],
       "outputs": {
-        "kernel": "SOURCE_ONLY",
-        "modules": "SOURCE_ONLY",
-        "dtb": "SOURCE_ONLY",
+        "kernel": "BLOCKED",
+        "modules": "BLOCKED",
+        "dtb": "BLOCKED",
         "dtbo": "SOURCE_ONLY",
         "boot_image": "BLOCKED"
       },

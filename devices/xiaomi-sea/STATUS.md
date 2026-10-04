@@ -10,7 +10,7 @@
 | kernel/device DTB | BLOCKED | Clang correto supera `tune.c`, mas faltam firmware cliente, `cust.dtsi` vendor e target DTS |
 | contexto vendor público | PARTIAL | um candidato `sea/cust.dtsi`, nenhum `k6781v1_64_k419/cust.dtsi`, firmware Focaltech real ausente |
 | perfil VENDOR_REFERENCE | BLOCKED | manifesto controlado preserva a árvore Xiaomi sem substituições silenciosas |
-| perfil SERVER_MINIMAL | DESIGN_ONLY | CCCI/DPMAIF ainda não foi removido nem alterado |
+| perfil SERVER_MINIMAL | SOURCE_ONLY / BLOCKED | camada externa formalizada; CCCI/DPMAIF removido no fragmento, kernel/DTB ainda não produzidos |
 | ADB/fastboot live | BLOCKED | transporte/driver indisponível |
 | bootloader da unidade | UNKNOWN | nenhuma consulta acessível |
 | Linux mainline | UNKNOWN | não há validação neste projeto |

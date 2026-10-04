@@ -83,7 +83,7 @@
     "controlled_layer": "reconstruction/manifest.json",
     "profiles": {
       "VENDOR_REFERENCE": "BLOCKED",
-      "SERVER_MINIMAL": "DESIGN_ONLY"
+      "SERVER_MINIMAL": "SOURCE_ONLY"
     },
     "dts_graph": "docs/DTS-DEPENDENCY-GRAPH.md",
     "kernel_reconstruction": "docs/KERNEL-RECONSTRUCTION.md",

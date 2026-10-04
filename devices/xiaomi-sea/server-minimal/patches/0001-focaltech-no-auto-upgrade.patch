@@ -1,0 +1,36 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Topazio Mobile Server OS <opensource@topazio.invalid>
+Date: Sun, 4 Oct 2026 00:00:00 -0300
+Subject: [PATCH] sea: keep Focaltech touch, disable embedded auto-upgrade
+
+The public Xiaomi tree references the unavailable customer file
+include/firmware/fw_sample.i from focaltech_flash.c. The driver has a separate
+touch-data/input path, while fts_fwupg_work() returns before any update when
+FTS_AUTO_UPGRADE_EN is zero. Do not disable CONFIG_TOUCHSCREEN_FTS and do not
+invent firmware bytes. Keeping the request_firmware/manual update code intact
+preserves a future device-specific update mechanism without committing a blob.
+
+This patch belongs only to SERVER_MINIMAL and must never be applied to
+VENDOR_REFERENCE.
+---
+ drivers/input/touchscreen/mediatek/ft3418_i2c/focaltech_config.h | 2 +-
+ drivers/input/touchscreen/mediatek/ft3418_i2c/focaltech_flash.c  | 4 ++++
+ 2 files changed, 5 insertions(+), 1 deletion(-)
+
+diff --git a/drivers/input/touchscreen/mediatek/ft3418_i2c/focaltech_config.h b/drivers/input/touchscreen/mediatek/ft3418_i2c/focaltech_config.h
+--- a/drivers/input/touchscreen/mediatek/ft3418_i2c/focaltech_config.h
++++ b/drivers/input/touchscreen/mediatek/ft3418_i2c/focaltech_config.h
+@@ -244,1 +244,1 @@
+-#define FTS_AUTO_UPGRADE_EN                     1
++#define FTS_AUTO_UPGRADE_EN                     0
+diff --git a/drivers/input/touchscreen/mediatek/ft3418_i2c/focaltech_flash.c b/drivers/input/touchscreen/mediatek/ft3418_i2c/focaltech_flash.c
+--- a/drivers/input/touchscreen/mediatek/ft3418_i2c/focaltech_flash.c
++++ b/drivers/input/touchscreen/mediatek/ft3418_i2c/focaltech_flash.c
+@@ -52,1 +52,2 @@
++#if FTS_AUTO_UPGRADE_EN
+ u8 fw_file[] = {
+@@ -68,1 +69,4 @@
+ };
++#else
++struct upgrade_module module_list[] = { {FTS_MODULE_ID, FTS_MODULE_NAME, NULL, 0} };
++#endif
