@@ -9,7 +9,12 @@
 - bateria nominal de 5000 mAh.
 
 O SKU, partições, revisão de placa, sensores exatos e estado físico desta
-unidade são `UNKNOWN`.
+unidade são `UNKNOWN`. A configuração de UFS, Wi-Fi, USB, energia, display e
+touch no kernel oficial é `SOURCE_AVAILABLE`, não `WORKING`; nenhum periférico
+foi testado no telefone.
+
+A matriz formal está em [`capabilities.json`](capabilities.json) e o relatório
+de enablement em [`docs/HARDWARE-ENABLEMENT.md`](../../docs/HARDWARE-ENABLEMENT.md).
 
 ## Implicações para o Core
 

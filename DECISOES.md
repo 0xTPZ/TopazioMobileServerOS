@@ -61,3 +61,14 @@ ambiguidade produz `ABORTED`; não há caminho automático de bypass ou gravaç�
 
 Documentação diferencia `CONFIRMED`, `INFERRED`, `UNKNOWN` e `BLOCKED`. Uma
 hipótese de comunidade nunca vira afirmação de suporte sem logs reproduzíveis.
+
+## 007 — Fonte oficial e pipeline fail-closed do `sea`
+
+**Status:** aceita para a Missão 003.
+
+O DSP fixa `sea-t-oss` e seu commit oficial, mas mantém `RESEARCH` porque a
+fonte pública não forma um kernel+DTB autônomo, o boot chain/partições da
+unidade não foram observados e o recovery-readiness está bloqueado. O pipeline
+aceita apenas artefatos explícitos e hashados; nunca monta um `boot.img`
+inventado nem grava no telefone. O build usa `O=` fora da árvore-fonte e
+registra falhas como diagnóstico reproduzível.

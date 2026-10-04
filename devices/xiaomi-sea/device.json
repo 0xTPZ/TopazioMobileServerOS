@@ -1,16 +1,90 @@
 {
-  "schema": 1,
+  "schema": 2,
   "vendor": "xiaomi",
   "model": "Redmi Note 12S",
   "codename": "sea",
   "architecture": "arm64",
+  "soc": {
+    "name": "MediaTek Helio G96",
+    "part": "MT6781V-CD",
+    "status": "CONFIRMED",
+    "evidence": ["official-xiaomi-spec", "local-audit"]
+  },
+  "android_base": {
+    "release": "13",
+    "vendor_branch": "Android T",
+    "status": "CONFIRMED",
+    "evidence": ["xiaomi-kernel-table"]
+  },
   "support_state": "RESEARCH",
   "installable": false,
   "bootloader_state": "UNKNOWN",
+  "kernel_source": {
+    "repository": "https://github.com/MiCode/Xiaomi_Kernel_OpenSource.git",
+    "branch": "sea-t-oss",
+    "commit": "6f6b84e0e2fa8d474db66798a051ec1835257729",
+    "base_release": "bsp-t-alps-release-s0.mp1.tc8sp2-cs1-xm-V1.0.13",
+    "defconfig": "arch/arm64/configs/sea_defconfig",
+    "debug_defconfig": "arch/arm64/configs/sea_debug_defconfig",
+    "dts": [
+      "arch/arm64/boot/dts/mediatek/sea.dts",
+      "arch/arm64/boot/dts/mediatek/k6781v1_64_k419.dts",
+      "arch/arm64/boot/dts/mediatek/mt6781.dts"
+    ],
+    "source_status": "CONFIRMED",
+    "build_status": "BLOCKED",
+    "build_blockers": [
+      "public-tree-sea-dts-is-an-overlay",
+      "included-sea/cust.dtsi-is-not-present-in-public-branch",
+      "mediatek-dts-makefile-has-no-sea-target",
+      "gcc-13-build-stops-in-kernel/sched/tune.c"
+    ],
+    "observations": [
+      "CONFIG_MACH_MT6781=y",
+      "CONFIG_MTK_PLATFORM=mt6785",
+      "source-tree-inconsistency-requires-vendor-build-context"
+    ]
+  },
+  "boot_contract": {
+    "status": "BLOCKED",
+    "components": [
+      {"name": "MediaTek Boot ROM", "status": "INFERRED", "evidence": "platform family only"},
+      {"name": "preloader", "status": "UNKNOWN", "evidence": "no stock package or unit dump"},
+      {"name": "LK/bootloader", "status": "BLOCKED", "evidence": "fastboot and bootloader state unavailable"},
+      {"name": "AVB/vbmeta", "status": "UNKNOWN", "evidence": "Android T is known, unit metadata is absent"},
+      {"name": "boot/vendor_boot/init_boot/dtbo", "status": "UNKNOWN", "evidence": "no stock partition inventory"},
+      {"name": "rootfs/init/SELinux", "status": "UNKNOWN", "evidence": "QEMU rootfs is not an Android boot image"}
+    ]
+  },
+  "partition_contract": {
+    "status": "BLOCKED",
+    "scheme": "UNKNOWN",
+    "entries": [],
+    "required_evidence": ["read-only-fastboot-getvar", "read-only-adb-shell", "official-stock-layout"]
+  },
+  "capabilities": "capabilities.json",
+  "recovery": {
+    "status": "BLOCKED",
+    "required_evidence": [
+      "exact-unit-identity",
+      "stock-firmware-and-hashes",
+      "verified-backup",
+      "permitted-partition-list",
+      "tested-recovery-procedure",
+      "compatible-artifacts"
+    ]
+  },
+  "artifact_pipeline": {
+    "status": "BLOCKED",
+    "required_inputs": ["kernel", "device-tree", "boot-image-format", "vendor-modules", "firmware", "avb-policy"],
+    "policy": "never-synthesize-boot-image; package only explicitly supplied, hashed artifacts"
+  },
   "evidence": [
     "local-audit-2026-10-04",
-    "https://www.mi.com/global/support/faq/details/KA-13546/",
-    "https://github.com/MiCode/Xiaomi_Kernel_OpenSource/blob/README/README.md"
+    "https://www.mi.com/co/product/redmi-note-12s/specs/",
+    "https://github.com/MiCode/Xiaomi_Kernel_OpenSource/blob/README/README.md",
+    "https://source.android.com/docs/core/architecture/bootloader/boot-image-header",
+    "https://source.android.com/docs/core/architecture/partitions/vendor-boot-partitions"
   ],
   "prohibited_in_mission_001": [
     "flash",

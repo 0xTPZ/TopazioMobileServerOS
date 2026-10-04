@@ -18,13 +18,18 @@
 - [x] comprovar `TOPAZIO_BOOT_OK`, `/healthz` e login SSH no smoke test;
 - [x] manter o `sea` intocado e em `RESEARCH`.
 
-## Missão 003 — imagem de desenvolvimento (planejada; não iniciada)
+## Missão 003 — enablement do Xiaomi `sea`
 
-- produzir rootfs ARM64 reproduzível em PC/CI;
-- testar em QEMU ou placa compatível, sem inferir suporte ao `sea`;
-- assinar manifestos e testar atualização/rollback em ambiente descartável.
+- [x] fixar a fonte oficial `sea-t-oss`, commit, defconfig e DTS;
+- [x] registrar boot chain, AVB, A/B/dynamic e partições como evidência explícita;
+- [x] criar manifest v2 e matriz de capabilities sem declarar `WORKING`;
+- [x] criar host probe, recovery check e pipeline de artefatos fail-closed;
+- [x] tentar `sea_defconfig` e build out-of-tree no PC;
+- [x] preservar o telefone intocado e documentar driver Windows Code 28;
+- [ ] obter source/vendor completo ou toolchain compatível e gerar kernel+DTB;
+- [ ] validar recovery e boot em hardware dedicado com procedimento aprovado.
 
-## Missão 004 — pesquisa de boot do `sea`
+## Missão 004 — próxima etapa, não iniciada
 
 - confirmar estado do bootloader por caminho oficial;
 - localizar documentação e código publicamente redistribuíveis;

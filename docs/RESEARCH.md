@@ -18,6 +18,28 @@ erro de driver 28. **BLOCKED:** consultas de bootloader e partições não foram
 executadas. **UNKNOWN:** estado do bootloader desta unidade e nível de suporte
 Linux mainline.
 
+## Missão 003 — fonte vendor e boot research
+
+**CONFIRMED:** a branch oficial Xiaomi `sea-t-oss` corresponde ao Redmi Note
+12S/Android T e o commit analisado declara `sea_defconfig`. O `sea_defconfig`
+habilita blocos de MediaTek para USB, UFS, conectividade, display, touch,
+thermal e carregamento. **INFERRED:** esses blocos indicam a superfície de
+hardware esperada, mas não são prova de funcionamento.
+
+**BLOCKED:** a árvore pública expõe `sea.dts` como overlay, inclui
+`sea/cust.dtsi` ausente e não registra um alvo `sea` no Makefile de DTBs. O
+build out-of-tree gerou `sea_defconfig`, mas falhou em `kernel/sched/tune.c`
+com GCC 13; nenhum kernel+DTB de telefone foi publicado ou fabricado.
+
+**UNKNOWN/BLOCKED:** boot ROM/preloader/LK, formato exato e AVB de
+`boot/vendor_boot/init_boot/dtbo/vbmeta`, esquema A/B/dynamic, `super`,
+`system/vendor/product` e recovery da unidade. O Debian ext4 de QEMU não é
+um `boot.img` Android.
+
+**BLOCKED:** a auditoria Windows observou `USB\\VID_0E8D&PID_201C` com Code 28;
+ADB e fastboot estavam vazios. O Google USB Driver não cobre esse ID. Nenhum
+INF foi forçado e nenhum driver foi instalado.
+
 ## Decisão
 
 O caminho híbrido Android/Termux é a melhor primeira etapa reversível. Debian

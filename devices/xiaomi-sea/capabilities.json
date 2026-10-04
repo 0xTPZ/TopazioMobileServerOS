@@ -1,0 +1,98 @@
+{
+  "schema": 1,
+  "device": "xiaomi-sea",
+  "status_vocabulary": [
+    "UNKNOWN",
+    "SOURCE_AVAILABLE",
+    "BUILDABLE",
+    "BOOT_TEST_REQUIRED",
+    "WORKING",
+    "BROKEN",
+    "NOT_REQUIRED"
+  ],
+  "test_scope": "No physical device test was performed in Mission 003.",
+  "capabilities": {
+    "cpu": {
+      "status": "SOURCE_AVAILABLE",
+      "critical": true,
+      "evidence": ["official-xiaomi-spec", "official-kernel-sea-t-oss"]
+    },
+    "ram": {
+      "status": "UNKNOWN",
+      "critical": true,
+      "evidence": ["commercial-skus-vary", "no-live-inventory"]
+    },
+    "ufs": {
+      "status": "SOURCE_AVAILABLE",
+      "critical": true,
+      "evidence": ["sea_defconfig-enables-ufs-mediatek"],
+      "note": "Kernel configuration is not proof of the storage fitted in this unit."
+    },
+    "usb": {
+      "status": "SOURCE_AVAILABLE",
+      "critical": true,
+      "evidence": ["sea.dts-usb-typec", "sea_defconfig-mtk-usb", "local-audit-usb-code-28"],
+      "hardware_test": "BLOCKED"
+    },
+    "wifi": {
+      "status": "SOURCE_AVAILABLE",
+      "critical": true,
+      "evidence": ["sea_defconfig-combo-wifi"],
+      "hardware_test": "BLOCKED"
+    },
+    "battery_charging": {
+      "status": "SOURCE_AVAILABLE",
+      "critical": true,
+      "evidence": ["sea.dts-bq2589x-bq2597x", "sea.dts-xiaomi-pd-qc"],
+      "hardware_test": "BLOCKED"
+    },
+    "thermal": {
+      "status": "SOURCE_AVAILABLE",
+      "critical": true,
+      "evidence": ["sea.dts-thermal-message", "sea_defconfig-thermal"],
+      "hardware_test": "BLOCKED"
+    },
+    "display": {
+      "status": "SOURCE_AVAILABLE",
+      "critical": true,
+      "evidence": ["sea.dts-dsi-panel", "sea_defconfig-display"],
+      "hardware_test": "BLOCKED"
+    },
+    "touch": {
+      "status": "SOURCE_AVAILABLE",
+      "critical": true,
+      "evidence": ["sea.dts-touchscreen-include", "sea_defconfig-touch"],
+      "hardware_test": "BLOCKED"
+    },
+    "gpu": {
+      "status": "SOURCE_AVAILABLE",
+      "critical": false,
+      "evidence": ["sea_defconfig-mali-valhall"],
+      "hardware_test": "BLOCKED"
+    },
+    "audio": {
+      "status": "SOURCE_AVAILABLE",
+      "critical": false,
+      "evidence": ["sea.dts-audio-includes"],
+      "hardware_test": "BLOCKED"
+    },
+    "camera": {
+      "status": "SOURCE_AVAILABLE",
+      "critical": false,
+      "evidence": ["sea.dts-camera-include"],
+      "hardware_test": "BLOCKED"
+    },
+    "modem": {
+      "status": "SOURCE_AVAILABLE",
+      "critical": false,
+      "evidence": ["helio-g96-commercial-spec", "sea_defconfig-connectivity"],
+      "hardware_test": "BLOCKED"
+    },
+    "sensors": {
+      "status": "UNKNOWN",
+      "critical": false,
+      "evidence": ["no-unit-inventory"],
+      "hardware_test": "BLOCKED"
+    }
+  }
+}

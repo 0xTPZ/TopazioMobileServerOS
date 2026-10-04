@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://topazio.example/schemas/device-manifest-v2.json",
+  "title": "Topazio Device Support Package manifest",
+  "type": "object",
+  "required": [
+    "schema",
+    "vendor",
+    "model",
+    "codename",
+    "architecture",
+    "support_state",
+    "installable",
+    "kernel_source",
+    "boot_contract",
+    "partition_contract",
+    "capabilities",
+    "recovery",
+    "artifact_pipeline"
+  ],
+  "properties": {
+    "schema": { "const": 2 },
+    "vendor": { "type": "string", "minLength": 1 },
+    "model": { "type": "string", "minLength": 1 },
+    "codename": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+    "architecture": { "const": "arm64" },
+    "support_state": { "enum": ["RESEARCH", "SUPPORTED", "STABLE"] },
+    "installable": { "type": "boolean" },
+    "kernel_source": {
+      "type": "object",
+      "required": ["repository", "branch", "commit", "defconfig", "dts", "source_status", "build_status"],
+      "properties": {
+        "repository": { "type": "string", "format": "uri" },
+        "branch": { "type": "string", "minLength": 1 },
+        "commit": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+        "defconfig": { "type": "string", "minLength": 1 },
+        "dts": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+        "source_status": { "enum": ["CONFIRMED", "INFERRED", "UNKNOWN", "BLOCKED"] },
+        "build_status": { "enum": ["CONFIRMED", "INFERRED", "UNKNOWN", "BLOCKED"] }
+      }
+    },
+    "boot_contract": {
+      "type": "object",
+      "required": ["status", "components"],
+      "properties": {
+        "status": { "enum": ["CONFIRMED", "INFERRED", "UNKNOWN", "BLOCKED"] },
+        "components": { "type": "array", "minItems": 1 }
+      }
+    },
+    "partition_contract": {
+      "type": "object",
+      "required": ["status", "scheme", "entries"],
+      "properties": {
+        "status": { "enum": ["CONFIRMED", "INFERRED", "UNKNOWN", "BLOCKED"] },
+        "scheme": { "enum": ["UNKNOWN", "A/B", "A-only", "A/B-dynamic"] },
+        "entries": { "type": "array" }
+      }
+    },
+    "capabilities": { "type": "string", "minLength": 1 },
+    "recovery": { "type": "object", "required": ["status", "required_evidence"] },
+    "artifact_pipeline": { "type": "object", "required": ["status", "required_inputs"] }
+  }
+}
