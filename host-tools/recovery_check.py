@@ -22,10 +22,17 @@ CHECKS = (
 def evaluate(manifest: dict, evidence: dict | None = None) -> dict:
     evidence = evidence or {}
     missing = [name for name in CHECKS if evidence.get(name) is not True]
-    if manifest.get("support_state") == "RESEARCH" or manifest.get("installable") is not True:
+    dsp_blocked = manifest.get("support_state") == "RESEARCH" or manifest.get("installable") is not True
+    if dsp_blocked:
         missing.append("DSP_not_installable")
+    if dsp_blocked or not evidence:
+        decision = "BLOCKED"
+    elif missing:
+        decision = "NOT_READY"
+    else:
+        decision = "READY"
     return {
-        "decision": "READY" if not missing else "BLOCKED",
+        "decision": decision,
         "missing": sorted(set(missing)),
         "writes_performed": False,
         "device_access": False,

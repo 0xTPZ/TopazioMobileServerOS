@@ -54,6 +54,16 @@ class Mission003Tests(unittest.TestCase):
         self.assertEqual(result.decision, "BLOCKED")
         self.assertIn("dsp-installable", result.missing)
 
+    def test_recovery_check_can_distinguish_not_ready_from_blocked(self):
+        check = load_tool("recovery_check")
+        evidence = {name: True for name in check.CHECKS}
+        evidence["backup_verified"] = False
+        ready_for_evaluation = dict(self.manifest)
+        ready_for_evaluation["support_state"] = "SUPPORTED"
+        ready_for_evaluation["installable"] = True
+        result = check.evaluate(ready_for_evaluation, evidence)
+        self.assertEqual(result["decision"], "NOT_READY")
+
     def test_artifact_hashing_is_explicit_and_local(self):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "artifact.bin"

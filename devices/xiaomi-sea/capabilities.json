@@ -34,10 +34,22 @@
       "evidence": ["sea.dts-usb-typec", "sea_defconfig-mtk-usb", "local-audit-usb-code-28"],
       "hardware_test": "BLOCKED"
     },
+    "microSD": {
+      "status": "SOURCE_AVAILABLE",
+      "critical": false,
+      "evidence": ["official-xiaomi-spec"],
+      "hardware_test": "BLOCKED"
+    },
     "wifi": {
       "status": "SOURCE_AVAILABLE",
       "critical": true,
       "evidence": ["sea_defconfig-combo-wifi"],
+      "hardware_test": "BLOCKED"
+    },
+    "bluetooth": {
+      "status": "SOURCE_AVAILABLE",
+      "critical": false,
+      "evidence": ["official-xiaomi-spec", "sea_defconfig-combo-bluetooth"],
       "hardware_test": "BLOCKED"
     },
     "battery_charging": {

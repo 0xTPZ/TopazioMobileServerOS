@@ -23,6 +23,7 @@
     "repository": "https://github.com/MiCode/Xiaomi_Kernel_OpenSource.git",
     "branch": "sea-t-oss",
     "commit": "6f6b84e0e2fa8d474db66798a051ec1835257729",
+    "kernel_version": "4.19.191",
     "base_release": "bsp-t-alps-release-s0.mp1.tc8sp2-cs1-xm-V1.0.13",
     "defconfig": "arch/arm64/configs/sea_defconfig",
     "debug_defconfig": "arch/arm64/configs/sea_debug_defconfig",
@@ -63,6 +64,11 @@
     "required_evidence": ["read-only-fastboot-getvar", "read-only-adb-shell", "official-stock-layout"]
   },
   "capabilities": "capabilities.json",
+  "required_firmware": {
+    "status": "UNKNOWN",
+    "items": [],
+    "note": "vendor firmware paths and redistributable licenses were not obtained"
+  },
   "recovery": {
     "status": "BLOCKED",
     "required_evidence": [

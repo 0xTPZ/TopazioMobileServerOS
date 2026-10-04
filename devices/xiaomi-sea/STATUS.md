@@ -5,6 +5,7 @@
 | identidade comercial | CONFIRMED | auditoria local + FAQ Xiaomi |
 | ARM64/SoC | CONFIRMED | auditoria local + especificação pública |
 | kernel vendor público | CONFIRMED | `sea-t-oss`, commit fixado e arquivos `sea_*` presentes |
+| versão da fonte | CONFIRMED | Linux `4.19.191` no Makefile vendor |
 | kernel `sea_defconfig` | CONFIRMED | defconfig gera configuração out-of-tree |
 | kernel/device DTB | BLOCKED | overlay, include vendor ausente, build para em `tune.c` |
 | ADB/fastboot live | BLOCKED | transporte/driver indisponível |

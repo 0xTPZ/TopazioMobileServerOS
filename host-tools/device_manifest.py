@@ -21,7 +21,8 @@ def load_manifest(path: Path) -> dict[str, Any]:
 def validate_manifest(manifest: dict[str, Any], root: Path | None = None) -> list[str]:
     errors: list[str] = []
     required = ("schema", "vendor", "model", "codename", "architecture", "support_state", "installable",
-                "kernel_source", "boot_contract", "partition_contract", "capabilities", "recovery", "artifact_pipeline")
+                "kernel_source", "required_firmware", "boot_contract", "partition_contract", "capabilities",
+                "recovery", "artifact_pipeline")
     for key in required:
         if key not in manifest:
             errors.append(f"manifest missing: {key}")

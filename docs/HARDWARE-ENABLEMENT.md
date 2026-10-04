@@ -15,6 +15,11 @@ configuração para USB/OTG, UFS MediaTek, conectividade, display DSI, touch,
 energia, bateria e thermal. Isso é **SOURCE_AVAILABLE**, não prova de hardware
 funcionando.
 
+O `Makefile` da fonte declara Linux `4.19.191`. O `sea_defconfig` ainda mostra
+uma combinação que precisa do contexto vendor (`CONFIG_MACH_MT6781=y` junto
+com `CONFIG_MTK_PLATFORM="mt6785"`); isso foi preservado como evidência, não
+“corrigido” no repositório oficial.
+
 Há duas limitações relevantes na fonte pública:
 
 - `sea.dts` é `/plugin/` e inclui `sea/cust.dtsi`, que não está disponível na
@@ -49,6 +54,11 @@ O console de emergência deve ser tratado como uma camada separada do boot:
 2. console local framebuffer/touch somente após display, touch e energia terem
    testes de bring-up;
 3. SSH e HTTP só depois de rootfs, rede, SELinux e serviços terem logs de boot.
+
+O mínimo de UI física é um framebuffer/DRM com painel correto, um input-event
+de touch, um terminal TTY com um processo de console e um teclado virtual
+leve. Não é necessário um desktop: o painel pode mostrar status e endereço IP,
+enquanto SSH continua sendo a interface administrativa principal.
 
 Não se assume que o USB-C exponha UART. Não se usa test-point, desmontagem,
 curto ou cabo especial nesta missão.

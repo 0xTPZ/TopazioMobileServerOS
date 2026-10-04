@@ -12,6 +12,7 @@
     "support_state",
     "installable",
     "kernel_source",
+    "required_firmware",
     "boot_contract",
     "partition_contract",
     "capabilities",
@@ -39,6 +40,7 @@
         "build_status": { "enum": ["CONFIRMED", "INFERRED", "UNKNOWN", "BLOCKED"] }
       }
     },
+    "required_firmware": { "type": "object", "required": ["status", "items"] },
     "boot_contract": {
       "type": "object",
       "required": ["status", "components"],

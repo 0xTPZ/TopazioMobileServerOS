@@ -12,6 +12,7 @@ Um DSP precisa declarar, no mínimo:
 - identidade comercial, codename e arquitetura;
 - SoC e base Android com estado de evidência;
 - repositório, branch, commit, defconfig e DTS do kernel;
+- firmware requerido como lista explícita, inclusive quando ainda desconhecido;
 - cadeia de boot e contrato de partições, incluindo desconhecidos explícitos;
 - matriz de capabilities com `UNKNOWN`, `SOURCE_AVAILABLE`, `BUILDABLE`,
   `BOOT_TEST_REQUIRED`, `WORKING`, `BROKEN` ou `NOT_REQUIRED`;
