@@ -1,0 +1,22 @@
+{
+  "schema": 1,
+  "target_architecture": "arm64",
+  "hostname_source": "/etc/hostname",
+  "administrative_user": {
+    "name": "admin",
+    "uid": 1000,
+    "authentication": "external-ssh-key-or-console-policy",
+    "password": "not-in-image"
+  },
+  "runtime_contract": {
+    "ssh": {"port": 22, "required": true},
+    "git": {"required": true},
+    "python": {"required": true},
+    "nodejs": {"required": true},
+    "sqlite": {"required": true},
+    "http": {"endpoint": "/healthz", "required": true},
+    "metrics": {"endpoint": "/metrics", "required": true}
+  },
+  "status": "prototype-contract-only",
+  "bootable": false
+}
