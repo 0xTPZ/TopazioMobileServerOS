@@ -79,17 +79,28 @@ deadline=$((SECONDS + 180))
 boot_ok=0
 http_ok=0
 ssh_ok=0
+services_ok=0
+guest_arch=""
 while (( SECONDS < deadline )); do
   if grep -q 'TOPAZIO_BOOT_OK' "$SERIAL_LOG" 2>/dev/null; then boot_ok=1; fi
   if curl --silent --show-error --max-time 2 http://127.0.0.1:8787/healthz >/tmp/topazio-health.json 2>/dev/null; then http_ok=1; fi
+  guest_arch="$(ssh -o BatchMode=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
+      -o ConnectTimeout=2 -i "$KEY_DIR/id_ed25519" -p 2222 admin@127.0.0.1 uname -m \
+      2>/dev/null || true)"
+  if [[ "$guest_arch" == "aarch64" ]]; then ssh_ok=1; fi
   if ssh -o BatchMode=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
-      -o ConnectTimeout=2 -i "$KEY_DIR/id_ed25519" -p 2222 admin@127.0.0.1 true \
-      >/dev/null 2>&1; then ssh_ok=1; fi
-  if (( boot_ok == 1 && http_ok == 1 && ssh_ok == 1 )); then
+      -o ConnectTimeout=2 -i "$KEY_DIR/id_ed25519" -p 2222 admin@127.0.0.1 \
+      systemctl is-active --quiet topazio-status.service topazio-metrics.service \
+      topazio-http.service topazio-console.service >/dev/null 2>&1; then
+    services_ok=1
+  fi
+  if (( boot_ok == 1 && http_ok == 1 && ssh_ok == 1 && services_ok == 1 )); then
     echo "TOPAZIO_QEMU_SMOKE_OK"
     echo "boot_marker=ok"
     echo "http=ok"
     echo "ssh=ok"
+    echo "guest_arch=$guest_arch"
+    echo "services=ok"
     cat /tmp/topazio-health.json
     exit 0
   fi
@@ -97,6 +108,6 @@ while (( SECONDS < deadline )); do
 done
 
 echo "TOPAZIO_QEMU_SMOKE_FAILED" >&2
-echo "boot_marker=$boot_ok http=$http_ok ssh=$ssh_ok" >&2
+echo "boot_marker=$boot_ok http=$http_ok ssh=$ssh_ok services=$services_ok guest_arch=$guest_arch" >&2
 tail -n 120 "$SERIAL_LOG" >&2 || true
 exit 1
