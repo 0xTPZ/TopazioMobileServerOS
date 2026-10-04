@@ -1,0 +1,89 @@
+{
+  "schema": 1,
+  "device": "xiaomi-sea",
+  "generated_at": "2026-10-04",
+  "profiles": {
+    "VENDOR_REFERENCE": {
+      "objective": "Reproduce the Xiaomi Android T vendor kernel as faithfully as public evidence permits.",
+      "status": "BLOCKED",
+      "base": {
+        "source_id": "xiaomi-kernel-sea-t-oss",
+        "branch": "sea-t-oss",
+        "commit": "6f6b84e0e2fa8d474db66798a051ec1835257729",
+        "defconfig": "arch/arm64/configs/sea_defconfig",
+        "toolchain_source_id": "aosp-clang-r433403b"
+      },
+      "external_components": [
+        {
+          "component_id": "sea-cust-dtsi",
+          "state": "NOT_IMPORTED",
+          "required": true,
+          "reason": "Only one community candidate exists; it is not confirmed as the Xiaomi snapshot."
+        },
+        {
+          "component_id": "k6781-cust-dtsi",
+          "state": "MISSING",
+          "required": true,
+          "reason": "No public version was located."
+        },
+        {
+          "component_id": "focaltech-fw-sample",
+          "state": "MISSING_PROPRIETARY_OR_UNRESOLVED",
+          "required": true,
+          "reason": "The official driver requires customer firmware; the public community placeholder is empty."
+        }
+      ],
+      "patches": [],
+      "outputs": {
+        "kernel": "BLOCKED",
+        "modules": "BLOCKED",
+        "dtb": "BLOCKED",
+        "dtbo": "BUILT_UNTESTED",
+        "boot_image": "BLOCKED"
+      },
+      "policy": {
+        "modify_upstream_checkout": false,
+        "accept_unverified_community_replacement": false,
+        "write_device": false
+      }
+    },
+    "SERVER_MINIMAL": {
+      "objective": "Future server-oriented kernel profile with modem-dependent paths evaluated explicitly.",
+      "status": "DESIGN_ONLY",
+      "base_profile": "VENDOR_REFERENCE",
+      "changes_allowed_in_future": [
+        "disable modem/CCCI only after a configuration dependency audit",
+        "retain display, storage, USB, thermal and power dependencies needed by the server contract",
+        "record every config delta and build result separately from VENDOR_REFERENCE"
+      ],
+      "changes_not_yet_applied": [
+        "CONFIG_MTK_CCCI_DEVICES",
+        "CONFIG_MTK_ECCCI_DRIVER",
+        "CONFIG_MTK_MD1_SUPPORT",
+        "CONFIG_TOUCHSCREEN_FTS"
+      ],
+      "patches": [],
+      "outputs": {
+        "kernel": "SOURCE_ONLY",
+        "modules": "SOURCE_ONLY",
+        "dtb": "SOURCE_ONLY",
+        "dtbo": "SOURCE_ONLY",
+        "boot_image": "BLOCKED"
+      },
+      "policy": {
+        "may_replace_vendor_reference": false,
+        "write_device": false
+      }
+    }
+  },
+  "patch_order": [],
+  "artifact_state_vocabulary": [
+    "SOURCE_ONLY",
+    "BUILDABLE",
+    "BUILT_UNTESTED",
+    "HARDWARE_TEST_REQUIRED",
+    "WORKING",
+    "BLOCKED",
+    "DESIGN_ONLY"
+  ]
+}

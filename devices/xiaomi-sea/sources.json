@@ -1,0 +1,359 @@
+{
+  "schema": 1,
+  "device": "xiaomi-sea",
+  "generated_at": "2026-10-04",
+  "classification_vocabulary": [
+    "OFFICIAL",
+    "COMMUNITY_VERIFIED",
+    "STRONG_CANDIDATE",
+    "WEAK_CANDIDATE",
+    "UNRELATED",
+    "PROPRIETARY",
+    "UNKNOWN"
+  ],
+  "sources": [
+    {
+      "id": "xiaomi-kernel-sea-t-oss",
+      "classification": "OFFICIAL",
+      "kind": "kernel",
+      "owner": "MiCode/Xiaomi",
+      "repository": "https://github.com/MiCode/Xiaomi_Kernel_OpenSource",
+      "branch": "sea-t-oss",
+      "commit": "6f6b84e0e2fa8d474db66798a051ec1835257729",
+      "commit_date": "2023-05-26T10:24:51+08:00",
+      "license": "GPL-2.0-only with Linux syscall exception as supplied by source",
+      "license_status": "DECLARED_IN_SOURCE",
+      "role": "authoritative public kernel and DTS baseline",
+      "evidence": [
+        "Xiaomi kernel source README maps sea-t-oss to Redmi Note 12S and Android T",
+        "commit message names Redmi Note 12S and sea_defconfig",
+        "source tree contains sea_defconfig, sea.dts and k6781v1_64_k419.dts"
+      ],
+      "tree_stats": {
+        "measurement": "git ls-tree -r --name-only HEAD",
+        "files": 77460,
+        "dts_or_dtsi": 2912,
+        "config_files": 2084,
+        "driver_paths": 39285,
+        "firmware_named_paths": 252
+      }
+    },
+    {
+      "id": "aosp-clang-r433403b",
+      "classification": "OFFICIAL",
+      "kind": "toolchain",
+      "owner": "Android Open Source Project",
+      "repository": "https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/",
+      "branch": "android-s-v2-beta-2",
+      "commit": "0625305092d0cfa7e28b0e1b268aff1d3d751eca",
+      "license": "Apache-2.0 and component licenses in NOTICE files",
+      "license_status": "DECLARED_IN_SOURCE",
+      "role": "compiler selected by the Xiaomi Android T build profile",
+      "evidence": [
+        "build.config.mtk.aarch64.tiramisu selects clang-r433403b",
+        "AOSP prebuilt release list contains clang-r433403b"
+      ]
+    },
+    {
+      "id": "mt6781-sea-community-kernel",
+      "classification": "COMMUNITY_VERIFIED",
+      "kind": "kernel",
+      "owner": "mt6781-sea",
+      "repository": "https://github.com/mt6781-sea/android_kernel_xiaomi_mt6781",
+      "branch": "lineage-23.2",
+      "commit": "ae44e42c393b44b1534a7fcd7065366abe6bfe65",
+      "commit_date": "2026-02-21T01:50:29-03:00",
+      "license": "GPL-2.0-only as supplied by kernel COPYING",
+      "license_status": "DECLARED_IN_SOURCE",
+      "role": "community comparison tree and source of the only located sea cust.dtsi candidate",
+      "evidence": [
+        "public repository and pinned commit",
+        "branch contains sea_defconfig and sea-specific DTS paths",
+        "repository history does not expose a common ancestor with MiCode sea-t-oss"
+      ],
+      "tree_stats": {
+        "measurement": "git ls-tree -r --name-only HEAD",
+        "files": 82414,
+        "dts_or_dtsi": 2998,
+        "config_files": 2154,
+        "driver_paths": 43881,
+        "firmware_named_paths": 253
+      }
+    },
+    {
+      "id": "mt6781-sea-community-device",
+      "classification": "COMMUNITY_VERIFIED",
+      "kind": "android-device-tree",
+      "owner": "mt6781-sea",
+      "repository": "https://github.com/mt6781-sea/android_device_xiaomi_sea",
+      "branch": "lineage-23.2",
+      "commit": "5bb6ea26756658687da2189dceb4d76b923ba7d3",
+      "commit_date": "2026-07-29T08:44:33+02:00",
+      "license": "Apache-2.0 as declared by the tree",
+      "license_status": "DECLARED_IN_SOURCE",
+      "role": "community build metadata and proprietary dependency inventory",
+      "evidence": [
+        "public device tree identifies TARGET_BOOTLOADER_BOARD_NAME=sea",
+        "BoardConfig declares Image.gz, DTB-in-boot and separated DTBO",
+        "BoardConfig also depends on vendor binaries and test AVB keys"
+      ],
+      "warning": "Offsets and partition declarations are community evidence, not unit-specific proof."
+    },
+    {
+      "id": "mt6781-sea-community-twrp",
+      "classification": "WEAK_CANDIDATE",
+      "kind": "recovery-device-tree",
+      "owner": "mt6781-sea",
+      "repository": "https://github.com/mt6781-sea/twrp_device_xiaomi_sea",
+      "branch": "main",
+      "commit": "1ae754e55373fc81089ce758858eac62a58347da",
+      "license": "Not established for the complete tree",
+      "license_status": "UNKNOWN",
+      "role": "recovery-tree research only",
+      "evidence": [
+        "public TWRP tree names Redmi Note 12S sea/ocean",
+        "tree is community-created and does not establish a tested stock recovery path"
+      ]
+    },
+    {
+      "id": "mt6781-sea-community-vendor",
+      "classification": "PROPRIETARY",
+      "kind": "vendor-binaries",
+      "owner": "mt6781-sea",
+      "repository": "https://github.com/mt6781-sea/android_vendor_xiaomi_sea",
+      "branch": "16.0",
+      "commit": "021a2883e9c0755ca076c3365242cd80868c5483",
+      "license": "Vendor binary licenses are not established by the repository license metadata",
+      "license_status": "UNKNOWN",
+      "role": "evidence that a community Android build requires proprietary vendor content",
+      "evidence": [
+        "repository contains proprietary/vendor shared libraries",
+        "repository contains radio/md1img.img referenced through Git LFS",
+        "no binary was copied to Topazio"
+      ],
+      "redistribution": "DO_NOT_REDISTRIBUTE"
+    },
+    {
+      "id": "aosp-boot-image-docs",
+      "classification": "OFFICIAL",
+      "kind": "documentation",
+      "owner": "Android Open Source Project",
+      "repository": "https://source.android.com/docs/core/architecture/bootloader/boot-image-header",
+      "branch": "published documentation",
+      "commit": null,
+      "license": "Android Open Source documentation terms",
+      "license_status": "PUBLIC_DOCUMENTATION",
+      "role": "generic boot image and partition format reference",
+      "evidence": [
+        "documents boot header and vendor_boot architecture",
+        "does not prove this unit's boot layout"
+      ]
+    },
+    {
+      "id": "postmarketos-device-index",
+      "classification": "UNRELATED",
+      "kind": "mobile-linux-index",
+      "owner": "postmarketOS",
+      "repository": "https://wiki.postmarketos.org/wiki/Devices",
+      "branch": "published wiki",
+      "commit": null,
+      "license": "Project documentation terms",
+      "license_status": "PUBLIC_DOCUMENTATION",
+      "role": "negative ecosystem search",
+      "evidence": [
+        "no Redmi Note 12S sea entry was located in the public device index during this mission",
+        "postmarketOS support would not supply the missing Xiaomi vendor snapshot"
+      ]
+    },
+    {
+      "id": "droidian-halium-docs",
+      "classification": "UNRELATED",
+      "kind": "mobile-linux-infrastructure",
+      "owner": "Droidian/Halium",
+      "repository": "https://docs.droidian.org/porting-guide/kernel-compilation/",
+      "branch": "published documentation",
+      "commit": null,
+      "license": "Project documentation terms",
+      "license_status": "PUBLIC_DOCUMENTATION",
+      "role": "generic downstream Android-kernel guidance",
+      "evidence": [
+        "documentation describes generic Halium/Droidian kernel builds",
+        "no sea-specific device support or missing vendor files were found"
+      ]
+    }
+  ],
+  "components": [
+    {
+      "id": "official-sea-dts",
+      "classification": "OFFICIAL",
+      "source_ids": ["xiaomi-kernel-sea-t-oss"],
+      "path": "arch/arm64/boot/dts/mediatek/sea.dts",
+      "hashes": {"sha256": "a17e4aa238006313dccea87e051fdada7ae6a97d97c8f56a46fa6cf52297bb85"},
+      "license": "GPL-2.0-only with Linux syscall exception",
+      "redistributable": "source-only",
+      "confidence": "high",
+      "evidence": "Committed in the official Xiaomi branch; it is an overlay and includes missing vendor context."
+    },
+    {
+      "id": "official-k6781-dts",
+      "classification": "OFFICIAL",
+      "source_ids": ["xiaomi-kernel-sea-t-oss"],
+      "path": "arch/arm64/boot/dts/mediatek/k6781v1_64_k419.dts",
+      "hashes": {"sha256": "d5c56bd88161484e682876674f1014cf76e17b98f2cc682702a2edf85d676a1b"},
+      "license": "GPL-2.0-only with Linux syscall exception",
+      "redistributable": "source-only",
+      "confidence": "high",
+      "evidence": "Committed in the official Xiaomi branch; it includes a missing k6781v1_64_k419/cust.dtsi."
+    },
+    {
+      "id": "sea-cust-dtsi",
+      "classification": "STRONG_CANDIDATE",
+      "source_ids": ["mt6781-sea-community-kernel"],
+      "path": "arch/arm64/boot/dts/mediatek/sea/cust.dtsi",
+      "hashes": {"sha256": "9ba54ed35a7ecb82c9b2d9ee5ed651162d8ca689174b0ca2ec29123189528216"},
+      "license": "GPL-2.0-only tree context; generated content license not separately established",
+      "redistributable": "public-source-with-license-review",
+      "confidence": "medium",
+      "evidence": [
+        "only located public sea/cust.dtsi candidate",
+        "header says MTK SP DrvGen 3.5.160809 for MT6781",
+        "content contains board ADC, clocks, I2C, GPIO, charging, touch and display references",
+        "community tree uses a different camera include from the official sea.dts"
+      ],
+      "confirmed_vendor_snapshot": false
+    },
+    {
+      "id": "k6781-cust-dtsi",
+      "classification": "UNKNOWN",
+      "source_ids": ["xiaomi-kernel-sea-t-oss", "mt6781-sea-community-kernel"],
+      "path": "arch/arm64/boot/dts/mediatek/k6781v1_64_k419/cust.dtsi",
+      "hashes": {},
+      "license": "Unknown because the file was not located",
+      "redistributable": "UNKNOWN",
+      "confidence": "low",
+      "evidence": [
+        "official sea-t-oss references the file but does not publish it",
+        "community kernel does not contain this path",
+        "the official tree does contain the related k6781v1_64_k419.dws input"
+      ]
+    },
+    {
+      "id": "focaltech-fw-sample",
+      "classification": "PROPRIETARY",
+      "source_ids": ["xiaomi-kernel-sea-t-oss", "mt6781-sea-community-kernel"],
+      "path": "include/firmware/fw_sample.i",
+      "hashes": {},
+      "license": "No firmware license identified; the driver calls it a customer firmware sample to replace",
+      "redistributable": "NOT_ESTABLISHED",
+      "confidence": "high",
+      "evidence": [
+        "official focaltech_config.h references it through FTS_UPGRADE_FW_FILE and two module variants",
+        "CONFIG_TOUCHSCREEN_FTS=y in sea_defconfig",
+        "official config comments state the sample is invalid and must be replaced with customer firmware",
+        "community path is present but zero bytes, so it cannot satisfy the driver"
+      ],
+      "hardware_relation": "sea.dts includes a Focaltech touchscreen node with compatible mediatek/focaltech bindings; exact panel firmware identity remains unproven"
+    },
+    {
+      "id": "dpmaif-ccci-driver",
+      "classification": "OFFICIAL",
+      "source_ids": ["xiaomi-kernel-sea-t-oss"],
+      "path": "drivers/misc/mediatek/eccci/hif/ccci_hif_dpmaif.c",
+      "hashes": {},
+      "license": "GPL-2.0-only as supplied by kernel tree",
+      "redistributable": "source-only",
+      "confidence": "high",
+      "evidence": [
+        "sea_defconfig enables MTK_CCCI_DEVICES, MTK_MD1_SUPPORT=11 and MTK_ECCCI_DRIVER",
+        "eccci Makefiles include ccci_hif_dpmaif.o when the modem CCCI driver is enabled",
+        "Clang diagnostics are pointer-to-integer truncation warnings promoted by vendor -Werror policy",
+        "community tree changes the two debug casts to long but is not an official fix"
+      ],
+      "hardware_relation": "MediaTek modem/CCCI DPMAIF transport; not required by a future server-only profile, but retained in VENDOR_REFERENCE"
+    },
+    {
+      "id": "community-board-config",
+      "classification": "WEAK_CANDIDATE",
+      "source_ids": ["mt6781-sea-community-device"],
+      "path": "BoardConfig.mk",
+      "hashes": {},
+      "license": "Apache-2.0 tree context",
+      "redistributable": "source-only",
+      "confidence": "medium",
+      "evidence": [
+        "declares Android boot header v2, Image.gz, DTB-in-boot and separated DTBO",
+        "declares test AVB keys and proprietary vendor modules",
+        "no stock partition inventory or device-side confirmation exists"
+      ]
+    },
+    {
+      "id": "sea-community-dtbo-candidate",
+      "classification": "WEAK_CANDIDATE",
+      "source_ids": ["xiaomi-kernel-sea-t-oss", "mt6781-sea-community-kernel"],
+      "path": "external build output sea-community-candidate.dtbo",
+      "hashes": {"sha256": "34febe33284575825169a1b46f6f438491bd5f7ffd7931ed44dc746f0f1b01ab"},
+      "license": "Mixed-provenance generated artifact; no install permission",
+      "redistributable": "research-only",
+      "confidence": "low",
+      "evidence": [
+        "official sea.dts plus external community cust.dtsi",
+        "dtc produced an FDT version 17 overlay with structural warnings",
+        "no official base tree or boot layout was available"
+      ],
+      "artifact_state": "BUILT_UNTESTED",
+      "installable": false
+    }
+  ],
+  "relationships": [
+    {
+      "from": "mt6781-sea-community-kernel",
+      "relation": "community-comparison-of",
+      "to": "xiaomi-kernel-sea-t-oss",
+      "evidence": "same device family and public vendor-derived paths; no common Git ancestor demonstrated"
+    },
+    {
+      "from": "sea-cust-dtsi",
+      "relation": "candidate-for",
+      "to": "official-sea-dts",
+      "evidence": "path satisfies the missing include, but camera include and provenance differ"
+    },
+    {
+      "from": "focaltech-fw-sample",
+      "relation": "referenced-by",
+      "to": "xiaomi-kernel-sea-t-oss",
+      "evidence": "focaltech_config.h and focaltech_flash.c"
+    },
+    {
+      "from": "dpmaif-ccci-driver",
+      "relation": "enabled-by",
+      "to": "xiaomi-kernel-sea-t-oss",
+      "evidence": "sea_defconfig modem/CCCI symbols; relation is kernel-config based"
+    }
+  ],
+  "measurements": {
+    "cust_dtsi_independent_convergence": {
+      "sea": 1,
+      "k6781v1_64_k419": 0,
+      "interpretation": "one public candidate is not independent convergence and is not promoted to OFFICIAL"
+    },
+    "tree_comparison": {
+      "official_files": 77460,
+      "community_files": 82414,
+      "community_minus_official_file_count": 4954,
+      "method": "pinned Git tree manifests; count is not a semantic patch count"
+    },
+    "chain_estimate": {
+      "official_or_open_source": 70,
+      "community_derived": 15,
+      "proprietary_or_unresolved": 15,
+      "basis": "engineering dependency estimate for a bootable vendor-style Android chain, not a measured byte ratio"
+    }
+  },
+  "policies": {
+    "community_replaces_official_silently": false,
+    "proprietary_blobs_in_repository": false,
+    "empty_firmware_accepted": false,
+    "device_writes_performed": false,
+    "recovery_readiness": "BLOCKED"
+  }
+}
