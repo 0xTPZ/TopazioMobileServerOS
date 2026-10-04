@@ -26,6 +26,9 @@ REQUIRED = [
     "docs/RESEARCH.md",
     "docs/HANDOFF.md",
     "docs/QEMU-LAB.md",
+    "docs/HARDWARE-ENABLEMENT.md",
+    "docs/BOOT-ARTIFACTS.md",
+    "docs/DEVICE-MANIFEST.md",
     "host-tools/validate_arm64_artifact.py",
     "scripts/build-arm64.sh",
     "scripts/run-qemu.sh",
@@ -45,6 +48,14 @@ REQUIRED = [
     "devices/xiaomi-sea/BOOT.md",
     "devices/xiaomi-sea/STATUS.md",
     "devices/xiaomi-sea/device.json",
+    "devices/xiaomi-sea/capabilities.json",
+    "devices/schema/device-manifest.schema.json",
+    "host-tools/device_manifest.py",
+    "host-tools/host_probe.py",
+    "host-tools/recovery_check.py",
+    "host-tools/device_artifact_pipeline.py",
+    "scripts/build-sea-kernel.sh",
+    "scripts/build-sea-kernel.ps1",
 ]
 
 
@@ -58,11 +69,22 @@ def validate(root: Path = ROOT) -> list[str]:
         if marker not in gitignore:
             errors.append(f".gitignore missing guard: {marker}")
     try:
-        device = json.loads((root / "devices/xiaomi-sea/device.json").read_text(encoding="utf-8"))
+        device_path = root / "devices/xiaomi-sea/device.json"
+        device = json.loads(device_path.read_text(encoding="utf-8"))
+        from device_manifest import validate_manifest
+
+        errors.extend(validate_manifest(device, root))
         if device.get("support_state") != "RESEARCH":
             errors.append("sea DSP must remain RESEARCH until evidence changes")
         if device.get("installable") is not False:
             errors.append("sea DSP must not be installable in mission 001")
+        capabilities = json.loads((root / "devices/xiaomi-sea/capabilities.json").read_text(encoding="utf-8"))
+        allowed = set(capabilities["status_vocabulary"])
+        for name, entry in capabilities.get("capabilities", {}).items():
+            if entry.get("status") not in allowed:
+                errors.append(f"invalid capability status: {name}")
+            if entry.get("critical") and entry.get("status") == "WORKING":
+                errors.append(f"critical capability cannot claim WORKING in research: {name}")
     except (OSError, json.JSONDecodeError) as exc:
         errors.append(f"invalid sea DSP metadata: {exc}")
     if "Apache License" not in (root / "LICENSE").read_text(encoding="utf-8"):
