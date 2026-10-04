@@ -81,6 +81,7 @@ http_ok=0
 ssh_ok=0
 services_ok=0
 guest_arch=""
+service_check='systemctl is-active --quiet topazio-status.service && systemctl is-active --quiet topazio-metrics.service && systemctl is-active --quiet topazio-http.service && systemctl is-active --quiet topazio-console.service'
 while (( SECONDS < deadline )); do
   if grep -q 'TOPAZIO_BOOT_OK' "$SERIAL_LOG" 2>/dev/null; then boot_ok=1; fi
   if curl --silent --show-error --max-time 2 http://127.0.0.1:8787/healthz >/tmp/topazio-health.json 2>/dev/null; then http_ok=1; fi
@@ -90,8 +91,7 @@ while (( SECONDS < deadline )); do
   if [[ "$guest_arch" == "aarch64" ]]; then ssh_ok=1; fi
   if ssh -o BatchMode=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
       -o ConnectTimeout=2 -i "$KEY_DIR/id_ed25519" -p 2222 admin@127.0.0.1 \
-      systemctl is-active --quiet topazio-status.service topazio-metrics.service \
-      topazio-http.service topazio-console.service >/dev/null 2>&1; then
+      "$service_check" >/dev/null 2>&1; then
     services_ok=1
   fi
   if (( boot_ok == 1 && http_ok == 1 && ssh_ok == 1 && services_ok == 1 )); then
