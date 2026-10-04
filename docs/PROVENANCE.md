@@ -2,6 +2,9 @@
 
 O registro canônico está em
 [`devices/xiaomi-sea/provenance.json`](../devices/xiaomi-sea/provenance.json).
+O banco de pesquisa ampliado, com classificações, relações, hashes e política
+de redistribuição, está em
+[`devices/xiaomi-sea/sources.json`](../devices/xiaomi-sea/sources.json).
 
 | Componente | Origem / ref | Uso | Redistribuição no projeto |
 |---|---|---|---|

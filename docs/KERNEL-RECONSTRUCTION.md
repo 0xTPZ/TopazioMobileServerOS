@@ -55,3 +55,20 @@ como `WORKING`.
 
 O máximo honesto desta missão é `BUILT_UNTESTED` para o DTBO candidato
 diagnóstico isolado e `BLOCKED` para o pacote kernel+DT destinado ao aparelho.
+
+## Missão 005 — contexto vendor e DPMAIF
+
+O mapa completo de fontes e componentes está em
+[`SEA-ECOSYSTEM.md`](SEA-ECOSYSTEM.md). A investigação confirmou que
+`fw_sample.i` é um placeholder de firmware Focaltech de cliente: o driver o
+inclui quando `CONFIG_TOUCHSCREEN_FTS=y`, mas os comentários vendor dizem que
+o sample é inválido e precisa ser substituído. A versão comunitária observada
+tem zero bytes; ela não é uma solução e não foi importada.
+
+O erro posterior em `ccci_hif_dpmaif.c` ocorre nos casts de ponteiro para
+`u32` nas linhas 453 e 466. O driver modem/CCCI é ativado pela configuração
+vendor e o `-Werror` do código Mediatek transforma o diagnóstico de truncamento
+do Clang em erro. A árvore comunitária altera esses casts para `long`, mas o
+patch não foi promovido para `VENDOR_REFERENCE` porque não há prova de que
+seja o patch Xiaomi correto. O perfil `SERVER_MINIMAL` fica separado e sem
+alterações aplicadas.

@@ -31,6 +31,13 @@ Também há diferença material na árvore comunitária: ela inclui
 usa `<sea/cust.dtsi>` e `cust_mt6781_camera.dtsi`. Isso impede chamar o
 conjunto comunitário de reconstrução oficial.
 
+Na busca da Missão 005 foi localizada uma única versão pública de
+`sea/cust.dtsi` e nenhuma versão pública de
+`k6781v1_64_k419/cust.dtsi`. Não há convergência independente de hashes. A
+árvore Xiaomi também contém `drivers/misc/mediatek/dws/mt6785/sea.dws`, que é
+um possível insumo do DrvGen, mas não substitui o artefato gerado nem prova a
+licença/procedência do snapshot comunitário.
+
 ## DTB e DTBO
 
 O `sea.dts` público é um overlay e a `arch/arm64/boot/dts/mediatek/Makefile`

@@ -79,6 +79,12 @@
   "reconstruction": {
     "status": "PARTIAL",
     "provenance": "provenance.json",
+    "research_database": "sources.json",
+    "controlled_layer": "reconstruction/manifest.json",
+    "profiles": {
+      "VENDOR_REFERENCE": "BLOCKED",
+      "SERVER_MINIMAL": "DESIGN_ONLY"
+    },
     "dts_graph": "docs/DTS-DEPENDENCY-GRAPH.md",
     "kernel_reconstruction": "docs/KERNEL-RECONSTRUCTION.md",
     "cust_dtsi": {
