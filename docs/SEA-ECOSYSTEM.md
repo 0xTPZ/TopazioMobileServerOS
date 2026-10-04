@@ -60,7 +60,7 @@ a reconstrução do kernel Xiaomi; não foram usados como substitutos.
 | `k6781v1_64_k419/cust.dtsi` | referenciado, ausente | não localizado na árvore comunitária | **0 versões públicas localizadas** |
 
 O candidato `sea/cust.dtsi` tem cabeçalho de `MTK SP DrvGen Version: 3.5.160809
-for MT6781`, 494 linhas no snapshot observado, e declarações para ADC,
+for MT6781`, e declarações para ADC,
 clock-buffer, I2C/câmera, carregamento/USB-C, NFC, GPIO, touch e DSI. Isso
 explica por que ele é tecnicamente plausível. Ainda assim:
 
