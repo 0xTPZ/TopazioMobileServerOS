@@ -12,6 +12,9 @@ from firmware_forensics.core import (
     inventory_package,
     parse_android_boot,
     parse_dtbo,
+    parse_fdt,
+    parse_update_payload_file,
+    parse_vendor_boot,
     parse_vbmeta,
 )
 
@@ -27,7 +30,10 @@ def build_parser() -> argparse.ArgumentParser:
     boot.add_argument("path", type=Path)
     boot.add_argument("--extract-dir", type=Path)
 
-    for name in ("dtbo", "vbmeta"):
+    for name in ("dtbo", "vbmeta", "vendor-boot"):
+        command = sub.add_parser(name)
+        command.add_argument("path", type=Path)
+    for name in ("fdt", "payload"):
         command = sub.add_parser(name)
         command.add_argument("path", type=Path)
     return parser
@@ -42,6 +48,12 @@ def main(argv: list[str] | None = None) -> int:
             result = parse_android_boot(args.path, args.extract_dir)
         elif args.command == "dtbo":
             result = parse_dtbo(args.path)
+        elif args.command == "fdt":
+            result = parse_fdt(args.path.read_bytes(), str(args.path.resolve()))
+        elif args.command == "payload":
+            result = parse_update_payload_file(args.path)
+        elif args.command == "vendor-boot":
+            result = parse_vendor_boot(args.path)
         else:
             result = parse_vbmeta(args.path)
     except (OSError, ValueError, KeyError) as error:

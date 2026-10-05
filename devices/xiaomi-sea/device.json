@@ -64,16 +64,17 @@
       {"name": "MediaTek Boot ROM", "status": "INFERRED", "evidence": "platform family only"},
       {"name": "preloader", "status": "UNKNOWN", "evidence": "no stock package or unit dump"},
       {"name": "LK/bootloader", "status": "BLOCKED", "evidence": "fastboot and bootloader state unavailable"},
-      {"name": "AVB/vbmeta", "status": "UNKNOWN", "evidence": "Android T is known, unit metadata is absent"},
+      {"name": "AVB/vbmeta", "status": "CONFIRMED_FROM_STOCK_PAYLOAD", "evidence": "Mission 010 reconstructed vbmeta, vbmeta_system and vbmeta_vendor from the official OTA payload manifest and verified AVB headers"},
       {"name": "boot.img", "status": "CONFIRMED", "evidence": "Mission 009 parsed a hash-verified OS2.0.209 sea Global component; exact unit variant remains unverified"},
-      {"name": "vendor_boot/init_boot/dtbo", "status": "UNKNOWN", "evidence": "no complete stock partition inventory"},
+      {"name": "vendor_boot/init_boot/vendor_kernel_boot", "status": "ABSENT_FROM_STOCK_PAYLOAD_MANIFEST", "evidence": "Mission 010 payload manifest contains no entries for these partitions; vendor ramdisk was not observed"},
+      {"name": "dtbo.img", "status": "CONFIRMED_FROM_STOCK_PAYLOAD", "evidence": "Mission 010 reconstructed the single-entry dtbo image and matched its manifest SHA-256"},
       {"name": "rootfs/init/SELinux", "status": "UNKNOWN", "evidence": "QEMU rootfs is not an Android boot image"}
     ]
   },
   "partition_contract": {
-    "status": "BLOCKED",
-    "scheme": "UNKNOWN",
-    "entries": [],
+    "status": "INFERRED",
+    "scheme": "A/B + Virtual A/B + dynamic partitions; exact physical table not enumerated",
+    "entries": ["main: odm_dlkm, product, system, system_dlkm, system_ext, vendor, vendor_dlkm, mi_ext"],
     "required_evidence": ["read-only-fastboot-getvar", "read-only-adb-shell", "official-stock-layout"]
   },
   "capabilities": "capabilities.json",
@@ -90,6 +91,7 @@
     "mission_008_dt_analysis": "reconstruction/dt-analysis.json",
     "mission_008_kernel_baseline": "server-minimal/kernel-baseline.json",
     "mission_009_stock_forensics": "firmware-forensics/mission-009.json",
+    "mission_010_stock_package_forensics": "firmware-forensics/mission-010.json",
     "kernel_reconstruction": "docs/KERNEL-RECONSTRUCTION.md",
     "cust_dtsi": {
       "status": "STRONG_CANDIDATE",
@@ -97,7 +99,7 @@
       "community_sha256": "9ba54ed35a7ecb82c9b2d9ee5ed651162d8ca689174b0ca2ec29123189528216"
     },
     "dtb": "BLOCKED",
-    "dtbo": "BLOCKED",
+    "dtbo": "STOCK_CONFIRMED_OFFLINE_ONLY",
     "boot_image": "BLOCKED"
   },
   "mission_009_stock_forensics": {
@@ -134,13 +136,27 @@
       "source": "AGENTS.md and mission-009 report"
     }
   },
+  "mission_010_stock_package_forensics": {
+    "status": "PARTIAL",
+    "report": "firmware-forensics/mission-010.json",
+    "package_identity": "OS2.0.209.0.VHZMIXM / Global / Android 15 / sea confirmed by META-INF metadata and payload manifest",
+    "package_sha256": null,
+    "partition_model": "A/B, Virtual A/B and dynamic partitions confirmed; main group requires super container",
+    "boot_family": "boot confirmed; vendor_boot/init_boot/vendor_kernel_boot absent from payload manifest; base DTB not observed",
+    "stock_dtbo": "CONFIRMED / SHA-256 44b31ec3b3bfb82631a4e214fadafe109248ba880cb2a9dfe8d7b27bb47914c3",
+    "avb": "CONFIRMED / AVB 1.0 algorithm type 1 across vbmeta family",
+    "recovery_readiness": "NOT_READY",
+    "kernel_strategy": "C_MAINTAIN_TWO_TRACKS",
+    "phone_writes": false
+  },
   "required_firmware": {
-    "status": "UNKNOWN",
+    "status": "PARTIAL",
     "items": [],
     "note": "vendor firmware paths and redistributable licenses were not obtained"
   },
   "recovery": {
     "status": "BLOCKED",
+    "readiness": "NOT_READY",
     "required_evidence": [
       "exact-unit-identity",
       "stock-firmware-and-hashes",

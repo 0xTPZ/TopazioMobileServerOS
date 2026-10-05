@@ -80,6 +80,22 @@
       "redistribution": "host-cache-only",
       "use": "offline Boot Header, kernel and ramdisk forensics",
       "sha256": "c8d9d33cc301d5b59c2443481dca139ce569635d70094833ad8f5b0095ad2af3"
+    },
+    {
+      "name": "Xiaomi sea OS2.0.209 Recovery OTA ranged evidence",
+      "origin": "official direct Xiaomi CDN",
+      "url": "https://bigota.d.miui.com/OS2.0.209.0.VHZMIXM/sea_global-ota_full-OS2.0.209.0.VHZMIXM-user-15.0-e802b6d430.zip",
+      "ref": "OS2.0.209.0.VHZMIXM",
+      "license": "Proprietary firmware; not redistributed",
+      "redistribution": "metadata-and-selected-component-hashes-only",
+      "use": "ranged ZIP metadata, update_engine payload manifest, stock dtbo and vbmeta reconstruction",
+      "published_size_bytes": 4693514032,
+      "published_md5": "e802b6d430a645dc6e3115983fe8d400",
+      "full_sha256": null,
+      "range_evidence": {
+        "prefix_sha256": "871134ab786d1fc0e403cd9a4061bea035529dbb2a4270db1cee0e9e49405fbe",
+        "tail_sha256": "e84c2f97f9a3261aa3acaa2f6ed74f162d9543229401e2faa3c87d46dd1c6b9e"
+      }
     }
   ],
   "policy": {
@@ -101,6 +117,19 @@
         "status": "EXTERNAL_CACHE_ONLY / FORENSICS_ONLY",
         "size": 67108864,
         "sha256": "c8d9d33cc301d5b59c2443481dca139ce569635d70094833ad8f5b0095ad2af3",
+        "proprietary": true,
+        "versioned": false,
+        "installable": false
+      },
+      {
+        "name": "sea-stock-package-os209-dtbo-vbmeta-metadata",
+        "status": "RANGED_OFFICIAL_PAYLOAD / FORENSICS_ONLY",
+        "sha256": {
+          "dtbo": "44b31ec3b3bfb82631a4e214fadafe109248ba880cb2a9dfe8d7b27bb47914c3",
+          "vbmeta": "9509d01ca921a017d4ccad33983ae4e64f1bc359e8538608eeb81d80a9a64a2b",
+          "vbmeta_system": "3dcef9c2eb549fce3212123d19a2ab73ea4365cb84488b1191aacac7363213c2",
+          "vbmeta_vendor": "d2e5d08fdefda0384332af6f0770bd7997eea8472636de043b32c5b7b2de8d68"
+        },
         "proprietary": true,
         "versioned": false,
         "installable": false

@@ -4,6 +4,11 @@
   "generated_at": "2026-10-04",
   "classification_vocabulary": [
     "OFFICIAL",
+    "OFFICIAL_DIRECT",
+    "OFFICIAL_REDIRECT",
+    "TRUSTED_MIRROR",
+    "MIRROR",
+    "COMMUNITY",
     "COMMUNITY_VERIFIED",
     "STRONG_CANDIDATE",
     "WEAK_CANDIDATE",
@@ -217,6 +222,27 @@
         "ramdisk build fingerprint identifies Redmi/sea_global/sea"
       ],
       "redistribution": "DO_NOT_REDISTRIBUTE"
+    },
+    {
+      "id": "sea-stock-package-os209-global-ranged",
+      "classification": "OFFICIAL",
+      "kind": "stock-firmware-payload-ranged",
+      "owner": "Xiaomi",
+      "repository": "https://bigota.d.miui.com/OS2.0.209.0.VHZMIXM/sea_global-ota_full-OS2.0.209.0.VHZMIXM-user-15.0-e802b6d430.zip",
+      "branch": "OS2.0.209.0.VHZMIXM",
+      "commit": null,
+      "license": "Proprietary firmware; not redistributed",
+      "license_status": "DO_NOT_VERSION",
+      "role": "official Recovery ZIP metadata and ranged payload source for offline component reconstruction",
+      "published_size_bytes": 4693514032,
+      "published_md5": "e802b6d430a645dc6e3115983fe8d400",
+      "full_sha256": null,
+      "evidence": [
+        "META-INF metadata confirms pre-device=sea and exact Global build fingerprint",
+        "CrAU manifest confirms full payload with boot, dtbo, vbmeta family and dynamic partition metadata",
+        "reconstructed component hashes match manifest new_partition_info"
+      ],
+      "redistribution": "METADATA_AND_HASHES_ONLY"
     }
   ],
   "components": [

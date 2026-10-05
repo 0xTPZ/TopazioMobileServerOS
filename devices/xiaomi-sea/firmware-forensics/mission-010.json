@@ -1,0 +1,430 @@
+{
+  "schema": 1,
+  "mission": 10,
+  "device": "xiaomi-sea",
+  "status": "PARTIAL",
+  "pass_gate": false,
+  "decision": {
+    "reason": "The official Recovery ZIP identity and OTA payload manifest were verified by ranged reads, and boot/dtbo/vbmeta components were reconstructed offline. The complete archive SHA-256 and stock base DTB/vendor_boot bytes were not obtained.",
+    "phone_writes_performed": false,
+    "phone_interaction": "NONE",
+    "recovery_readiness": "NOT_READY",
+    "temporary_boot_executed": false,
+    "kernel_strategy": "C_MAINTAIN_TWO_TRACKS"
+  },
+  "package": {
+    "selected": {
+      "model": "Redmi Note 12S",
+      "codename": "sea",
+      "region": "Global",
+      "version": "OS2.0.209.0.VHZMIXM",
+      "android_version": "15",
+      "type": "Recovery full OTA",
+      "filename": "sea_global-ota_full-OS2.0.209.0.VHZMIXM-user-15.0-e802b6d430.zip",
+      "url": "https://bigota.d.miui.com/OS2.0.209.0.VHZMIXM/sea_global-ota_full-OS2.0.209.0.VHZMIXM-user-15.0-e802b6d430.zip",
+      "source_classification": "OFFICIAL_DIRECT",
+      "published_size_bytes": 4693514032,
+      "published_md5": "e802b6d430a645dc6e3115983fe8d400",
+      "sha256": null,
+      "sha256_status": "NOT_COMPUTED_FULL_ARCHIVE_NOT_DOWNLOADED",
+      "identity_confidence": "HIGH_INTERNAL_METADATA"
+    },
+    "other_candidates": [
+      {
+        "type": "Fastboot ROM",
+        "filename": "sea_global_images_OS2.0.209.0.VHZMIXM_20251222.0000.00_15.0_global_2604685251.tgz",
+        "url": "https://ultimateota.d.miui.com/OS2.0.209.0.VHZMIXM/sea_global_images_OS2.0.209.0.VHZMIXM_20251222.0000.00_15.0_global_2604685251.tgz",
+        "source_classification": "OFFICIAL_DIRECT",
+        "size_status": "INDEXED_APPROXIMATELY_7.4_GB",
+        "download_status": "NOT_DOWNLOADED"
+      },
+      {
+        "type": "payload package",
+        "status": "PRESENT_INSIDE_RECOVERY_ZIP",
+        "filename": "payload.bin"
+      }
+    ],
+    "acquisition": {
+      "status": "RANGED_METADATA_AND_COMPONENTS_ONLY",
+      "full_archive_downloaded": false,
+      "full_archive_attempt": "Stopped after transfer-rate measurement; official CDN delivered approximately 1 MiB in 47.75 seconds for a 4.69 GB archive.",
+      "cache": "E:/TopazioMission010Cache",
+      "cache_is_outside_git": true,
+      "zip_central_directory": {
+        "entry_count": 7,
+        "entries": [
+          "META-INF/com/android/metadata",
+          "META-INF/com/android/metadata.pb",
+          "apex_info.pb",
+          "care_map.pb",
+          "payload.bin",
+          "payload_properties.txt",
+          "META-INF/com/android/otacert"
+        ],
+        "payload_size_bytes": 4693505546,
+        "payload_zip_data_offset": 4814
+      },
+      "range_evidence": [
+        {
+          "purpose": "ZIP prefix and payload manifest",
+          "range": "0-1048575",
+          "size_bytes": 1048576,
+          "sha256": "871134ab786d1fc0e403cd9a4061bea035529dbb2a4270db1cee0e9e49405fbe"
+        },
+        {
+          "purpose": "ZIP64 central directory and comment",
+          "range": "4692465456-4693514031",
+          "size_bytes": 1048576,
+          "sha256": "e84c2f97f9a3261aa3acaa2f6ed74f162d9543229401e2faa3c87d46dd1c6b9e"
+        }
+      ]
+    },
+    "ota_metadata": {
+      "ota-type": "AB",
+      "pre-device": "sea",
+      "post-build": "Redmi/sea_global/sea:15/AP3A.240905.015.A2/OS2.0.209.0.VHZMIXM:user/release-keys",
+      "post-build-incremental": "OS2.0.209.0.VHZMIXM",
+      "post-sdk-level": "35",
+      "post-security-patch-level": "2025-12-01",
+      "payload_properties_verified": true
+    },
+    "payload_manifest": {
+      "magic": "CrAU",
+      "major_version": 2,
+      "manifest_size_bytes": 181166,
+      "metadata_signature_size_bytes": 267,
+      "manifest_sha256": "aa8dbac0e1bbff9d5be16c6facea5b02d5158ba3e2d1b01dc7b89386fadae9e8",
+      "block_size": 4096,
+      "minor_version": 0,
+      "is_full_payload": true,
+      "security_patch_level": "",
+      "data_area_offset": 181457,
+      "partitions": [
+        "audio_dsp",
+        "boot",
+        "dtbo",
+        "gz",
+        "lk",
+        "md1img",
+        "odm_dlkm",
+        "pi_img",
+        "preloader_raw",
+        "product",
+        "scp",
+        "spmfw",
+        "sspm",
+        "system",
+        "system_dlkm",
+        "system_ext",
+        "tee",
+        "vbmeta",
+        "vbmeta_system",
+        "vbmeta_vendor",
+        "vendor",
+        "vendor_dlkm",
+        "mi_ext"
+      ]
+    }
+  },
+  "partition_model": {
+    "ab": "CONFIRMED",
+    "virtual_ab": "CONFIRMED",
+    "dynamic_partitions": "CONFIRMED",
+    "super": "CONFIRMED_AS_REQUIRED_CONTAINER_NOT_PACKAGE_ENTRY",
+    "confidence": "HIGH",
+    "evidence": {
+      "ota_type": "AB",
+      "dynamic_group": {
+        "name": "main",
+        "size_bytes": 7511998464,
+        "logical_partitions": [
+          "odm_dlkm",
+          "product",
+          "system",
+          "system_dlkm",
+          "system_ext",
+          "vendor",
+          "vendor_dlkm",
+          "mi_ext"
+        ]
+      },
+      "snapshot_enabled": true,
+      "vabc_enabled": true,
+      "vabc_compression_param": "gz",
+      "cow_version": 2,
+      "super_image_entry": "ABSENT_FROM_PAYLOAD_MANIFEST"
+    }
+  },
+  "inventory": {
+    "present_in_payload": [
+      "boot.img",
+      "dtbo.img",
+      "vbmeta.img",
+      "vbmeta_system.img",
+      "vbmeta_vendor.img",
+      "system.img",
+      "system_ext.img",
+      "vendor.img",
+      "product.img",
+      "odm_dlkm.img",
+      "system_dlkm.img",
+      "vendor_dlkm.img",
+      "mi_ext.img",
+      "preloader_raw",
+      "lk",
+      "md1img",
+      "audio_dsp",
+      "gz",
+      "scp",
+      "spmfw",
+      "sspm",
+      "tee",
+      "pi_img"
+    ],
+    "absent_or_not_packaged": [
+      "vendor_boot.img",
+      "vendor_kernel_boot.img",
+      "init_boot.img",
+      "super.img",
+      "recovery.img",
+      "metadata.img",
+      "userdata.img",
+      "odm.img",
+      "scatter.txt",
+      "payload.bin as an extracted image file"
+    ],
+    "interpretation": "super is the expected backing container for the confirmed dynamic-partition group; its absence as a standalone payload entry is not evidence that the device lacks super."
+  },
+  "boot_family": {
+    "boot": {
+      "status": "STOCK_CONFIRMED",
+      "size_bytes": 67108864,
+      "sha256": "c8d9d33cc301d5b59c2443481dca139ce569635d70094833ad8f5b0095ad2af3",
+      "header_version": 3,
+      "page_size": 4096,
+      "kernel_location": "boot.img kernel component at offset 4096",
+      "generic_ramdisk_location": "boot.img ramdisk component at offset 14692352",
+      "kernel_sha256": "0bdcf6159c48f111d19641721b97d30de2bf24c33910cc49a8ca1789aacc1ca9",
+      "ramdisk_sha256": "046849410f33acafc0f9a72e079dc07739ac1ce6478532a90f8fc0c6e7c7b0d6",
+      "embedded_avb_tail": {
+        "status": "OBSERVED",
+        "offset": 17326080,
+        "size_bytes": 1664,
+        "magic": "AVB0"
+      }
+    },
+    "vendor_boot": {
+      "status": "ABSENT_FROM_PAYLOAD_MANIFEST",
+      "vendor_ramdisk": "NOT_OBSERVED"
+    },
+    "init_boot": "ABSENT_FROM_PAYLOAD_MANIFEST",
+    "vendor_kernel_boot": "ABSENT_FROM_PAYLOAD_MANIFEST",
+    "bootconfig": "UNKNOWN",
+    "dtb": {
+      "status": "NOT_OBSERVED",
+      "evidence": [
+        "boot v3 header exposes no DTB field",
+        "no d00dfeed FDT magic was found in the analyzed boot tail",
+        "vendor_boot and vendor_kernel_boot are absent from the verified payload manifest"
+      ]
+    }
+  },
+  "stock_kernel": {
+    "track_id": "CURRENT_STOCK_ANDROID15",
+    "linux_version": "6.6.58-android15-8-g19e0e8cef6b2-4k",
+    "architecture": "arm64",
+    "compression": "gzip",
+    "compressed_size_bytes": 14688235,
+    "uncompressed_size_bytes": 36841984,
+    "uncompressed_sha256": "3c5a8c5695fb2323e30ba84a240431faf125225bab1d57cc150508b70d311619",
+    "toolchain": "Android clang 18.0.0 / LLD 18.0.0",
+    "build_lineage": "Kleaf Android common kernel string with android15-8 KMI-looking suffix",
+    "gki_status": "GKI_LIKELY",
+    "kmi_status": "NOT_CONFIRMED_FROM_MODULE_ABI",
+    "module_expectations": "vendor_dlkm and system_dlkm payload partitions are present, but modules were not extracted from the incomplete archive",
+    "legacy_track_preserved": {
+      "track_id": "LEGACY_VENDOR_SOURCE_PATH",
+      "baseline_id": "SEA_SERVER_MINIMAL_KERNEL_001",
+      "kernel_version": "4.19.191",
+      "status": "BUILT_UNTESTED",
+      "path": "devices/xiaomi-sea/server-minimal/kernel-baseline.json"
+    }
+  },
+  "dtbo": {
+    "status": "STOCK_CONFIRMED",
+    "partition_size_bytes": 8388608,
+    "sha256": "44b31ec3b3bfb82631a4e214fadafe109248ba880cb2a9dfe8d7b27bb47914c3",
+    "manifest_operation_hash": "44b31ec3b3bfb82631a4e214fadafe109248ba880cb2a9dfe8d7b27bb47914c3",
+    "reconstruction": {
+      "method": "RANGED_REPLACE_XZ_AND_REPLACE_BZ_OPERATIONS",
+      "compressed_operation_bytes": 13327,
+      "operation_range_zip_offsets": "17313234-17326560",
+      "hash_verified": true
+    },
+    "table": {
+      "entry_count": 1,
+      "entry_size": 32,
+      "page_size": 2048,
+      "version": 0,
+      "entry": {
+        "index": 0,
+        "id": 0,
+        "rev": 0,
+        "custom": [0, 0, 0, 0],
+        "payload_size_bytes": 72934,
+        "payload_sha256": "ece194e9ba0a9477bd2ac22e6b5c466a19cde5a98a0c7444ce5c8599a5c21143"
+      }
+    },
+    "correct_for_selected_package": "YES_SINGLE_ENTRY",
+    "exact_physical_unit_match": "NOT_PROVEN"
+  },
+  "stock_merged_dt": {
+    "status": "BLOCKED_NO_STOCK_BASE_DTB",
+    "stock_dtbo_available": true,
+    "stock_base_dtb_available": false,
+    "generated": false,
+    "reason": "The exact stock DTBO is available, but the package exposes no base DTB and no vendor_boot container from which to obtain one."
+  },
+  "mission_008_comparison": {
+    "status": "BLOCKED_NO_STOCK_MERGED_DT",
+    "overall_score": null,
+    "subsystems": {
+      "cpu": "BLOCKED",
+      "ram": "BLOCKED",
+      "ufs": "BLOCKED",
+      "usb": "BLOCKED",
+      "wifi": "BLOCKED",
+      "pmic": "BLOCKED",
+      "charging": "BLOCKED",
+      "thermal": "BLOCKED",
+      "display": "BLOCKED",
+      "touch": "BLOCKED"
+    },
+    "stock_dtbo_only_observations": {
+      "usb": ["mediatek,usb_c_pinctrl", "mediatek,mtk-usb", "xiaomi,usbpd-pm"],
+      "power": ["ti,bq25890", "ti,bq2597x-standalone", "xiaomi,cp-qc30"],
+      "display": ["dsi_panel_k7sr_38_0c_0a_video", "dsi_panel_k7sr_38_0c_0b_video"],
+      "touch": ["focaltech,fts", "xiaomi-touch"]
+    }
+  },
+  "hardware": {
+    "ram": {
+      "platform_memory_map": "UNKNOWN",
+      "physical_sku_ram": "UNKNOWN",
+      "reserved_memory": "UNKNOWN",
+      "confidence": "LOW"
+    },
+    "ufs": {
+      "controller": "UNKNOWN",
+      "compatible": "UNKNOWN",
+      "phy": "UNKNOWN",
+      "regulators_clocks_power_domains": "UNKNOWN",
+      "confidence": "LOW"
+    },
+    "usb": {
+      "status": "PARTIAL_STOCK_DTBO_EVIDENCE",
+      "compatible": ["mediatek,mtk-usb", "mediatek,usb_c_pinctrl", "xiaomi,usbpd-pm"]
+    },
+    "wifi": {"status": "UNKNOWN", "driver": "UNKNOWN", "firmware": "UNKNOWN"},
+    "power": {
+      "status": "PARTIAL_STOCK_DTBO_EVIDENCE",
+      "pmic": "UNKNOWN_BASE_DTB",
+      "charger": ["ti,bq25890", "ti,bq2597x-standalone"],
+      "charging_paths": ["xiaomi,usbpd-pm", "xiaomi,cp-qc30"]
+    },
+    "thermal": {"status": "UNKNOWN_BASE_DTB"},
+    "display": {
+      "status": "PARTIAL_STOCK_DTBO_EVIDENCE",
+      "panel_candidates": ["dsi_panel_k7sr_38_0c_0a_video", "dsi_panel_k7sr_38_0c_0b_video"]
+    },
+    "touch": {
+      "status": "PARTIAL_STOCK_DTBO_EVIDENCE",
+      "controller": "focaltech,fts",
+      "firmware": "NOT_OBSERVED_OR_PROPRIETARY"
+    }
+  },
+  "avb": {
+    "status": "CONFIRMED",
+    "version": {"major": 1, "minor": 0},
+    "algorithm_type": 1,
+    "algorithm_label": "SHA256_RSA2048",
+    "vbmeta": {
+      "size_bytes": 8192,
+      "sha256": "9509d01ca921a017d4ccad33983ae4e64f1bc359e8538608eeb81d80a9a64a2b",
+      "descriptor_count": 20,
+      "descriptor_tags": [4, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 1, 1, 1, 1],
+      "descriptor_parse_complete": true
+    },
+    "vbmeta_system": {
+      "size_bytes": 4096,
+      "sha256": "3dcef9c2eb549fce3212123d19a2ab73ea4365cb84488b1191aacac7363213c2",
+      "descriptor_count": 12,
+      "descriptor_tags": [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1]
+    },
+    "vbmeta_vendor": {
+      "size_bytes": 4096,
+      "sha256": "d2e5d08fdefda0384332af6f0770bd7997eea8472636de043b32c5b7b2de8d68",
+      "descriptor_count": 4,
+      "descriptor_tags": [0, 0, 0, 1]
+    },
+    "chain_partitions": {
+      "status": "CONFIRMED",
+      "entries": [
+        {"partition": "boot", "rollback_index_location": 3, "public_key_size_bytes": 520},
+        {"partition": "vbmeta_system", "rollback_index_location": 2, "public_key_size_bytes": 520},
+        {"partition": "vbmeta_vendor", "rollback_index_location": 4, "public_key_size_bytes": 520}
+      ]
+    },
+    "hash_descriptors": ["dtbo", "vendor_boot"],
+    "hashtree_descriptors": [
+      "mi_ext",
+      "odm_dlkm",
+      "system_dlkm",
+      "vendor_dlkm",
+      "product",
+      "system",
+      "system_ext",
+      "vendor"
+    ],
+    "rollback_indexes": "ZERO_IN_ANALYZED_BLOBS",
+    "policy": "Analysis only. No AVB removal, verity bypass, key replacement or patching."
+  },
+  "recovery_model": {
+    "readiness": "NOT_READY",
+    "stock_package_available": "METADATA_AND_SELECTED_COMPONENTS",
+    "partition_layout_known": true,
+    "boot_artifacts_known": "PARTIAL",
+    "component_hashes_known": true,
+    "full_package_sha256_known": false,
+    "exact_unit_identity_known": false,
+    "verified_backup_known": false,
+    "permitted_partition_list_known": false,
+    "tested_recovery_procedure": false,
+    "reason": "The official package model and selected hashes are now known, but exact unit identity, full archive hash, base DTB, verified backup and a tested official restoration procedure remain absent."
+  },
+  "temporary_boot": {
+    "status": "UNKNOWN",
+    "evidence": "The OTA partition model is known, but no exact-unit bootloader documentation or read-only capability evidence was obtained.",
+    "executed": false
+  },
+  "toolkit": {
+    "cli": "host-tools/firmware_forensics.py",
+    "package": "host-tools/firmware_forensics/",
+    "new_capabilities": [
+      "resumable HTTP(S) acquisition and byte ranges",
+      "Android update_engine payload manifest parsing",
+      "A/B, Virtual A/B and dynamic-partition metadata",
+      "vendor_boot header parsing",
+      "FDT structural parsing",
+      "correct AVB descriptor sizing and descriptor metadata",
+      "fail-closed DT semantic comparison"
+    ],
+    "device_transport_integration": false,
+    "proprietary_files_versioned": false
+  },
+  "next_blocker": {
+    "priority": "HIGH",
+    "item": "Obtain or independently verify the stock base DTB and any vendor boot container for this exact unit, then perform an offline stock-DTBO merge and semantic comparison.",
+    "does_not_authorize_phone_write": true
+  }
+}

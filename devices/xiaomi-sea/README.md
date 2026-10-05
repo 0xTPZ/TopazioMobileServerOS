@@ -25,3 +25,9 @@ A auditoria de firmware stock da Missão 009 está em
 [`firmware-forensics/mission-009.json`](firmware-forensics/mission-009.json).
 Ela contém somente metadados, hashes e conclusões; os arquivos de firmware
 permanecem no cache ignorado do host.
+
+A investigação profunda da Missão 010 está em
+[`firmware-forensics/mission-010.json`](firmware-forensics/mission-010.json).
+Ela confirmou, por metadata e manifest OTA oficial, A/B, Virtual A/B,
+partições dinâmicas, `dtbo` e AVB. O pacote integral e o base DTB permanecem
+fora do repositório; `STOCK_MERGED_DT` e recovery continuam não prontos.

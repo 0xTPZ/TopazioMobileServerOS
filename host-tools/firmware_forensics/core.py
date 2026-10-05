@@ -15,6 +15,327 @@ from typing import Any, BinaryIO
 ANDROID_MAGIC = b"ANDROID!"
 DT_TABLE_MAGIC = 0xD7B7AB1E
 AVB_MAGIC = b"AVB0"
+PAYLOAD_MAGIC = b"CrAU"
+
+
+_PAYLOAD_OPERATION_TYPES = {
+    0: "REPLACE",
+    1: "REPLACE_BZ",
+    2: "MOVE",
+    3: "BSDIFF",
+    4: "SOURCE_COPY",
+    5: "SOURCE_BSDIFF",
+    6: "ZERO",
+    7: "DISCARD",
+    8: "REPLACE_XZ",
+    9: "PUFFDIFF",
+    10: "BROTLI_BSDIFF",
+    11: "ZUCCHINI",
+    12: "LZ4DIFF_BSDIFF",
+    13: "LZ4DIFF_PUFFDIFF",
+}
+
+
+def _read_varint(data: bytes, offset: int) -> tuple[int, int]:
+    value = 0
+    shift = 0
+    while True:
+        if offset >= len(data) or shift >= 64:
+            raise ValueError("truncated protobuf varint")
+        byte = data[offset]
+        offset += 1
+        value |= (byte & 0x7F) << shift
+        if not byte & 0x80:
+            return value, offset
+        shift += 7
+
+
+def _protobuf_fields(data: bytes) -> list[tuple[int, int, int | bytes]]:
+    """Parse the wire types needed by Android update_metadata.proto."""
+
+    fields: list[tuple[int, int, int | bytes]] = []
+    offset = 0
+    while offset < len(data):
+        key, offset = _read_varint(data, offset)
+        number, wire_type = key >> 3, key & 0x07
+        if number <= 0:
+            raise ValueError("invalid protobuf field number")
+        if wire_type == 0:
+            value, offset = _read_varint(data, offset)
+        elif wire_type == 1:
+            value = data[offset : offset + 8]
+            if len(value) != 8:
+                raise ValueError("truncated protobuf fixed64")
+            offset += 8
+        elif wire_type == 2:
+            length, offset = _read_varint(data, offset)
+            value = data[offset : offset + length]
+            if len(value) != length:
+                raise ValueError("truncated protobuf bytes")
+            offset += length
+        elif wire_type == 5:
+            value = data[offset : offset + 4]
+            if len(value) != 4:
+                raise ValueError("truncated protobuf fixed32")
+            offset += 4
+        else:
+            raise ValueError(f"unsupported protobuf wire type: {wire_type}")
+        fields.append((number, wire_type, value))
+    return fields
+
+
+def _protobuf_values(data: bytes, field_number: int) -> list[int | bytes]:
+    return [value for number, _wire_type, value in _protobuf_fields(data) if number == field_number]
+
+
+def _protobuf_one(data: bytes, field_number: int, default: Any = None) -> Any:
+    values = _protobuf_values(data, field_number)
+    return values[0] if values else default
+
+
+def _parse_payload_extent(data: bytes) -> dict[str, int]:
+    return {
+        "start_block": int(_protobuf_one(data, 1, 0)),
+        "num_blocks": int(_protobuf_one(data, 2, 0)),
+    }
+
+
+def _parse_partition_info(data: bytes | None) -> dict[str, Any] | None:
+    if data is None:
+        return None
+    raw_hash = _protobuf_one(data, 2, b"")
+    return {
+        "size_bytes": int(_protobuf_one(data, 1, 0)),
+        "sha256": raw_hash.hex() if isinstance(raw_hash, bytes) and raw_hash else None,
+    }
+
+
+def _parse_payload_operation(data: bytes) -> dict[str, Any]:
+    raw_type = int(_protobuf_one(data, 1, 0))
+    raw_hash = _protobuf_one(data, 8, b"")
+    return {
+        "type": _PAYLOAD_OPERATION_TYPES.get(raw_type, f"UNKNOWN_{raw_type}"),
+        "type_value": raw_type,
+        "data_offset": int(_protobuf_one(data, 2, 0)),
+        "data_length": int(_protobuf_one(data, 3, 0)),
+        "src_extents": [_parse_payload_extent(item) for item in _protobuf_values(data, 4)],
+        "src_length": int(_protobuf_one(data, 5, 0)),
+        "dst_extents": [_parse_payload_extent(item) for item in _protobuf_values(data, 6)],
+        "dst_length": int(_protobuf_one(data, 7, 0)),
+        "data_sha256": raw_hash.hex() if isinstance(raw_hash, bytes) and raw_hash else None,
+        "src_sha256": (
+            _protobuf_one(data, 9, b"").hex()
+            if isinstance(_protobuf_one(data, 9, b""), bytes) and _protobuf_one(data, 9, b"")
+            else None
+        ),
+    }
+
+
+def _parse_dynamic_partition_metadata(data: bytes) -> dict[str, Any]:
+    groups = []
+    for group in _protobuf_values(data, 1):
+        groups.append(
+            {
+                "name": bytes(_protobuf_one(group, 1, b"")).decode("utf-8", "replace"),
+                "size_bytes": int(_protobuf_one(group, 2, 0)),
+                "partition_names": [
+                    bytes(item).decode("utf-8", "replace") for item in _protobuf_values(group, 3)
+                ],
+            }
+        )
+    return {
+        "groups": groups,
+        "snapshot_enabled": bool(_protobuf_one(data, 2, False)),
+        "vabc_enabled": bool(_protobuf_one(data, 3, False)),
+        "vabc_compression_param": bytes(_protobuf_one(data, 4, b"")).decode("utf-8", "replace"),
+        "cow_version": int(_protobuf_one(data, 5, 0)),
+    }
+
+
+def parse_update_payload(data: bytes, source: str | None = None) -> dict[str, Any]:
+    """Parse an Android update_engine payload manifest without applying it."""
+
+    if len(data) < 20 or data[:4] != PAYLOAD_MAGIC:
+        raise ValueError("missing CrAU payload magic or truncated header")
+    major_version, manifest_size = struct.unpack_from(">QQ", data, 4)
+    if major_version >= 2 and len(data) < 24:
+        raise ValueError("truncated payload v2 header")
+    metadata_signature_size = struct.unpack_from(">I", data, 20)[0] if major_version >= 2 else 0
+    manifest_offset = 24 if major_version >= 2 else 20
+    manifest_end = manifest_offset + manifest_size
+    signature_end = manifest_end + metadata_signature_size
+    if signature_end > len(data):
+        raise ValueError("payload metadata is truncated")
+    manifest = data[manifest_offset:manifest_end]
+    top = _protobuf_fields(manifest)
+    partitions = []
+    for _number, _wire_type, raw_partition in top:
+        if _number != 13 or not isinstance(raw_partition, bytes):
+            continue
+        partition_name = bytes(_protobuf_one(raw_partition, 1, b"")).decode("utf-8", "replace")
+        operations = [
+            _parse_payload_operation(item) for item in _protobuf_values(raw_partition, 8)
+        ]
+        partitions.append(
+            {
+                "name": partition_name,
+                "old_partition_info": _parse_partition_info(
+                    _protobuf_one(raw_partition, 6, None)
+                ),
+                "new_partition_info": _parse_partition_info(
+                    _protobuf_one(raw_partition, 7, None)
+                ),
+                "operations": operations,
+                "operation_count": len(operations),
+                "data_bytes": sum(item["data_length"] for item in operations),
+                "operation_types": sorted({item["type"] for item in operations}),
+                "requires_source_partition": any(item["src_extents"] for item in operations),
+            }
+        )
+    dynamic_raw = _protobuf_one(manifest, 15, None)
+    dynamic = (
+        _parse_dynamic_partition_metadata(dynamic_raw)
+        if isinstance(dynamic_raw, bytes)
+        else None
+    )
+    return {
+        "source": source,
+        "magic": PAYLOAD_MAGIC.decode("ascii"),
+        "major_version": major_version,
+        "manifest_size_bytes": manifest_size,
+        "metadata_signature_size_bytes": metadata_signature_size,
+        "metadata_size_bytes": signature_end,
+        "manifest_sha256": hashlib.sha256(manifest).hexdigest(),
+        "data_area_offset": signature_end,
+        "block_size": int(_protobuf_one(manifest, 3, 4096)),
+        "signatures_offset": int(_protobuf_one(manifest, 4, 0)),
+        "signatures_size": int(_protobuf_one(manifest, 5, 0)),
+        "minor_version": int(_protobuf_one(manifest, 12, 0)),
+        "max_timestamp": int(_protobuf_one(manifest, 14, 0)),
+        "partial_update": bool(_protobuf_one(manifest, 16, False)),
+        "security_patch_level": bytes(_protobuf_one(manifest, 18, b"")).decode("utf-8", "replace"),
+        "dynamic_partition_metadata": dynamic,
+        "is_full_payload": not any(item["old_partition_info"] for item in partitions),
+        "partitions": partitions,
+        "partition_names": [item["name"] for item in partitions],
+        "payload_signature_range": {
+            "offset_from_data_area": int(_protobuf_one(manifest, 4, 0)),
+            "size_bytes": int(_protobuf_one(manifest, 5, 0)),
+        },
+    }
+
+
+def parse_update_payload_file(path: Path) -> dict[str, Any]:
+    """Read only the header, manifest and metadata signature from a payload."""
+
+    path = path.resolve()
+    with path.open("rb") as stream:
+        header_prefix = stream.read(20)
+        if len(header_prefix) < 20 or header_prefix[:4] != PAYLOAD_MAGIC:
+            raise ValueError("missing CrAU payload magic or truncated header")
+        major_version, manifest_size = struct.unpack_from(">QQ", header_prefix, 4)
+        signature_header = stream.read(4) if major_version >= 2 else b""
+        if major_version >= 2 and len(signature_header) != 4:
+            raise ValueError("truncated payload metadata signature size")
+        signature_size = struct.unpack(">I", signature_header)[0] if major_version >= 2 else 0
+        header_size = 24 if major_version >= 2 else 20
+        metadata = header_prefix + signature_header + stream.read(manifest_size + signature_size)
+    if len(metadata) != (24 if major_version >= 2 else 20) + manifest_size + signature_size:
+        raise ValueError("payload metadata file is truncated")
+    return parse_update_payload(metadata, str(path))
+
+
+def parse_ota_properties(data: bytes | str) -> dict[str, str]:
+    """Parse the line-oriented META-INF/com/android/metadata contract."""
+
+    text = data.decode("utf-8", "replace") if isinstance(data, bytes) else data
+    properties: dict[str, str] = {}
+    for line in text.splitlines():
+        if "=" in line and not line.lstrip().startswith("#"):
+            key, value = line.split("=", 1)
+            properties[key.strip()] = value.strip()
+    return properties
+
+
+def parse_fdt(data: bytes, source: str | None = None) -> dict[str, Any]:
+    """Read a flattened device-tree header and structural summary."""
+
+    if len(data) < 40 or data[:4] != b"\xd0\x0d\xfe\xed":
+        raise ValueError("missing FDT magic")
+    (
+        _magic,
+        total_size,
+        structure_offset,
+        strings_offset,
+        reserved_offset,
+        version,
+        last_compatible,
+        boot_cpuid,
+        strings_size,
+        structure_size,
+    ) = struct.unpack_from(">10I", data, 0)
+    if total_size > len(data) or structure_offset + structure_size > total_size:
+        raise ValueError("invalid FDT bounds")
+    strings = data[strings_offset : strings_offset + strings_size]
+    properties: list[dict[str, Any]] = []
+    nodes: list[str] = []
+    cursor = structure_offset
+    end = structure_offset + structure_size
+    while cursor + 4 <= end:
+        token = struct.unpack_from(">I", data, cursor)[0]
+        cursor += 4
+        if token == 1:  # FDT_BEGIN_NODE
+            name_end = data.find(b"\x00", cursor, end)
+            if name_end < 0:
+                raise ValueError("unterminated FDT node name")
+            nodes.append(data[cursor:name_end].decode("utf-8", "replace"))
+            cursor = align(name_end + 1, 4)
+        elif token == 2:  # FDT_END_NODE
+            if nodes:
+                nodes.pop()
+        elif token == 3:  # FDT_PROP
+            if cursor + 8 > end:
+                raise ValueError("truncated FDT property")
+            length, name_offset = struct.unpack_from(">II", data, cursor)
+            cursor += 8
+            value = data[cursor : cursor + length]
+            cursor = align(cursor + length, 4)
+            name_end = strings.find(b"\x00", name_offset)
+            if name_offset >= len(strings) or name_end < 0:
+                raise ValueError("invalid FDT property name offset")
+            properties.append(
+                {
+                    "path": "/" + "/".join(nodes),
+                    "name": strings[name_offset:name_end].decode("utf-8", "replace"),
+                    "size_bytes": length,
+                    "sha256": hashlib.sha256(value).hexdigest(),
+                    "text": value.rstrip(b"\x00").decode("utf-8", "replace")
+                    if b"\x00" in value or all(32 <= byte < 127 or byte in (9, 10, 13) for byte in value)
+                    else None,
+                }
+            )
+        elif token == 4:  # FDT_NOP
+            continue
+        elif token == 9:  # FDT_END
+            break
+        else:
+            raise ValueError(f"unknown FDT token: {token}")
+    return {
+        "source": source,
+        "magic": "d00dfeed",
+        "total_size": total_size,
+        "structure_offset": structure_offset,
+        "strings_offset": strings_offset,
+        "reserved_map_offset": reserved_offset,
+        "version": version,
+        "last_compatible_version": last_compatible,
+        "boot_cpuid_phys": boot_cpuid,
+        "strings_size": strings_size,
+        "structure_size": structure_size,
+        "node_count": len({item["path"] for item in properties}),
+        "properties": properties,
+        "parse_complete": cursor <= end,
+    }
 
 
 def sha256_path(path: Path, chunk_size: int = 1024 * 1024) -> str:
@@ -373,6 +694,87 @@ def parse_android_boot(image: Path, extract_dir: Path | None = None) -> dict[str
     return result
 
 
+def parse_vendor_boot(image: Path) -> dict[str, Any]:
+    """Parse the common vendor_boot v3/v4 header and component boundaries."""
+
+    image = image.resolve()
+    data = image.read_bytes()
+    if len(data) < 40 or data[:8] != b"VNDRBOOT":
+        raise ValueError("missing VNDRBOOT vendor_boot magic")
+    header_version, page_size, vendor_ramdisk_size, ramdisk_addr, tags_addr, header_size, dtb_size = struct.unpack_from(
+        "<7I", data, 8
+    )
+    dtb_addr = struct.unpack_from("<Q", data, 36)[0]
+    vendor_ramdisk_offset = page_size
+    dtb_offset = align(vendor_ramdisk_offset + vendor_ramdisk_size, page_size)
+    return {
+        "path": str(image),
+        "file_size_bytes": len(data),
+        "magic": "VNDRBOOT",
+        "header_version": header_version,
+        "page_size": page_size,
+        "header_size": header_size,
+        "vendor_ramdisk": {
+            "offset": vendor_ramdisk_offset,
+            "size_bytes": vendor_ramdisk_size,
+            "bounds_valid": vendor_ramdisk_offset + vendor_ramdisk_size <= len(data),
+        },
+        "dtb": {
+            "offset": dtb_offset,
+            "size_bytes": dtb_size,
+            "address": dtb_addr,
+            "bounds_valid": dtb_offset + dtb_size <= len(data),
+        },
+        "addresses": {"ramdisk": ramdisk_addr, "tags": tags_addr},
+        "vendor_bootconfig_status": "HEADER_VERSION_DEPENDENT",
+    }
+
+
+def compare_dt_semantics(
+    stock: dict[str, Any] | None, experimental: dict[str, Any] | None
+) -> dict[str, Any]:
+    """Compare parsed FDT property identities, failing closed without stock DT."""
+
+    if not stock or not experimental:
+        return {
+            "status": "BLOCKED_NO_STOCK_REFERENCE",
+            "overall_score": None,
+            "subsystems": {},
+        }
+    stock_names = {item["name"] for item in stock.get("properties", [])}
+    experimental_names = {item["name"] for item in experimental.get("properties", [])}
+    union = stock_names | experimental_names
+    score = len(stock_names & experimental_names) / len(union) if union else 1.0
+    subsystem_keywords = {
+        "cpu": ("cpu", "opp"),
+        "ram": ("memory", "reserved-memory", "cma"),
+        "ufs": ("ufs", "ufshci"),
+        "usb": ("usb", "typec", "phy"),
+        "wifi": ("wifi", "wlan"),
+        "pmic": ("pmic", "regulator", "charger"),
+        "thermal": ("thermal", "cooling"),
+        "display": ("dsi", "panel", "display"),
+        "touch": ("touch", "focal", "ft5"),
+    }
+    subsystem_scores = {}
+    for subsystem, keywords in subsystem_keywords.items():
+        stock_subset = {name for name in stock_names if any(key in name.lower() for key in keywords)}
+        experimental_subset = {
+            name for name in experimental_names if any(key in name.lower() for key in keywords)
+        }
+        local_union = stock_subset | experimental_subset
+        subsystem_scores[subsystem] = (
+            len(stock_subset & experimental_subset) / len(local_union) if local_union else None
+        )
+    return {
+        "status": "COMPARED_PROPERTY_IDENTITY",
+        "overall_score": score,
+        "subsystems": subsystem_scores,
+        "stock_property_count": len(stock_names),
+        "experimental_property_count": len(experimental_names),
+    }
+
+
 def _be_u32(data: bytes, offset: int) -> int:
     return struct.unpack_from(">I", data, offset)[0]
 
@@ -425,13 +827,98 @@ def _descriptor_name(tag: int) -> str:
         0: "property",
         1: "hashtree",
         2: "hash",
-        3: "chain_partition",
-        4: "kernel_cmdline",
+        3: "kernel_cmdline",
+        4: "chain_partition",
     }.get(tag, f"unknown_{tag}")
 
 
-def parse_vbmeta(image: Path) -> dict[str, Any]:
-    data = image.read_bytes()
+def _parse_avb_descriptor(tag: int, payload: bytes) -> dict[str, Any]:
+    details: dict[str, Any] = {}
+    if tag == 0 and len(payload) >= 16:
+        key_size, value_size = struct.unpack_from(">QQ", payload, 0)
+        key_start = 16
+        value_start = key_start + key_size
+        details = {
+            "key": payload[key_start:value_start].strip(b"\x00").decode("utf-8", "replace"),
+            "value": payload[value_start : value_start + value_size]
+            .strip(b"\x00")
+            .decode("utf-8", "replace"),
+        }
+    elif tag == 2 and len(payload) >= 116:
+        image_size, hash_algorithm, partition_name_size, salt_size, digest_size, flags = struct.unpack_from(
+            ">Q32sIIII", payload, 0
+        )
+        cursor = 116
+        details = {
+            "image_size_bytes": image_size,
+            "hash_algorithm": hash_algorithm.rstrip(b"\x00").decode("ascii", "replace"),
+            "partition_name": payload[cursor : cursor + partition_name_size]
+            .rstrip(b"\x00")
+            .decode("utf-8", "replace"),
+            "salt_size_bytes": salt_size,
+            "digest_size_bytes": digest_size,
+            "flags": flags,
+        }
+    elif tag == 1 and len(payload) >= 164:
+        (
+            dm_verity_version,
+            image_size,
+            tree_offset,
+            tree_size,
+            data_block_size,
+            hash_block_size,
+            fec_num_roots,
+            fec_offset,
+            fec_size,
+            hash_algorithm,
+            partition_name_size,
+            salt_size,
+            root_digest_size,
+            flags,
+        ) = struct.unpack_from(">IQQQIIIQQ32sIIII", payload, 0)
+        cursor = 164
+        details = {
+            "dm_verity_version": dm_verity_version,
+            "image_size_bytes": image_size,
+            "tree_offset": tree_offset,
+            "tree_size": tree_size,
+            "data_block_size": data_block_size,
+            "hash_block_size": hash_block_size,
+            "fec_num_roots": fec_num_roots,
+            "fec_offset": fec_offset,
+            "fec_size": fec_size,
+            "hash_algorithm": hash_algorithm.rstrip(b"\x00").decode("ascii", "replace"),
+            "partition_name": payload[cursor : cursor + partition_name_size]
+            .rstrip(b"\x00")
+            .decode("utf-8", "replace"),
+            "salt_size_bytes": salt_size,
+            "root_digest_size_bytes": root_digest_size,
+            "flags": flags,
+        }
+    elif tag == 4 and len(payload) >= 76:
+        rollback_location, partition_name_size, public_key_size, flags = struct.unpack_from(">IIII", payload, 0)
+        cursor = 76
+        details = {
+            "rollback_index_location": rollback_location,
+            "flags": flags,
+            "partition_name": payload[cursor : cursor + partition_name_size]
+            .rstrip(b"\x00")
+            .decode("utf-8", "replace"),
+            "public_key_size_bytes": public_key_size,
+        }
+    elif tag == 3 and len(payload) >= 72:
+        flags, cmdline_size = struct.unpack_from(">II", payload, 0)
+        cursor = 72
+        details = {
+            "flags": flags,
+            "cmdline": payload[cursor : cursor + cmdline_size]
+            .rstrip(b"\x00")
+            .decode("utf-8", "replace"),
+        }
+    return details
+
+
+def parse_vbmeta_bytes(data: bytes, source: str | None = None) -> dict[str, Any]:
     if len(data) < 256 or data[:4] != AVB_MAGIC:
         raise ValueError("missing AVB0 vbmeta magic")
     fields = struct.unpack_from(">IIQQIQQQQQQQQQQQII", data, 4)
@@ -447,20 +934,24 @@ def parse_vbmeta(image: Path) -> dict[str, Any]:
     descriptors = []
     cursor = descriptor_start
     while cursor + 16 <= descriptor_end and cursor + 16 <= len(data):
-        tag, num_bytes = struct.unpack_from(">QQ", data, cursor)
-        if num_bytes < 16 or cursor + num_bytes > descriptor_end:
+        tag, num_bytes_following = struct.unpack_from(">QQ", data, cursor)
+        total_size = 16 + num_bytes_following
+        if total_size < 16 or cursor + total_size > descriptor_end:
             break
+        raw_descriptor = data[cursor : cursor + total_size]
         descriptors.append(
             {
                 "tag": tag,
                 "type": _descriptor_name(tag),
-                "size_bytes": num_bytes,
-                "sha256": hashlib.sha256(data[cursor : cursor + num_bytes]).hexdigest(),
+                "size_bytes": total_size,
+                "num_bytes_following": num_bytes_following,
+                "sha256": hashlib.sha256(raw_descriptor).hexdigest(),
+                "details": _parse_avb_descriptor(tag, raw_descriptor[16:]),
             }
         )
-        cursor += num_bytes
+        cursor += total_size
     return {
-        "path": str(image.resolve()),
+        "path": source,
         "file_size_bytes": len(data),
         "magic": AVB_MAGIC.decode("ascii"),
         "version": {"major": version_major, "minor": version_minor},
@@ -481,6 +972,11 @@ def parse_vbmeta(image: Path) -> dict[str, Any]:
         "descriptors": descriptors,
         "descriptor_parse_complete": cursor == descriptor_end,
     }
+
+
+def parse_vbmeta(image: Path) -> dict[str, Any]:
+    image = image.resolve()
+    return parse_vbmeta_bytes(image.read_bytes(), str(image))
 
 
 def inventory_package(path: Path) -> dict[str, Any]:

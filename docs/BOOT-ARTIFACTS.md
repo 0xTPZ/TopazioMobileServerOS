@@ -75,3 +75,21 @@ Isso não confirma o layout completo: o pacote integral não foi versionado, e
 desconhecidos. O Boot Header v3 não contém o DTB; a localização stock exata
 precisa ser confirmada no `vendor_boot` ou em outro container. Recovery e
 qualquer escrita física permanecem bloqueados.
+
+## Missão 010 — pacote stock completo / deep forensics
+
+Leituras ranged do Recovery OTA oficial `OS2.0.209.0.VHZMIXM` confirmaram
+internamente `pre-device=sea`, `ota-type=AB`, Virtual A/B (`snapshot_enabled`
+e `vabc_enabled`) e o grupo dynamic `main`. O payload contém `boot`, `dtbo`,
+`vbmeta`, `vbmeta_system`, `vbmeta_vendor` e partições lógicas; não contém
+entradas `vendor_boot`, `init_boot` ou `vendor_kernel_boot`.
+
+O `dtbo.img` stock foi reconstruído sem instalar nada: 8 MiB, hash
+`44b31ec3b3bfb82631a4e214fadafe109248ba880cb2a9dfe8d7b27bb47914c3`, uma
+entrada FDT e hash de operação coincidente com o manifest. Os três blobs AVB
+foram igualmente reconstruídos e validados por header/descriptors. Como o
+payload não forneceu base DTB e o pacote integral não foi baixado, não foi
+gerado `STOCK_MERGED_DT`; a comparação semântica com a Missão 008 permanece
+fail-closed. Recovery está `NOT_READY`, e nenhuma escrita física foi feita.
+
+Relatório: [`mission-010.json`](../devices/xiaomi-sea/firmware-forensics/mission-010.json).

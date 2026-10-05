@@ -118,6 +118,27 @@
     "recovery_readiness": "BLOCKED",
     "write_device": false
   },
+  "mission_010_stock_package_forensics": {
+    "report": "devices/xiaomi-sea/firmware-forensics/mission-010.json",
+    "status": "PARTIAL",
+    "package_sha256": null,
+    "payload_manifest_sha256": "aa8dbac0e1bbff9d5be16c6facea5b02d5158ba3e2d1b01dc7b89386fadae9e8",
+    "boot_sha256": "c8d9d33cc301d5b59c2443481dca139ce569635d70094833ad8f5b0095ad2af3",
+    "dtbo_sha256": "44b31ec3b3bfb82631a4e214fadafe109248ba880cb2a9dfe8d7b27bb47914c3",
+    "vbmeta_sha256": {
+      "vbmeta": "9509d01ca921a017d4ccad33983ae4e64f1bc359e8538608eeb81d80a9a64a2b",
+      "vbmeta_system": "3dcef9c2eb549fce3212123d19a2ab73ea4365cb84488b1191aacac7363213c2",
+      "vbmeta_vendor": "d2e5d08fdefda0384332af6f0770bd7997eea8472636de043b32c5b7b2de8d68"
+    },
+    "partition_model": "AB_VIRTUAL_AB_DYNAMIC_MAIN",
+    "stock_dtb": "NOT_OBSERVED",
+    "stock_dtbo": "CONFIRMED_SINGLE_ENTRY",
+    "stock_merged_dt": "BLOCKED_NO_BASE_DTB",
+    "recovery_readiness": "NOT_READY",
+    "kernel_track": "CURRENT_STOCK_ANDROID15",
+    "legacy_kernel_preserved": "SEA_SERVER_MINIMAL_KERNEL_001",
+    "write_device": false
+  },
   "patch_order": [],
   "artifact_state_vocabulary": [
     "SOURCE_ONLY",
