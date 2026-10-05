@@ -96,6 +96,7 @@
     "mission_011_required_base_symbols": "reconstruction/stock-required-base-symbols.json",
     "mission_012_physical_readonly_inventory": "firmware-forensics/mission-012.json",
     "mission_012_unit_observation": "unit-observation.json",
+    "mission_012b_transport_restore": "firmware-forensics/mission-012b.json",
     "kernel_reconstruction": "docs/KERNEL-RECONSTRUCTION.md",
     "cust_dtsi": {
       "status": "STRONG_CANDIDATE",
@@ -172,6 +173,18 @@
     "adb": "ABSENT",
     "fastboot": "ABSENT",
     "physical_identity": "UNKNOWN",
+    "recovery_readiness": "BLOCKED",
+    "phone_writes": false
+  },
+  "mission_012b_transport_restore": {
+    "status": "PARTIAL",
+    "report": "firmware-forensics/mission-012b.json",
+    "result": "PHYSICAL_IDENTITY_PARTIAL",
+    "platform_tools": "37.0.1-15733141",
+    "windows_model": "Redmi Note 12S",
+    "windows_interface": "WPD_MTP",
+    "adb": "ABSENT",
+    "fastboot": "ABSENT",
     "recovery_readiness": "BLOCKED",
     "phone_writes": false
   },

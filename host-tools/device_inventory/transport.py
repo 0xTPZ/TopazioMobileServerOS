@@ -4,12 +4,12 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from datetime import datetime, timezone
-import shutil
 import subprocess
 from pathlib import Path
 
 from device_command_safety import classify_command
 
+from .discovery import ToolSelection, discover_tools
 from .sanitize import sanitized_result_hash, sanitize_text
 
 
@@ -27,6 +27,7 @@ class CommandResult:
     sanitized_stderr: str
     result_hash: str | None
     timestamp: str
+    execution_status: str = "EXECUTED"
 
     def as_dict(self) -> dict:
         return {
@@ -40,17 +41,34 @@ class CommandResult:
             "stderr": self.sanitized_stderr,
             "sanitized_result_hash": self.result_hash,
             "timestamp": self.timestamp,
+            "execution_status": self.execution_status,
         }
 
 
-def command_result(command_id: str, transport: str, command: str, *, dry_run: bool) -> CommandResult:
+def command_result(
+    command_id: str,
+    transport: str,
+    command: str,
+    *,
+    dry_run: bool,
+    tool: ToolSelection | None = None,
+    skipped_reason: str | None = None,
+) -> CommandResult:
     safety = classify_command(command)
     if safety != "READ_ONLY_SAFE":
         raise ValueError(f"refusing non-read-only command: {command} ({safety})")
-    executable = command.split()[0]
-    present = shutil.which(executable) is not None
-    if dry_run or not present:
-        stderr = "DRY_RUN" if dry_run else "COMMAND_NOT_FOUND"
+    executable = tool.path if tool else None
+    present = bool(executable)
+    if dry_run or not present or skipped_reason:
+        if dry_run:
+            stderr = "DRY_RUN"
+            execution_status = "DRY_RUN"
+        elif skipped_reason:
+            stderr = skipped_reason
+            execution_status = "NOT_EXECUTED_FAIL_CLOSED"
+        else:
+            stderr = "COMMAND_NOT_FOUND"
+            execution_status = "NOT_EXECUTED_TOOL_ABSENT"
         return CommandResult(
             command_id,
             transport,
@@ -64,9 +82,11 @@ def command_result(command_id: str, transport: str, command: str, *, dry_run: bo
             sanitize_text(stderr),
             sanitized_result_hash("", stderr),
             datetime.now(timezone.utc).isoformat(),
+            execution_status,
         )
+    tokens = command.split()
     completed = subprocess.run(
-        command.split(),
+        [executable, *tokens[1:]],
         check=False,
         capture_output=True,
         text=True,
@@ -89,6 +109,7 @@ def command_result(command_id: str, transport: str, command: str, *, dry_run: bo
         sanitize_text(stderr),
         sanitized_result_hash(stdout, stderr),
         datetime.now(timezone.utc).isoformat(),
+        "EXECUTED",
     )
 
 
@@ -128,14 +149,63 @@ FASTBOOT_COMMANDS = (
 )
 
 
-def collect_transport_commands(*, dry_run: bool, raw_dir: Path | None = None) -> list[CommandResult]:
+def _adb_state(result: CommandResult) -> str:
+    if not result.executable_present or result.execution_status != "EXECUTED":
+        return "ABSENT"
+    lines = [line.strip().lower() for line in result.sanitized_stdout.splitlines() if line.strip()]
+    if any("unauthorized" in line for line in lines):
+        return "UNAUTHORIZED"
+    if any("offline" in line for line in lines):
+        return "OFFLINE"
+    if any(line.endswith("\tdevice") or line.endswith(" device") for line in lines):
+        return "AUTHORIZED"
+    return "ABSENT"
+
+
+def _record(
+    results: list[CommandResult],
+    command_id: str,
+    command: str,
+    transport: str,
+    *,
+    dry_run: bool,
+    tools: dict[str, ToolSelection],
+    raw_dir: Path | None,
+    skipped_reason: str | None = None,
+) -> CommandResult:
+    result = command_result(
+        command_id,
+        transport,
+        command,
+        dry_run=dry_run,
+        tool=tools[transport],
+        skipped_reason=skipped_reason,
+    )
+    if raw_dir and result.execution_status == "EXECUTED":
+        raw_dir.mkdir(parents=True, exist_ok=True)
+        (raw_dir / f"{command_id}.stdout.txt").write_text(result.stdout, encoding="utf-8")
+        (raw_dir / f"{command_id}.stderr.txt").write_text(result.stderr, encoding="utf-8")
+    results.append(result)
+    return result
+
+
+def collect_transport_commands(
+    *,
+    dry_run: bool,
+    raw_dir: Path | None = None,
+    adb_path: str | None = None,
+    fastboot_path: str | None = None,
+    platform_tools: Path | None = None,
+) -> tuple[list[CommandResult], dict[str, ToolSelection]]:
+    tools = discover_tools(adb=adb_path, fastboot=fastboot_path, platform_tools=platform_tools)
     results: list[CommandResult] = []
-    for command_id, command in (*ADB_COMMANDS, *FASTBOOT_COMMANDS):
-        transport = "adb" if command.startswith("adb ") else "fastboot"
-        result = command_result(command_id, transport, command, dry_run=dry_run)
-        if raw_dir and not dry_run and result.executable_present:
-            raw_dir.mkdir(parents=True, exist_ok=True)
-            (raw_dir / f"{command_id}.stdout.txt").write_text(result.stdout, encoding="utf-8")
-            (raw_dir / f"{command_id}.stderr.txt").write_text(result.stderr, encoding="utf-8")
-        results.append(result)
-    return results
+    adb_probe = _record(results, "adb_devices", "adb devices", "adb", dry_run=dry_run, tools=tools, raw_dir=raw_dir)
+    adb_state = "DRY_RUN" if dry_run else _adb_state(adb_probe)
+    for command_id, command in ADB_COMMANDS[1:]:
+        reason = None if dry_run or adb_state == "AUTHORIZED" else f"ADB_{adb_state}_NO_SHELL"
+        _record(results, command_id, command, "adb", dry_run=dry_run, tools=tools, raw_dir=raw_dir, skipped_reason=reason)
+
+    _record(results, "fastboot_devices", "fastboot devices", "fastboot", dry_run=dry_run, tools=tools, raw_dir=raw_dir)
+    for command_id, command in FASTBOOT_COMMANDS[1:]:
+        _record(results, command_id, command, "fastboot", dry_run=dry_run, tools=tools, raw_dir=raw_dir, skipped_reason="FASTBOOT_METADATA_NOT_REQUESTED_IN_012B")
+    return results, tools

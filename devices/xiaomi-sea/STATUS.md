@@ -77,3 +77,11 @@ sanitizado está em
 [`firmware-forensics/mission-012.json`](firmware-forensics/mission-012.json)
 e [`unit-observation.json`](unit-observation.json). Recovery permanece
 `BLOCKED` e a origem do DTB continua `UNKNOWN`.
+
+Missão 012-B corrigiu a descoberta das Platform Tools: `adb` e `fastboot`
+37.0.1 foram encontrados em `C:\AndroidTools\platform-tools`, sem alterar o
+PATH. O Windows identificou o Redmi Note 12S como WPD/MTP (`VID_2717`,
+driver Microsoft `wpdmtp.inf`, problema 0), mas `adb devices` e
+`fastboot devices` ficaram vazios. Nenhum shell ou `getvar` foi executado;
+Recovery segue `BLOCKED`. O relatório está em
+[`firmware-forensics/mission-012b.json`](firmware-forensics/mission-012b.json).

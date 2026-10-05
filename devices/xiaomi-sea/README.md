@@ -41,3 +41,9 @@ foi detectado pelo PnP, nenhum comando foi executado no telefone. O resultado
 sanitizado está em
 [`firmware-forensics/mission-012.json`](firmware-forensics/mission-012.json)
 e [`unit-observation.json`](unit-observation.json).
+
+A Missão 012-B encontrou as Platform Tools fora do PATH e repetiu somente as
+enumerações `adb devices`/`fastboot devices`. O Windows vê o telefone em
+WPD/MTP, mas ainda não há interface ADB nem fastboot; a identidade física é
+parcial e Recovery permanece bloqueado. Consulte
+[`firmware-forensics/mission-012b.json`](firmware-forensics/mission-012b.json).

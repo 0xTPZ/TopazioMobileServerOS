@@ -67,3 +67,12 @@ instalar imagem.
 comando. A classificação é uma barreira estática auxiliar, não uma garantia de
 segurança do shell; qualquer comando fora da lista deve ser revisado
 manualmente.
+
+## Resultado da Missão 012-B
+
+As Platform Tools foram encontradas em
+`C:\AndroidTools\platform-tools`, mas `adb devices` e `fastboot devices`
+retornaram listas vazias. O Windows expôs o telefone somente como WPD/MTP;
+nenhum comando shell, `getvar` ou escrita foi executado. O relatório
+sanitizado está em
+`devices/xiaomi-sea/firmware-forensics/mission-012b.json`.

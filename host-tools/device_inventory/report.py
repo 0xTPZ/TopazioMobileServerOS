@@ -41,7 +41,11 @@ def _transport_state(results, command_id: str, *, fastboot: bool = False) -> str
         return "ABSENT"
     if result.exit_code not in (None, 0):
         return "DRIVER_BLOCKED"
-    lines = [line.strip() for line in result.sanitized_stdout.splitlines() if line.strip()]
+    lines = [
+        line.strip()
+        for line in result.sanitized_stdout.splitlines()
+        if line.strip() and line.strip().lower() != "list of devices attached"
+    ]
     if not lines:
         return "ABSENT"
     if fastboot:

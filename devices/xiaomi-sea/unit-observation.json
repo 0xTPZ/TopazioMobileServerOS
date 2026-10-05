@@ -3,20 +3,20 @@
   "mission": 12,
   "device": "xiaomi-sea",
   "report_type": "SANITIZED_UNIT_OBSERVATION",
-  "timestamp": "2026-10-05T15:07:39.135226+00:00",
+  "timestamp": "2026-10-05T15:19:23.445017+00:00",
   "transport": {
     "adb": {
       "value": "ABSENT",
       "source": "adb devices",
       "confidence": "HIGH",
-      "timestamp": "2026-10-05T15:07:39.135226+00:00",
+      "timestamp": "2026-10-05T15:19:23.445017+00:00",
       "safety_class": "READ_ONLY_SAFE"
     },
     "fastboot": {
       "value": "ABSENT",
       "source": "fastboot devices",
       "confidence": "HIGH",
-      "timestamp": "2026-10-05T15:07:39.135226+00:00",
+      "timestamp": "2026-10-05T15:19:23.445017+00:00",
       "safety_class": "READ_ONLY_SAFE"
     }
   },
@@ -25,56 +25,56 @@
       "value": null,
       "source": "adb_getprop",
       "confidence": "UNKNOWN",
-      "timestamp": "2026-10-05T15:07:39.135226+00:00",
+      "timestamp": "2026-10-05T15:19:23.445017+00:00",
       "safety_class": "READ_ONLY_SAFE"
     },
     "brand": {
       "value": null,
       "source": "adb_getprop",
       "confidence": "UNKNOWN",
-      "timestamp": "2026-10-05T15:07:39.135226+00:00",
+      "timestamp": "2026-10-05T15:19:23.445017+00:00",
       "safety_class": "READ_ONLY_SAFE"
     },
     "model": {
       "value": null,
       "source": "adb_getprop",
       "confidence": "UNKNOWN",
-      "timestamp": "2026-10-05T15:07:39.135226+00:00",
+      "timestamp": "2026-10-05T15:19:23.445017+00:00",
       "safety_class": "READ_ONLY_SAFE"
     },
     "device": {
       "value": null,
       "source": "adb_getprop",
       "confidence": "UNKNOWN",
-      "timestamp": "2026-10-05T15:07:39.135226+00:00",
+      "timestamp": "2026-10-05T15:19:23.445017+00:00",
       "safety_class": "READ_ONLY_SAFE"
     },
     "product": {
       "value": null,
       "source": "adb_getprop",
       "confidence": "UNKNOWN",
-      "timestamp": "2026-10-05T15:07:39.135226+00:00",
+      "timestamp": "2026-10-05T15:19:23.445017+00:00",
       "safety_class": "READ_ONLY_SAFE"
     },
     "hardware": {
       "value": null,
       "source": "adb_getprop",
       "confidence": "UNKNOWN",
-      "timestamp": "2026-10-05T15:07:39.135226+00:00",
+      "timestamp": "2026-10-05T15:19:23.445017+00:00",
       "safety_class": "READ_ONLY_SAFE"
     },
     "board": {
       "value": null,
       "source": "adb_getprop",
       "confidence": "UNKNOWN",
-      "timestamp": "2026-10-05T15:07:39.135226+00:00",
+      "timestamp": "2026-10-05T15:19:23.445017+00:00",
       "safety_class": "READ_ONLY_SAFE"
     },
     "codename_assessment": {
       "value": null,
       "source": "adb_getprop",
       "confidence": "UNKNOWN",
-      "timestamp": "2026-10-05T15:07:39.135226+00:00",
+      "timestamp": "2026-10-05T15:19:23.445017+00:00",
       "safety_class": "READ_ONLY_SAFE"
     }
   },
@@ -83,35 +83,35 @@
       "value": null,
       "source": "adb_getprop",
       "confidence": "UNKNOWN",
-      "timestamp": "2026-10-05T15:07:39.135226+00:00",
+      "timestamp": "2026-10-05T15:19:23.445017+00:00",
       "safety_class": "READ_ONLY_SAFE"
     },
     "build_id": {
       "value": null,
       "source": "adb_getprop",
       "confidence": "UNKNOWN",
-      "timestamp": "2026-10-05T15:07:39.135226+00:00",
+      "timestamp": "2026-10-05T15:19:23.445017+00:00",
       "safety_class": "READ_ONLY_SAFE"
     },
     "android_version": {
       "value": null,
       "source": "adb_getprop",
       "confidence": "UNKNOWN",
-      "timestamp": "2026-10-05T15:07:39.135226+00:00",
+      "timestamp": "2026-10-05T15:19:23.445017+00:00",
       "safety_class": "READ_ONLY_SAFE"
     },
     "security_patch": {
       "value": null,
       "source": "adb_getprop",
       "confidence": "UNKNOWN",
-      "timestamp": "2026-10-05T15:07:39.135226+00:00",
+      "timestamp": "2026-10-05T15:19:23.445017+00:00",
       "safety_class": "READ_ONLY_SAFE"
     },
     "ota_comparison": {
       "value": "UNKNOWN",
       "source": "adb_getprop",
       "confidence": "UNKNOWN",
-      "timestamp": "2026-10-05T15:07:39.135226+00:00",
+      "timestamp": "2026-10-05T15:19:23.445017+00:00",
       "safety_class": "READ_ONLY_SAFE"
     }
   },
@@ -120,21 +120,21 @@
       "value": "",
       "source": "adb shell uname -a",
       "confidence": "UNKNOWN",
-      "timestamp": "2026-10-05T15:07:39.135226+00:00",
+      "timestamp": "2026-10-05T15:19:23.445017+00:00",
       "safety_class": "READ_ONLY_SAFE"
     },
     "unit_matches_stock_kernel": {
       "value": "UNKNOWN",
       "source": "adb shell uname -a",
       "confidence": "UNKNOWN",
-      "timestamp": "2026-10-05T15:07:39.135226+00:00",
+      "timestamp": "2026-10-05T15:19:23.445017+00:00",
       "safety_class": "READ_ONLY_SAFE"
     },
     "architecture": {
       "value": null,
       "source": "adb_getprop",
       "confidence": "UNKNOWN",
-      "timestamp": "2026-10-05T15:07:39.135226+00:00",
+      "timestamp": "2026-10-05T15:19:23.445017+00:00",
       "safety_class": "READ_ONLY_SAFE"
     }
   },
@@ -143,14 +143,14 @@
       "value": null,
       "source": "adb shell cat /proc/meminfo",
       "confidence": "UNKNOWN",
-      "timestamp": "2026-10-05T15:07:39.135226+00:00",
+      "timestamp": "2026-10-05T15:19:23.445017+00:00",
       "safety_class": "READ_ONLY_SAFE"
     },
     "available_bytes": {
       "value": null,
       "source": "adb shell cat /proc/meminfo",
       "confidence": "UNKNOWN",
-      "timestamp": "2026-10-05T15:07:39.135226+00:00",
+      "timestamp": "2026-10-05T15:19:23.445017+00:00",
       "safety_class": "READ_ONLY_SAFE"
     }
   },
@@ -159,21 +159,21 @@
       "value": null,
       "source": "adb shell cat /sys/block/sda/size",
       "confidence": "UNKNOWN",
-      "timestamp": "2026-10-05T15:07:39.135226+00:00",
+      "timestamp": "2026-10-05T15:19:23.445017+00:00",
       "safety_class": "READ_ONLY_SAFE"
     },
     "logical_block_size": {
       "value": null,
       "source": "adb shell cat /sys/block/sda/queue/logical_block_size",
       "confidence": "UNKNOWN",
-      "timestamp": "2026-10-05T15:07:39.135226+00:00",
+      "timestamp": "2026-10-05T15:19:23.445017+00:00",
       "safety_class": "READ_ONLY_SAFE"
     },
     "mounts": {
       "value": "",
       "source": "adb shell cat /proc/mounts",
       "confidence": "UNKNOWN",
-      "timestamp": "2026-10-05T15:07:39.135226+00:00",
+      "timestamp": "2026-10-05T15:19:23.445017+00:00",
       "safety_class": "READ_ONLY_SAFE"
     }
   },
@@ -182,21 +182,21 @@
       "value": null,
       "source": "public UFS sysfs",
       "confidence": "UNKNOWN",
-      "timestamp": "2026-10-05T15:07:39.135226+00:00",
+      "timestamp": "2026-10-05T15:19:23.445017+00:00",
       "safety_class": "READ_ONLY_SAFE"
     },
     "model": {
       "value": null,
       "source": "public UFS sysfs",
       "confidence": "UNKNOWN",
-      "timestamp": "2026-10-05T15:07:39.135226+00:00",
+      "timestamp": "2026-10-05T15:19:23.445017+00:00",
       "safety_class": "READ_ONLY_SAFE"
     },
     "revision": {
       "value": null,
       "source": "public UFS sysfs",
       "confidence": "UNKNOWN",
-      "timestamp": "2026-10-05T15:07:39.135226+00:00",
+      "timestamp": "2026-10-05T15:19:23.445017+00:00",
       "safety_class": "READ_ONLY_SAFE"
     }
   },
@@ -204,14 +204,14 @@
     "value": null,
     "source": "adb_getprop",
     "confidence": "UNKNOWN",
-    "timestamp": "2026-10-05T15:07:39.135226+00:00",
+    "timestamp": "2026-10-05T15:19:23.445017+00:00",
     "safety_class": "READ_ONLY_SAFE"
   },
   "partition_names": {
     "value": [],
     "source": "adb shell ls -l /dev/block/by-name",
     "confidence": "UNKNOWN",
-    "timestamp": "2026-10-05T15:07:39.135226+00:00",
+    "timestamp": "2026-10-05T15:19:23.445017+00:00",
     "safety_class": "READ_ONLY_SAFE"
   },
   "boot_state": {
@@ -219,21 +219,21 @@
       "value": null,
       "source": "adb_getprop",
       "confidence": "UNKNOWN",
-      "timestamp": "2026-10-05T15:07:39.135226+00:00",
+      "timestamp": "2026-10-05T15:19:23.445017+00:00",
       "safety_class": "READ_ONLY_SAFE"
     },
     "device_state": {
       "value": null,
       "source": "adb_getprop",
       "confidence": "UNKNOWN",
-      "timestamp": "2026-10-05T15:07:39.135226+00:00",
+      "timestamp": "2026-10-05T15:19:23.445017+00:00",
       "safety_class": "READ_ONLY_SAFE"
     },
     "verity_mode": {
       "value": null,
       "source": "adb_getprop",
       "confidence": "UNKNOWN",
-      "timestamp": "2026-10-05T15:07:39.135226+00:00",
+      "timestamp": "2026-10-05T15:19:23.445017+00:00",
       "safety_class": "READ_ONLY_SAFE"
     }
   },
@@ -241,21 +241,21 @@
     "value": null,
     "source": "adb_getprop",
     "confidence": "UNKNOWN",
-    "timestamp": "2026-10-05T15:07:39.135226+00:00",
+    "timestamp": "2026-10-05T15:19:23.445017+00:00",
     "safety_class": "READ_ONLY_SAFE"
   },
   "dt_metadata": {
     "value": null,
     "source": "not exposed or not collected",
     "confidence": "UNKNOWN",
-    "timestamp": "2026-10-05T15:07:39.135226+00:00",
+    "timestamp": "2026-10-05T15:19:23.445017+00:00",
     "safety_class": "READ_ONLY_SAFE"
   },
   "modules": {
     "value": [],
     "source": "adb shell cat /proc/modules",
     "confidence": "UNKNOWN",
-    "timestamp": "2026-10-05T15:07:39.135226+00:00",
+    "timestamp": "2026-10-05T15:19:23.445017+00:00",
     "safety_class": "READ_ONLY_SAFE"
   },
   "thermal": {
@@ -263,14 +263,14 @@
       "value": "",
       "source": "sysfs thermal zone 0",
       "confidence": "UNKNOWN",
-      "timestamp": "2026-10-05T15:07:39.135226+00:00",
+      "timestamp": "2026-10-05T15:19:23.445017+00:00",
       "safety_class": "READ_ONLY_SAFE"
     },
     "zone0_temp": {
       "value": "",
       "source": "sysfs thermal zone 0",
       "confidence": "UNKNOWN",
-      "timestamp": "2026-10-05T15:07:39.135226+00:00",
+      "timestamp": "2026-10-05T15:19:23.445017+00:00",
       "safety_class": "READ_ONLY_SAFE"
     }
   },
@@ -279,14 +279,14 @@
       "value": "",
       "source": "battery sysfs",
       "confidence": "UNKNOWN",
-      "timestamp": "2026-10-05T15:07:39.135226+00:00",
+      "timestamp": "2026-10-05T15:19:23.445017+00:00",
       "safety_class": "READ_ONLY_SAFE"
     },
     "battery_technology": {
       "value": "",
       "source": "battery sysfs",
       "confidence": "UNKNOWN",
-      "timestamp": "2026-10-05T15:07:39.135226+00:00",
+      "timestamp": "2026-10-05T15:19:23.445017+00:00",
       "safety_class": "READ_ONLY_SAFE"
     }
   },
@@ -295,7 +295,7 @@
       "value": null,
       "source": "public network sysfs",
       "confidence": "UNKNOWN",
-      "timestamp": "2026-10-05T15:07:39.135226+00:00",
+      "timestamp": "2026-10-05T15:19:23.445017+00:00",
       "safety_class": "READ_ONLY_SAFE"
     }
   },
@@ -304,7 +304,7 @@
       "value": null,
       "source": "public network sysfs",
       "confidence": "UNKNOWN",
-      "timestamp": "2026-10-05T15:07:39.135226+00:00",
+      "timestamp": "2026-10-05T15:19:23.445017+00:00",
       "safety_class": "READ_ONLY_SAFE"
     }
   },
@@ -313,7 +313,7 @@
       "value": null,
       "source": "public DRM sysfs",
       "confidence": "UNKNOWN",
-      "timestamp": "2026-10-05T15:07:39.135226+00:00",
+      "timestamp": "2026-10-05T15:19:23.445017+00:00",
       "safety_class": "READ_ONLY_SAFE"
     }
   },
@@ -321,7 +321,7 @@
     "value": null,
     "source": "not exposed or not collected",
     "confidence": "UNKNOWN",
-    "timestamp": "2026-10-05T15:07:39.135226+00:00",
+    "timestamp": "2026-10-05T15:19:23.445017+00:00",
     "safety_class": "READ_ONLY_SAFE"
   },
   "audit_log": [
@@ -330,348 +330,377 @@
       "transport": "adb",
       "command": "adb devices",
       "safety_class": "READ_ONLY_SAFE",
-      "executable_present": false,
-      "exit_code": null,
-      "stdout": "",
-      "stderr": "COMMAND_NOT_FOUND",
-      "sanitized_result_hash": "7f37168d9cde819736e0839de91ae9fd4ad610385bf11e53f72b4ba56dfca2cd",
-      "timestamp": "2026-10-05T15:07:38.594226+00:00"
+      "executable_present": true,
+      "exit_code": 0,
+      "stdout": "List of devices attached\n\n",
+      "stderr": "",
+      "sanitized_result_hash": "5bf970c41a9ffcc009f05975dbfeb375cb51fe5faf5baf84341049afc003fe88",
+      "timestamp": "2026-10-05T15:19:23.414011+00:00",
+      "execution_status": "EXECUTED"
     },
     {
       "command_id": "adb_get_state",
       "transport": "adb",
       "command": "adb get-state",
       "safety_class": "READ_ONLY_SAFE",
-      "executable_present": false,
+      "executable_present": true,
       "exit_code": null,
       "stdout": "",
-      "stderr": "COMMAND_NOT_FOUND",
-      "sanitized_result_hash": "7f37168d9cde819736e0839de91ae9fd4ad610385bf11e53f72b4ba56dfca2cd",
-      "timestamp": "2026-10-05T15:07:38.615224+00:00"
+      "stderr": "ADB_ABSENT_NO_SHELL",
+      "sanitized_result_hash": "d189c6f8fc0efdef92a30db6e4b83e9d7dea7f25f8ffa50873edea3ef923dd46",
+      "timestamp": "2026-10-05T15:19:23.415013+00:00",
+      "execution_status": "NOT_EXECUTED_FAIL_CLOSED"
     },
     {
       "command_id": "adb_getprop",
       "transport": "adb",
       "command": "adb shell getprop",
       "safety_class": "READ_ONLY_SAFE",
-      "executable_present": false,
+      "executable_present": true,
       "exit_code": null,
       "stdout": "",
-      "stderr": "COMMAND_NOT_FOUND",
-      "sanitized_result_hash": "7f37168d9cde819736e0839de91ae9fd4ad610385bf11e53f72b4ba56dfca2cd",
-      "timestamp": "2026-10-05T15:07:38.636227+00:00"
+      "stderr": "ADB_ABSENT_NO_SHELL",
+      "sanitized_result_hash": "d189c6f8fc0efdef92a30db6e4b83e9d7dea7f25f8ffa50873edea3ef923dd46",
+      "timestamp": "2026-10-05T15:19:23.415013+00:00",
+      "execution_status": "NOT_EXECUTED_FAIL_CLOSED"
     },
     {
       "command_id": "adb_uname",
       "transport": "adb",
       "command": "adb shell uname -a",
       "safety_class": "READ_ONLY_SAFE",
-      "executable_present": false,
+      "executable_present": true,
       "exit_code": null,
       "stdout": "",
-      "stderr": "COMMAND_NOT_FOUND",
-      "sanitized_result_hash": "7f37168d9cde819736e0839de91ae9fd4ad610385bf11e53f72b4ba56dfca2cd",
-      "timestamp": "2026-10-05T15:07:38.656229+00:00"
+      "stderr": "ADB_ABSENT_NO_SHELL",
+      "sanitized_result_hash": "d189c6f8fc0efdef92a30db6e4b83e9d7dea7f25f8ffa50873edea3ef923dd46",
+      "timestamp": "2026-10-05T15:19:23.415013+00:00",
+      "execution_status": "NOT_EXECUTED_FAIL_CLOSED"
     },
     {
       "command_id": "adb_meminfo",
       "transport": "adb",
       "command": "adb shell cat /proc/meminfo",
       "safety_class": "READ_ONLY_SAFE",
-      "executable_present": false,
+      "executable_present": true,
       "exit_code": null,
       "stdout": "",
-      "stderr": "COMMAND_NOT_FOUND",
-      "sanitized_result_hash": "7f37168d9cde819736e0839de91ae9fd4ad610385bf11e53f72b4ba56dfca2cd",
-      "timestamp": "2026-10-05T15:07:38.673225+00:00"
+      "stderr": "ADB_ABSENT_NO_SHELL",
+      "sanitized_result_hash": "d189c6f8fc0efdef92a30db6e4b83e9d7dea7f25f8ffa50873edea3ef923dd46",
+      "timestamp": "2026-10-05T15:19:23.415013+00:00",
+      "execution_status": "NOT_EXECUTED_FAIL_CLOSED"
     },
     {
       "command_id": "adb_partitions",
       "transport": "adb",
       "command": "adb shell cat /proc/partitions",
       "safety_class": "READ_ONLY_SAFE",
-      "executable_present": false,
+      "executable_present": true,
       "exit_code": null,
       "stdout": "",
-      "stderr": "COMMAND_NOT_FOUND",
-      "sanitized_result_hash": "7f37168d9cde819736e0839de91ae9fd4ad610385bf11e53f72b4ba56dfca2cd",
-      "timestamp": "2026-10-05T15:07:38.690227+00:00"
+      "stderr": "ADB_ABSENT_NO_SHELL",
+      "sanitized_result_hash": "d189c6f8fc0efdef92a30db6e4b83e9d7dea7f25f8ffa50873edea3ef923dd46",
+      "timestamp": "2026-10-05T15:19:23.416011+00:00",
+      "execution_status": "NOT_EXECUTED_FAIL_CLOSED"
     },
     {
       "command_id": "adb_mounts",
       "transport": "adb",
       "command": "adb shell cat /proc/mounts",
       "safety_class": "READ_ONLY_SAFE",
-      "executable_present": false,
+      "executable_present": true,
       "exit_code": null,
       "stdout": "",
-      "stderr": "COMMAND_NOT_FOUND",
-      "sanitized_result_hash": "7f37168d9cde819736e0839de91ae9fd4ad610385bf11e53f72b4ba56dfca2cd",
-      "timestamp": "2026-10-05T15:07:38.708225+00:00"
+      "stderr": "ADB_ABSENT_NO_SHELL",
+      "sanitized_result_hash": "d189c6f8fc0efdef92a30db6e4b83e9d7dea7f25f8ffa50873edea3ef923dd46",
+      "timestamp": "2026-10-05T15:19:23.416011+00:00",
+      "execution_status": "NOT_EXECUTED_FAIL_CLOSED"
     },
     {
       "command_id": "adb_modules",
       "transport": "adb",
       "command": "adb shell cat /proc/modules",
       "safety_class": "READ_ONLY_SAFE",
-      "executable_present": false,
+      "executable_present": true,
       "exit_code": null,
       "stdout": "",
-      "stderr": "COMMAND_NOT_FOUND",
-      "sanitized_result_hash": "7f37168d9cde819736e0839de91ae9fd4ad610385bf11e53f72b4ba56dfca2cd",
-      "timestamp": "2026-10-05T15:07:38.726225+00:00"
+      "stderr": "ADB_ABSENT_NO_SHELL",
+      "sanitized_result_hash": "d189c6f8fc0efdef92a30db6e4b83e9d7dea7f25f8ffa50873edea3ef923dd46",
+      "timestamp": "2026-10-05T15:19:23.416011+00:00",
+      "execution_status": "NOT_EXECUTED_FAIL_CLOSED"
     },
     {
       "command_id": "adb_by_name",
       "transport": "adb",
       "command": "adb shell ls -l /dev/block/by-name",
       "safety_class": "READ_ONLY_SAFE",
-      "executable_present": false,
+      "executable_present": true,
       "exit_code": null,
       "stdout": "",
-      "stderr": "COMMAND_NOT_FOUND",
-      "sanitized_result_hash": "7f37168d9cde819736e0839de91ae9fd4ad610385bf11e53f72b4ba56dfca2cd",
-      "timestamp": "2026-10-05T15:07:38.751230+00:00"
+      "stderr": "ADB_ABSENT_NO_SHELL",
+      "sanitized_result_hash": "d189c6f8fc0efdef92a30db6e4b83e9d7dea7f25f8ffa50873edea3ef923dd46",
+      "timestamp": "2026-10-05T15:19:23.416011+00:00",
+      "execution_status": "NOT_EXECUTED_FAIL_CLOSED"
     },
     {
       "command_id": "adb_thermal_type",
       "transport": "adb",
       "command": "adb shell cat /sys/class/thermal/thermal_zone0/type",
       "safety_class": "READ_ONLY_SAFE",
-      "executable_present": false,
+      "executable_present": true,
       "exit_code": null,
       "stdout": "",
-      "stderr": "COMMAND_NOT_FOUND",
-      "sanitized_result_hash": "7f37168d9cde819736e0839de91ae9fd4ad610385bf11e53f72b4ba56dfca2cd",
-      "timestamp": "2026-10-05T15:07:38.776226+00:00"
+      "stderr": "ADB_ABSENT_NO_SHELL",
+      "sanitized_result_hash": "d189c6f8fc0efdef92a30db6e4b83e9d7dea7f25f8ffa50873edea3ef923dd46",
+      "timestamp": "2026-10-05T15:19:23.416011+00:00",
+      "execution_status": "NOT_EXECUTED_FAIL_CLOSED"
     },
     {
       "command_id": "adb_thermal_temp",
       "transport": "adb",
       "command": "adb shell cat /sys/class/thermal/thermal_zone0/temp",
       "safety_class": "READ_ONLY_SAFE",
-      "executable_present": false,
+      "executable_present": true,
       "exit_code": null,
       "stdout": "",
-      "stderr": "COMMAND_NOT_FOUND",
-      "sanitized_result_hash": "7f37168d9cde819736e0839de91ae9fd4ad610385bf11e53f72b4ba56dfca2cd",
-      "timestamp": "2026-10-05T15:07:38.793226+00:00"
+      "stderr": "ADB_ABSENT_NO_SHELL",
+      "sanitized_result_hash": "d189c6f8fc0efdef92a30db6e4b83e9d7dea7f25f8ffa50873edea3ef923dd46",
+      "timestamp": "2026-10-05T15:19:23.416011+00:00",
+      "execution_status": "NOT_EXECUTED_FAIL_CLOSED"
     },
     {
       "command_id": "adb_battery_status",
       "transport": "adb",
       "command": "adb shell cat /sys/class/power_supply/battery/status",
       "safety_class": "READ_ONLY_SAFE",
-      "executable_present": false,
+      "executable_present": true,
       "exit_code": null,
       "stdout": "",
-      "stderr": "COMMAND_NOT_FOUND",
-      "sanitized_result_hash": "7f37168d9cde819736e0839de91ae9fd4ad610385bf11e53f72b4ba56dfca2cd",
-      "timestamp": "2026-10-05T15:07:38.815224+00:00"
+      "stderr": "ADB_ABSENT_NO_SHELL",
+      "sanitized_result_hash": "d189c6f8fc0efdef92a30db6e4b83e9d7dea7f25f8ffa50873edea3ef923dd46",
+      "timestamp": "2026-10-05T15:19:23.416011+00:00",
+      "execution_status": "NOT_EXECUTED_FAIL_CLOSED"
     },
     {
       "command_id": "adb_battery_technology",
       "transport": "adb",
       "command": "adb shell cat /sys/class/power_supply/battery/technology",
       "safety_class": "READ_ONLY_SAFE",
-      "executable_present": false,
+      "executable_present": true,
       "exit_code": null,
       "stdout": "",
-      "stderr": "COMMAND_NOT_FOUND",
-      "sanitized_result_hash": "7f37168d9cde819736e0839de91ae9fd4ad610385bf11e53f72b4ba56dfca2cd",
-      "timestamp": "2026-10-05T15:07:38.838224+00:00"
+      "stderr": "ADB_ABSENT_NO_SHELL",
+      "sanitized_result_hash": "d189c6f8fc0efdef92a30db6e4b83e9d7dea7f25f8ffa50873edea3ef923dd46",
+      "timestamp": "2026-10-05T15:19:23.416011+00:00",
+      "execution_status": "NOT_EXECUTED_FAIL_CLOSED"
     },
     {
       "command_id": "adb_battery_capacity",
       "transport": "adb",
       "command": "adb shell cat /sys/class/power_supply/battery/capacity",
       "safety_class": "READ_ONLY_SAFE",
-      "executable_present": false,
+      "executable_present": true,
       "exit_code": null,
       "stdout": "",
-      "stderr": "COMMAND_NOT_FOUND",
-      "sanitized_result_hash": "7f37168d9cde819736e0839de91ae9fd4ad610385bf11e53f72b4ba56dfca2cd",
-      "timestamp": "2026-10-05T15:07:38.853227+00:00"
+      "stderr": "ADB_ABSENT_NO_SHELL",
+      "sanitized_result_hash": "d189c6f8fc0efdef92a30db6e4b83e9d7dea7f25f8ffa50873edea3ef923dd46",
+      "timestamp": "2026-10-05T15:19:23.416011+00:00",
+      "execution_status": "NOT_EXECUTED_FAIL_CLOSED"
     },
     {
       "command_id": "adb_storage_size",
       "transport": "adb",
       "command": "adb shell cat /sys/block/sda/size",
       "safety_class": "READ_ONLY_SAFE",
-      "executable_present": false,
+      "executable_present": true,
       "exit_code": null,
       "stdout": "",
-      "stderr": "COMMAND_NOT_FOUND",
-      "sanitized_result_hash": "7f37168d9cde819736e0839de91ae9fd4ad610385bf11e53f72b4ba56dfca2cd",
-      "timestamp": "2026-10-05T15:07:38.864224+00:00"
+      "stderr": "ADB_ABSENT_NO_SHELL",
+      "sanitized_result_hash": "d189c6f8fc0efdef92a30db6e4b83e9d7dea7f25f8ffa50873edea3ef923dd46",
+      "timestamp": "2026-10-05T15:19:23.416011+00:00",
+      "execution_status": "NOT_EXECUTED_FAIL_CLOSED"
     },
     {
       "command_id": "adb_storage_block_size",
       "transport": "adb",
       "command": "adb shell cat /sys/block/sda/queue/logical_block_size",
       "safety_class": "READ_ONLY_SAFE",
-      "executable_present": false,
+      "executable_present": true,
       "exit_code": null,
       "stdout": "",
-      "stderr": "COMMAND_NOT_FOUND",
-      "sanitized_result_hash": "7f37168d9cde819736e0839de91ae9fd4ad610385bf11e53f72b4ba56dfca2cd",
-      "timestamp": "2026-10-05T15:07:38.880226+00:00"
+      "stderr": "ADB_ABSENT_NO_SHELL",
+      "sanitized_result_hash": "d189c6f8fc0efdef92a30db6e4b83e9d7dea7f25f8ffa50873edea3ef923dd46",
+      "timestamp": "2026-10-05T15:19:23.416011+00:00",
+      "execution_status": "NOT_EXECUTED_FAIL_CLOSED"
     },
     {
       "command_id": "adb_ufs_vendor",
       "transport": "adb",
       "command": "adb shell cat /sys/block/sda/device/vendor",
       "safety_class": "READ_ONLY_SAFE",
-      "executable_present": false,
+      "executable_present": true,
       "exit_code": null,
       "stdout": "",
-      "stderr": "COMMAND_NOT_FOUND",
-      "sanitized_result_hash": "7f37168d9cde819736e0839de91ae9fd4ad610385bf11e53f72b4ba56dfca2cd",
-      "timestamp": "2026-10-05T15:07:38.903228+00:00"
+      "stderr": "ADB_ABSENT_NO_SHELL",
+      "sanitized_result_hash": "d189c6f8fc0efdef92a30db6e4b83e9d7dea7f25f8ffa50873edea3ef923dd46",
+      "timestamp": "2026-10-05T15:19:23.416011+00:00",
+      "execution_status": "NOT_EXECUTED_FAIL_CLOSED"
     },
     {
       "command_id": "adb_ufs_model",
       "transport": "adb",
       "command": "adb shell cat /sys/block/sda/device/model",
       "safety_class": "READ_ONLY_SAFE",
-      "executable_present": false,
+      "executable_present": true,
       "exit_code": null,
       "stdout": "",
-      "stderr": "COMMAND_NOT_FOUND",
-      "sanitized_result_hash": "7f37168d9cde819736e0839de91ae9fd4ad610385bf11e53f72b4ba56dfca2cd",
-      "timestamp": "2026-10-05T15:07:38.920227+00:00"
+      "stderr": "ADB_ABSENT_NO_SHELL",
+      "sanitized_result_hash": "d189c6f8fc0efdef92a30db6e4b83e9d7dea7f25f8ffa50873edea3ef923dd46",
+      "timestamp": "2026-10-05T15:19:23.416011+00:00",
+      "execution_status": "NOT_EXECUTED_FAIL_CLOSED"
     },
     {
       "command_id": "adb_ufs_revision",
       "transport": "adb",
       "command": "adb shell cat /sys/block/sda/device/rev",
       "safety_class": "READ_ONLY_SAFE",
-      "executable_present": false,
+      "executable_present": true,
       "exit_code": null,
       "stdout": "",
-      "stderr": "COMMAND_NOT_FOUND",
-      "sanitized_result_hash": "7f37168d9cde819736e0839de91ae9fd4ad610385bf11e53f72b4ba56dfca2cd",
-      "timestamp": "2026-10-05T15:07:38.938226+00:00"
+      "stderr": "ADB_ABSENT_NO_SHELL",
+      "sanitized_result_hash": "d189c6f8fc0efdef92a30db6e4b83e9d7dea7f25f8ffa50873edea3ef923dd46",
+      "timestamp": "2026-10-05T15:19:23.416011+00:00",
+      "execution_status": "NOT_EXECUTED_FAIL_CLOSED"
     },
     {
       "command_id": "adb_wifi_uevent",
       "transport": "adb",
       "command": "adb shell cat /sys/class/net/wlan0/device/uevent",
       "safety_class": "READ_ONLY_SAFE",
-      "executable_present": false,
+      "executable_present": true,
       "exit_code": null,
       "stdout": "",
-      "stderr": "COMMAND_NOT_FOUND",
-      "sanitized_result_hash": "7f37168d9cde819736e0839de91ae9fd4ad610385bf11e53f72b4ba56dfca2cd",
-      "timestamp": "2026-10-05T15:07:38.954225+00:00"
+      "stderr": "ADB_ABSENT_NO_SHELL",
+      "sanitized_result_hash": "d189c6f8fc0efdef92a30db6e4b83e9d7dea7f25f8ffa50873edea3ef923dd46",
+      "timestamp": "2026-10-05T15:19:23.416011+00:00",
+      "execution_status": "NOT_EXECUTED_FAIL_CLOSED"
     },
     {
       "command_id": "adb_usb_uevent",
       "transport": "adb",
       "command": "adb shell cat /sys/class/net/usb0/device/uevent",
       "safety_class": "READ_ONLY_SAFE",
-      "executable_present": false,
+      "executable_present": true,
       "exit_code": null,
       "stdout": "",
-      "stderr": "COMMAND_NOT_FOUND",
-      "sanitized_result_hash": "7f37168d9cde819736e0839de91ae9fd4ad610385bf11e53f72b4ba56dfca2cd",
-      "timestamp": "2026-10-05T15:07:38.975229+00:00"
+      "stderr": "ADB_ABSENT_NO_SHELL",
+      "sanitized_result_hash": "d189c6f8fc0efdef92a30db6e4b83e9d7dea7f25f8ffa50873edea3ef923dd46",
+      "timestamp": "2026-10-05T15:19:23.416011+00:00",
+      "execution_status": "NOT_EXECUTED_FAIL_CLOSED"
     },
     {
       "command_id": "adb_display_uevent",
       "transport": "adb",
       "command": "adb shell cat /sys/class/drm/card0/device/uevent",
       "safety_class": "READ_ONLY_SAFE",
-      "executable_present": false,
+      "executable_present": true,
       "exit_code": null,
       "stdout": "",
-      "stderr": "COMMAND_NOT_FOUND",
-      "sanitized_result_hash": "7f37168d9cde819736e0839de91ae9fd4ad610385bf11e53f72b4ba56dfca2cd",
-      "timestamp": "2026-10-05T15:07:38.995229+00:00"
+      "stderr": "ADB_ABSENT_NO_SHELL",
+      "sanitized_result_hash": "d189c6f8fc0efdef92a30db6e4b83e9d7dea7f25f8ffa50873edea3ef923dd46",
+      "timestamp": "2026-10-05T15:19:23.416011+00:00",
+      "execution_status": "NOT_EXECUTED_FAIL_CLOSED"
     },
     {
       "command_id": "fastboot_devices",
       "transport": "fastboot",
       "command": "fastboot devices",
       "safety_class": "READ_ONLY_SAFE",
-      "executable_present": false,
-      "exit_code": null,
+      "executable_present": true,
+      "exit_code": 0,
       "stdout": "",
-      "stderr": "COMMAND_NOT_FOUND",
-      "sanitized_result_hash": "7f37168d9cde819736e0839de91ae9fd4ad610385bf11e53f72b4ba56dfca2cd",
-      "timestamp": "2026-10-05T15:07:39.014222+00:00"
+      "stderr": "",
+      "sanitized_result_hash": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "timestamp": "2026-10-05T15:19:23.444013+00:00",
+      "execution_status": "EXECUTED"
     },
     {
       "command_id": "fastboot_product",
       "transport": "fastboot",
       "command": "fastboot getvar product",
       "safety_class": "READ_ONLY_SAFE",
-      "executable_present": false,
+      "executable_present": true,
       "exit_code": null,
       "stdout": "",
-      "stderr": "COMMAND_NOT_FOUND",
-      "sanitized_result_hash": "7f37168d9cde819736e0839de91ae9fd4ad610385bf11e53f72b4ba56dfca2cd",
-      "timestamp": "2026-10-05T15:07:39.038228+00:00"
+      "stderr": "FASTBOOT_METADATA_NOT_REQUESTED_IN_012B",
+      "sanitized_result_hash": "50f38931cfdc652979cfe90cd4d00953ddf56b907f2757e241c9240a684ae127",
+      "timestamp": "2026-10-05T15:19:23.445017+00:00",
+      "execution_status": "NOT_EXECUTED_FAIL_CLOSED"
     },
     {
       "command_id": "fastboot_variant",
       "transport": "fastboot",
       "command": "fastboot getvar variant",
       "safety_class": "READ_ONLY_SAFE",
-      "executable_present": false,
+      "executable_present": true,
       "exit_code": null,
       "stdout": "",
-      "stderr": "COMMAND_NOT_FOUND",
-      "sanitized_result_hash": "7f37168d9cde819736e0839de91ae9fd4ad610385bf11e53f72b4ba56dfca2cd",
-      "timestamp": "2026-10-05T15:07:39.060225+00:00"
+      "stderr": "FASTBOOT_METADATA_NOT_REQUESTED_IN_012B",
+      "sanitized_result_hash": "50f38931cfdc652979cfe90cd4d00953ddf56b907f2757e241c9240a684ae127",
+      "timestamp": "2026-10-05T15:19:23.445017+00:00",
+      "execution_status": "NOT_EXECUTED_FAIL_CLOSED"
     },
     {
       "command_id": "fastboot_current_slot",
       "transport": "fastboot",
       "command": "fastboot getvar current-slot",
       "safety_class": "READ_ONLY_SAFE",
-      "executable_present": false,
+      "executable_present": true,
       "exit_code": null,
       "stdout": "",
-      "stderr": "COMMAND_NOT_FOUND",
-      "sanitized_result_hash": "7f37168d9cde819736e0839de91ae9fd4ad610385bf11e53f72b4ba56dfca2cd",
-      "timestamp": "2026-10-05T15:07:39.084225+00:00"
+      "stderr": "FASTBOOT_METADATA_NOT_REQUESTED_IN_012B",
+      "sanitized_result_hash": "50f38931cfdc652979cfe90cd4d00953ddf56b907f2757e241c9240a684ae127",
+      "timestamp": "2026-10-05T15:19:23.445017+00:00",
+      "execution_status": "NOT_EXECUTED_FAIL_CLOSED"
     },
     {
       "command_id": "fastboot_slot_count",
       "transport": "fastboot",
       "command": "fastboot getvar slot-count",
       "safety_class": "READ_ONLY_SAFE",
-      "executable_present": false,
+      "executable_present": true,
       "exit_code": null,
       "stdout": "",
-      "stderr": "COMMAND_NOT_FOUND",
-      "sanitized_result_hash": "7f37168d9cde819736e0839de91ae9fd4ad610385bf11e53f72b4ba56dfca2cd",
-      "timestamp": "2026-10-05T15:07:39.106224+00:00"
+      "stderr": "FASTBOOT_METADATA_NOT_REQUESTED_IN_012B",
+      "sanitized_result_hash": "50f38931cfdc652979cfe90cd4d00953ddf56b907f2757e241c9240a684ae127",
+      "timestamp": "2026-10-05T15:19:23.445017+00:00",
+      "execution_status": "NOT_EXECUTED_FAIL_CLOSED"
     },
     {
       "command_id": "fastboot_unlocked",
       "transport": "fastboot",
       "command": "fastboot getvar unlocked",
       "safety_class": "READ_ONLY_SAFE",
-      "executable_present": false,
+      "executable_present": true,
       "exit_code": null,
       "stdout": "",
-      "stderr": "COMMAND_NOT_FOUND",
-      "sanitized_result_hash": "7f37168d9cde819736e0839de91ae9fd4ad610385bf11e53f72b4ba56dfca2cd",
-      "timestamp": "2026-10-05T15:07:39.121223+00:00"
+      "stderr": "FASTBOOT_METADATA_NOT_REQUESTED_IN_012B",
+      "sanitized_result_hash": "50f38931cfdc652979cfe90cd4d00953ddf56b907f2757e241c9240a684ae127",
+      "timestamp": "2026-10-05T15:19:23.445017+00:00",
+      "execution_status": "NOT_EXECUTED_FAIL_CLOSED"
     },
     {
       "command_id": "fastboot_secure",
       "transport": "fastboot",
       "command": "fastboot getvar secure",
       "safety_class": "READ_ONLY_SAFE",
-      "executable_present": false,
+      "executable_present": true,
       "exit_code": null,
       "stdout": "",
-      "stderr": "COMMAND_NOT_FOUND",
-      "sanitized_result_hash": "7f37168d9cde819736e0839de91ae9fd4ad610385bf11e53f72b4ba56dfca2cd",
-      "timestamp": "2026-10-05T15:07:39.135226+00:00"
+      "stderr": "FASTBOOT_METADATA_NOT_REQUESTED_IN_012B",
+      "sanitized_result_hash": "50f38931cfdc652979cfe90cd4d00953ddf56b907f2757e241c9240a684ae127",
+      "timestamp": "2026-10-05T15:19:23.445017+00:00",
+      "execution_status": "NOT_EXECUTED_FAIL_CLOSED"
     }
   ],
   "sanitization": {
@@ -684,5 +713,18 @@
   "stock_dtb_origin": "UNKNOWN",
   "next_hardware_gate": "PHYSICAL_TRANSPORT_BLOCKED",
   "phone_writes_performed": false,
-  "phone_state_changed": false
+  "phone_state_changed": false,
+  "tool_discovery": {
+    "adb": {
+      "path": "C:\\AndroidTools\\platform-tools\\adb.exe",
+      "source": "documented_local_path",
+      "available": true
+    },
+    "fastboot": {
+      "path": "C:\\AndroidTools\\platform-tools\\fastboot.exe",
+      "source": "documented_local_path",
+      "available": true
+    }
+  },
+  "phone_command_execution_count": 2
 }

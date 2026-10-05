@@ -152,6 +152,15 @@
         "raw_device_output_versioned": false,
         "phone_writes": false,
         "pii_persisted": false
+      },
+      {
+        "name": "sea-physical-unit-observation-012b",
+        "status": "SANITIZED_REPORT / IDENTITY_PARTIAL",
+        "report": "firmware-forensics/mission-012b.json",
+        "platform_tools": "37.0.1-15733141",
+        "transport": "WPD_MTP_ONLY_NO_ADB_OR_FASTBOOT",
+        "phone_writes": false,
+        "pii_persisted": false
       }
     ]
   }

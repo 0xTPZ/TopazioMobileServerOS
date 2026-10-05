@@ -1,0 +1,129 @@
+{
+  "schema": 1,
+  "mission": "012-B",
+  "device": "xiaomi-sea",
+  "status": "PARTIAL",
+  "pass_gate": false,
+  "title": "Restore platform-tools discovery and repeat physical read-only inventory",
+  "decision": {
+    "result": "PHYSICAL_IDENTITY_PARTIAL",
+    "transport_blocker": "ADB_INTERFACE_ABSENT_AND_FASTBOOT_EMPTY",
+    "reason": "Platform-tools were found at the documented path and the Windows PnP layer identifies a Redmi Note 12S as WPD/MTP, but neither adb devices nor fastboot devices reported a transport.",
+    "phone_writes_performed": false,
+    "phone_state_changed": false,
+    "unlock_attempted": false,
+    "reboot_attempted": false,
+    "shell_commands_executed": false,
+    "fastboot_getvar_executed": false,
+    "mission_013_started": false
+  },
+  "tool_audit": {
+    "adb_path": "C:/AndroidTools/platform-tools/adb.exe",
+    "adb_exists": true,
+    "adb_version": "Android Debug Bridge version 1.0.41 / Version 37.0.1-15733141",
+    "fastboot_path": "C:/AndroidTools/platform-tools/fastboot.exe",
+    "fastboot_exists": true,
+    "fastboot_version": "fastboot version 37.0.1-15733141",
+    "discovery_source": "documented_local_path_after_PATH",
+    "path_global_modified": false,
+    "download_performed": false
+  },
+  "host_pnp": {
+    "device_detected": true,
+    "friendly_name": "Redmi Note 12S",
+    "class": "WPD",
+    "hardware_id_sanitized": "USB\\VID_2717&PID_FF40",
+    "interface_mode": "WPD_MTP",
+    "driver_provider": "Microsoft",
+    "driver_inf": "wpdmtp.inf",
+    "driver_version": "10.0.19041.4355",
+    "driver_status": "FUNCTIONAL",
+    "problem_code": 0,
+    "unique_serial_persisted": false,
+    "adb_interface_found": false,
+    "fastboot_interface_found": false
+  },
+  "transport": {
+    "adb_tool_available": true,
+    "fastboot_tool_available": true,
+    "adb_device_present": false,
+    "adb_state": "ABSENT",
+    "adb_authorized": false,
+    "fastboot_device_present": false,
+    "fastboot_state": "ABSENT",
+    "executed_probes": ["adb devices", "fastboot devices"],
+    "probe_results": {"adb devices":"EMPTY_LIST", "fastboot devices":"EMPTY_LIST"},
+    "daemon_note": "adb daemon startup occurred on the host only; no phone transport appeared",
+    "shell_queries": "NOT_EXECUTED_FAIL_CLOSED",
+    "fastboot_getvars": "NOT_EXECUTED"
+  },
+  "unit_identity": {
+    "manufacturer": "Xiaomi (PnP provider/name)",
+    "model": "Redmi Note 12S (PnP friendly name)",
+    "codename": "UNKNOWN",
+    "identity_result": "PARTIAL_WINDOWS_PNP_ONLY",
+    "physical_sea_confirmed": false,
+    "confidence": "MEDIUM"
+  },
+  "installed_software": {
+    "build": "UNKNOWN",
+    "android_version": "UNKNOWN",
+    "security_patch": "UNKNOWN",
+    "ota_comparison": "UNKNOWN",
+    "reference_ota": "OS2.0.209.0.VHZMIXM"
+  },
+  "kernel": {"release":"UNKNOWN","architecture":"UNKNOWN","unit_matches_stock_kernel":"UNKNOWN"},
+  "ram": {"unit_ram_total":"UNKNOWN","available":"UNKNOWN"},
+  "storage": {"capacity":"UNKNOWN","mounts":"UNKNOWN"},
+  "ufs": {"vendor":"UNKNOWN","model":"UNKNOWN","revision":"UNKNOWN"},
+  "a_b": {"unit_confirmed":"UNKNOWN","current_slot":"UNKNOWN"},
+  "partition_names": {"value":[],"status":"NOT_COLLECTED","raw_blocks_opened":false},
+  "bootloader_state": "UNKNOWN",
+  "verified_boot_state": "UNKNOWN",
+  "dt_metadata": {"compatible":"UNKNOWN","model":"UNKNOWN","stock_dtb_origin":"UNKNOWN","new_information":false},
+  "modules": {"status":"NOT_COLLECTED","critical_loaded_modules":"UNKNOWN"},
+  "hardware_metadata": {
+    "wifi_driver": "UNKNOWN",
+    "usb": "WPD_MTP_ONLY_ADB_INTERFACE_NOT_PRESENT",
+    "power": "UNKNOWN",
+    "thermal": "UNKNOWN",
+    "display": "UNKNOWN",
+    "touch": "UNKNOWN"
+  },
+  "sanitization": {
+    "status": "APPLIED",
+    "snapshot": "devices/xiaomi-sea/unit-observation.json",
+    "serial_imei_meid_mac_android_id_persisted": false,
+    "raw_output": "external temporary cache only",
+    "raw_output_in_git": false
+  },
+  "audit_log": {
+    "snapshot": "devices/xiaomi-sea/unit-observation.json#audit_log",
+    "phone_probes_executed": 2,
+    "phone_shell_commands_executed": 0,
+    "phone_write_commands_executed": 0,
+    "all_result_hashes_sanitized": true
+  },
+  "recovery_readiness": {
+    "status": "BLOCKED",
+    "reason": "ADB/fastboot transport and physical software identity remain unavailable; WPD/MTP presence is insufficient for recovery research."
+  },
+  "stock_dtb_origin": {
+    "status": "UNKNOWN",
+    "new_evidence": "NONE",
+    "reason": "No authorized Android property or DT metadata interface was available."
+  },
+  "normal_user_action_required": {
+    "status": "REQUIRED_FOR_NEXT_READ_ONLY_STEP",
+    "action": "On the phone, normally enable Developer Options and USB debugging, keep the device unlocked, and accept the standard RSA authorization dialog if Android displays it.",
+    "not_required": ["unlock bootloader", "reboot to fastboot", "install APK", "install driver manually by bypass", "BROM/preloader"],
+    "automatic_action_taken": false
+  },
+  "next_hardware_gate": {
+    "status": "PHYSICAL_TRANSPORT_BLOCKED",
+    "exact_blocker": "The Windows WPD/MTP interface works, but the Android Debug Bridge interface is not exposed and the device is not in fastboot.",
+    "safe_follow_up": "User enables standard USB debugging and accepts RSA authorization; then rerun only adb devices before any shell collector.",
+    "driver_diagnosis": "MTP driver functional; ADB interface absent, not a Code 28 failure in the observed PnP entry."
+  },
+  "previous_mission": "devices/xiaomi-sea/firmware-forensics/mission-012.json"
+}

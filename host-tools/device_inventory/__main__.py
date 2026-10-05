@@ -15,10 +15,13 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--dry-run", action="store_true", help="show safe commands without touching a device")
     parser.add_argument("--report", type=Path, help="write sanitized report to this path")
     parser.add_argument("--raw-dir", type=Path, help="temporary local raw-output directory; never use the repository")
+    parser.add_argument("--adb", help="explicit adb executable path")
+    parser.add_argument("--fastboot", help="explicit fastboot executable path")
+    parser.add_argument("--platform-tools", type=Path, help="explicit platform-tools directory")
     args = parser.parse_args(argv)
     if args.raw_dir and str(Path.cwd()).lower().startswith(str(args.raw_dir.resolve()).lower()):
         parser.error("raw output directory must not be the repository working directory")
-    inventory = DeviceInventory(raw_dir=args.raw_dir)
+    inventory = DeviceInventory(raw_dir=args.raw_dir, adb_path=args.adb, fastboot_path=args.fastboot, platform_tools=args.platform_tools)
     report = inventory.collect(dry_run=args.dry_run)
     if args.report:
         args.report.parent.mkdir(parents=True, exist_ok=True)
