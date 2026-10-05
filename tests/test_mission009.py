@@ -108,7 +108,7 @@ class Mission009Tests(unittest.TestCase):
             self.assertEqual(result["header_version"], 3)
             self.assertEqual(result["kernel_analysis"]["analysis_status"], "DECOMPRESSED")
             self.assertTrue(result["ramdisk_analysis"]["cpio"]["parse_complete"])
-            self.assertEqual(result["extracted"]["kernel"].split("\\")[-1], "kernel")
+            self.assertEqual(Path(result["extracted"]["kernel"]).name, "kernel")
 
     def test_dtbo_and_avb_parsers(self):
         dtbo = bytearray(struct.pack(">8I", 0xD7B7AB1E, 68, 32, 32, 1, 32, 4096, 0))
