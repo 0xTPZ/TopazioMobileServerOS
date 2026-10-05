@@ -65,7 +65,8 @@
       {"name": "preloader", "status": "UNKNOWN", "evidence": "no stock package or unit dump"},
       {"name": "LK/bootloader", "status": "BLOCKED", "evidence": "fastboot and bootloader state unavailable"},
       {"name": "AVB/vbmeta", "status": "UNKNOWN", "evidence": "Android T is known, unit metadata is absent"},
-      {"name": "boot/vendor_boot/init_boot/dtbo", "status": "UNKNOWN", "evidence": "no stock partition inventory"},
+      {"name": "boot.img", "status": "CONFIRMED", "evidence": "Mission 009 parsed a hash-verified OS2.0.209 sea Global component; exact unit variant remains unverified"},
+      {"name": "vendor_boot/init_boot/dtbo", "status": "UNKNOWN", "evidence": "no complete stock partition inventory"},
       {"name": "rootfs/init/SELinux", "status": "UNKNOWN", "evidence": "QEMU rootfs is not an Android boot image"}
     ]
   },
@@ -88,6 +89,7 @@
     "dts_graph": "docs/DTS-DEPENDENCY-GRAPH.md",
     "mission_008_dt_analysis": "reconstruction/dt-analysis.json",
     "mission_008_kernel_baseline": "server-minimal/kernel-baseline.json",
+    "mission_009_stock_forensics": "firmware-forensics/mission-009.json",
     "kernel_reconstruction": "docs/KERNEL-RECONSTRUCTION.md",
     "cust_dtsi": {
       "status": "STRONG_CANDIDATE",
@@ -97,6 +99,40 @@
     "dtb": "BLOCKED",
     "dtbo": "BLOCKED",
     "boot_image": "BLOCKED"
+  },
+  "mission_009_stock_forensics": {
+    "status": "PARTIAL",
+    "report": "firmware-forensics/mission-009.json",
+    "selected_build": {
+      "value": "OS2.0.209.0.VHZMIXM / Global / Android 15 / sea",
+      "confidence": "HIGH",
+      "evidence": "stock boot component ramdisk fingerprint and build properties",
+      "source": "https://xmfirmwareupdater.com/hyperos/sea/stable/OS2.0.209.0.VHZMIXM/"
+    },
+    "stock_boot_image": {
+      "value": "boot.img header v3, 4096-byte pages, 67108864 bytes",
+      "confidence": "HIGH_FOR_ANALYZED_COMPONENT",
+      "evidence": "local parser output and verified component SHA-256",
+      "source": "firmware-forensics/mission-009.json"
+    },
+    "stock_kernel": {
+      "value": "6.6.58-android15-8-g19e0e8cef6b2-4k",
+      "confidence": "HIGH_FOR_ANALYZED_COMPONENT",
+      "evidence": "decompressed Linux version string",
+      "source": "firmware-forensics/mission-009.json"
+    },
+    "stock_dtb_dtbo_avb_layout": {
+      "value": "UNKNOWN / not observed in acquired component",
+      "confidence": "LOW",
+      "evidence": "boot v3 header has no DTB, and complete package was not downloaded",
+      "source": "firmware-forensics/mission-009.json"
+    },
+    "phone_writes": {
+      "value": false,
+      "confidence": "HIGH",
+      "evidence": "host-only tooling and audit log",
+      "source": "AGENTS.md and mission-009 report"
+    }
   },
   "required_firmware": {
     "status": "UNKNOWN",

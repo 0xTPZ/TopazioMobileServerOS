@@ -105,6 +105,19 @@
     "recovery_readiness": "BLOCKED",
     "write_device": false
   },
+  "mission_009_stock_forensics": {
+    "report": "devices/xiaomi-sea/firmware-forensics/mission-009.json",
+    "status": "PARTIAL",
+    "selected_build": "OS2.0.209.0.VHZMIXM",
+    "package_sha256": null,
+    "boot_component_sha256": "c8d9d33cc301d5b59c2443481dca139ce569635d70094833ad8f5b0095ad2af3",
+    "stock_dtb": "UNKNOWN",
+    "stock_dtbo": "UNKNOWN",
+    "avb": "UNKNOWN",
+    "partition_layout": "UNKNOWN",
+    "recovery_readiness": "BLOCKED",
+    "write_device": false
+  },
   "patch_order": [],
   "artifact_state_vocabulary": [
     "SOURCE_ONLY",

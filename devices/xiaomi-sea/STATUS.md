@@ -18,6 +18,7 @@
 | boot chain/partições | UNKNOWN/BLOCKED | layout A/B/dynamic, AVB e imagens stock não observados |
 | artefato de boot Topazio | BLOCKED | pipeline exige kernel/DTB/boot image reais e hashes |
 | instalação segura | BLOCKED | recovery e transporte não comprovados |
+| firmware stock / forensics | PARTIAL | `sea` boot component OS2.0.209 Global analisado offline; pacote completo, DTB/DTBO, AVB e layout ainda desconhecidos |
 
 O pacote permanece em `RESEARCH` até haver evidência reproduzível de boot e
 serviços mínimos com recuperação.
@@ -44,3 +45,10 @@ hashes, tamanhos, patches e procedimento validados por
 ao candidato público `mt6781.dtb`, mas a ausência do `cust.dtsi` oficial e do
 base stock impede `DT_SEA_CANDIDATE`. Recovery continua `BLOCKED` e nenhuma
 operação de escrita foi executada.
+
+Missão 009 confirmou offline um `boot.img` stock correspondente ao `sea`
+Global OS2.0.209.0.VHZMIXM por fingerprint, build property e hash local. O
+header é v3, o kernel é `6.6.58-android15` e o ramdisk é CPIO comprimido em
+LZ4 Android. Como o pacote completo não foi versionado nem totalmente
+baixado, `vendor_boot`, DTB, DTBO, vbmeta, partições e recuperação continuam
+`UNKNOWN/BLOCKED`; nenhuma operação no telefone foi executada.

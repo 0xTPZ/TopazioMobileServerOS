@@ -20,3 +20,8 @@ DTS em [`device.json`](device.json). A matriz de capacidades está em
 [`capabilities.json`](capabilities.json).
 
 Consulte `HARDWARE.md`, `BOOT.md` e `STATUS.md` para limites e evidências.
+
+A auditoria de firmware stock da Missão 009 está em
+[`firmware-forensics/mission-009.json`](firmware-forensics/mission-009.json).
+Ela contém somente metadados, hashes e conclusões; os arquivos de firmware
+permanecem no cache ignorado do host.

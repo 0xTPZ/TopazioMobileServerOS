@@ -60,3 +60,18 @@ identidade exata, backup verificável, recovery funcional, artefatos assinados
 ou hashados e documentação do comando oficial. Ele deverá ser feito em uma
 unidade dedicada, com rollback comprovado, e a falha deverá deixar o telefone
 no estado stock. Esta missão não consulta nem executa esse caminho.
+
+## Missão 009 — forensics stock
+
+Foi analisado offline um componente `boot.img` do Redmi Note 12S `sea`, build
+Global `OS2.0.209.0.VHZMIXM`, obtido por espelho com caminho upstream oficial.
+O componente foi confirmado por fingerprint `Redmi/sea_global/sea`, header
+Android v3, kernel GKI `6.6.58-android15` e ramdisk CPIO/LZ4. O relatório
+machine-readable está em
+[`devices/xiaomi-sea/firmware-forensics/mission-009.json`](../devices/xiaomi-sea/firmware-forensics/mission-009.json).
+
+Isso não confirma o layout completo: o pacote integral não foi versionado, e
+`vendor_boot`, DTB/DTBO, vbmeta, super e os metadados A/B continuam
+desconhecidos. O Boot Header v3 não contém o DTB; a localização stock exata
+precisa ser confirmada no `vendor_boot` ou em outro container. Recovery e
+qualquer escrita física permanecem bloqueados.

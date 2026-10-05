@@ -1,0 +1,229 @@
+{
+  "schema": 1,
+  "mission": 9,
+  "device": "xiaomi-sea",
+  "status": "PARTIAL",
+  "pass_gate": false,
+  "decision": {
+    "highest_device_tree_level": "DT_STRUCTURALLY_VALID",
+    "dt_sea_candidate": false,
+    "recovery_readiness": "BLOCKED",
+    "phone_writes_performed": false,
+    "phone_interaction": "NONE",
+    "reason": "A matching stock boot component was forensically parsed, but the complete stock package, vendor_boot/DTB, DTBO, vbmeta and partition metadata were not acquired."
+  },
+  "firmware_selection": {
+    "selected_build": {
+      "model": "Redmi Note 12S",
+      "codename": "sea",
+      "region": "Global",
+      "version": "OS2.0.209.0.VHZMIXM",
+      "android_version": "15",
+      "package_release_date": "2025-12-22",
+      "package_type": "Recovery full package plus independently retrieved boot component",
+      "confidence": "HIGH_FOR_CODENAME_AND_BUILD",
+      "evidence": [
+        "boot image ramdisk identifies device=sea and fingerprint Redmi/sea_global/sea",
+        "boot image incremental property is OS2.0.209.0.VHZMIXM",
+        "published package metadata names Redmi Note 12S (sea), Android 15 and Global"
+      ],
+      "source": "https://xmfirmwareupdater.com/hyperos/sea/stable/OS2.0.209.0.VHZMIXM/"
+    },
+    "latest_discovered_variants": [
+      {"region": "Global", "version": "OS2.0.212.0.VHZMIXM", "android": "15", "type": "Recovery/Fastboot"},
+      {"region": "EEA", "version": "OS2.0.211.0.VHZEUXM", "android": "15", "type": "Recovery/Fastboot"},
+      {"region": "Russia", "version": "OS2.0.209.0.VHZRUXM", "android": "15", "type": "Recovery/Fastboot"},
+      {"region": "Turkey", "version": "OS2.0.208.0.VHZTRXM", "android": "15", "type": "Recovery/Fastboot"},
+      {"region": "Taiwan", "version": "OS2.0.209.0.VHZTWXM", "android": "15", "type": "Recovery/Fastboot"}
+    ]
+  },
+  "source_trust": {
+    "official_package_metadata": {
+      "classification": "OFFICIAL_METADATA",
+      "recovery_url": "https://bigota.d.miui.com/OS2.0.209.0.VHZMIXM/sea_global-ota_full-OS2.0.209.0.VHZMIXM-user-15.0-e802b6d430.zip",
+      "recovery_published_md5": "e802b6d430a645dc6e3115983fe8d400",
+      "fastboot_url": "https://ultimateota.d.miui.com/OS2.0.209.0.VHZMIXM/sea_global_images_OS2.0.209.0.VHZMIXM_20251222.0000.00_15.0_global_2604685251.tgz",
+      "fastboot_published_md5": "2604685251ddfe0a7bd4cf908549f2db",
+      "package_sha256": null,
+      "package_sha256_status": "NOT_COMPUTED_FULL_PACKAGE_NOT_DOWNLOADED",
+      "confidence": "HIGH_FOR_PUBLIC_METADATA",
+      "evidence": ["published Xiaomi CDN URLs and independent firmware indexes"],
+      "source": "https://mirom.ezbox.idv.tw/en/phone/sea/"
+    },
+    "boot_component": {
+      "classification": "MIRROR_WITH_OFFICIAL_UPSTREAM_PATH",
+      "upstream_path": "ultimateota.d.miui.com/OS2.0.209.0.VHZMIXM/sea_global-ota_full-OS2.0.209.0.VHZMIXM-user-15.0-e802b6d430/boot.img",
+      "acquisition_url": "https://huggingface.co/datasets/offici5l/fcetool/resolve/c2ca3bda5661bcac211b2fb0e91949061d459db9/ultimateota.d.miui.com/OS2.0.209.0.VHZMIXM/sea_global-ota_full-OS2.0.209.0.VHZMIXM-user-15.0-e802b6d430/boot.img",
+      "mirror_commit": "c2ca3bda5661bcac211b2fb0e91949061d459db9",
+      "size_bytes": 67108864,
+      "sha256": "c8d9d33cc301d5b59c2443481dca139ce569635d70094833ad8f5b0095ad2af3",
+      "mirror_sha256_verified": true,
+      "license_status": "PROPRIETARY_FIRMWARE_DO_NOT_VERSION",
+      "confidence": "HIGH_FOR_THIS_BUILD_COMPONENT",
+      "evidence": [
+        "local SHA-256 equals the mirror X-Linked-ETag",
+        "mirror path names the official ultimateota source and exact sea package",
+        "boot ramdisk contains the matching sea fingerprint"
+      ],
+      "source": "https://huggingface.co/datasets/offici5l/fcetool/blob/c2ca3bda5661bcac211b2fb0e91949061d459db9/.gitattributes"
+    }
+  },
+  "package_inventory": {
+    "full_package_status": "NOT_DOWNLOADED",
+    "reason": "Official Fastboot archive is approximately 6.9 GB; direct CDN transfer was rate-limited. No proprietary package was committed.",
+    "items": {
+      "boot.img": "PRESENT_OBSERVED_AND_PARSED",
+      "vendor_boot.img": "UNKNOWN_NOT_OBSERVED",
+      "init_boot.img": "UNKNOWN_NOT_OBSERVED",
+      "dtbo.img": "UNKNOWN_NOT_OBSERVED",
+      "vbmeta.img": "UNKNOWN_NOT_OBSERVED",
+      "vbmeta_system.img": "UNKNOWN_NOT_OBSERVED",
+      "vbmeta_vendor.img": "UNKNOWN_NOT_OBSERVED",
+      "super.img": "UNKNOWN_NOT_OBSERVED",
+      "system.img": "UNKNOWN_NOT_OBSERVED",
+      "vendor.img": "UNKNOWN_NOT_OBSERVED",
+      "product.img": "UNKNOWN_NOT_OBSERVED",
+      "odm.img": "UNKNOWN_NOT_OBSERVED",
+      "recovery.img": "UNKNOWN_NOT_OBSERVED",
+      "preloader": "UNKNOWN_NOT_OBSERVED",
+      "lk": "UNKNOWN_NOT_OBSERVED",
+      "scatter": "UNKNOWN_NOT_OBSERVED",
+      "partition_tables": "UNKNOWN_NOT_OBSERVED",
+      "payload.bin": "UNKNOWN_NOT_OBSERVED"
+    }
+  },
+  "boot_image": {
+    "status": "CONFIRMED_FROM_STOCK_COMPONENT",
+    "file_size_bytes": 67108864,
+    "sha256": "c8d9d33cc301d5b59c2443481dca139ce569635d70094833ad8f5b0095ad2af3",
+    "header": {
+      "magic": "ANDROID!",
+      "version": 3,
+      "page_size": 4096,
+      "header_size": 1580,
+      "os_version": "15.0.0",
+      "os_version_encoded": "0x1e00019c",
+      "security_patch_or_build_date": "2025-12-22 from ramdisk build metadata"
+    },
+    "kernel": {
+      "offset": 4096,
+      "size_bytes": 14688235,
+      "sha256": "0bdcf6159c48f111d19641721b97d30de2bf24c33910cc49a8ca1789aacc1ca9",
+      "compression": "gzip",
+      "uncompressed_size_bytes": 36841984,
+      "uncompressed_sha256": "3c5a8c5695fb2323e30ba84a240431faf125225bab1d57cc150508b70d311619",
+      "linux_version": "6.6.58-android15-8-g19e0e8cef6b2-4k",
+      "toolchain_string": "Android clang 18.0.0 / LLD 18.0.0"
+    },
+    "ramdisk": {
+      "offset": 14692352,
+      "size_bytes": 2630888,
+      "sha256": "046849410f33acafc0f9a72e079dc07739ac1ce6478532a90f8fc0c6e7c7b0d6",
+      "compression": "lz4-android-legacy",
+      "uncompressed_size_bytes": 4849408,
+      "uncompressed_sha256": "260d0f739fc029152d78bb05732f82fcfa39127085bda80db2fc8690b4a871ab",
+      "format": "cpio-newc",
+      "entry_count": 18,
+      "fstab_paths": [],
+      "build_fingerprint": "Redmi/sea_global/sea:15/AP3A.240905.015.A2/OS2.0.209.0.VHZMIXM:user/release-keys",
+      "bootimage_device": "sea",
+      "bootimage_model": "sea",
+      "bootimage_name": "sea_global"
+    },
+    "second_stage": "ABSENT_IN_HEADER",
+    "cmdline": "NOT_PRESENT_IN_BOOT_V3_HEADER",
+    "board": "NOT_PRESENT_IN_BOOT_V3_HEADER",
+    "dtb": {
+      "status": "NOT_PRESENT_IN_BOOT_V3_HEADER",
+      "expected_location": "vendor_boot_or_separate_container",
+      "stock_location_confirmed": false
+    }
+  },
+  "stock_kernel_comparison": {
+    "status": "CONFIRMED_DIFFERENT_KERNEL_CONTRACT",
+    "stock": {
+      "architecture": "arm64",
+      "kernel": "6.6.58-android15-8-g19e0e8cef6b2-4k",
+      "compressed_size_bytes": 14688235,
+      "uncompressed_size_bytes": 36841984,
+      "gki_or_android15_evidence": "android15 and Kleaf build string"
+    },
+    "topazio_baseline": {
+      "baseline_id": "SEA_SERVER_MINIMAL_KERNEL_001",
+      "kernel_version": "4.19.191",
+      "image_size_bytes": 27455504,
+      "image_gz_size_bytes": 11482091,
+      "status": "BUILT_UNTESTED"
+    },
+    "comparison": "NOT_EQUAL_AND_NOT_DROP_IN_COMPATIBLE",
+    "boot_contract_finding": "The analyzed stock build expects an Android 15/GKI-era boot contract; the Mission 007 vendor 4.19 kernel cannot be substituted without a new boot and module contract."
+  },
+  "partition_layout": {
+    "status": "UNKNOWN",
+    "ab": "UNKNOWN",
+    "dynamic_partitions": "UNKNOWN",
+    "super": "UNKNOWN",
+    "entries": [],
+    "evidence_limit": "Only boot.img was observed; no partition metadata, fastboot script, super metadata or device-side read-only query was used."
+  },
+  "dt_forensics": {
+    "stock_dtb": "NOT_OBSERVED",
+    "stock_dtbo": "NOT_OBSERVED",
+    "sea_dtbo_identification": "NOT_POSSIBLE",
+    "stock_vs_public_dt": "BLOCKED_NO_STOCK_DTB_OR_DTBO",
+    "mission_008_merged_dt": "Still structurally valid only; no stock semantic comparison was possible."
+  },
+  "hardware_coverage": {
+    "ram": {"platform_layout": "UNKNOWN", "unit_ram_size": "UNKNOWN", "confidence": "LOW"},
+    "reserved_memory": {"status": "UNKNOWN_FROM_STOCK", "confidence": "LOW"},
+    "ufs": {"controller": "UNKNOWN_FROM_STOCK", "phy": "UNKNOWN_FROM_STOCK", "confidence": "LOW"},
+    "usb": {"status": "UNKNOWN_FROM_STOCK", "confidence": "LOW"},
+    "wifi": {"status": "UNKNOWN_FROM_STOCK", "firmware": "UNKNOWN", "confidence": "LOW"},
+    "power": {"status": "UNKNOWN_FROM_STOCK", "confidence": "LOW"},
+    "thermal": {"status": "UNKNOWN_FROM_STOCK", "confidence": "LOW"},
+    "display": {"status": "UNKNOWN_FROM_STOCK", "confidence": "LOW"},
+    "touch": {"status": "UNKNOWN_FROM_STOCK", "firmware": "PROPRIETARY_OR_NOT_OBSERVED", "confidence": "LOW"}
+  },
+  "avb": {
+    "status": "UNKNOWN",
+    "vbmeta": "NOT_OBSERVED",
+    "algorithm": "UNKNOWN",
+    "rollback_indexes": "UNKNOWN",
+    "descriptors": "UNKNOWN",
+    "chain_partitions": "UNKNOWN",
+    "policy": "No AVB removal, verity bypass or key modification performed."
+  },
+  "vendor_boot_init_boot": {
+    "vendor_boot": {"status": "UNKNOWN_NOT_OBSERVED", "expected_by_v3_boot_contract": true},
+    "init_boot": {"status": "UNKNOWN_NOT_OBSERVED"},
+    "vendor_ramdisk": "UNKNOWN",
+    "modules": "UNKNOWN",
+    "fstab": "NOT_PRESENT_IN_ANALYZED_GENERIC_RAMDISK"
+  },
+  "temporary_boot": {
+    "status": "UNKNOWN",
+    "evidence": "No exact unit bootloader documentation or read-only bootloader capability evidence was obtained.",
+    "executed": false
+  },
+  "recovery_evidence": {
+    "stock_package_metadata_available": true,
+    "component_hash_available": true,
+    "full_package_sha256_available": false,
+    "required_recovery_artifacts_complete": false,
+    "partition_layout_known": false,
+    "rollback_source_known": false,
+    "readiness": "BLOCKED"
+  },
+  "toolkit": {
+    "cli": "host-tools/firmware_forensics.py",
+    "package": "host-tools/firmware_forensics/",
+    "capabilities": ["package inventory", "Android boot header", "DTBO table", "AVB vbmeta header", "hashing", "provenance"],
+    "device_transport_integration": false,
+    "proprietary_files_versioned": false
+  },
+  "next_blocker": {
+    "priority": "HIGH",
+    "item": "Acquire or independently verify the complete matching stock package's vendor_boot/DTB, DTBO and vbmeta/partition metadata without device extraction.",
+    "does_not_authorize_phone_write": true
+  }
+}

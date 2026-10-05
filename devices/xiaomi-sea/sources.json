@@ -180,6 +180,43 @@
         "documentation describes generic Halium/Droidian kernel builds",
         "no sea-specific device support or missing vendor files were found"
       ]
+    },
+    {
+      "id": "sea-stock-firmware-os209-global",
+      "classification": "OFFICIAL",
+      "kind": "stock-firmware-metadata",
+      "owner": "Xiaomi",
+      "repository": "https://bigota.d.miui.com/OS2.0.209.0.VHZMIXM/",
+      "branch": "OS2.0.209.0.VHZMIXM",
+      "commit": null,
+      "license": "Proprietary firmware; not redistributed",
+      "license_status": "DO_NOT_VERSION",
+      "role": "official package metadata and upstream path for offline boot component forensics",
+      "evidence": [
+        "published sea Global recovery and fastboot package names and MD5 values",
+        "mirrored boot component carries the official ultimateota upstream path",
+        "full package SHA-256 was not computed because the full archive was not downloaded"
+      ]
+    },
+    {
+      "id": "sea-stock-boot-os209-global-mirror",
+      "classification": "COMMUNITY_VERIFIED",
+      "kind": "stock-boot-component-mirror",
+      "owner": "offici5l/fcetool",
+      "repository": "https://huggingface.co/datasets/offici5l/fcetool",
+      "branch": "c2ca3bda5661bcac211b2fb0e91949061d459db9",
+      "commit": "c2ca3bda5661bcac211b2fb0e91949061d459db9",
+      "license": "Proprietary firmware mirror; not redistributed",
+      "license_status": "DO_NOT_VERSION",
+      "role": "host-only source of the verified OS2.0.209 sea boot component",
+      "sha256": "c8d9d33cc301d5b59c2443481dca139ce569635d70094833ad8f5b0095ad2af3",
+      "evidence": [
+        "path names ultimateota.d.miui.com and exact sea package",
+        "local file is 67108864 bytes",
+        "local SHA-256 equals the mirror X-Linked-ETag",
+        "ramdisk build fingerprint identifies Redmi/sea_global/sea"
+      ],
+      "redistribution": "DO_NOT_REDISTRIBUTE"
     }
   ],
   "components": [

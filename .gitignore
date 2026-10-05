@@ -1,6 +1,7 @@
 # Generated build output and local experiments
 build/out/
 build/artifacts/
+build/vendor-cache/
 *.log
 *.tmp
 *.swp

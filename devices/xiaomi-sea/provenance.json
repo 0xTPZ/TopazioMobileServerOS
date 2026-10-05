@@ -61,6 +61,25 @@
       "license": "Apache-2.0 as declared by the tree",
       "redistribution": "public-source",
       "use": "research only for boot offsets, partition declarations and proprietary dependency inventory"
+    },
+    {
+      "name": "Xiaomi sea OS2.0.209 stock package metadata",
+      "origin": "official metadata / Xiaomi CDN",
+      "url": "https://bigota.d.miui.com/OS2.0.209.0.VHZMIXM/",
+      "ref": "OS2.0.209.0.VHZMIXM",
+      "license": "Proprietary firmware; not redistributed",
+      "redistribution": "metadata-only",
+      "use": "stock package identity, published MD5 and upstream boot-component path"
+    },
+    {
+      "name": "sea OS2.0.209 boot component mirror",
+      "origin": "community mirror of official ultimateota path",
+      "url": "https://huggingface.co/datasets/offici5l/fcetool",
+      "ref": "c2ca3bda5661bcac211b2fb0e91949061d459db9",
+      "license": "Proprietary firmware; not redistributed",
+      "redistribution": "host-cache-only",
+      "use": "offline Boot Header, kernel and ramdisk forensics",
+      "sha256": "c8d9d33cc301d5b59c2443481dca139ce569635d70094833ad8f5b0095ad2af3"
     }
   ],
   "policy": {
@@ -75,6 +94,15 @@
         "size": 67869,
         "sha256": "34febe33284575825169a1b46f6f438491bd5f7ffd7931ed44dc746f0f1b01ab",
         "mixed_provenance": true,
+        "installable": false
+      },
+      {
+        "name": "sea-stock-boot-os209-global",
+        "status": "EXTERNAL_CACHE_ONLY / FORENSICS_ONLY",
+        "size": 67108864,
+        "sha256": "c8d9d33cc301d5b59c2443481dca139ce569635d70094833ad8f5b0095ad2af3",
+        "proprietary": true,
+        "versioned": false,
         "installable": false
       }
     ]
