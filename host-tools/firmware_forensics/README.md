@@ -20,6 +20,8 @@ python host-tools/firmware_forensics.py payload <payload.bin>
 python host-tools/firmware_forensics/acquire.py <url> <cache/package> --provenance <cache/package.json>
 python host-tools/firmware_forensics/acquire.py <url> <cache/range> --range-start 0 --range-end 1048575
 python host-tools/firmware_forensics/acquire.py <url> <cache/package> --resume
+python -m device_inventory --dry-run
+python -m device_inventory --report devices/xiaomi-sea/unit-observation.json --raw-dir <external-temp-dir>
 ```
 
 Extraction output must remain in an ignored host cache. Proprietary firmware is
@@ -33,5 +35,13 @@ a public candidate to stock identity.
 
 Future device inventory commands are documented in
 `docs/SEA-READONLY-INVENTORY-PLAN.md` and statically classified by
-`host-tools/device_command_safety.py`. No command in that plan is executed by
-this toolkit.
+`host-tools/device_command_safety.py`. The firmware-forensics commands do not
+execute any command in that plan; the separate inventory CLI is the only
+component that can run the allowlisted probes.
+
+The physical inventory package is fail-closed: it runs only the allowlisted
+read-only ADB commands and specific fastboot `getvar` queries. `fastboot
+getvar all`, reboot, boot, unlock, writes, raw reads and dumps are rejected or
+never planned. Its report generator removes device identifiers and network
+secrets before persistence; raw output, when available, is kept only in an
+external temporary directory.

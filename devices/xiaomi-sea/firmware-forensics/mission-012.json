@@ -1,0 +1,133 @@
+{
+  "schema": 1,
+  "mission": 12,
+  "device": "xiaomi-sea",
+  "status": "BLOCKED",
+  "pass_gate": false,
+  "title": "SEA physical read-only inventory",
+  "decision": {
+    "result": "PHYSICAL_TRANSPORT_BLOCKED",
+    "reason": "The host audit found neither adb nor fastboot executable in PATH and no Android/Xiaomi/MediaTek PnP device. The fail-closed collector therefore did not execute any phone command.",
+    "phone_writes_performed": false,
+    "phone_state_changed": false,
+    "unlock_attempted": false,
+    "reboot_attempted": false,
+    "raw_partition_reads": false,
+    "mission_013_started": false
+  },
+  "host_audit": {
+    "captured_at": "2026-10-05T14:59:23.8516537Z",
+    "windows": {"caption":"Microsoft Windows 10 Enterprise","version":"10.0.19045","build":"19045","architecture":"64-bit"},
+    "adb_version": "COMMAND_NOT_FOUND",
+    "fastboot_version": "COMMAND_NOT_FOUND",
+    "adb_executable_found": false,
+    "fastboot_executable_found": false,
+    "pnp": {
+      "present_filtered_entries": 17,
+      "android_xiaomi_mediatek_match": 0,
+      "summary": "Only generic USB/HID/root-hub devices were visible; no Android, ADB, fastboot, Xiaomi or MediaTek device was identified."
+    },
+    "relevant_driver_changes": false,
+    "automatic_driver_installation": false,
+    "raw_audit_external_and_not_versioned": true
+  },
+  "dry_run": {
+    "status": "PASS",
+    "tool": "host-tools/device_inventory",
+    "commands_planned": 29,
+    "commands_classified_read_only_safe": 29,
+    "commands_executed_during_dry_run": 0,
+    "fastboot_getvar_all": "UNKNOWN_AND_NOT_PLANNED"
+  },
+  "transport": {
+    "adb": {"status":"ABSENT","reason":"adb executable not found; no transport probe was possible","authorization":"UNKNOWN","driver":"NOT_APPLICABLE_TOOL_MISSING"},
+    "fastboot": {"status":"ABSENT","reason":"fastboot executable not found; no transport probe was possible","driver":"NOT_APPLICABLE_TOOL_MISSING"},
+    "windows_usb": "GENERIC_USB_ONLY"
+  },
+  "unit_observation": {
+    "report": "devices/xiaomi-sea/unit-observation.json",
+    "report_type": "SANITIZED_UNIT_OBSERVATION",
+    "captured_at": "2026-10-05T15:07:39.135226+00:00",
+    "sanitization": "APPLIED",
+    "pii_persisted": false,
+    "raw_device_output_generated": false,
+    "phone_command_execution_count": 0
+  },
+  "unit_identity": {
+    "manufacturer": "UNKNOWN",
+    "model": "UNKNOWN",
+    "codename": "UNKNOWN",
+    "identity_result": "PHYSICAL_IDENTITY_UNAVAILABLE",
+    "expected_device": "Xiaomi Redmi Note 12S / sea"
+  },
+  "installed_software": {
+    "build": "UNKNOWN",
+    "android_version": "UNKNOWN",
+    "security_patch": "UNKNOWN",
+    "ota_comparison": "UNKNOWN",
+    "reference_ota": "OS2.0.209.0.VHZMIXM"
+  },
+  "kernel": {
+    "release": "UNKNOWN",
+    "architecture": "UNKNOWN",
+    "unit_matches_stock_kernel": "UNKNOWN"
+  },
+  "ram": {"unit_ram_total":"UNKNOWN","available":"UNKNOWN","confidence":"UNKNOWN"},
+  "storage": {"capacity":"UNKNOWN","mounts":"UNKNOWN","confidence":"UNKNOWN"},
+  "ufs": {"vendor":"UNKNOWN","model":"UNKNOWN","revision":"UNKNOWN","confidence":"UNKNOWN"},
+  "a_b": {"unit_confirmed":"UNKNOWN","current_slot":"UNKNOWN","ota_reference":"A/B and Virtual A/B confirmed only by stock OTA"},
+  "partition_names": {"value":[],"status":"NOT_COLLECTED","raw_block_devices_opened":false,"hashes_computed":false},
+  "bootloader_state": "UNKNOWN",
+  "verified_boot_state": "UNKNOWN",
+  "dt_metadata": {"status":"BLOCKED","compatible":"UNKNOWN","model":"UNKNOWN","base_dtb_origin":"UNKNOWN"},
+  "modules": {"status":"NOT_COLLECTED","loaded_critical_modules":"UNKNOWN","module_load_or_unload":false},
+  "hardware_metadata": {
+    "wifi_driver": "UNKNOWN",
+    "usb": "UNKNOWN",
+    "power": "UNKNOWN",
+    "thermal": "UNKNOWN",
+    "display": "UNKNOWN",
+    "touch": "UNKNOWN"
+  },
+  "sanitization": {
+    "status": "APPLIED",
+    "sanitized_report": "devices/xiaomi-sea/unit-observation.json",
+    "removed_or_never_persisted": ["serial number", "IMEI", "MEID", "MAC", "Android ID", "accounts", "user names", "tokens", "SSID", "public IP"],
+    "raw_local_temporary": true,
+    "raw_device_output_in_git": false
+  },
+  "audit_log": {
+    "report": "devices/xiaomi-sea/unit-observation.json#audit_log",
+    "executed_phone_commands": 0,
+    "not_executed_reason": "adb/fastboot absent; all 29 records have exit_code null and COMMAND_NOT_FOUND",
+    "sanitized_result_hashes": true
+  },
+  "recovery_readiness": {
+    "status": "BLOCKED",
+    "readiness": "BLOCKED",
+    "reason": "Physical identity, transport, bootloader state and verified unit inventory remain unavailable."
+  },
+  "stock_dtb_origin": {
+    "status": "UNKNOWN",
+    "new_evidence": "NONE",
+    "reason": "No physical DT metadata was exposed because no authorized transport was available."
+  },
+  "tooling": {
+    "package": "host-tools/device_inventory",
+    "components": ["transport detection", "command safety", "ADB read-only collector", "fastboot read-only collector", "sanitizer", "report generator"],
+    "dry_run": true,
+    "automatic_driver_install": false,
+    "writes_to_device": false
+  },
+  "next_hardware_gate": {
+    "status": "PHYSICAL_TRANSPORT_BLOCKED",
+    "exact_blocker": "Provide a normal Windows environment with platform-tools adb/fastboot available and the powered SEA unit visibly connected through a standard USB path; do not install drivers automatically or change the phone state.",
+    "allowed_follow_up": "Repeat only the safe transport detection and then the allowlisted read-only collector.",
+    "forbidden_follow_up": ["reboot to fastboot", "unlock", "driver bypass", "BROM/preloader", "raw reads", "dumps", "writes"]
+  },
+  "previous_state": {
+    "stock_dtb_origin": "UNKNOWN",
+    "recovery_readiness": "BLOCKED",
+    "mission_011_report": "devices/xiaomi-sea/firmware-forensics/mission-011.json"
+  }
+}

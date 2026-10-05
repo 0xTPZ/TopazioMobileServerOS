@@ -153,6 +153,18 @@
     "recovery_readiness": "BLOCKED",
     "write_device": false
   },
+  "mission_012_physical_readonly_inventory": {
+    "report": "devices/xiaomi-sea/firmware-forensics/mission-012.json",
+    "unit_observation": "devices/xiaomi-sea/unit-observation.json",
+    "status": "BLOCKED",
+    "result": "PHYSICAL_TRANSPORT_BLOCKED",
+    "adb": "ABSENT",
+    "fastboot": "ABSENT",
+    "identity": "UNKNOWN",
+    "read_only_only": true,
+    "phone_writes": false,
+    "mission_013_started": false
+  },
   "patch_order": [],
   "artifact_state_vocabulary": [
     "SOURCE_ONLY",

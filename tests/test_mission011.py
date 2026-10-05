@@ -129,7 +129,7 @@ class Mission011Tests(unittest.TestCase):
         from device_command_safety import classify_command
 
         self.assertEqual(classify_command("adb shell cat /proc/meminfo"), "READ_ONLY_SAFE")
-        self.assertEqual(classify_command("fastboot getvar all"), "READ_ONLY_SAFE")
+        self.assertEqual(classify_command("fastboot getvar all"), "UNKNOWN")
         self.assertEqual(classify_command("adb reboot bootloader"), "STATE_CHANGING")
         self.assertEqual(classify_command("fastboot flash boot boot.img"), "WRITE")
         self.assertEqual(classify_command("adb shell dd if=x of=y"), "WRITE")

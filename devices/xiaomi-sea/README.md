@@ -31,3 +31,13 @@ A investigação profunda da Missão 010 está em
 Ela confirmou, por metadata e manifest OTA oficial, A/B, Virtual A/B,
 partições dinâmicas, `dtbo` e AVB. O pacote integral e o base DTB permanecem
 fora do repositório; `STOCK_MERGED_DT` e recovery continuam não prontos.
+
+A Missão 011 registrou o contrato Android 15 em
+[`firmware-forensics/mission-011.json`](firmware-forensics/mission-011.json).
+
+A Missão 012 realizou o audit do host e tentou o inventário físico em modo
+fail-closed. Como `adb` e `fastboot` não estavam disponíveis e nenhum Android
+foi detectado pelo PnP, nenhum comando foi executado no telefone. O resultado
+sanitizado está em
+[`firmware-forensics/mission-012.json`](firmware-forensics/mission-012.json)
+e [`unit-observation.json`](unit-observation.json).

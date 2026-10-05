@@ -62,3 +62,18 @@ integral não foi baixado por limitação de taxa; `STOCK_MERGED_DT` continua
 bloqueado porque o base DTB não apareceu no payload. Recovery avançou para
 `NOT_READY`, sem qualquer escrita no aparelho. O relatório está em
 [`firmware-forensics/mission-010.json`](firmware-forensics/mission-010.json).
+
+Missão 011 analisou o contrato Android 15: nenhum FDT válido foi encontrado
+no `boot.img`, kernel ou ramdisk; o DTBO stock exige 60 símbolos-base e o
+kernel é `GKI_LIKELY`, sem KMI exato confirmado. `vendor_dlkm` foi reconstruído
+seletivamente como EROFS, com 209 módulos inventariados sem versionar blobs.
+O relatório está em
+[`firmware-forensics/mission-011.json`](firmware-forensics/mission-011.json).
+
+Missão 012 autorizou o primeiro inventário físico, mas o host não possui
+`adb` nem `fastboot` disponíveis e o PnP não mostrou Android/Xiaomi/MediaTek.
+O coletor fail-closed não executou comandos no telefone; o relatório
+sanitizado está em
+[`firmware-forensics/mission-012.json`](firmware-forensics/mission-012.json)
+e [`unit-observation.json`](unit-observation.json). Recovery permanece
+`BLOCKED` e a origem do DTB continua `UNKNOWN`.

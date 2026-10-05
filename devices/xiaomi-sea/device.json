@@ -94,6 +94,8 @@
     "mission_010_stock_package_forensics": "firmware-forensics/mission-010.json",
     "mission_011_stock_dtb_origin_android15_boot_contract": "firmware-forensics/mission-011.json",
     "mission_011_required_base_symbols": "reconstruction/stock-required-base-symbols.json",
+    "mission_012_physical_readonly_inventory": "firmware-forensics/mission-012.json",
+    "mission_012_unit_observation": "unit-observation.json",
     "kernel_reconstruction": "docs/KERNEL-RECONSTRUCTION.md",
     "cust_dtsi": {
       "status": "STRONG_CANDIDATE",
@@ -159,6 +161,17 @@
     "gki_status": "GKI_LIKELY_NOT_CONFIRMED",
     "vendor_dlkm": "EROFS / 209 MODULES / METADATA_ONLY_IN_REPO",
     "dual_kernel_tracks": ["LEGACY_SERVER_MINIMAL_4_19", "CURRENT_STOCK_ANDROID15_6_6"],
+    "recovery_readiness": "BLOCKED",
+    "phone_writes": false
+  },
+  "mission_012_physical_readonly_inventory": {
+    "status": "BLOCKED",
+    "report": "firmware-forensics/mission-012.json",
+    "unit_observation": "unit-observation.json",
+    "result": "PHYSICAL_TRANSPORT_BLOCKED",
+    "adb": "ABSENT",
+    "fastboot": "ABSENT",
+    "physical_identity": "UNKNOWN",
     "recovery_readiness": "BLOCKED",
     "phone_writes": false
   },

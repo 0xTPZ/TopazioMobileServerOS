@@ -144,6 +144,14 @@
         "proprietary": true,
         "versioned": false,
         "installable": false
+      },
+      {
+        "name": "sea-physical-unit-observation",
+        "status": "SANITIZED_REPORT / TRANSPORT_BLOCKED",
+        "report": "unit-observation.json",
+        "raw_device_output_versioned": false,
+        "phone_writes": false,
+        "pii_persisted": false
       }
     ]
   }
