@@ -49,7 +49,7 @@
     },
     "SERVER_MINIMAL": {
       "objective": "Experimental server-oriented kernel profile with modem-dependent paths removed only after dependency audit.",
-      "status": "SOURCE_ONLY",
+      "status": "BUILT_UNTESTED",
       "base_profile": "VENDOR_REFERENCE",
       "generic_profile": "profiles/TOPAZIO_SERVER_PROFILE.json",
       "server_minimal_layer": "devices/xiaomi-sea/server-minimal",
@@ -59,7 +59,9 @@
         "disable CONFIG_MTK_CCCI_DEVICES and its ECCCI/DPMAIF modem path",
         "disable CONFIG_MTK_ECCCI_DRIVER and CONFIG_MTK_ECCCI_C2K",
         "set CONFIG_MTK_MD1_SUPPORT=0",
-        "disable only Focaltech embedded auto-upgrade while retaining touch input"
+        "disable only Focaltech embedded auto-upgrade while retaining touch input",
+        "disable optional MT6357/MT6359 audio jack detection",
+        "correct the BQ2589x exported function prototype without changing charging logic"
       ],
       "critical_capabilities_preserved": [
         "cpu_smp", "ram", "timers", "interrupt_controller", "ufs", "usb",
@@ -71,11 +73,16 @@
           "order": 1,
           "id": "0001-focaltech-no-auto-upgrade",
           "path": "devices/xiaomi-sea/server-minimal/patches/0001-focaltech-no-auto-upgrade.patch"
+        },
+        {
+          "order": 2,
+          "id": "0002-bq2589x-prototype",
+          "path": "devices/xiaomi-sea/server-minimal/patches/0002-bq2589x-prototype.patch"
         }
       ],
       "outputs": {
-        "kernel": "BLOCKED",
-        "modules": "BLOCKED",
+        "kernel": "BUILT_UNTESTED",
+        "modules": "BUILT_UNTESTED",
         "dtb": "BLOCKED",
         "dtbo": "SOURCE_ONLY",
         "boot_image": "BLOCKED"

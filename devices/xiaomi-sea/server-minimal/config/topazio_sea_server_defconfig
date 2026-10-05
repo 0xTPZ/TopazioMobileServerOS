@@ -7,3 +7,8 @@
 # CONFIG_MTK_ECCCI_DRIVER is not set
 # CONFIG_MTK_ECCCI_C2K is not set
 CONFIG_MTK_MD1_SUPPORT=0
+
+# Audio jack/accessory detection is optional for SERVER_MINIMAL and is not a
+# dependency of the MTK/BQ charging path.
+# CONFIG_SND_SOC_MT6357_ACCDET is not set
+# CONFIG_SND_SOC_MT6359_ACCDET is not set

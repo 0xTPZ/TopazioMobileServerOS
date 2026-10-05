@@ -1,10 +1,11 @@
 # `SERVER_MINIMAL` kernel profile — `sea`
 
-Status: `PARTIAL / BLOCKED` at the Mission 006 checkpoint.
+Status: `BUILT_UNTESTED` kernel/modules at the Mission 007 checkpoint;
+target `sea` DTB and boot integration remain `BLOCKED`.
 
-The profile is now a reproducible external layer, but no complete kernel,
-modules or trustworthy `sea` DTB was produced. `VENDOR_REFERENCE` remains
-preserved and `BLOCKED`; its status is not changed by this experiment.
+The profile is now a reproducible external layer with a complete out-of-tree
+kernel build. `VENDOR_REFERENCE` remains preserved and `BLOCKED`; its status is
+not changed by this experiment.
 
 ## Product contract
 
@@ -55,6 +56,32 @@ removes only the compile-time embedded-array include. It does not disable
 `CONFIG_TOUCHSCREEN_FTS`, does not create an empty firmware file, and does not
 redistribute proprietary firmware. This preserves touch operation using the
 controller's existing firmware, subject to future hardware validation.
+
+## Mission 007 compiler gate
+
+The clean reproduction produced the seven recorded errors: six unused-variable
+diagnostics in `mt6357-accdet.c` and one old-style prototype diagnostic in
+`bq2589x_charger.c`. The MT6357 driver is an optional jack/accessory detector;
+its Kconfig entry has no charging dependency and explicitly permits `N` when a
+board has no jack. The paired MT6359 detector exposed the same optional debt in
+the first controlled rebuild, so both ACCDET symbols are disabled locally. The
+audio codec and charging framework are not globally disabled.
+
+The BQ2589x error was fixed with the localized, reversible
+`0002-bq2589x-prototype.patch`. Its exported `get_charger_type()` function is
+consumed through an existing `get_charger_type(void)` declaration in the
+charger-type detector. `CONFIG_MTK_CHARGER=y` and `CONFIG_CHARGER_BQ2589X=y`
+remain enabled, and `bq2589x_charger.o` compiles. No global `-Werror` disable or
+`-Wno-error` workaround was introduced.
+
+The structured gate report is
+[`build-gate.json`](../devices/xiaomi-sea/server-minimal/build-gate.json). The
+final PC/WSL result is `BUILT_UNTESTED`, with `Image` and `Image.gz`,
+`System.map`, `.config`, `Module.symvers` and five modules preserved under the
+ignored build output directory. The two generated DTBs are generic
+`auto2712p1v1` outputs, not evidence for `sea`, so the DTB gate remains
+blocked. The bounded result is `SEA_CONTINUE`; a second device with a public
+target DTB and recovery evidence is recommended.
 
 ## CCCI/DPMAIF decision
 
@@ -107,10 +134,13 @@ Wi-Fi remains enabled in the configuration through MediaTek combo and
 complete and no blob is in this repository. A future build/installer contract
 must acquire a license-compatible artifact externally and record its hash.
 
-The selected compiler remains `clang-r433403b`. A full `Image.gz`/modules
-build was not claimed because the public tree's missing vendor context remains
-material. No kernel size or SHA-256 exists at this checkpoint. `DTBO` remains
-non-installable research/source state, and no `boot.img` is created.
+The selected compiler remains `clang-r433403b`. The final `Image` is 27,455,504
+bytes with SHA-256
+`1913c3c0c659784eb7c6d8204a84923d9d5bc07be5d84e474d2919575e246adc`; the
+`Image.gz` is 11,482,091 bytes with SHA-256
+`d58c2bfdf13c71cd3ed2c505ed767adbb651728cf388394066d23db0205468bd`.
+`DTB` is still blocked, `DTBO` remains non-installable research/source state,
+and no `boot.img` is created.
 
 ## Rootfs hand-off contract
 
@@ -124,4 +154,4 @@ phone in this mission.
 
 Recovery Readiness remains `BLOCKED`. This mission performed no flash, erase,
 format, unlock, partition operation, SP Flash Tool action, payload, exploit or
-bypass, and the project is not ready to write anything to the device.
+bypass. The project is not authorized or ready to write anything to the device.

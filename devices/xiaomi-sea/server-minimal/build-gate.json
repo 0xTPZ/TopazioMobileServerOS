@@ -1,0 +1,248 @@
+{
+  "schema": 1,
+  "mission": 7,
+  "device": "xiaomi-sea",
+  "profile": "SERVER_MINIMAL",
+  "source": {
+    "repository": "https://github.com/MiCode/Xiaomi_Kernel_OpenSource.git",
+    "branch": "sea-t-oss",
+    "commit": "6f6b84e0e2fa8d474db66798a051ec1835257729",
+    "defconfig": "arch/arm64/configs/sea_defconfig"
+  },
+  "toolchain": {
+    "name": "clang-r433403b",
+    "commit": "0625305092d0cfa7e28b0e1b268aff1d3d751eca",
+    "compiler": "clang",
+    "linker": "ld.lld",
+    "status": "VERIFIED"
+  },
+  "reproduction": {
+    "status": "REPRODUCED",
+    "duration_seconds": 911,
+    "make_exit_code": 2,
+    "warning_count": 91,
+    "error_count": 7,
+    "log": "build/out/sea-server-minimal-gate/build.log",
+    "same_source_and_toolchain": true,
+    "global_werror_disabled": false,
+    "errors": [
+      {
+        "id": "M007-E01",
+        "file": "sound/soc/codecs/mt6357-accdet.c",
+        "line": 619,
+        "diagnostic": "variable 'ret' set but not used",
+        "warning_class": "-Wunused-but-set-variable",
+        "category": "D_OPTIONAL_SUBSYSTEM",
+        "root_cause": "C_ACTUAL_SOURCE_BUG",
+        "subsystem": "audio/accessory-detection",
+        "critical_impact": "none for the SERVER_MINIMAL contract; not a charging dependency",
+        "resolution": "CONFIG_SND_SOC_MT6357_ACCDET=n"
+      },
+      {
+        "id": "M007-E02",
+        "file": "sound/soc/codecs/mt6357-accdet.c",
+        "line": 702,
+        "diagnostic": "variable 'ret' set but not used",
+        "warning_class": "-Wunused-but-set-variable",
+        "category": "D_OPTIONAL_SUBSYSTEM",
+        "root_cause": "C_ACTUAL_SOURCE_BUG",
+        "subsystem": "audio/accessory-detection",
+        "critical_impact": "none for the SERVER_MINIMAL contract; not a charging dependency",
+        "resolution": "CONFIG_SND_SOC_MT6357_ACCDET=n"
+      },
+      {
+        "id": "M007-E03",
+        "file": "sound/soc/codecs/mt6357-accdet.c",
+        "line": 1496,
+        "diagnostic": "variable 'eint_sts' set but not used",
+        "warning_class": "-Wunused-but-set-variable",
+        "category": "D_OPTIONAL_SUBSYSTEM",
+        "root_cause": "C_ACTUAL_SOURCE_BUG",
+        "subsystem": "audio/accessory-detection",
+        "critical_impact": "none for the SERVER_MINIMAL contract; not a charging dependency",
+        "resolution": "CONFIG_SND_SOC_MT6357_ACCDET=n"
+      },
+      {
+        "id": "M007-E04",
+        "file": "sound/soc/codecs/mt6357-accdet.c",
+        "line": 1496,
+        "diagnostic": "variable 'acc_sts' set but not used",
+        "warning_class": "-Wunused-but-set-variable",
+        "category": "D_OPTIONAL_SUBSYSTEM",
+        "root_cause": "C_ACTUAL_SOURCE_BUG",
+        "subsystem": "audio/accessory-detection",
+        "critical_impact": "none for the SERVER_MINIMAL contract; not a charging dependency",
+        "resolution": "CONFIG_SND_SOC_MT6357_ACCDET=n"
+      },
+      {
+        "id": "M007-E05",
+        "file": "sound/soc/codecs/mt6357-accdet.c",
+        "line": 1566,
+        "diagnostic": "variable 'ret' set but not used",
+        "warning_class": "-Wunused-but-set-variable",
+        "category": "D_OPTIONAL_SUBSYSTEM",
+        "root_cause": "C_ACTUAL_SOURCE_BUG",
+        "subsystem": "audio/accessory-detection",
+        "critical_impact": "none for the SERVER_MINIMAL contract; not a charging dependency",
+        "resolution": "CONFIG_SND_SOC_MT6357_ACCDET=n"
+      },
+      {
+        "id": "M007-E06",
+        "file": "sound/soc/codecs/mt6357-accdet.c",
+        "line": 1975,
+        "diagnostic": "variable 'res' set but not used",
+        "warning_class": "-Wunused-but-set-variable",
+        "category": "D_OPTIONAL_SUBSYSTEM",
+        "root_cause": "C_ACTUAL_SOURCE_BUG",
+        "subsystem": "audio/accessory-detection",
+        "critical_impact": "none for the SERVER_MINIMAL contract; not a charging dependency",
+        "resolution": "CONFIG_SND_SOC_MT6357_ACCDET=n"
+      },
+      {
+        "id": "M007-E07",
+        "file": "drivers/power/supply/mediatek/charger/bq2589x_charger.c",
+        "line": 117,
+        "diagnostic": "old-style function definition is not preceded by a prototype",
+        "warning_class": "-Wstrict-prototypes",
+        "category": "E_CRITICAL_SUBSYSTEM",
+        "root_cause": "C_ACTUAL_SOURCE_BUG",
+        "subsystem": "power/charging",
+        "critical_impact": "critical; BQ2589x is selected and called by the charger type detector",
+        "resolution": "localized TPZ-M007-002 prototype correction; charging logic unchanged"
+      }
+    ]
+  },
+  "iterations": [
+    {
+      "id": "M007-ITER-1",
+      "changes": ["TPZ-M007-002", "CONFIG_SND_SOC_MT6357_ACCDET=n"],
+      "duration_seconds": 1228,
+      "make_exit_code": 2,
+      "warning_count": 114,
+      "error_count": 7,
+      "new_blocker_error_occurrences": 7,
+      "new_blockers": [
+        {
+          "subsystem": "audio/accessory-detection",
+          "file": "sound/soc/codecs/mt6359-accdet.c",
+          "category": "D_OPTIONAL_SUBSYSTEM",
+          "resolution": "CONFIG_SND_SOC_MT6359_ACCDET=n"
+        }
+      ]
+    },
+    {
+      "id": "M007-ITER-2",
+      "changes": ["TPZ-M007-002", "CONFIG_SND_SOC_MT6357_ACCDET=n", "CONFIG_SND_SOC_MT6359_ACCDET=n"],
+      "duration_seconds": 2765,
+      "make_exit_code": 0,
+      "warning_count": 114,
+      "error_count": 0,
+      "status": "BUILT_UNTESTED",
+      "artifact_note": "green build verified; temporary /tmp outputs were superseded by the final persistent run"
+    },
+    {
+      "id": "M007-FINAL",
+      "changes": ["TPZ-M007-002", "CONFIG_SND_SOC_MT6357_ACCDET=n", "CONFIG_SND_SOC_MT6359_ACCDET=n"],
+      "duration_seconds": 1750,
+      "make_exit_code": 0,
+      "warning_count": 114,
+      "error_count": 0,
+      "status": "BUILT_UNTESTED",
+      "manifest": "build/out/sea-server-minimal-gate-007-final/manifest.json",
+      "log": "build/out/sea-server-minimal-gate-007-final/build.log"
+    }
+  ],
+  "new_blocker_count": 1,
+  "new_blocker_policy": {
+    "limit": 25,
+    "distinct_subsystems_counted": 1,
+    "decision": "below_limit; continue"
+  },
+  "patches": [
+    {
+      "id": "TPZ-M006-001",
+      "file": "devices/xiaomi-sea/server-minimal/patches/0001-focaltech-no-auto-upgrade.patch",
+      "problem": "unavailable embedded fw_sample.i blocks the optional boot-time firmware auto-upgrade path",
+      "category": "D_OPTIONAL_SUBSYSTEM",
+      "justification": "SERVER_MINIMAL preserves touch input and does not require boot-time controller reflashing",
+      "source_evidence": "Mission 006 Focaltech audit and pinned Xiaomi source",
+      "impact": "focaltech_core/input remains enabled; only automatic firmware upgrade is disabled",
+      "risk": "medium; existing controller firmware must already be usable",
+      "subsystem": "input/touchscreen",
+      "reversibility": "remove patch and restore the original firmware context",
+      "sha256": "412e87de8e789fca7a12c56da30725bd7886f40bebff143aef2968a58134ce72"
+    },
+    {
+      "id": "TPZ-M007-002",
+      "file": "devices/xiaomi-sea/server-minimal/patches/0002-bq2589x-prototype.patch",
+      "problem": "Clang -Wstrict-prototypes rejects the old-style exported function definition",
+      "category": "E_CRITICAL_SUBSYSTEM",
+      "root_cause": "C_ACTUAL_SOURCE_BUG",
+      "justification": "the declaration in mtk_chg_type_det.c already uses get_charger_type(void); only the definition is corrected",
+      "source_evidence": "Mission 007 reproduction and pinned Xiaomi source lines 117 and 562",
+      "impact": "BQ2589x object compiles while charging API and logic remain unchanged",
+      "risk": "low; prototype-only correction with matching consumers",
+      "subsystem": "power/charging",
+      "reversibility": "remove patch",
+      "sha256": "dc4101df985d8a81856ec0406a8f170f573f0f4fda319ca52b548096bea2f0fc"
+    }
+  ],
+  "configuration": {
+    "fragment": "devices/xiaomi-sea/server-minimal/config/topazio_sea_server_defconfig",
+    "fragment_sha256": "5bbd1383cf6d93a4f88e0d0f06dc25f92defe5d833d53c8ae9e39e21d80604ec",
+    "explicit_changes": [
+      "CONFIG_MTK_CCCI_DEVICES=n",
+      "CONFIG_MTK_ECCCI_DRIVER=n",
+      "CONFIG_MTK_ECCCI_C2K=n",
+      "CONFIG_MTK_MD1_SUPPORT=0",
+      "CONFIG_SND_SOC_MT6357_ACCDET=n",
+      "CONFIG_SND_SOC_MT6359_ACCDET=n"
+    ],
+    "charging_preserved": ["CONFIG_MTK_CHARGER=y", "CONFIG_CHARGER_BQ2589X=y"],
+    "global_werror_disabled": false,
+    "localized_warning_flag": "CFLAGS_KERNEL=-Wno-unused-but-set-variable (pre-existing; not -Wno-error and not used to resolve the gate errors)"
+  },
+  "critical_capability_audit": {
+    "ufs": {"status": "CONFIGURED", "symbols": ["CONFIG_SCSI_UFSHCD=y", "CONFIG_SCSI_UFSHCD_PLATFORM=y", "CONFIG_SCSI_UFS_MEDIATEK=y"]},
+    "usb": {"status": "CONFIGURED", "symbols": ["CONFIG_USB_MTK_HDRC=y", "CONFIG_USB_MTK_OTG=y", "CONFIG_USB_USBNET=y"]},
+    "wifi": {"status": "CONFIGURED_BUT_FIRMWARE_CONTEXT_OPEN", "symbols": ["CONFIG_MTK_COMBO_WIFI=y", "CONFIG_CFG80211=y"]},
+    "charging": {"status": "COMPILED_PRESERVED", "symbols": ["CONFIG_MTK_CHARGER=y", "CONFIG_CHARGER_BQ2589X=y"], "object": "drivers/power/supply/mediatek/charger/bq2589x_charger.o"},
+    "thermal": {"status": "CONFIGURED", "symbols": ["CONFIG_THERMAL=y", "CONFIG_CPU_THERMAL=y"]},
+    "display": {"status": "CONFIGURED", "symbols": ["CONFIG_DRM=y", "CONFIG_DRM_MEDIATEK=y"]},
+    "touch": {"status": "CONFIGURED_AND_COMPILED", "symbols": ["CONFIG_TOUCHSCREEN_FTS=y"], "object": "drivers/input/touchscreen/mediatek/ft3418_i2c/focaltech_flash.o"}
+  },
+  "artifacts": {
+    "state": "BUILT_UNTESTED",
+    "image": {"path": "build/out/sea-server-minimal-gate-007-final/artifacts/boot/Image", "size_bytes": 27455504, "sha256": "1913c3c0c659784eb7c6d8204a84923d9d5bc07be5d84e474d2919575e246adc"},
+    "image_gz": {"path": "build/out/sea-server-minimal-gate-007-final/artifacts/boot/Image.gz", "size_bytes": 11482091, "sha256": "d58c2bfdf13c71cd3ed2c505ed767adbb651728cf388394066d23db0205468bd"},
+    "system_map": {"path": "build/out/sea-server-minimal-gate-007-final/artifacts/System.map", "size_bytes": 5639571, "sha256": "c0e203d03099485cfe86541ff3d56b075c2e1d688efb0908958a15db2d3c4a31"},
+    "config": {"path": "build/out/sea-server-minimal-gate-007-final/artifacts/.config", "sha256": "edc29e850fe9f52dc1a645bbe71951c7ae8b5369993ae4bf8694797870a87372"},
+    "module_count": 5,
+    "modules": ["lcd.ko", "kheaders.ko", "trace_mmstat.ko", "tcp_htcp.ko", "tcp_westwood.ko"],
+    "dtb_status": "BLOCKED",
+    "dtb_outputs_not_accepted_for_sea": ["auto2712p1v1-ivi-boot.dtb", "auto2712p1v1-ivi-nand-boot.dtb"],
+    "boot_image": "BLOCKED"
+  },
+  "rootfs_contract": {
+    "KERNEL": "BUILT_UNTESTED",
+    "DEVICE_TREE": "BLOCKED",
+    "FIRMWARE": "BLOCKED_OR_UNRESOLVED",
+    "BOOT_ARTIFACT": "BLOCKED",
+    "ROOTFS": "BLOCKED_PENDING_KERNEL_DT_FIRMWARE_BOOT_CONTRACT"
+  },
+  "decision": {
+    "sea": "SEA_CONTINUE",
+    "reason": "bounded compatibility debt resolved; kernel build is green, while DTB/firmware/boot integration remain separate gates",
+    "seek_second_device": "YES_RECOMMENDED",
+    "second_device_criteria": "prefer a device with public target DTB, released firmware context and documented recovery path",
+    "recovery_readiness": "BLOCKED",
+    "write_phone_authorized": false,
+    "writes_to_device": false
+  },
+  "license_and_safety": {
+    "new_firmware_or_blobs_added": false,
+    "phone_write_commands_run": false,
+    "boot_image_created": false,
+    "source_checkout_modified": false
+  }
+}

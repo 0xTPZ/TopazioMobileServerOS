@@ -31,7 +31,7 @@ class Mission006Tests(unittest.TestCase):
             (ROOT / "devices/xiaomi-sea/server-minimal/manifests/dependency-graph.json").read_text(encoding="utf-8")
         )
 
-    def test_derivation_changes_only_explicit_modem_options(self):
+    def test_derivation_changes_only_explicit_profile_options(self):
         symbols = sorted(self.config_tool.CRITICAL_SYMBOLS)
         base_lines = [f"{symbol}=y" for symbol in symbols]
         base_lines.extend(
@@ -56,16 +56,19 @@ class Mission006Tests(unittest.TestCase):
                 ("CONFIG_MTK_ECCCI_C2K", "n"),
                 ("CONFIG_MTK_ECCCI_DRIVER", "n"),
                 ("CONFIG_MTK_MD1_SUPPORT", "0"),
+                ("CONFIG_SND_SOC_MT6357_ACCDET", "n"),
+                ("CONFIG_SND_SOC_MT6359_ACCDET", "n"),
             ],
         )
 
     def test_profile_and_graph_preserve_critical_capabilities(self):
         minimal = self.manifest["profiles"]["SERVER_MINIMAL"]
         self.assertEqual(self.manifest["profiles"]["VENDOR_REFERENCE"]["status"], "BLOCKED")
-        self.assertEqual(minimal["status"], "SOURCE_ONLY")
-        self.assertEqual(minimal["outputs"]["kernel"], "BLOCKED")
+        self.assertEqual(minimal["status"], "BUILT_UNTESTED")
+        self.assertEqual(minimal["outputs"]["kernel"], "BUILT_UNTESTED")
+        self.assertEqual(minimal["outputs"]["modules"], "BUILT_UNTESTED")
         self.assertEqual(minimal["outputs"]["dtb"], "BLOCKED")
-        self.assertEqual(self.plan["status"], "SOURCE_ONLY")
+        self.assertEqual(self.plan["status"], "BUILT_UNTESTED")
         node_ids = {node["id"] for node in self.graph["nodes"]}
         for required in {
             "cpu-memory-interrupts",

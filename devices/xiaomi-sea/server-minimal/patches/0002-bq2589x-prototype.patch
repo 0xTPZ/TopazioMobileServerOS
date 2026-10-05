@@ -1,0 +1,38 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Topazio Mobile Server OS <topazio@0xtpz.org>
+Date: 2026-10-04
+Subject: [PATCH] sea: bq2589x: use a strict no-argument prototype
+
+The pinned Xiaomi tree exports get_charger_type() and declares its consumer
+as get_charger_type(void). Clang r433403b promotes the old-style definition
+to an error because the charger directory enables -Werror. This localized
+prototype correction preserves the exported ABI and charging behavior.
+
+Evidence: Mission 007 reproduction at
+drivers/power/supply/mediatek/charger/bq2589x_charger.c:117, and the matching
+extern declaration in mtk_chg_type_det.c:562.
+
+Topazio patch metadata:
+  ID: TPZ-M007-002
+  File: drivers/power/supply/mediatek/charger/bq2589x_charger.c
+  Problem: -Wstrict-prototypes under Clang/Werror
+  Category: C_ACTUAL_SOURCE_BUG; E_CRITICAL_SUBSYSTEM
+  Justification: a prototype-only correction; no charging logic changes
+  Source/evidence: pinned Xiaomi sea-t-oss source and Mission 007 log
+  Impact: restores compilation of the BQ2589x charging driver
+  Risk: low; exported function type already matches all consumers
+  Subsystem: power/charging
+  Reversibility: remove this patch
+
+---
+ drivers/power/supply/mediatek/charger/bq2589x_charger.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/power/supply/mediatek/charger/bq2589x_charger.c b/drivers/power/supply/mediatek/charger/bq2589x_charger.c
+--- a/drivers/power/supply/mediatek/charger/bq2589x_charger.c
++++ b/drivers/power/supply/mediatek/charger/bq2589x_charger.c
+@@ -117,1 +117,1 @@
+-int get_charger_type()
++int get_charger_type(void)
+-- 
+2.39.0

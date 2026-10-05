@@ -49,7 +49,7 @@ class Mission005Tests(unittest.TestCase):
         self.assertEqual(vendor["status"], "BLOCKED")
         self.assertNotEqual(vendor["status"], "WORKING")
         self.assertEqual(vendor["outputs"]["dtbo"], "BUILT_UNTESTED")
-        self.assertEqual(minimal["status"], "SOURCE_ONLY")
+        self.assertEqual(minimal["status"], "BUILT_UNTESTED")
 
     def test_patch_order_validator_rejects_gaps(self):
         invalid = copy.deepcopy(self.reconstruction)

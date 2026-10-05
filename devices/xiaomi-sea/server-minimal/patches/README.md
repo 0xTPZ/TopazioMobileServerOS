@@ -11,3 +11,8 @@ from Git, and the normal touch-data/input registration remains enabled.
 No patch changes pointer casts in DPMAIF. The entire CCCI/DPMAIF path is
 disabled by the separate configuration fragment because cellular modem support
 is outside the initial server contract.
+
+`0002-bq2589x-prototype.patch` is a one-line, reversible correction from
+`int get_charger_type()` to `int get_charger_type(void)`. The consumer already
+declares the strict prototype, so this preserves the exported charging API and
+allows Clang `-Wstrict-prototypes` to pass without disabling `-Werror`.

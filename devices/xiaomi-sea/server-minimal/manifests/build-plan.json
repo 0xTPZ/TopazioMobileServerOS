@@ -2,7 +2,7 @@
   "schema": 1,
   "profile": "SERVER_MINIMAL",
   "device": "xiaomi-sea",
-  "status": "SOURCE_ONLY",
+  "status": "BUILT_UNTESTED",
   "base": {
     "source_id": "xiaomi-kernel-sea-t-oss",
     "repository": "https://github.com/MiCode/Xiaomi_Kernel_OpenSource.git",
@@ -27,6 +27,8 @@
       {"symbol": "CONFIG_MTK_ECCCI_DRIVER", "new": "n", "reason": "remove modem CCCI/DPMAIF path"},
       {"symbol": "CONFIG_MTK_ECCCI_C2K", "new": "n", "reason": "remove modem CCCI/DPMAIF path"},
       {"symbol": "CONFIG_MTK_MD1_SUPPORT", "new": "0", "reason": "no cellular modem in initial server product"}
+      ,{"symbol": "CONFIG_SND_SOC_MT6357_ACCDET", "new": "n", "reason": "optional audio jack/accessory detection is outside SERVER_MINIMAL"}
+      ,{"symbol": "CONFIG_SND_SOC_MT6359_ACCDET", "new": "n", "reason": "optional audio jack/accessory detection is outside SERVER_MINIMAL"}
     ]
   },
   "patches": [
@@ -36,6 +38,14 @@
       "path": "devices/xiaomi-sea/server-minimal/patches/0001-focaltech-no-auto-upgrade.patch",
       "sha256": "412e87de8e789fca7a12c56da30725bd7886f40bebff143aef2968a58134ce72",
       "reason": "avoid unavailable embedded firmware include while preserving touch input",
+      "changes_vendor_reference": false
+    },
+    {
+      "order": 2,
+      "id": "0002-bq2589x-prototype",
+      "path": "devices/xiaomi-sea/server-minimal/patches/0002-bq2589x-prototype.patch",
+      "sha256": "dc4101df985d8a81856ec0406a8f170f573f0f4fda319ca52b548096bea2f0fc",
+      "reason": "correct exported get_charger_type prototype without changing charging logic",
       "changes_vendor_reference": false
     }
   ],
@@ -52,8 +62,8 @@
     ]
   },
   "outputs": {
-    "kernel": "BLOCKED",
-    "modules": "BLOCKED",
+    "kernel": "BUILT_UNTESTED",
+    "modules": "BUILT_UNTESTED",
     "dtb": "BLOCKED",
     "dtbo": "SOURCE_ONLY",
     "boot_image": "BLOCKED"

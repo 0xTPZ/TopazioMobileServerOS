@@ -22,12 +22,19 @@ hardware.
 official Xiaomi source @ 6f6b84e0e2fa8d474db66798a051ec1835257729
   + config/topazio_sea_server_defconfig
   + patches/0001-focaltech-no-auto-upgrade.patch
+  + patches/0002-bq2589x-prototype.patch
   = reproducible SERVER_MINIMAL build tree (PC/WSL only)
 ```
 
 The Focaltech patch disables only the boot-time embedded-firmware auto-update
-path. It intentionally retains `CONFIG_TOUCHSCREEN_FTS` and the touch input
-driver. It does not add an empty or synthetic firmware file.
+path. The BQ2589x patch corrects one old-style C prototype without changing
+charging logic. `CONFIG_SND_SOC_MT6357_ACCDET` and
+`CONFIG_SND_SOC_MT6359_ACCDET` are disabled as optional audio jack detection;
+the charging symbols remain enabled.
+
+Mission 007 gate result: `BUILT_UNTESTED` kernel and modules, with persistent
+artifacts in `build/out/sea-server-minimal-gate-007-final/`. A target `sea`
+DTB, firmware contract, boot artifact and rootfs remain blocked.
 
 See [the profile report](../../../docs/SERVER-MINIMAL.md), the structured
 [build manifest](manifests/build-plan.json), and the generic

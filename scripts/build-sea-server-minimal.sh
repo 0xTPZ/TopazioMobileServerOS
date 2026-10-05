@@ -17,7 +17,7 @@ expected_toolchain_commit="0625305092d0cfa7e28b0e1b268aff1d3d751eca"
 expected_clang_sha256="ea2fd6ab23df6601d88d0198fd3444e608b08341a2da5c0d219f708ac93c944e"
 expected_lld_sha256="a2abf2aca9ff6e7545676cac2cbd2759dd11d98572c84c13e5709d192a430b74"
 fragment="$repo_root/devices/xiaomi-sea/server-minimal/config/topazio_sea_server_defconfig"
-patch_file="$repo_root/devices/xiaomi-sea/server-minimal/patches/0001-focaltech-no-auto-upgrade.patch"
+patch_dir="$repo_root/devices/xiaomi-sea/server-minimal/patches"
 log_file="$output_dir/build.log"
 manifest_file="$output_dir/manifest.json"
 
@@ -67,7 +67,7 @@ elif [[ "$(sha256sum "$toolchain_bin/clang" 2>/dev/null | awk '{print $1}')" != 
     reason="clang binary SHA-256 does not match provenance"
 elif [[ "$(sha256sum "$toolchain_bin/ld.lld" 2>/dev/null | awk '{print $1}')" != "$expected_lld_sha256" ]]; then
     reason="ld.lld binary SHA-256 does not match provenance"
-elif [[ ! -f "$fragment" || ! -f "$patch_file" ]]; then
+elif [[ ! -f "$fragment" || ! -f "$patch_dir/0001-focaltech-no-auto-upgrade.patch" || ! -f "$patch_dir/0002-bq2589x-prototype.patch" ]]; then
     reason="SERVER_MINIMAL config or patch layer is missing"
 elif [[ -e "$build_dir" && -n "$(find "$build_dir" -mindepth 1 -maxdepth 1 -print -quit 2>/dev/null)" ]]; then
     reason="build directory is not empty; refusing to overwrite an existing build"
@@ -78,12 +78,12 @@ else
     : > "$log_file"
     if ! git -C "$source_dir" -c core.autocrlf=false -c core.eol=lf worktree add --detach "$patched_source" "$expected_source_commit" >>"$log_file" 2>&1; then
         reason="unable to create detached source worktree"
-    elif ! sed -i 's/\r$//' "$patched_source/drivers/input/touchscreen/mediatek/ft3418_i2c/focaltech_config.h" "$patched_source/drivers/input/touchscreen/mediatek/ft3418_i2c/focaltech_flash.c"; then
-        reason="unable to normalize temporary Focaltech source line endings"
-    elif ! git -C "$patched_source" apply --check --unidiff-zero "$patch_file" >>"$log_file" 2>&1; then
-        reason="SERVER_MINIMAL patch does not apply cleanly to the pinned source"
-    elif ! git -C "$patched_source" apply --unidiff-zero "$patch_file" >>"$log_file" 2>&1; then
-        reason="SERVER_MINIMAL patch application failed"
+    elif ! sed -i 's/\r$//' "$patched_source/drivers/input/touchscreen/mediatek/ft3418_i2c/focaltech_config.h" "$patched_source/drivers/input/touchscreen/mediatek/ft3418_i2c/focaltech_flash.c" "$patched_source/drivers/power/supply/mediatek/charger/bq2589x_charger.c"; then
+        reason="unable to normalize temporary vendor source line endings"
+    elif ! git -C "$patched_source" apply --check --unidiff-zero "$patch_dir/0001-focaltech-no-auto-upgrade.patch" >>"$log_file" 2>&1 || ! git -C "$patched_source" apply --check --unidiff-zero "$patch_dir/0002-bq2589x-prototype.patch" >>"$log_file" 2>&1; then
+        reason="SERVER_MINIMAL patch set does not apply cleanly to the pinned source"
+    elif ! git -C "$patched_source" apply --unidiff-zero "$patch_dir/0001-focaltech-no-auto-upgrade.patch" >>"$log_file" 2>&1 || ! git -C "$patched_source" apply --unidiff-zero "$patch_dir/0002-bq2589x-prototype.patch" >>"$log_file" 2>&1; then
+        reason="SERVER_MINIMAL patch set application failed"
     else
         mkdir -p "$build_dir"
         python3 "$repo_root/host-tools/server_minimal_config.py" \
@@ -118,6 +118,29 @@ else
 fi
 
 duration_seconds="$(( $(date +%s) - start_epoch ))"
+artifact_dir="$output_dir/artifacts"
+if [[ "$make_rc" -eq 0 ]]; then
+    rm -rf "$artifact_dir"
+    mkdir -p "$artifact_dir/boot" "$artifact_dir/dtb" "$artifact_dir/modules"
+    for artifact in Image Image.gz; do
+        if [[ -s "$build_dir/arch/arm64/boot/$artifact" ]]; then
+            cp "$build_dir/arch/arm64/boot/$artifact" "$artifact_dir/boot/$artifact"
+        fi
+    done
+    for artifact in System.map Module.symvers .config; do
+        if [[ -s "$build_dir/$artifact" ]]; then
+            cp "$build_dir/$artifact" "$artifact_dir/$artifact"
+        fi
+    done
+    while IFS= read -r module; do
+        relative="${module#"$build_dir/"}"
+        mkdir -p "$artifact_dir/modules/$(dirname "$relative")"
+        cp "$module" "$artifact_dir/modules/$relative"
+    done < <(find "$build_dir" -type f -name '*.ko' -print)
+    while IFS= read -r dtb; do
+        cp "$dtb" "$artifact_dir/dtb/$(basename "$dtb")"
+    done < <(find "$build_dir/arch/arm64/boot/dts" -type f -name '*.dtb' -print 2>/dev/null)
+fi
 python3 - "$manifest_file" "$source_commit" "$status" "$reason" "$make_rc" "$toolchain_status" "$duration_seconds" "${build_command:-}" "$build_dir" <<'PY'
 import hashlib
 import json
@@ -130,11 +153,17 @@ log_path = root / "build.log"
 log_text = log_path.read_text(encoding="utf-8", errors="replace") if log_path.is_file() else ""
 outputs = []
 for candidate in [
-    Path(build_dir) / "arch/arm64/boot/Image.gz",
-    Path(build_dir) / "arch/arm64/boot/Image",
+    root / "artifacts/boot/Image.gz",
+    root / "artifacts/boot/Image",
 ]:
     if candidate.is_file() and candidate.stat().st_size:
-        outputs.append({"path": str(candidate), "size": candidate.stat().st_size, "sha256": hashlib.sha256(candidate.read_bytes()).hexdigest()})
+        outputs.append({"path": str(candidate.relative_to(root)), "size": candidate.stat().st_size, "sha256": hashlib.sha256(candidate.read_bytes()).hexdigest()})
+module_files = sorted((root / "artifacts/modules").rglob("*.ko")) if (root / "artifacts/modules").is_dir() else []
+dtb_files = sorted((root / "artifacts/dtb").glob("*.dtb")) if (root / "artifacts/dtb").is_dir() else []
+preserved = []
+for candidate in [root / "artifacts/System.map", root / "artifacts/Module.symvers", root / "artifacts/.config", *module_files, *dtb_files]:
+    if candidate.is_file():
+        preserved.append({"path": str(candidate.relative_to(root)), "size": candidate.stat().st_size, "sha256": hashlib.sha256(candidate.read_bytes()).hexdigest()})
 manifest = {
     "schema": 1,
     "device": "xiaomi-sea",
@@ -149,12 +178,18 @@ manifest = {
         "status": toolchain_status,
     },
     "config": "config-diff.json",
-    "patch": "devices/xiaomi-sea/server-minimal/patches/0001-focaltech-no-auto-upgrade.patch",
+    "patches": [
+        "devices/xiaomi-sea/server-minimal/patches/0001-focaltech-no-auto-upgrade.patch",
+        "devices/xiaomi-sea/server-minimal/patches/0002-bq2589x-prototype.patch",
+    ],
     "command": command,
     "duration_seconds": int(duration),
     "make_exit_code": int(make_rc),
     "log": "build.log",
     "outputs": outputs,
+    "preserved_artifacts": preserved,
+    "module_count": len(module_files),
+    "dtb_count": len(dtb_files),
     "dtb": "BLOCKED unless independently evidenced",
     "warnings_and_errors": "see build.log",
     "warning_count": log_text.count("warning:"),
