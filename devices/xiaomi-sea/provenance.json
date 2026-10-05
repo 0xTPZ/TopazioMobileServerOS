@@ -133,6 +133,17 @@
         "proprietary": true,
         "versioned": false,
         "installable": false
+      },
+      {
+        "name": "sea-stock-package-os209-vendor-dlkm-metadata",
+        "status": "RANGED_OFFICIAL_PAYLOAD / FORENSICS_ONLY",
+        "target_sha256": "0adae670b424f9fbe70f7a6e40e8829a5e033a187e7e0e612d0a342e5d0b54ff",
+        "zip_range": {"start": 4029054869, "end_inclusive": 4037364524, "size_bytes": 8309656},
+        "filesystem": "EROFS",
+        "module_binary_count": 209,
+        "proprietary": true,
+        "versioned": false,
+        "installable": false
       }
     ]
   }

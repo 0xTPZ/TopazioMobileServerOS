@@ -92,6 +92,8 @@
     "mission_008_kernel_baseline": "server-minimal/kernel-baseline.json",
     "mission_009_stock_forensics": "firmware-forensics/mission-009.json",
     "mission_010_stock_package_forensics": "firmware-forensics/mission-010.json",
+    "mission_011_stock_dtb_origin_android15_boot_contract": "firmware-forensics/mission-011.json",
+    "mission_011_required_base_symbols": "reconstruction/stock-required-base-symbols.json",
     "kernel_reconstruction": "docs/KERNEL-RECONSTRUCTION.md",
     "cust_dtsi": {
       "status": "STRONG_CANDIDATE",
@@ -147,6 +149,17 @@
     "avb": "CONFIRMED / AVB 1.0 algorithm type 1 across vbmeta family",
     "recovery_readiness": "NOT_READY",
     "kernel_strategy": "C_MAINTAIN_TWO_TRACKS",
+    "phone_writes": false
+  },
+  "mission_011_stock_dtb_origin_android15_boot_contract": {
+    "status": "PARTIAL",
+    "report": "firmware-forensics/mission-011.json",
+    "stock_dtb": "NOT_FOUND",
+    "dtbo_required_base_symbols": 60,
+    "gki_status": "GKI_LIKELY_NOT_CONFIRMED",
+    "vendor_dlkm": "EROFS / 209 MODULES / METADATA_ONLY_IN_REPO",
+    "dual_kernel_tracks": ["LEGACY_SERVER_MINIMAL_4_19", "CURRENT_STOCK_ANDROID15_6_6"],
+    "recovery_readiness": "BLOCKED",
     "phone_writes": false
   },
   "required_firmware": {

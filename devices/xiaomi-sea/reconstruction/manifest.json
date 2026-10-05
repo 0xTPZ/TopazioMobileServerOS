@@ -139,6 +139,20 @@
     "legacy_kernel_preserved": "SEA_SERVER_MINIMAL_KERNEL_001",
     "write_device": false
   },
+  "mission_011_stock_dtb_origin_android15_boot_contract": {
+    "report": "devices/xiaomi-sea/firmware-forensics/mission-011.json",
+    "required_base_symbols": "devices/xiaomi-sea/reconstruction/stock-required-base-symbols.json",
+    "status": "PARTIAL",
+    "stock_dtb": "NOT_FOUND",
+    "stock_dtbo": "ANALYZED_60_REQUIRED_BASE_SYMBOLS",
+    "stock_merged_dt": "BLOCKED_NO_STOCK_BASE_DTB",
+    "gki_status": "GKI_LIKELY_NOT_CONFIRMED",
+    "vendor_dlkm": "SELECTIVELY_RECONSTRUCTED_EROFS_HASH_VERIFIED",
+    "dual_kernel_tracks": true,
+    "read_only_inventory_plan": "docs/SEA-READONLY-INVENTORY-PLAN.md",
+    "recovery_readiness": "BLOCKED",
+    "write_device": false
+  },
   "patch_order": [],
   "artifact_state_vocabulary": [
     "SOURCE_ONLY",

@@ -1,0 +1,295 @@
+{
+  "schema": 1,
+  "mission": 11,
+  "device": "xiaomi-sea",
+  "status": "PARTIAL",
+  "pass_gate": false,
+  "title": "SEA DTB origin and Android 15 boot contract",
+  "decision": {
+    "reason": "The stock Android 15 boot component, DTBO and AVB family were analyzed offline. No valid base DTB was found in boot, kernel or ramdisk, and no exact stock DTB/vendor container was identified in the verified OTA manifest.",
+    "phone_writes_performed": false,
+    "phone_interaction": "NONE",
+    "temporary_boot_executed": false,
+    "unlock_attempted": false,
+    "mission_012_started": false,
+    "recovery_readiness": "BLOCKED",
+    "kernel_strategy": "C_MAINTAIN_TWO_TRACKS"
+  },
+  "audit": {
+    "head": "9214405ab6e42014802b59ea111c93fd4925a9ea",
+    "origin_main": "9214405ab6e42014802b59ea111c93fd4925a9ea",
+    "working_tree_before_mission": "CLEAN",
+    "previous_ci": {
+      "status": "SUCCESS",
+      "run": "37322548308",
+      "url": "https://github.com/0xTPZ/TopazioMobileServerOS/actions/runs/37322548308"
+    },
+    "required_local_gates": [
+      "python host-tools/verify_repo.py",
+      "python host-tools/secret_scan.py --working-tree",
+      "python -m unittest discover -s tests -v",
+      "git diff --check"
+    ]
+  },
+  "package": {
+    "model": "Redmi Note 12S",
+    "codename": "sea",
+    "region": "Global",
+    "version": "OS2.0.209.0.VHZMIXM",
+    "android_version": "15",
+    "type": "Recovery full OTA",
+    "url": "https://bigota.d.miui.com/OS2.0.209.0.VHZMIXM/sea_global-ota_full-OS2.0.209.0.VHZMIXM-user-15.0-e802b6d430.zip",
+    "published_size_bytes": 4693514032,
+    "published_md5": "e802b6d430a645dc6e3115983fe8d400",
+    "full_archive_sha256": null,
+    "full_archive_status": "NOT_COMPUTED_FULL_ARCHIVE_NOT_DOWNLOADED",
+    "source_classification": "OFFICIAL_DIRECT",
+    "ota_metadata": {
+      "ota_type": "AB",
+      "pre_device": "sea",
+      "post_sdk_level": "35",
+      "post_security_patch_level": "2025-12-01",
+      "post_build": "Redmi/sea_global/sea:15/AP3A.240905.015.A2/OS2.0.209.0.VHZMIXM:user/release-keys"
+    }
+  },
+  "boot_image_deep_analysis": {
+    "boot_sha256": "c8d9d33cc301d5b59c2443481dca139ce569635d70094833ad8f5b0095ad2af3",
+    "boot_size_bytes": 67108864,
+    "header_version": 3,
+    "page_size": 4096,
+    "kernel_component": {
+      "compressed_sha256": "0bdcf6159c48f111d19641721b97d30de2bf24c33910cc49a8ca1789aacc1ca9",
+      "compressed_size_bytes": 14688235,
+      "compression": "gzip",
+      "uncompressed_sha256": "3c5a8c5695fb2323e30ba84a240431faf125225bab1d57cc150508b70d311619",
+      "uncompressed_size_bytes": 36841984
+    },
+    "ramdisk_component": {
+      "compression": "lz4-android",
+      "compressed_sha256": "046849410f33acafc0f9a72e079dc07739ac1ce6478532a90f8fc0c6e7c7b0d6",
+      "compressed_size_bytes": 2630888,
+      "uncompressed_sha256": "260d0f739fc029152d78bb05732f82fcfa39127085bda80db2fc8690b4a871ab",
+      "uncompressed_size_bytes": 4849408,
+      "entries": ["debug_ramdisk", "dev", "init", "metadata", "mnt", "proc", "second_stage_resources", "sys", "system/bin/snapuserd", "system/bin/snapuserd_ramdisk", "system/etc/init/snapuserd.rc", "system/etc/ramdisk/build.prop", "TRAILER!!!"],
+      "dtb_entry": "NOT_OBSERVED",
+      "fstab_entry": "NOT_OBSERVED"
+    },
+    "fdt_scans": [
+      {"source":"raw boot.img","candidate_count":0,"valid_count":0},
+      {"source":"gzip kernel component","candidate_count":0,"valid_count":0},
+      {"source":"decompressed kernel Image","candidate_count":0,"valid_count":0},
+      {"source":"lz4 decompressed ramdisk","candidate_count":0,"valid_count":0}
+    ],
+    "conclusion": "No valid FDT magic/header/structure/FDT_END was found in any analyzed boot, kernel or ramdisk byte range. Boot v3 exposes no base-DTB field."
+  },
+  "dtb_discovery": {
+    "stock_dtb": "NOT_FOUND",
+    "appended_dtb": "NOT_FOUND",
+    "embedded_dtb": "NOT_FOUND",
+    "other_ota_partition_dtb": "NOT_IDENTIFIED",
+    "vendor_boot": "ABSENT_FROM_VERIFIED_PAYLOAD_MANIFEST",
+    "vendor_kernel_boot": "ABSENT_FROM_VERIFIED_PAYLOAD_MANIFEST",
+    "init_boot": "ABSENT_FROM_VERIFIED_PAYLOAD_MANIFEST",
+    "reason": "The verified payload partition list has boot and dtbo but no standalone DTB image or vendor_boot-family image. Vendor, odm_dlkm and other logical images were not all reconstructed; therefore absence from the manifest is proven, while a hidden/vendor container origin is not ruled out."
+  },
+  "stock_kernel": {
+    "track_id": "CURRENT_STOCK_ANDROID15",
+    "linux_version": "6.6.58-android15-8-g19e0e8cef6b2-4k",
+    "architecture": "arm64",
+    "toolchain": "Android clang 18.0.0 / LLD 18.0.0",
+    "build_lineage": "Kleaf Android common kernel string",
+    "config": {
+      "embedded_status": "CONFIRMED",
+      "start_offset": 17901000,
+      "end_offset": 17946609,
+      "compressed_size_bytes": 45593,
+      "config_size_bytes": 211391,
+      "compressed_sha256": "37a63caeece87344625910ce6cdab5baf3e61e8278b0c7321210d4a9e2d156cd",
+      "config_sha256": "1b7d54bb2ee7b4df414076cc33c3801b28df5e6ff75a705c40d3d66661a13ca0",
+      "option_count": 6170,
+      "selected_options": {
+        "CONFIG_MODULES": "y",
+        "CONFIG_MODVERSIONS": "y",
+        "CONFIG_GKI_HACKS_TO_FIX": "y",
+        "CONFIG_GKI_HIDDEN_UFS_CONFIGS": "y",
+        "CONFIG_SCSI_UFSHCD": "y",
+        "CONFIG_SCSI_UFSHCD_PLATFORM": "y",
+        "CONFIG_WLAN": "y",
+        "CONFIG_BT": "m",
+        "CONFIG_DRM": "y",
+        "CONFIG_THERMAL": "y",
+        "CONFIG_DM_VERITY": "y",
+        "CONFIG_EROFS_FS": "y",
+        "CONFIG_EXT4_FS": "y",
+        "CONFIG_F2FS_FS": "y",
+        "CONFIG_IKCONFIG": "y",
+        "CONFIG_IKCONFIG_PROC": "y",
+        "CONFIG_BLK_DEV_INITRD": "y"
+      }
+    },
+    "gki_status": "GKI_LIKELY",
+    "gki_evidence": {
+      "android15_kernel_string": true,
+      "kleaf_build_host": true,
+      "clang18": true,
+      "gki_hacks_config": true,
+      "modversions": true,
+      "kmi_exactly_confirmed": false,
+      "reason_not_confirmed": "Exact vendor module vermagic/symbol CRC compatibility and corresponding Xiaomi 6.6 source were not proven."
+    }
+  },
+  "dtbo_analysis": {
+    "status": "STOCK_ENTRY_ANALYZED",
+    "dtbo_sha256": "44b31ec3b3bfb82631a4e214fadafe109248ba880cb2a9dfe8d7b27bb47914c3",
+    "entry_sha256": "ece194e9ba0a9477bd2ac22e6b5c466a19cde5a98a0c7444ce5c8599a5c21143",
+    "entry_count": 1,
+    "required_base_symbol_count": 60,
+    "exported_overlay_symbol_count": 136,
+    "local_fixup_property_count": 122,
+    "target_path_count": 0,
+    "fragment_count": 76,
+    "required_symbols_file": "devices/xiaomi-sea/reconstruction/stock-required-base-symbols.json",
+    "required_symbol_groups": ["SoC/interconnect", "I2C/SPI", "GPIO/PIO", "PMIC/charger/battery", "USB/Type-C/PD", "display/DSI", "touch/fingerprint", "camera", "thermal/memory", "chosen/vendor runtime"],
+    "stock_merged_dt": {
+      "status": "BLOCKED_NO_STOCK_BASE_DTB",
+      "generated": false,
+      "stock_confirmation": false
+    }
+  },
+  "base_matcher": {
+    "status": "CANDIDATE_ONLY",
+    "public_mt6781_candidate": "Mission 008 public mt6781.dtb mechanically resolves the overlay's expected symbol shape/compatible family",
+    "exact_stock_match": false,
+    "confidence": "LOW",
+    "policy": "Structural symbol compatibility is not physical-unit or stock-image confirmation."
+  },
+  "dynamic_partitions": {
+    "ab": "CONFIRMED",
+    "virtual_ab": "CONFIRMED",
+    "dynamic_group": {"name":"main","size_bytes":7511998464,"logical_partitions":["odm_dlkm","product","system","system_dlkm","system_ext","vendor","vendor_dlkm","mi_ext"]},
+    "super": "REQUIRED_BACKING_CONTAINER_NOT_A_PAYLOAD_ENTRY",
+    "payload_partitions": ["audio_dsp","boot","dtbo","gz","lk","md1img","odm_dlkm","pi_img","preloader_raw","product","scp","spmfw","sspm","system","system_dlkm","system_ext","tee","vbmeta","vbmeta_system","vbmeta_vendor","vendor","vendor_dlkm","mi_ext"],
+    "vendor_dlkm_selective_reconstruction": {
+      "target_size_bytes": 13910016,
+      "target_sha256": "0adae670b424f9fbe70f7a6e40e8829a5e033a187e7e0e612d0a342e5d0b54ff",
+      "operation_type": "REPLACE_XZ",
+      "zip_range_start": 4029054869,
+      "zip_range_end_inclusive": 4037364524,
+      "range_size_bytes": 8309656,
+      "operation_data_sha256": "b06bb243222b3839cc6f167484f11c22adc26c8bf8b9d9b5fdbd41250d0cd313",
+      "reconstruction_hash_verified": true,
+      "filesystem": "EROFS",
+      "filesystem_uuid": "fca05e49-e0a3-50a9-8810-a935e5347f01",
+      "block_count": 3312,
+      "inode_count": 221
+    }
+  },
+  "module_ecosystem": {
+    "source_partition": "vendor_dlkm",
+    "module_directory": "/lib/modules",
+    "module_binary_count": 209,
+    "module_binaries_inspected": false,
+    "metadata": {
+      "modules.alias": {"size_bytes":84266,"sha256":"ff6550f5d941fa7cb93e6b86dd9f8b5174834c84320716a81da6580c8633ce80","line_count":1582,"entry_count":1581},
+      "modules.dep": {"size_bytes":40941,"sha256":"8ea62c602b5d6ccb6266bdbad08131759211d1dc2becbc2ccc2e24823673cf53","line_count":285,"entry_count":285},
+      "modules.load": {"size_bytes":3202,"sha256":"efb6eecae99939b31a4469a4d3f01f823db78e34d4440a339cce59ea65112790","line_count":192,"entry_count":192},
+      "modules.softdep": {"size_bytes":258,"sha256":"ba42c887d917c93d91a5c6e7d8b47867f5db9fa68520751c8772f45111e81390","line_count":6,"entry_count":5}
+    },
+    "soft_dependencies": ["mtk_sec_heap pre: apusys", "mali_kbase_mt6781_r49 pre: memory_group_manager", "audio_ipi pre: adsp-v2", "gz_tz_system pre: gz_virtio_mod.ko", "gz_tz_system pre: gz_irq_mod.ko"]
+  },
+  "critical_hardware_modules": {
+    "ufs": {"kernel_core":"BUILT_IN","vendor_specific_controller_phy":"UNKNOWN","confidence":"LOW"},
+    "usb": {"generic_core":"BUILT_IN_OR_CONFIG_DEPENDENT","gadget_and_vendor_paths":"MODULE","examples":["mtk_usb_f_rndis.ko","mtk_u_ether.ko","musb_boost.ko"]},
+    "wifi": {"status":"MODULE","examples":["cfg80211.ko","mac80211.ko","wlan_drv_gen4m_6781.ko","wmt_drv.ko"]},
+    "bluetooth": {"config":"CONFIG_BT=m","status":"MODULE","examples":["bt_drv_connac1x.ko","btif_drv.ko"]},
+    "charging": {"generic_controller":"UNKNOWN","vendor_paths":"MODULE","examples":["mtk_charger_cooler.ko","mtk_battery_oc_throttling.ko"]},
+    "battery": {"status":"PARTIAL","vendor_paths":"MODULE","examples":["mtk_battery_oc_throttling.ko","mtk_low_battery_throttling.ko"]},
+    "thermal": {"generic_core":"BUILT_IN","vendor_paths":"MODULE","examples":["thermal_monitor.ko","mtk_cpu_power_throttling.ko"]},
+    "display": {"generic_drm":"BUILT_IN","vendor_paths":"MODULE","examples":["mdp_drv_mt6781.ko","mtk_disp_sec.ko","mtk-composite.ko"]},
+    "touch": {"status":"MODULE","examples":["ft3418_i2c.ko","lct_tp.ko","xiaomi_touch.ko","touch_boost.ko"]}
+  },
+  "firmware_references": {
+    "status": "REFERENCES_ONLY",
+    "examples": {
+      "wifi": ["regulatory.db", "regulatory.db.p7s", "wifi.cfg", "txpowerctrl.cfg", "mt%x_patch_e%x_hdr.bin", "mtsoc1_0_patch_e%x_hdr.bin"],
+      "bluetooth": ["mt66xx_patch_hdr.bin", "WMT_SOC.cfg"],
+      "touch": ["%s%s.bin"],
+      "audio_haptics": ["aw8622_f0_info.bin", "awinic_monitor.bin", "aw87xxx_acf.bin"],
+      "gps_scp": ["request_firmware", "scpreg.cfg", "FM firmware patch/coefficients"]
+    },
+    "license_and_redistribution": "UNKNOWN_OR_PROPRIETARY; DO_NOT_VERSION"
+  },
+  "public_6_6_sources": {
+    "exact_xiaomi_sea_source": "NOT_FOUND",
+    "official_xiaomi_reference": {"repository":"https://github.com/MiCode/Xiaomi_Kernel_OpenSource","branch":"sea-t-oss","commit":"6f6b84e0e2fa8d474db66798a051ec1835257729","kernel_generation":"4.19"},
+    "generic_aosp_reference": {"url":"https://android.googlesource.com/kernel/common/%2B/refs/heads/android15-6.6/android/","role":"GKI reference only; not Xiaomi sea source"},
+    "gpl_status": "NOT_FOUND_FOR_EXACT_STOCK_6_6_VENDOR_SOURCE",
+    "community_or_search_results": "Not promoted to official source evidence"
+  },
+  "dual_kernel_tracks": {
+    "legacy": {"track_id":"LEGACY_SERVER_MINIMAL_4_19","kernel_version":"4.19.191","status":"BUILT_UNTESTED","dtb_status":"BLOCKED","baseline":"devices/xiaomi-sea/server-minimal/kernel-baseline.json"},
+    "current_stock": {"track_id":"CURRENT_STOCK_ANDROID15","kernel_version":"6.6.58-android15-8","status":"STOCK_FORENSICS_ONLY","gki_status":"GKI_LIKELY","dtb_status":"BLOCKED","boot_image_generated":false}
+  },
+  "rootfs_strategy": {
+    "status": "THEORETICAL_BLOCKED",
+    "concept": "Use a stock/GKI-compatible kernel with exact DTB/DTBO contract, vendor_dlkm/system_dlkm modules and matching firmware, then layer Topazio server userspace in a read-only/recovery-safe rootfs.",
+    "blockers": ["base DTB origin", "exact boot/vendor container", "UFS controller/PHY/power map", "firmware licensing and availability", "console/init/SELinux contract"]
+  },
+  "future_boot_contract": {
+    "status": "PARTIALLY_UNDERSTOOD_NO_IMAGE_GENERATED",
+    "observed": ["Android boot header v3", "gzip arm64 kernel", "generic LZ4 ramdisk", "separate stock DTBO", "AVB boot/vbmeta/vendor chains", "dynamic partitions and vendor_dlkm"],
+    "unknown": ["exact base DTB source/container", "vendor_boot-family packaging if hidden outside payload", "exact module ABI/KMI acceptance", "physical-unit slot and rollback state"],
+    "installable": false
+  },
+  "avb_boundary": {
+    "status": "ANALYSIS_ONLY",
+    "observed": ["AVB 1.0 metadata family", "chain partitions boot/vbmeta_system/vbmeta_vendor", "hash descriptor dtbo/vendor_boot", "hashtree descriptors for logical partitions"],
+    "policy": "No AVB removal, verity bypass, key replacement, signature patching, unlock or flashing."
+  },
+  "hardware_confidence": {
+    "ram": "LOW",
+    "ufs": "LOW",
+    "base_dtb": "LOW",
+    "dtbo_required_symbols": "HIGH_FOR_SELECTED_STOCK_PACKAGE",
+    "kernel_gki_likelihood": "HIGH",
+    "exact_kmi": "LOW"
+  },
+  "read_only_inventory_plan": {
+    "path": "docs/SEA-READONLY-INVENTORY-PLAN.md",
+    "execution_status": "NOT_EXECUTED",
+    "tool": "host-tools/device_command_safety.py",
+    "allowed_scope": ["adb devices", "adb get-state", "adb shell getprop", "adb shell uname -a", "adb shell cat /proc/meminfo", "adb shell cat /proc/partitions", "adb shell cat /proc/mounts", "adb shell ls -l /dev/block/by-name", "fastboot getvar product", "fastboot getvar current-slot", "fastboot getvar slot-count", "fastboot getvar unlocked", "fastboot getvar all"],
+    "forbidden_scope": ["adb push", "adb shell dd", "adb reboot", "fastboot flash", "fastboot erase", "fastboot format", "fastboot boot", "unlock", "BROM/preloader raw reads", "partition dumps"]
+  },
+  "recovery_model": {
+    "status": "BLOCKED",
+    "readiness": "NOT_READY",
+    "reason": "Exact unit identity, permitted recovery procedure, verified backup, base DTB and bootloader read-only inventory remain absent.",
+    "next_blocker": "Obtain or independently verify exact-unit stock base DTB origin/bytes and the stock bootloader/vendor-container contract, then merge stock DTBO offline."
+  },
+  "toolkit": {
+    "cli": "host-tools/firmware_forensics.py",
+    "new_commands": ["fdt-scan", "kernel", "module-metadata", "dt-match"],
+    "new_capabilities": ["structurally validated FDT candidate scanning", "DTBO fixup/symbol/local-fixup extraction", "evidence-only DT base matching", "gzip/raw Image and IKCONFIG analysis", "module metadata inventory without binary inspection", "static ADB/fastboot safety classification"],
+    "proprietary_files_versioned": false,
+    "device_transport_integration": false
+  },
+  "tests": {
+    "file": "tests/test_mission011.py",
+    "coverage": ["FDT false-positive rejection", "kernel gzip and IKCONFIG", "GKI evidence", "DT base matcher fail-closed stock flag", "60-symbol inventory", "module metadata", "dual tracks", "read-only command classification"]
+  },
+  "final_answers": {
+    "dtb_stock": "NOT_FOUND",
+    "dtb_appended_or_embedded": "NO_VALID_CANDIDATE",
+    "other_ota_partition": "NOT_IDENTIFIED",
+    "dtbo_symbols": 60,
+    "stock_merged_dt": "BLOCKED",
+    "gki": "GKI_LIKELY_NOT_CONFIRMED",
+    "vendor_modules": "vendor_dlkm EROFS with 209 module binaries and metadata",
+    "exact_6_6_source": "NOT_FOUND",
+    "ram_and_ufs": "LOW_CONFIDENCE",
+    "stock_gki_vs_legacy": "STOCK_GKI_MORE_PROMISING_FOR_RESEARCH; LEGACY_TRACK_PRESERVED",
+    "topazio_userspace": "THEORETICALLY_POSSIBLE_NOT_PROVEN",
+    "write_ready": false
+  }
+}

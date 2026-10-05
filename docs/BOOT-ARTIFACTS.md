@@ -7,12 +7,12 @@
 | MediaTek Boot ROM | INFERRED | evidência específica da unidade |
 | preloader | UNKNOWN | pacote stock ou dump autorizado |
 | LK/bootloader/fastboot | BLOCKED | transporte e estado do bootloader |
-| `boot.img` | UNKNOWN | formato, cmdline, ramdisk e hash stock |
-| `vendor_boot.img` | UNKNOWN | header/ramdisk vendor e módulos |
-| `init_boot.img` | UNKNOWN | presença e papel no SKU |
-| `dtbo.img`/DTB | UNKNOWN | inventário e correspondência exata |
-| `vbmeta`/AVB | UNKNOWN | chaves, rollback index e política da unidade |
-| `super`, system, vendor, product | UNKNOWN | partições e grupo dynamic |
+| `boot.img` | CONFIRMED_OFFLINE | v3, 4 KiB, gzip kernel, LZ4 ramdisk e hash stock |
+| `vendor_boot.img` | ABSENT_FROM_VERIFIED_MANIFEST | container alternativo não identificado |
+| `init_boot.img` | ABSENT_FROM_VERIFIED_MANIFEST | presença física da unidade ainda não enumerada |
+| `dtbo.img`/DTB | DTBO_CONFIRMED / BASE_DTB_BLOCKED | DTBO stock analisado; base DTB não localizado |
+| `vbmeta`/AVB | CONFIRMED_OFFLINE | família AVB reconstruída do payload; política da unidade não consultada |
+| `super`, system, vendor, product | PARTIAL_CONFIRMED | grupo dynamic `main` e Virtual A/B confirmados por manifest |
 | userdata/recovery | BLOCKED | enumeração somente leitura e recuperação |
 
 Android moderno usa formatos de boot versionados e pode separar ramdisk
@@ -93,3 +93,22 @@ gerado `STOCK_MERGED_DT`; a comparação semântica com a Missão 008 permanece
 fail-closed. Recovery está `NOT_READY`, e nenhuma escrita física foi feita.
 
 Relatório: [`mission-010.json`](../devices/xiaomi-sea/firmware-forensics/mission-010.json).
+
+## Missão 011 — origem do DTB e contrato Android 15
+
+A análise estrutural de `boot.img`, kernel gzip, kernel descomprimido e
+ramdisk LZ4 encontrou zero candidatos FDT válidos. O kernel
+`6.6.58-android15-8-g19e0e8cef6b2-4k` contém IKCONFIG, `CONFIG_MODULES=y`,
+`CONFIG_MODVERSIONS=y` e sinais fortes de GKI, mas o KMI exato não foi
+confirmado. O DTBO stock exige 60 símbolos-base; o inventário está em
+[`stock-required-base-symbols.json`](../devices/xiaomi-sea/reconstruction/stock-required-base-symbols.json).
+
+Uma faixa seletiva do `vendor_dlkm` oficial foi reconstruída offline, validou
+o hash EROFS e permitiu contar 209 módulos e registrar `modules.alias`,
+`modules.dep`, `modules.load` e `modules.softdep`, sem copiar binários
+proprietários ao repositório. O plano futuro de consultas somente leitura está
+em [`SEA-READONLY-INVENTORY-PLAN.md`](SEA-READONLY-INVENTORY-PLAN.md); ele não
+foi executado. O relatório completo é
+[`mission-011.json`](../devices/xiaomi-sea/firmware-forensics/mission-011.json).
+
+`STOCK_MERGED_DT`, geração de boot, instalação e recovery continuam bloqueados.

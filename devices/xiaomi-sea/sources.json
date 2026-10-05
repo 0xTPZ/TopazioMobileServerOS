@@ -367,6 +367,28 @@
       "installable": false
     }
   ],
+  "mission_011_sources": [
+    {
+      "id": "aosp-android15-common-6-6",
+      "classification": "OFFICIAL_REFERENCE",
+      "kind": "generic-gki-kernel",
+      "url": "https://android.googlesource.com/kernel/common/%2B/refs/heads/android15-6.6/android/",
+      "ref": "android15-6.6",
+      "role": "generic GKI comparison only; not the exact Xiaomi sea vendor source",
+      "exact_device_source": false
+    },
+    {
+      "id": "sea-stock-vendor-dlkm-ranged",
+      "classification": "OFFICIAL_PAYLOAD_FORENSICS",
+      "kind": "vendor_dlkm",
+      "url": "https://bigota.d.miui.com/OS2.0.209.0.VHZMIXM/sea_global-ota_full-OS2.0.209.0.VHZMIXM-user-15.0-e802b6d430.zip",
+      "role": "selective EROFS and module metadata inventory",
+      "zip_range": {"start": 4029054869, "end_inclusive": 4037364524, "size_bytes": 8309656},
+      "target_sha256": "0adae670b424f9fbe70f7a6e40e8829a5e033a187e7e0e612d0a342e5d0b54ff",
+      "module_binary_count": 209,
+      "versioned": false
+    }
+  ],
   "relationships": [
     {
       "from": "mt6781-sea-community-kernel",

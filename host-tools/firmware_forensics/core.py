@@ -281,6 +281,7 @@ def parse_fdt(data: bytes, source: str | None = None) -> dict[str, Any]:
     nodes: list[str] = []
     cursor = structure_offset
     end = structure_offset + structure_size
+    saw_end = False
     while cursor + 4 <= end:
         token = struct.unpack_from(">I", data, cursor)[0]
         cursor += 4
@@ -305,7 +306,7 @@ def parse_fdt(data: bytes, source: str | None = None) -> dict[str, Any]:
                 raise ValueError("invalid FDT property name offset")
             properties.append(
                 {
-                    "path": "/" + "/".join(nodes),
+                    "path": "/" + "/".join(node for node in nodes if node),
                     "name": strings[name_offset:name_end].decode("utf-8", "replace"),
                     "size_bytes": length,
                     "sha256": hashlib.sha256(value).hexdigest(),
@@ -317,6 +318,7 @@ def parse_fdt(data: bytes, source: str | None = None) -> dict[str, Any]:
         elif token == 4:  # FDT_NOP
             continue
         elif token == 9:  # FDT_END
+            saw_end = True
             break
         else:
             raise ValueError(f"unknown FDT token: {token}")
@@ -334,7 +336,233 @@ def parse_fdt(data: bytes, source: str | None = None) -> dict[str, Any]:
         "structure_size": structure_size,
         "node_count": len({item["path"] for item in properties}),
         "properties": properties,
-        "parse_complete": cursor <= end,
+        "parse_complete": saw_end and cursor <= end,
+    }
+
+
+def scan_fdt_candidates(data: bytes, source: str | None = None) -> dict[str, Any]:
+    """Find structurally valid FDTs in arbitrary binary data.
+
+    A magic value alone is not accepted. Header bounds, version fields and a
+    complete structure block ending in FDT_END must all validate before a
+    candidate is reported.
+    """
+
+    candidates: list[dict[str, Any]] = []
+    cursor = 0
+    while True:
+        cursor = data.find(b"\xd0\x0d\xfe\xed", cursor)
+        if cursor < 0:
+            break
+        candidate = {"offset": cursor, "magic": "d00dfeed", "valid": False}
+        try:
+            if cursor + 40 > len(data):
+                raise ValueError("truncated FDT header")
+            header = struct.unpack_from(">10I", data, cursor)
+            total_size, structure_offset, strings_offset = header[1:4]
+            version, last_compatible = header[5:7]
+            if not 16 <= version <= 17 or last_compatible > version:
+                raise ValueError("unsupported FDT version fields")
+            if total_size < 40 or cursor + total_size > len(data):
+                raise ValueError("FDT total_size outside candidate bounds")
+            parsed = parse_fdt(data[cursor : cursor + total_size], f"{source or '<bytes>'}+{cursor}")
+            if not parsed["parse_complete"]:
+                raise ValueError("FDT structure has no complete FDT_END")
+            compatible = [
+                item["text"]
+                for item in parsed["properties"]
+                if item["path"] == "/" and item["name"] == "compatible" and item["text"]
+            ]
+            model = [
+                item["text"]
+                for item in parsed["properties"]
+                if item["path"] == "/" and item["name"] == "model" and item["text"]
+            ]
+            candidate.update(
+                {
+                    "valid": True,
+                    "total_size": total_size,
+                    "sha256": hashlib.sha256(data[cursor : cursor + total_size]).hexdigest(),
+                    "version": version,
+                    "last_compatible_version": last_compatible,
+                    "node_count": parsed["node_count"],
+                    "property_count": len(parsed["properties"]),
+                    "compatible": compatible,
+                    "model": model,
+                }
+            )
+        except (ValueError, struct.error) as error:
+            candidate["error"] = str(error)
+        candidates.append(candidate)
+        cursor += 4
+    return {
+        "source": source,
+        "size_bytes": len(data),
+        "sha256": hashlib.sha256(data).hexdigest(),
+        "candidate_count": len(candidates),
+        "valid_count": sum(1 for item in candidates if item["valid"]),
+        "candidates": candidates,
+    }
+
+
+def analyze_dtbo_fdt(data: bytes, source: str | None = None) -> dict[str, Any]:
+    """Summarize overlay fixups, symbols and base-tree targets."""
+
+    parsed = parse_fdt(data, source)
+    fixups = [item for item in parsed["properties"] if item["path"] == "/__fixups__"]
+    symbols = [item for item in parsed["properties"] if item["path"] == "/__symbols__"]
+    local_fixups = [
+        item for item in parsed["properties"] if item["path"].startswith("/__local_fixups__")
+    ]
+    target_paths = [
+        item
+        for item in parsed["properties"]
+        if item["path"].startswith("/fragment@")
+        and item["path"].count("/") == 2
+        and item["name"] == "target-path"
+    ]
+    required = []
+    for item in fixups:
+        references = [value for value in (item.get("text") or "").split("\x00") if value]
+        required.append(
+            {
+                "symbol": item["name"],
+                "fixup_references": references,
+                "evidence": "stock DTBO /__fixups__ property",
+            }
+        )
+    return {
+        "source": source,
+        "sha256": hashlib.sha256(data).hexdigest(),
+        "total_size": parsed["total_size"],
+        "entry_parse_complete": parsed["parse_complete"],
+        "required_base_symbols": required,
+        "required_base_symbol_count": len(required),
+        "exported_overlay_symbols": [item["name"] for item in symbols],
+        "exported_overlay_symbol_count": len(symbols),
+        "local_fixup_property_count": len(local_fixups),
+        "target_path_count": len(target_paths),
+        "target_paths": [item.get("text") for item in target_paths],
+        "property_count": len(parsed["properties"]),
+    }
+
+
+def _candidate_symbols(parsed: dict[str, Any]) -> set[str]:
+    return {
+        item["name"]
+        for item in parsed.get("properties", [])
+        if item.get("path") == "/__symbols__"
+    }
+
+
+def _hardware_bucket(symbol: str) -> str:
+    lowered = symbol.lower()
+    buckets = {
+        "memory": ("reserved", "memory", "ssmr", "mtee", "svp", "wfd"),
+        "ufs": ("ufs", "ufshci"),
+        "usb": ("usb", "typec", "pd", "u2port"),
+        "power": ("charger", "battery", "gauge", "pmic", "auxadc", "rt5133", "mt6370"),
+        "display": ("dsi", "mtkfb", "dispsys", "irtx"),
+        "touch": ("touch", "ctp", "focal"),
+        "thermal": ("thermal",),
+        "camera": ("camera", "flashlight", "kd_camera"),
+    }
+    for bucket, terms in buckets.items():
+        if any(term in lowered for term in terms):
+            return bucket
+    return "board-and-interconnect"
+
+
+def match_dt_base(
+    dtbo_analysis: dict[str, Any], candidates: list[dict[str, Any]]
+) -> dict[str, Any]:
+    """Score DTB candidates against stock DTBO fixup requirements.
+
+    Scores are evidence metrics only. A candidate is never promoted to stock
+    without independent provenance and exact-unit evidence.
+    """
+
+    required = {item["symbol"] for item in dtbo_analysis.get("required_base_symbols", [])}
+    results = []
+    for candidate in candidates:
+        symbols = set(candidate.get("symbols", []))
+        if not symbols:
+            symbols = _candidate_symbols(candidate.get("parsed", {}))
+        matched = sorted(required & symbols)
+        missing = sorted(required - symbols)
+        structural_score = len(matched) / len(required) if required else 1.0
+        buckets = {_hardware_bucket(name) for name in required}
+        matched_buckets = {_hardware_bucket(name) for name in matched}
+        hardware_score = len(buckets & matched_buckets) / len(buckets) if buckets else 1.0
+        compatible = " ".join(candidate.get("compatible", []))
+        compatible_score = 1.0 if "mt6781" in compatible.lower() else 0.0
+        results.append(
+            {
+                "name": candidate.get("name") or candidate.get("source"),
+                "sha256": candidate.get("sha256"),
+                "matched_symbols": matched,
+                "missing_symbols": missing,
+                "compatible": candidate.get("compatible", []),
+                "compatible_score": compatible_score,
+                "structural_score": structural_score,
+                "hardware_score": hardware_score,
+                "overall_score": round(
+                    (compatible_score + structural_score + hardware_score) / 3, 4
+                ),
+                "status": "CANDIDATE_ONLY" if structural_score == 1.0 else "INCOMPLETE",
+            }
+        )
+    return {
+        "status": "COMPARED" if candidates else "BLOCKED_NO_CANDIDATES",
+        "required_symbol_count": len(required),
+        "candidates": results,
+        "stock_confirmation": False,
+    }
+
+
+def analyze_module_metadata(path: Path) -> dict[str, Any]:
+    """Inventory Android module metadata without extracting module binaries."""
+
+    path = path.resolve()
+    metadata_names = {
+        "modules.load",
+        "modules.dep",
+        "modules.alias",
+        "modules.softdep",
+        "modules.order",
+        "modules.builtin",
+        "modules.builtin.modinfo",
+    }
+    files: list[Path] = []
+    if path.is_dir():
+        files = [item for item in path.rglob("*") if item.is_file() and item.name in metadata_names]
+    elif path.is_file() and path.name in metadata_names:
+        files = [path]
+    result_files = []
+    for item in sorted(files):
+        raw = item.read_bytes()
+        text = raw.decode("utf-8", "replace")
+        entries = [
+            line.strip()
+            for line in text.splitlines()
+            if line.strip() and not line.lstrip().startswith("#")
+        ]
+        result_files.append(
+            {
+                "name": str(item.relative_to(path)) if path.is_dir() else item.name,
+                "size_bytes": len(raw),
+                "sha256": hashlib.sha256(raw).hexdigest(),
+                "line_count": len(text.splitlines()),
+                "entry_count": len(entries),
+                "entries_preview": entries[:20],
+            }
+        )
+    return {
+        "path": str(path),
+        "status": "FOUND" if result_files else "NOT_FOUND",
+        "metadata_file_count": len(result_files),
+        "files": result_files,
+        "module_binaries_inspected": False,
     }
 
 
@@ -538,14 +766,89 @@ def analyze_ramdisk(data: bytes) -> dict[str, Any]:
     return result
 
 
+def decompress_kernel(data: bytes) -> tuple[str, bytes]:
+    """Return the detected kernel format and uncompressed Image bytes."""
+
+    compression = compression_from_magic(data[:32])
+    if compression == "gzip":
+        return compression, gzip.decompress(data)
+    # arm64 Image stores its identifying magic at offset 0x38. A raw Image is
+    # already decompressed and must not be transformed or rewritten.
+    if len(data) >= 0x3C and data[0x38:0x3C] == b"ARMd":
+        return "raw-image", data
+    raise ValueError(f"unsupported kernel compression: {compression}")
+
+
+def _parse_kernel_config(config: bytes) -> dict[str, str]:
+    values: dict[str, str] = {}
+    for line in config.decode("utf-8", "replace").splitlines():
+        if line.startswith("CONFIG_") and "=" in line:
+            key, value = line.split("=", 1)
+            values[key] = value
+        elif line.startswith("# CONFIG_") and line.endswith(" is not set"):
+            values[line.split()[1]] = "n"
+    return values
+
+
+def extract_embedded_kernel_config(data: bytes) -> dict[str, Any]:
+    """Extract IKCONFIG metadata without returning proprietary kernel bytes."""
+
+    start_marker = b"IKCFG_ST"
+    end_marker = b"IKCFG_ED"
+    start = data.find(start_marker)
+    if start < 0:
+        return {"status": "NOT_FOUND"}
+    payload_start = start + len(start_marker)
+    end = data.find(end_marker, payload_start)
+    if end < 0:
+        return {"status": "TRUNCATED", "start_offset": start}
+    compressed = data[payload_start:end]
+    try:
+        config = gzip.decompress(compressed)
+    except (OSError, EOFError) as error:
+        return {"status": "DECOMPRESSION_ERROR", "start_offset": start, "error": str(error)}
+    values = _parse_kernel_config(config)
+    selected = {
+        name: values[name]
+        for name in (
+            "CONFIG_MODULES",
+            "CONFIG_MODVERSIONS",
+            "CONFIG_IKCONFIG",
+            "CONFIG_IKCONFIG_PROC",
+            "CONFIG_GKI_HACKS_TO_FIX",
+            "CONFIG_GKI_HIDDEN_UFS_CONFIGS",
+            "CONFIG_SCSI_UFSHCD",
+            "CONFIG_SCSI_UFSHCD_PLATFORM",
+            "CONFIG_WLAN",
+            "CONFIG_BT",
+            "CONFIG_DRM",
+            "CONFIG_THERMAL",
+            "CONFIG_DM_VERITY",
+            "CONFIG_EROFS_FS",
+            "CONFIG_EXT4_FS",
+            "CONFIG_F2FS_FS",
+        )
+        if name in values
+    }
+    return {
+        "status": "CONFIRMED",
+        "start_offset": start,
+        "end_offset": end + len(end_marker),
+        "compressed_size_bytes": len(compressed),
+        "config_size_bytes": len(config),
+        "compressed_sha256": hashlib.sha256(compressed).hexdigest(),
+        "config_sha256": hashlib.sha256(config).hexdigest(),
+        "config_option_count": len(values),
+        "selected_options": selected,
+    }
+
+
 def analyze_kernel(data: bytes) -> dict[str, Any]:
     compression = compression_from_magic(data[:32])
     result: dict[str, Any] = {"compressed_size_bytes": len(data), "compression": compression}
-    if compression != "gzip":
-        result["analysis_status"] = "COMPRESSION_UNSUPPORTED"
-        return result
     try:
-        uncompressed = gzip.decompress(data)
+        detected, uncompressed = decompress_kernel(data)
+        result["compression"] = detected
         result["uncompressed_size_bytes"] = len(uncompressed)
         result["sha256_uncompressed"] = hashlib.sha256(uncompressed).hexdigest()
         marker = b"Linux version "
@@ -555,8 +858,24 @@ def analyze_kernel(data: bytes) -> dict[str, Any]:
             result["linux_version_string"] = uncompressed[start : end if end >= 0 else start + 256].decode(
                 "utf-8", "replace"
             )
+        result["fdt_scan"] = scan_fdt_candidates(uncompressed, "kernel-uncompressed")
+        result["embedded_ikconfig"] = extract_embedded_kernel_config(uncompressed)
+        result["marker_counts"] = {
+            marker.decode("ascii"): uncompressed.count(marker)
+            for marker in (b"bootconfig", b"GKI", b"KMI", b"CONFIG_", b"IKCFG_ST")
+        }
+        result["gki_evidence"] = {
+            "linux_version_android15": "android15-" in result.get("linux_version_string", ""),
+            "kleaf_build_host": "kleaf@" in result.get("linux_version_string", ""),
+            "android_clang_18": "clang version 18." in result.get("linux_version_string", ""),
+            "config_gki_hacks": result.get("embedded_ikconfig", {}).get("selected_options", {}).get(
+                "CONFIG_GKI_HACKS_TO_FIX"
+            )
+            == "y",
+            "status": "GKI_LIKELY",
+        }
         result["analysis_status"] = "DECOMPRESSED"
-    except (OSError, EOFError) as error:
+    except (OSError, EOFError, ValueError) as error:
         result["analysis_status"] = "DECOMPRESSION_ERROR"
         result["error"] = str(error)
     return result
