@@ -27,3 +27,16 @@ aplica alterações diretamente ao checkout Xiaomi.
 Nenhum arquivo de firmware, blob vendor, imagem de boot ou dump do telefone é
 armazenado aqui. A lista estruturada de fontes, componentes, hashes e relações
 está em [`../sources.json`](../sources.json).
+
+## Missão 008 — device tree
+
+[`dt-analysis.json`](dt-analysis.json) registra a auditoria formal dos dois
+overlays oficiais, do `cust.dtsi` comunitário, do DTBO externo e da aplicação
+offline sobre o candidato público `mt6781.dtb`. Os grafos transitiveis estão
+em [`official-sea-dts-graph.json`](official-sea-dts-graph.json) e
+[`official-k6781-dts-graph.json`](official-k6781-dts-graph.json), além da base
+[`official-mt6781-base-dts-graph.json`](official-mt6781-base-dts-graph.json).
+
+O resultado é `PARTIAL / DT_STRUCTURALLY_VALID`: o `sea` DTB stock, o contexto
+`k6781v1_64_k419/cust.dtsi`, o layout de boot e a validação em hardware ainda
+não foram provados.

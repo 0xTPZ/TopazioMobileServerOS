@@ -1,0 +1,310 @@
+{
+  "schema": 1,
+  "mission": 8,
+  "device": "xiaomi-sea",
+  "status": "PARTIAL",
+  "highest_achieved_level": "DT_STRUCTURALLY_VALID",
+  "allowed_levels": [
+    "DT_SOURCE_ONLY",
+    "DT_STRUCTURALLY_VALID",
+    "DT_SEA_CANDIDATE",
+    "DT_BOOT_TEST_REQUIRED",
+    "DT_WORKING"
+  ],
+  "level_policy": {
+    "overall_level": "DT_STRUCTURALLY_VALID",
+    "dt_sea_candidate": false,
+    "dt_working": false,
+    "reason": "The overlay and a merged tree are structurally valid, but the exact stock sea base DTB and one official vendor include are not proven."
+  },
+  "source_roles": {
+    "official_source": {
+      "repository": "https://github.com/MiCode/Xiaomi_Kernel_OpenSource",
+      "branch": "sea-t-oss",
+      "commit": "6f6b84e0e2fa8d474db66798a051ec1835257729",
+      "classification": "OFFICIAL"
+    },
+    "sea_dts": {
+      "path": "arch/arm64/boot/dts/mediatek/sea.dts",
+      "role": "device/project-specific MediaTek overlay for CONFIG_ARCH_MTK_PROJECT=sea",
+      "evidence": [
+        "contains /plugin/; and no SoC base include",
+        "references sea/cust.dtsi, official camera/audio includes, touchscreen and fingerprint context",
+        "sea_defconfig selects CONFIG_ARCH_MTK_PROJECT=sea"
+      ],
+      "sha256": "a17e4aa238006313dccea87e051fdada7ae6a97d97c8f56a46fa6cf52297bb85",
+      "confidence": "high"
+    },
+    "k6781v1_64_k419_dts": {
+      "path": "arch/arm64/boot/dts/mediatek/k6781v1_64_k419.dts",
+      "role": "separate project overlay/reference for CONFIG_ARCH_MTK_PROJECT=k6781v1_64_k419, not the sea base",
+      "evidence": [
+        "contains /plugin/; and no SoC base include",
+        "references k6781v1_64_k419/cust.dtsi and a 1080x2300 touch include",
+        "the matching defconfig selects CONFIG_ARCH_MTK_PROJECT=k6781v1_64_k419"
+      ],
+      "sha256": "d5c56bd88161484e682876674f1014cf76e17b98f2cc682702a2edf85d676a1b",
+      "confidence": "high"
+    },
+    "mt6781_dts": {
+      "path": "arch/arm64/boot/dts/mediatek/mt6781.dts",
+      "role": "public SoC/base tree containing CPU, memory, UFS, USB, WiFi, PMIC, thermal and display nodes",
+      "sha256": "not recorded in repository; source commit is pinned above",
+      "confidence": "high as public SoC base, low as exact stock sea base"
+    }
+  },
+  "graphs": {
+    "official_sea": {
+      "path": "devices/xiaomi-sea/reconstruction/official-sea-dts-graph.json",
+      "status": "BLOCKED",
+      "nodes": 12,
+      "edges": 11,
+      "missing": ["sea/cust.dtsi"]
+    },
+    "official_k6781": {
+      "path": "devices/xiaomi-sea/reconstruction/official-k6781-dts-graph.json",
+      "status": "BLOCKED",
+      "nodes": 8,
+      "edges": 7,
+      "missing": ["k6781v1_64_k419/cust.dtsi"]
+    },
+    "official_mt6781_base": {
+      "path": "devices/xiaomi-sea/reconstruction/official-mt6781-base-dts-graph.json",
+      "status": "COMPLETE",
+      "nodes": 26,
+      "edges": 26,
+      "missing": []
+    },
+    "node_contract": [
+      "path",
+      "source",
+      "sha256",
+      "provenance",
+      "confidence",
+      "required",
+      "available"
+    ]
+  },
+  "cust_dtsi_audit": {
+    "sea/cust.dtsi": {
+      "official_available": false,
+      "community_available": true,
+      "community_repository": "https://github.com/mt6781-sea/android_kernel_xiaomi_mt6781",
+      "community_branch": "lineage-23.2",
+      "community_commit": "ae44e42c393b44b1534a7fcd7065366abe6bfe65",
+      "community_sha256": "9ba54ed35a7ecb82c9b2d9ee5ed651162d8ca689174b0ca2ec29123189528216",
+      "file_header": "MTK SP DrvGen Version 3.5.160809 for MT6781",
+      "confidence": "STRONG_CANDIDATE",
+      "exact_official_equivalence": "UNPROVEN",
+      "imported_into_topazio": false,
+      "property_groups": {
+        "adc": "PRESENT / community-derived",
+        "clock_buffer": "PRESENT / community-derived",
+        "i2c_and_camera_addresses": "PRESENT / community-derived",
+        "gpio_and_gpio_usage": "PRESENT / community-derived",
+        "eint_and_md1_eint": "PRESENT / community-derived",
+        "pmic": "PRESENT / community-derived",
+        "power_and_charging": "PRESENT / community-derived",
+        "keypad": "PRESENT / community-derived"
+      },
+      "material_differences": [
+        "community sea.dts uses a quoted sea/cust.dtsi include while official sea.dts uses an angle-bracket include",
+        "community tree uses cust_mt6781_sea_camera.dtsi while official sea.dts uses cust_mt6781_camera.dtsi",
+        "one public candidate is not independent convergence"
+      ]
+    },
+    "k6781v1_64_k419/cust.dtsi": {
+      "official_available": false,
+      "community_available": false,
+      "status": "UNKNOWN",
+      "public_versions_located": 0,
+      "content_equivalence": "not assessable",
+      "must_not_be_fabricated": true
+    }
+  },
+  "dtbo_candidate": {
+    "state": "BUILT_UNTESTED",
+    "availability": "external_build_checkout_only",
+    "path": "/root/topazio-sea-clang-build/sea-community-candidate.dtbo",
+    "size_bytes": 67869,
+    "sha256": "34febe33284575825169a1b46f6f438491bd5f7ffd7931ed44dc746f0f1b01ab",
+    "fdt_version": 17,
+    "source_inputs": [
+      "official sea.dts and its resolved official includes",
+      "community sea/cust.dtsi supplied as an external include"
+    ],
+    "dtc": {
+      "exit_code": 0,
+      "warning_lines": 113,
+      "warning_classes": [
+        "overlay-only reg/address-cell warnings",
+        "overlay-only unit-address warnings",
+        "overlay-only unresolved phandle/gpio/interrupt warnings",
+        "prerequisite warnings caused by the absence of a base tree"
+      ],
+      "decompile_exit_code": 0,
+      "rebuild_byte_identical": true
+    },
+    "commands": {
+      "preprocess": "clang -E -nostdinc -undef -D__DTS__ -D__ASSEMBLY__ -I<official>/arch/arm64/boot/dts -I<official>/arch/arm64/boot/dts/mediatek -I<community>/arch/arm64/boot/dts/mediatek -I<official>/include -I<official>/include/uapi -I<official>/arch/arm64/include -x assembler-with-cpp <official>/arch/arm64/boot/dts/mediatek/sea.dts",
+      "compile_overlay": "dtc -@ -O dtb -b 0 -i<official>/arch/arm64/boot/dts/mediatek -i<official>/scripts/dtc/include-prefixes -i<community>/arch/arm64/boot/dts/mediatek <preprocessed-sea.dts>",
+      "compile_base": "clang -E -nostdinc -undef -D__DTS__ -D__ASSEMBLY__ -I<official>/arch/arm64/boot/dts -I<official>/arch/arm64/boot/dts/mediatek -I<official>/include -I<official>/include/uapi -I<official>/arch/arm64/include -I<build>/include -x assembler-with-cpp <official>/arch/arm64/boot/dts/mediatek/mt6781.dts | dtc -@ -I dts -O dtb",
+      "apply": "fdtoverlay -i <mt6781.dtb> -o <merged.dtb> -v <sea-community-candidate.dtbo>"
+    },
+    "structure": {
+      "fragment_count": 65,
+      "fixup_symbol_count": 51,
+      "exported_symbol_count": 134,
+      "local_fixup_node_count": 11,
+      "target_path_count": 0,
+      "target_phandle_fragments": 65
+    },
+    "installable": false,
+    "phone_write_performed": false
+  },
+  "required_base_symbols": [
+    "i2c0",
+    "pio",
+    "xiaomi_touch",
+    "touch",
+    "spi0",
+    "fpsensor_finger",
+    "reserved_memory",
+    "chosen",
+    "odm",
+    "gps",
+    "mt6370_pmu",
+    "thermal_message",
+    "mt6370_typec",
+    "i2c2",
+    "i2c5",
+    "usbpd_pm",
+    "cp_qc30",
+    "bat_gm30",
+    "spi3",
+    "accdet",
+    "keypad",
+    "mtkfb",
+    "dispsys_config",
+    "dsi0",
+    "irtx_pwm",
+    "auxadc",
+    "md_auxadc",
+    "pmic_clock_buffer_ctrl",
+    "i2c1",
+    "i2c3",
+    "i2c4",
+    "i2c6",
+    "i2c7",
+    "i2c8",
+    "i2c9",
+    "gpio_usage_mapping",
+    "gpio",
+    "mrdump_ext_rst",
+    "fpsensor_fp_eint",
+    "irq_nfc",
+    "swtp",
+    "dsi_te",
+    "md1_sim1_hot_plug_eint",
+    "kd_camera_hw1",
+    "flashlights_ocp8132",
+    "camera_af_node",
+    "mt_pmic_vibr_ldo_reg",
+    "camera_af_hw_node",
+    "rt5133_ldo3",
+    "rt5133_ldo2",
+    "rt5133_gpio1"
+  ],
+  "base_candidates": {
+    "most_defensible_public_candidate": {
+      "name": "mt6781.dtb",
+      "source": "official mt6781.dts",
+      "generated_for_offline_test": true,
+      "base_sha256": "a3ad7e28d2713bda7b1ecaac5616d469ed61d476fc0a61e886d8aa7b1f1b0073",
+      "dtc_warning_lines": 60,
+      "confidence": "LOW_FOR_EXACT_STOCK_SEA",
+      "why": "It is the matching public MT6781 SoC base and resolves every required fixup label used by the candidate, but the vendor build variables that select the exact stock base are not published here."
+    },
+    "rejected_as_sea_proof": [
+      "auto2712p1v1-ivi-boot.dtb",
+      "auto2712p1v1-ivi-nand-boot.dtb"
+    ],
+    "unknown": [
+      "exact stock sea base DTB name and hash",
+      "vendor values for PLATFORM_DTB_NAME and PROJECT_DTB_NAMES"
+    ]
+  },
+  "offline_apply": {
+    "base": {
+      "path": "external /tmp/mt6781-m008.dtb",
+      "sha256": "a3ad7e28d2713bda7b1ecaac5616d469ed61d476fc0a61e886d8aa7b1f1b0073",
+      "size_bytes": 137825
+    },
+    "overlay": {
+      "path": "external /root/topazio-sea-clang-build/sea-community-candidate.dtbo",
+      "sha256": "34febe33284575825169a1b46f6f438491bd5f7ffd7931ed44dc746f0f1b01ab",
+      "size_bytes": 67869
+    },
+    "merged": {
+      "tool": "fdtoverlay",
+      "exit_code": 0,
+      "sha256": "c5e72980d08dea831abc0ecc6526b426337d90650991db75d53de048be57424e",
+      "size_bytes": 191453,
+      "structural_decompile_exit_code": 0,
+      "structural_recompile_exit_code": 0,
+      "structural_recompile_sha256": "9178b0bf50f3b5a7e6285b819019a284c2d3ff03d08d30d26a27a5845af4363e",
+      "structural_recompile_warning_lines": 1045
+    },
+    "interpretation": "PASS mechanically for the public mt6781 base; NOT a proof of the unit's stock sea merge."
+  },
+  "critical_coverage": {
+    "cpu": {"status": "PRESENT_BASE_ONLY", "evidence": "mt6781.dts cpus/opp tables", "exact_unit": "UNKNOWN"},
+    "ram": {"status": "PRESENT_BASE_ONLY", "evidence": "mt6781.dts memory node", "exact_layout": "UNKNOWN", "safety": "DANGEROUS_AMBIGUITY"},
+    "ufs": {"status": "PRESENT_BASE_ONLY", "evidence": "ufshci@11270000, ufsphy, clocks and resets in mt6781.dts", "exact_unit": "UNKNOWN", "safety": "DANGEROUS_AMBIGUITY"},
+    "usb": {"status": "PRESENT_PARTIAL", "evidence": "usb0/usb1p/PHY in base plus USB-C/PD overlay nodes", "exact_unit": "UNKNOWN"},
+    "wifi": {"status": "PRESENT_BASE_ONLY", "evidence": "wifi@18000000 and reserved WiFi memory in mt6781.dts", "board_firmware": "UNKNOWN"},
+    "power_charging": {"status": "PRESENT_PARTIAL", "evidence": "base charger/battery plus bq2589x/bq2597x/PD overlay", "vendor_equivalence": "UNPROVEN"},
+    "thermal": {"status": "PRESENT_PARTIAL", "evidence": "base thermal nodes plus sea board-sensor property", "exact_sensor_map": "UNKNOWN"},
+    "display": {"status": "PRESENT_PARTIAL", "evidence": "mtkfb/dsi0 base plus panel fragments", "panel_identity": "candidate_only"},
+    "touch": {"status": "PRESENT_PARTIAL", "evidence": "official touchscreen include plus Focaltech fragments", "firmware": "MISSING_OR_PROPRIETARY"},
+    "interrupts": {"status": "PRESENT_PARTIAL", "evidence": "GIC/pio base symbols and overlay fixups", "exact_mapping": "UNKNOWN"},
+    "clocks": {"status": "PRESENT_BASE_ONLY", "evidence": "mt6781 clock controller and UFS/DSI clocks", "exact_board_override": "UNKNOWN"},
+    "regulators": {"status": "PRESENT_PARTIAL", "evidence": "PMIC/regulator labels used by overlay", "exact_board_override": "UNKNOWN"},
+    "reserved_memory": {"status": "PRESENT_BASE_ONLY", "evidence": "base reserved-memory labels; sea overlay target is empty", "exact_carveouts": "UNKNOWN", "safety": "DANGEROUS_AMBIGUITY"}
+  },
+  "stock_package_research": {
+    "status": "NOT_DOWNLOADED",
+    "official_exact_unit_package": "NOT_ESTABLISHED",
+    "community_vendor_package": "PROPRIETARY_DO_NOT_IMPORT",
+    "phone_or_firmware_auto_download": false,
+    "proprietary_blobs_added": false,
+    "next_safe_step": "research official package metadata and hashes only, with exact unit identity and legal redistribution review"
+  },
+  "boot_artifact_research": {
+    "kernel_plus_dt_research_allowed": true,
+    "scope": "offline format/layout/hash research only",
+    "installable_image_produced": false,
+    "missing_for_first_temporary_boot": [
+      "exact stock sea base DTB or a vendor-confirmed equivalent",
+      "published or licensed k6781v1_64_k419/cust.dtsi context where required",
+      "exact unit boot/vendor_boot/init_boot/dtbo layout and hashes",
+      "vendor firmware and module contract, including touchscreen firmware",
+      "verified AVB/bootloader/recovery procedure and unit identity"
+    ]
+  },
+  "decision": {
+    "pass_gate": false,
+    "decision": "PARTIAL",
+    "recovery_readiness": "BLOCKED",
+    "ready_for_phone_write": false,
+    "phone_writes_performed": false,
+    "second_reference_device": "RECOMMENDED",
+    "mission_009_started": false
+  },
+  "kernel_baseline": {
+    "id": "SEA_SERVER_MINIMAL_KERNEL_001",
+    "path": "devices/xiaomi-sea/server-minimal/kernel-baseline.json",
+    "regression_validator": "host-tools/verify_kernel_baseline.py",
+    "changed_in_mission_008": false
+  }
+}

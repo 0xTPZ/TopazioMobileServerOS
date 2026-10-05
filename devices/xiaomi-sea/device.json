@@ -86,6 +86,8 @@
       "SERVER_MINIMAL": "SOURCE_ONLY"
     },
     "dts_graph": "docs/DTS-DEPENDENCY-GRAPH.md",
+    "mission_008_dt_analysis": "reconstruction/dt-analysis.json",
+    "mission_008_kernel_baseline": "server-minimal/kernel-baseline.json",
     "kernel_reconstruction": "docs/KERNEL-RECONSTRUCTION.md",
     "cust_dtsi": {
       "status": "STRONG_CANDIDATE",

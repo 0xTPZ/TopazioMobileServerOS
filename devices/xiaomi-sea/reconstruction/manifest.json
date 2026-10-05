@@ -93,6 +93,18 @@
       }
     }
   },
+  "mission_008_device_tree": {
+    "analysis": "devices/xiaomi-sea/reconstruction/dt-analysis.json",
+    "official_sea_graph": "devices/xiaomi-sea/reconstruction/official-sea-dts-graph.json",
+    "official_k6781_graph": "devices/xiaomi-sea/reconstruction/official-k6781-dts-graph.json",
+    "official_mt6781_graph": "devices/xiaomi-sea/reconstruction/official-mt6781-base-dts-graph.json",
+    "kernel_baseline": "devices/xiaomi-sea/server-minimal/kernel-baseline.json",
+    "highest_level": "DT_STRUCTURALLY_VALID",
+    "dt_sea_candidate": false,
+    "offline_apply": "PASS_ON_PUBLIC_MT6781_BASE_ONLY",
+    "recovery_readiness": "BLOCKED",
+    "write_device": false
+  },
   "patch_order": [],
   "artifact_state_vocabulary": [
     "SOURCE_ONLY",

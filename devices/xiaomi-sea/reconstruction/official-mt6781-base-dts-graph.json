@@ -1,0 +1,600 @@
+{
+  "edges": [
+    {
+      "from": "/root/topazio-sea-source/arch/arm64/boot/dts/mediatek/bat_setting/mt6781_battery_prop.dtsi",
+      "include": "mt6781_battery_prop_dim2_ext.dtsi",
+      "to": "/root/topazio-sea-source/arch/arm64/boot/dts/mediatek/bat_setting/mt6781_battery_prop_dim2_ext.dtsi"
+    },
+    {
+      "from": "/root/topazio-sea-source/arch/arm64/boot/dts/mediatek/cust_mt6781_msdc.dtsi",
+      "include": "dt-bindings/gpio/gpio.h",
+      "to": "/root/topazio-sea-source/include/dt-bindings/gpio/gpio.h"
+    },
+    {
+      "from": "/root/topazio-sea-source/arch/arm64/boot/dts/mediatek/mt6781.dts",
+      "include": "generated/autoconf.h",
+      "to": "/root/topazio-sea-clang-build/include/generated/autoconf.h"
+    },
+    {
+      "from": "/root/topazio-sea-source/arch/arm64/boot/dts/mediatek/mt6781.dts",
+      "include": "mediatek/bat_setting/mt6781_battery_prop.dtsi",
+      "to": "/root/topazio-sea-source/arch/arm64/boot/dts/mediatek/bat_setting/mt6781_battery_prop.dtsi"
+    },
+    {
+      "from": "/root/topazio-sea-source/arch/arm64/boot/dts/mediatek/mt6781.dts",
+      "include": "mediatek/cust_mt6781_msdc.dtsi",
+      "to": "/root/topazio-sea-source/arch/arm64/boot/dts/mediatek/cust_mt6781_msdc.dtsi"
+    },
+    {
+      "from": "/root/topazio-sea-source/arch/arm64/boot/dts/mediatek/mt6781.dts",
+      "include": "mediatek/mt6366.dtsi",
+      "to": "/root/topazio-sea-source/arch/arm64/boot/dts/mediatek/mt6366.dtsi"
+    },
+    {
+      "from": "/root/topazio-sea-source/arch/arm64/boot/dts/mediatek/mt6781.dts",
+      "include": "mediatek/mt6370.dtsi",
+      "to": "/root/topazio-sea-source/arch/arm64/boot/dts/mediatek/mt6370.dtsi"
+    },
+    {
+      "from": "/root/topazio-sea-source/arch/arm64/boot/dts/mediatek/mt6781.dts",
+      "include": "mediatek/mt6370_pd.dtsi",
+      "to": "/root/topazio-sea-source/arch/arm64/boot/dts/mediatek/mt6370_pd.dtsi"
+    },
+    {
+      "from": "/root/topazio-sea-source/arch/arm64/boot/dts/mediatek/mt6781.dts",
+      "include": "mediatek/mt6781-clkitg.dtsi",
+      "to": "/root/topazio-sea-source/arch/arm64/boot/dts/mediatek/mt6781-clkitg.dtsi"
+    },
+    {
+      "from": "/root/topazio-sea-source/arch/arm64/boot/dts/mediatek/mt6781.dts",
+      "include": "mediatek/rt5133_for_6781.dtsi",
+      "to": "/root/topazio-sea-source/arch/arm64/boot/dts/mediatek/rt5133_for_6781.dtsi"
+    },
+    {
+      "from": "/root/topazio-sea-source/arch/arm64/boot/dts/mediatek/mt6781.dts",
+      "include": "mediatek/tcpc_config.dtsi",
+      "to": "/root/topazio-sea-source/arch/arm64/boot/dts/mediatek/tcpc_config.dtsi"
+    },
+    {
+      "from": "/root/topazio-sea-source/arch/arm64/boot/dts/mediatek/mt6781.dts",
+      "include": "mediatek/trusty.dtsi",
+      "to": "/root/topazio-sea-source/arch/arm64/boot/dts/mediatek/trusty.dtsi"
+    },
+    {
+      "from": "/root/topazio-sea-source/arch/arm64/boot/dts/mediatek/mt6781.dts",
+      "include": "dt-bindings/clock/mt6781-clk.h",
+      "to": "/root/topazio-sea-source/include/dt-bindings/clock/mt6781-clk.h"
+    },
+    {
+      "from": "/root/topazio-sea-source/arch/arm64/boot/dts/mediatek/mt6781.dts",
+      "include": "dt-bindings/gce/mt6781-gce.h",
+      "to": "/root/topazio-sea-source/include/dt-bindings/gce/mt6781-gce.h"
+    },
+    {
+      "from": "/root/topazio-sea-source/arch/arm64/boot/dts/mediatek/mt6781.dts",
+      "include": "dt-bindings/iio/mt635x-auxadc.h",
+      "to": "/root/topazio-sea-source/include/dt-bindings/iio/mt635x-auxadc.h"
+    },
+    {
+      "from": "/root/topazio-sea-source/arch/arm64/boot/dts/mediatek/mt6781.dts",
+      "include": "dt-bindings/interrupt-controller/arm-gic.h",
+      "to": "/root/topazio-sea-source/include/dt-bindings/interrupt-controller/arm-gic.h"
+    },
+    {
+      "from": "/root/topazio-sea-source/arch/arm64/boot/dts/mediatek/mt6781.dts",
+      "include": "dt-bindings/interrupt-controller/irq.h",
+      "to": "/root/topazio-sea-source/include/dt-bindings/interrupt-controller/irq.h"
+    },
+    {
+      "from": "/root/topazio-sea-source/arch/arm64/boot/dts/mediatek/mt6781.dts",
+      "include": "dt-bindings/memory/mt6781-larb-port.h",
+      "to": "/root/topazio-sea-source/include/dt-bindings/memory/mt6781-larb-port.h"
+    },
+    {
+      "from": "/root/topazio-sea-source/arch/arm64/boot/dts/mediatek/mt6781.dts",
+      "include": "dt-bindings/mfd/mt6366-irq.h",
+      "to": "/root/topazio-sea-source/include/dt-bindings/mfd/mt6366-irq.h"
+    },
+    {
+      "from": "/root/topazio-sea-source/arch/arm64/boot/dts/mediatek/mt6781.dts",
+      "include": "dt-bindings/mmc/mt6781-msdc.h",
+      "to": "/root/topazio-sea-source/include/dt-bindings/mmc/mt6781-msdc.h"
+    },
+    {
+      "from": "/root/topazio-sea-source/arch/arm64/boot/dts/mediatek/mt6781.dts",
+      "include": "dt-bindings/phy/phy.h",
+      "to": "/root/topazio-sea-source/include/dt-bindings/phy/phy.h"
+    },
+    {
+      "from": "/root/topazio-sea-source/arch/arm64/boot/dts/mediatek/mt6781.dts",
+      "include": "dt-bindings/pinctrl/mt6781-pinfunc.h",
+      "to": "/root/topazio-sea-source/include/dt-bindings/pinctrl/mt6781-pinfunc.h"
+    },
+    {
+      "from": "/root/topazio-sea-source/arch/arm64/boot/dts/mediatek/mt6781.dts",
+      "include": "dt-bindings/reset/ti-syscon.h",
+      "to": "/root/topazio-sea-source/include/dt-bindings/reset/ti-syscon.h"
+    },
+    {
+      "from": "/root/topazio-sea-source/arch/arm64/boot/dts/mediatek/mt6781.dts",
+      "include": "dt-bindings/soc/mediatek,boot-mode.h",
+      "to": "/root/topazio-sea-source/include/dt-bindings/soc/mediatek,boot-mode.h"
+    },
+    {
+      "from": "/root/topazio-sea-source/include/dt-bindings/interrupt-controller/arm-gic.h",
+      "include": "dt-bindings/interrupt-controller/irq.h",
+      "to": "/root/topazio-sea-source/include/dt-bindings/interrupt-controller/irq.h"
+    },
+    {
+      "from": "/root/topazio-sea-source/include/dt-bindings/pinctrl/mt6781-pinfunc.h",
+      "include": "mt65xx.h",
+      "to": "/root/topazio-sea-source/include/dt-bindings/pinctrl/mt65xx.h"
+    }
+  ],
+  "entry": "/root/topazio-sea-source/arch/arm64/boot/dts/mediatek/mt6781.dts",
+  "include_dirs": [
+    "/root/topazio-sea-source/arch/arm64/boot/dts",
+    "/root/topazio-sea-source/arch/arm64/boot/dts/mediatek",
+    "/root/topazio-sea-source/include",
+    "/root/topazio-sea-source",
+    "/root/topazio-sea-clang-build/include"
+  ],
+  "missing": [],
+  "nodes": [
+    {
+      "available": true,
+      "confidence": "high",
+      "exists": true,
+      "includes": [],
+      "path": "/root/topazio-sea-clang-build/include/generated/autoconf.h",
+      "provenance": {
+        "commit": "6f6b84e0e2fa8d474db66798a051ec1835257729",
+        "relative_path": null,
+        "repository": "https://github.com/MiCode/Xiaomi_Kernel_OpenSource",
+        "source_id": "xiaomi-kernel-sea-t-oss"
+      },
+      "required": true,
+      "sha256": "b5a9356c8e1d3a9154da9b2251e2758b155af51e4b643f7c8f43cf0c324f7e34",
+      "source": "xiaomi-kernel-sea-t-oss"
+    },
+    {
+      "available": true,
+      "confidence": "high",
+      "exists": true,
+      "includes": [
+        "mt6781_battery_prop_dim2_ext.dtsi"
+      ],
+      "path": "/root/topazio-sea-source/arch/arm64/boot/dts/mediatek/bat_setting/mt6781_battery_prop.dtsi",
+      "provenance": {
+        "commit": "6f6b84e0e2fa8d474db66798a051ec1835257729",
+        "relative_path": "arch/arm64/boot/dts/mediatek/bat_setting/mt6781_battery_prop.dtsi",
+        "repository": "https://github.com/MiCode/Xiaomi_Kernel_OpenSource",
+        "source_id": "xiaomi-kernel-sea-t-oss"
+      },
+      "required": true,
+      "sha256": "f3522f13f54b34e44ee2cf76d627b710854abd53bd6d59e722191b8368e957e3",
+      "source": "xiaomi-kernel-sea-t-oss"
+    },
+    {
+      "available": true,
+      "confidence": "high",
+      "exists": true,
+      "includes": [],
+      "path": "/root/topazio-sea-source/arch/arm64/boot/dts/mediatek/bat_setting/mt6781_battery_prop_dim2_ext.dtsi",
+      "provenance": {
+        "commit": "6f6b84e0e2fa8d474db66798a051ec1835257729",
+        "relative_path": "arch/arm64/boot/dts/mediatek/bat_setting/mt6781_battery_prop_dim2_ext.dtsi",
+        "repository": "https://github.com/MiCode/Xiaomi_Kernel_OpenSource",
+        "source_id": "xiaomi-kernel-sea-t-oss"
+      },
+      "required": true,
+      "sha256": "7b4cd3fa91e3af1f0e9d32a33ee4ee75bed7aaf9a87a1a5e439f0a8655374016",
+      "source": "xiaomi-kernel-sea-t-oss"
+    },
+    {
+      "available": true,
+      "confidence": "high",
+      "exists": true,
+      "includes": [
+        "dt-bindings/gpio/gpio.h"
+      ],
+      "path": "/root/topazio-sea-source/arch/arm64/boot/dts/mediatek/cust_mt6781_msdc.dtsi",
+      "provenance": {
+        "commit": "6f6b84e0e2fa8d474db66798a051ec1835257729",
+        "relative_path": "arch/arm64/boot/dts/mediatek/cust_mt6781_msdc.dtsi",
+        "repository": "https://github.com/MiCode/Xiaomi_Kernel_OpenSource",
+        "source_id": "xiaomi-kernel-sea-t-oss"
+      },
+      "required": true,
+      "sha256": "094eb8a2ab2baac585662e9dea2527f577380ddc2e1088858d18c6139eb0f5d8",
+      "source": "xiaomi-kernel-sea-t-oss"
+    },
+    {
+      "available": true,
+      "confidence": "high",
+      "exists": true,
+      "includes": [],
+      "path": "/root/topazio-sea-source/arch/arm64/boot/dts/mediatek/mt6366.dtsi",
+      "provenance": {
+        "commit": "6f6b84e0e2fa8d474db66798a051ec1835257729",
+        "relative_path": "arch/arm64/boot/dts/mediatek/mt6366.dtsi",
+        "repository": "https://github.com/MiCode/Xiaomi_Kernel_OpenSource",
+        "source_id": "xiaomi-kernel-sea-t-oss"
+      },
+      "required": true,
+      "sha256": "b4ad3afc21bf7909b0181664297c1510a9886b2a9502fbecac59e41fe2ed9d64",
+      "source": "xiaomi-kernel-sea-t-oss"
+    },
+    {
+      "available": true,
+      "confidence": "high",
+      "exists": true,
+      "includes": [],
+      "path": "/root/topazio-sea-source/arch/arm64/boot/dts/mediatek/mt6370.dtsi",
+      "provenance": {
+        "commit": "6f6b84e0e2fa8d474db66798a051ec1835257729",
+        "relative_path": "arch/arm64/boot/dts/mediatek/mt6370.dtsi",
+        "repository": "https://github.com/MiCode/Xiaomi_Kernel_OpenSource",
+        "source_id": "xiaomi-kernel-sea-t-oss"
+      },
+      "required": true,
+      "sha256": "08c00711ea87271eb3747fac01c8bedb60177780a6d2e753f93e781143371f31",
+      "source": "xiaomi-kernel-sea-t-oss"
+    },
+    {
+      "available": true,
+      "confidence": "high",
+      "exists": true,
+      "includes": [],
+      "path": "/root/topazio-sea-source/arch/arm64/boot/dts/mediatek/mt6370_pd.dtsi",
+      "provenance": {
+        "commit": "6f6b84e0e2fa8d474db66798a051ec1835257729",
+        "relative_path": "arch/arm64/boot/dts/mediatek/mt6370_pd.dtsi",
+        "repository": "https://github.com/MiCode/Xiaomi_Kernel_OpenSource",
+        "source_id": "xiaomi-kernel-sea-t-oss"
+      },
+      "required": true,
+      "sha256": "09bcc3edfd04f5c7f97188f636e21b3273de75d48b0d68d96de74927591e7bcd",
+      "source": "xiaomi-kernel-sea-t-oss"
+    },
+    {
+      "available": true,
+      "confidence": "high",
+      "exists": true,
+      "includes": [],
+      "path": "/root/topazio-sea-source/arch/arm64/boot/dts/mediatek/mt6781-clkitg.dtsi",
+      "provenance": {
+        "commit": "6f6b84e0e2fa8d474db66798a051ec1835257729",
+        "relative_path": "arch/arm64/boot/dts/mediatek/mt6781-clkitg.dtsi",
+        "repository": "https://github.com/MiCode/Xiaomi_Kernel_OpenSource",
+        "source_id": "xiaomi-kernel-sea-t-oss"
+      },
+      "required": true,
+      "sha256": "c02f8e8a01a307e152b4e9db393c5465a44af01dba6dd97e63b70ae71e0d78e1",
+      "source": "xiaomi-kernel-sea-t-oss"
+    },
+    {
+      "available": true,
+      "confidence": "high",
+      "exists": true,
+      "includes": [
+        "dt-bindings/mmc/mt6781-msdc.h",
+        "dt-bindings/clock/mt6781-clk.h",
+        "dt-bindings/iio/mt635x-auxadc.h",
+        "dt-bindings/interrupt-controller/arm-gic.h",
+        "dt-bindings/interrupt-controller/irq.h",
+        "dt-bindings/memory/mt6781-larb-port.h",
+        "dt-bindings/mfd/mt6366-irq.h",
+        "dt-bindings/reset/ti-syscon.h",
+        "dt-bindings/gce/mt6781-gce.h",
+        "dt-bindings/phy/phy.h",
+        "generated/autoconf.h",
+        "dt-bindings/pinctrl/mt6781-pinfunc.h",
+        "dt-bindings/soc/mediatek,boot-mode.h",
+        "mediatek/bat_setting/mt6781_battery_prop.dtsi",
+        "mediatek/mt6366.dtsi",
+        "mediatek/cust_mt6781_msdc.dtsi",
+        "mediatek/tcpc_config.dtsi",
+        "mediatek/mt6370.dtsi",
+        "mediatek/mt6370_pd.dtsi",
+        "mediatek/mt6781-clkitg.dtsi",
+        "mediatek/rt5133_for_6781.dtsi",
+        "mediatek/trusty.dtsi"
+      ],
+      "path": "/root/topazio-sea-source/arch/arm64/boot/dts/mediatek/mt6781.dts",
+      "provenance": {
+        "commit": "6f6b84e0e2fa8d474db66798a051ec1835257729",
+        "relative_path": "arch/arm64/boot/dts/mediatek/mt6781.dts",
+        "repository": "https://github.com/MiCode/Xiaomi_Kernel_OpenSource",
+        "source_id": "xiaomi-kernel-sea-t-oss"
+      },
+      "required": true,
+      "sha256": "bdaa558465b94494bb954adda0d7039fe722aa780022b9605898f9957ae57ce9",
+      "source": "xiaomi-kernel-sea-t-oss"
+    },
+    {
+      "available": true,
+      "confidence": "high",
+      "exists": true,
+      "includes": [],
+      "path": "/root/topazio-sea-source/arch/arm64/boot/dts/mediatek/rt5133_for_6781.dtsi",
+      "provenance": {
+        "commit": "6f6b84e0e2fa8d474db66798a051ec1835257729",
+        "relative_path": "arch/arm64/boot/dts/mediatek/rt5133_for_6781.dtsi",
+        "repository": "https://github.com/MiCode/Xiaomi_Kernel_OpenSource",
+        "source_id": "xiaomi-kernel-sea-t-oss"
+      },
+      "required": true,
+      "sha256": "d933146e6bb794077dd0652f6b29c19b6ca7df29625fd52f327b9573f3672ab5",
+      "source": "xiaomi-kernel-sea-t-oss"
+    },
+    {
+      "available": true,
+      "confidence": "high",
+      "exists": true,
+      "includes": [],
+      "path": "/root/topazio-sea-source/arch/arm64/boot/dts/mediatek/tcpc_config.dtsi",
+      "provenance": {
+        "commit": "6f6b84e0e2fa8d474db66798a051ec1835257729",
+        "relative_path": "arch/arm64/boot/dts/mediatek/tcpc_config.dtsi",
+        "repository": "https://github.com/MiCode/Xiaomi_Kernel_OpenSource",
+        "source_id": "xiaomi-kernel-sea-t-oss"
+      },
+      "required": true,
+      "sha256": "704f9fd25b28b5e022d4ce07062fec2f99e09a6a8b8150de3fb78595603e7e4d",
+      "source": "xiaomi-kernel-sea-t-oss"
+    },
+    {
+      "available": true,
+      "confidence": "high",
+      "exists": true,
+      "includes": [],
+      "path": "/root/topazio-sea-source/arch/arm64/boot/dts/mediatek/trusty.dtsi",
+      "provenance": {
+        "commit": "6f6b84e0e2fa8d474db66798a051ec1835257729",
+        "relative_path": "arch/arm64/boot/dts/mediatek/trusty.dtsi",
+        "repository": "https://github.com/MiCode/Xiaomi_Kernel_OpenSource",
+        "source_id": "xiaomi-kernel-sea-t-oss"
+      },
+      "required": true,
+      "sha256": "362b614d743c964ec9066c6c74ca683f2984630593f3bfd4b663a763f1d2e88c",
+      "source": "xiaomi-kernel-sea-t-oss"
+    },
+    {
+      "available": true,
+      "confidence": "high",
+      "exists": true,
+      "includes": [],
+      "path": "/root/topazio-sea-source/include/dt-bindings/clock/mt6781-clk.h",
+      "provenance": {
+        "commit": "6f6b84e0e2fa8d474db66798a051ec1835257729",
+        "relative_path": "include/dt-bindings/clock/mt6781-clk.h",
+        "repository": "https://github.com/MiCode/Xiaomi_Kernel_OpenSource",
+        "source_id": "xiaomi-kernel-sea-t-oss"
+      },
+      "required": true,
+      "sha256": "62aaad866678b1f8c1323afc45efbad1c7315be287701da2440671ead3293181",
+      "source": "xiaomi-kernel-sea-t-oss"
+    },
+    {
+      "available": true,
+      "confidence": "high",
+      "exists": true,
+      "includes": [],
+      "path": "/root/topazio-sea-source/include/dt-bindings/gce/mt6781-gce.h",
+      "provenance": {
+        "commit": "6f6b84e0e2fa8d474db66798a051ec1835257729",
+        "relative_path": "include/dt-bindings/gce/mt6781-gce.h",
+        "repository": "https://github.com/MiCode/Xiaomi_Kernel_OpenSource",
+        "source_id": "xiaomi-kernel-sea-t-oss"
+      },
+      "required": true,
+      "sha256": "49ddcd87fcd8fe2abbfb594cbf617b2f2014ad5bd72658e219282327d84b64ef",
+      "source": "xiaomi-kernel-sea-t-oss"
+    },
+    {
+      "available": true,
+      "confidence": "high",
+      "exists": true,
+      "includes": [],
+      "path": "/root/topazio-sea-source/include/dt-bindings/gpio/gpio.h",
+      "provenance": {
+        "commit": "6f6b84e0e2fa8d474db66798a051ec1835257729",
+        "relative_path": "include/dt-bindings/gpio/gpio.h",
+        "repository": "https://github.com/MiCode/Xiaomi_Kernel_OpenSource",
+        "source_id": "xiaomi-kernel-sea-t-oss"
+      },
+      "required": true,
+      "sha256": "1ab4eab4751c627bf0c82176ac0496523a46636d5cd4c0c793eb08f2063f0a07",
+      "source": "xiaomi-kernel-sea-t-oss"
+    },
+    {
+      "available": true,
+      "confidence": "high",
+      "exists": true,
+      "includes": [],
+      "path": "/root/topazio-sea-source/include/dt-bindings/iio/mt635x-auxadc.h",
+      "provenance": {
+        "commit": "6f6b84e0e2fa8d474db66798a051ec1835257729",
+        "relative_path": "include/dt-bindings/iio/mt635x-auxadc.h",
+        "repository": "https://github.com/MiCode/Xiaomi_Kernel_OpenSource",
+        "source_id": "xiaomi-kernel-sea-t-oss"
+      },
+      "required": true,
+      "sha256": "f106ebd8ad147119b6e64dec1a5a56bd63fb539eb638405850d0949f8d72d557",
+      "source": "xiaomi-kernel-sea-t-oss"
+    },
+    {
+      "available": true,
+      "confidence": "high",
+      "exists": true,
+      "includes": [
+        "dt-bindings/interrupt-controller/irq.h"
+      ],
+      "path": "/root/topazio-sea-source/include/dt-bindings/interrupt-controller/arm-gic.h",
+      "provenance": {
+        "commit": "6f6b84e0e2fa8d474db66798a051ec1835257729",
+        "relative_path": "include/dt-bindings/interrupt-controller/arm-gic.h",
+        "repository": "https://github.com/MiCode/Xiaomi_Kernel_OpenSource",
+        "source_id": "xiaomi-kernel-sea-t-oss"
+      },
+      "required": true,
+      "sha256": "0343e3fe31d7e6b694c0b25a2da29dc51dc1715d69fef4bd66df33f832f20910",
+      "source": "xiaomi-kernel-sea-t-oss"
+    },
+    {
+      "available": true,
+      "confidence": "high",
+      "exists": true,
+      "includes": [],
+      "path": "/root/topazio-sea-source/include/dt-bindings/interrupt-controller/irq.h",
+      "provenance": {
+        "commit": "6f6b84e0e2fa8d474db66798a051ec1835257729",
+        "relative_path": "include/dt-bindings/interrupt-controller/irq.h",
+        "repository": "https://github.com/MiCode/Xiaomi_Kernel_OpenSource",
+        "source_id": "xiaomi-kernel-sea-t-oss"
+      },
+      "required": true,
+      "sha256": "41209dee029601b0151a03734122e62e07bbd3a694e2549af1742347776969fe",
+      "source": "xiaomi-kernel-sea-t-oss"
+    },
+    {
+      "available": true,
+      "confidence": "high",
+      "exists": true,
+      "includes": [],
+      "path": "/root/topazio-sea-source/include/dt-bindings/memory/mt6781-larb-port.h",
+      "provenance": {
+        "commit": "6f6b84e0e2fa8d474db66798a051ec1835257729",
+        "relative_path": "include/dt-bindings/memory/mt6781-larb-port.h",
+        "repository": "https://github.com/MiCode/Xiaomi_Kernel_OpenSource",
+        "source_id": "xiaomi-kernel-sea-t-oss"
+      },
+      "required": true,
+      "sha256": "c201f670fc17f518223379247cb6be1086c1b1269dc2b872f023b09ca391d42c",
+      "source": "xiaomi-kernel-sea-t-oss"
+    },
+    {
+      "available": true,
+      "confidence": "high",
+      "exists": true,
+      "includes": [],
+      "path": "/root/topazio-sea-source/include/dt-bindings/mfd/mt6366-irq.h",
+      "provenance": {
+        "commit": "6f6b84e0e2fa8d474db66798a051ec1835257729",
+        "relative_path": "include/dt-bindings/mfd/mt6366-irq.h",
+        "repository": "https://github.com/MiCode/Xiaomi_Kernel_OpenSource",
+        "source_id": "xiaomi-kernel-sea-t-oss"
+      },
+      "required": true,
+      "sha256": "66e71a107a86192871b78d4d07fb96b5b52f5625ee007dcf3ed6c4e9eba2d4b1",
+      "source": "xiaomi-kernel-sea-t-oss"
+    },
+    {
+      "available": true,
+      "confidence": "high",
+      "exists": true,
+      "includes": [],
+      "path": "/root/topazio-sea-source/include/dt-bindings/mmc/mt6781-msdc.h",
+      "provenance": {
+        "commit": "6f6b84e0e2fa8d474db66798a051ec1835257729",
+        "relative_path": "include/dt-bindings/mmc/mt6781-msdc.h",
+        "repository": "https://github.com/MiCode/Xiaomi_Kernel_OpenSource",
+        "source_id": "xiaomi-kernel-sea-t-oss"
+      },
+      "required": true,
+      "sha256": "e7e0863845e40b1c3c1bc30f9f65b3f458c832ae30d23992fe9fb48e42ebe78f",
+      "source": "xiaomi-kernel-sea-t-oss"
+    },
+    {
+      "available": true,
+      "confidence": "high",
+      "exists": true,
+      "includes": [],
+      "path": "/root/topazio-sea-source/include/dt-bindings/phy/phy.h",
+      "provenance": {
+        "commit": "6f6b84e0e2fa8d474db66798a051ec1835257729",
+        "relative_path": "include/dt-bindings/phy/phy.h",
+        "repository": "https://github.com/MiCode/Xiaomi_Kernel_OpenSource",
+        "source_id": "xiaomi-kernel-sea-t-oss"
+      },
+      "required": true,
+      "sha256": "ac06c917a98f47efc0aeaeea4de1bcd5f83e96175222af236f35292906a65c67",
+      "source": "xiaomi-kernel-sea-t-oss"
+    },
+    {
+      "available": true,
+      "confidence": "high",
+      "exists": true,
+      "includes": [],
+      "path": "/root/topazio-sea-source/include/dt-bindings/pinctrl/mt65xx.h",
+      "provenance": {
+        "commit": "6f6b84e0e2fa8d474db66798a051ec1835257729",
+        "relative_path": "include/dt-bindings/pinctrl/mt65xx.h",
+        "repository": "https://github.com/MiCode/Xiaomi_Kernel_OpenSource",
+        "source_id": "xiaomi-kernel-sea-t-oss"
+      },
+      "required": true,
+      "sha256": "4762c50d0509720c452ae08bbd23dd16146018d516825bf06f4cf2c5c0c42322",
+      "source": "xiaomi-kernel-sea-t-oss"
+    },
+    {
+      "available": true,
+      "confidence": "high",
+      "exists": true,
+      "includes": [
+        "mt65xx.h"
+      ],
+      "path": "/root/topazio-sea-source/include/dt-bindings/pinctrl/mt6781-pinfunc.h",
+      "provenance": {
+        "commit": "6f6b84e0e2fa8d474db66798a051ec1835257729",
+        "relative_path": "include/dt-bindings/pinctrl/mt6781-pinfunc.h",
+        "repository": "https://github.com/MiCode/Xiaomi_Kernel_OpenSource",
+        "source_id": "xiaomi-kernel-sea-t-oss"
+      },
+      "required": true,
+      "sha256": "eea6acec86a3a0e8d7e2d1905d345f6bdc04afc14b0a3fb660098f86ba833595",
+      "source": "xiaomi-kernel-sea-t-oss"
+    },
+    {
+      "available": true,
+      "confidence": "high",
+      "exists": true,
+      "includes": [],
+      "path": "/root/topazio-sea-source/include/dt-bindings/reset/ti-syscon.h",
+      "provenance": {
+        "commit": "6f6b84e0e2fa8d474db66798a051ec1835257729",
+        "relative_path": "include/dt-bindings/reset/ti-syscon.h",
+        "repository": "https://github.com/MiCode/Xiaomi_Kernel_OpenSource",
+        "source_id": "xiaomi-kernel-sea-t-oss"
+      },
+      "required": true,
+      "sha256": "fa7c7fac2ef3e28ba1f32c4ad5bda0768f6f9c61b6c89ecccb5c130960ab0310",
+      "source": "xiaomi-kernel-sea-t-oss"
+    },
+    {
+      "available": true,
+      "confidence": "high",
+      "exists": true,
+      "includes": [],
+      "path": "/root/topazio-sea-source/include/dt-bindings/soc/mediatek,boot-mode.h",
+      "provenance": {
+        "commit": "6f6b84e0e2fa8d474db66798a051ec1835257729",
+        "relative_path": "include/dt-bindings/soc/mediatek,boot-mode.h",
+        "repository": "https://github.com/MiCode/Xiaomi_Kernel_OpenSource",
+        "source_id": "xiaomi-kernel-sea-t-oss"
+      },
+      "required": true,
+      "sha256": "868fc19c0caab2743f594bd74433b6fe4db9b6cfb74731b5e6367e48d17de775",
+      "source": "xiaomi-kernel-sea-t-oss"
+    }
+  ],
+  "provenance": {
+    "commit": "6f6b84e0e2fa8d474db66798a051ec1835257729",
+    "repository": "https://github.com/MiCode/Xiaomi_Kernel_OpenSource",
+    "source_id": "xiaomi-kernel-sea-t-oss",
+    "source_root": "/root/topazio-sea-source"
+  },
+  "schema": 1,
+  "status": "COMPLETE"
+}

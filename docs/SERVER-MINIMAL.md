@@ -3,6 +3,12 @@
 Status: `BUILT_UNTESTED` kernel/modules at the Mission 007 checkpoint;
 target `sea` DTB and boot integration remain `BLOCKED`.
 
+The kernel checkpoint is frozen as
+[`SEA_SERVER_MINIMAL_KERNEL_001`](../devices/xiaomi-sea/server-minimal/kernel-baseline.json).
+The regression check is `python host-tools/verify_kernel_baseline.py`; it
+compares source, toolchain, config fragment, patch hashes and preserved
+artifact hashes/sizes without requiring ignored build outputs in CI.
+
 The profile is now a reproducible external layer with a complete out-of-tree
 kernel build. `VENDOR_REFERENCE` remains preserved and `BLOCKED`; its status is
 not changed by this experiment.
@@ -128,6 +134,16 @@ charger, thermal, DSI and touch, but the public source still references missing
 vendor `sea/cust.dtsi` and `k6781v1_64_k419/cust.dtsi` inputs. A device tree
 cannot be completed by inventing GPIOs, addresses, regulators or phandles.
 Consequently `DTB = BLOCKED` independently of the kernel profile.
+
+Mission 008 completed a separate static device-tree audit in
+[`dt-analysis.json`](../devices/xiaomi-sea/reconstruction/dt-analysis.json).
+Both official project files are overlays. The community `sea/cust.dtsi` is
+recorded as `STRONG_CANDIDATE`; the `k6781v1_64_k419/cust.dtsi` remains
+unknown. The existing 67,869-byte DTBO candidate was decompiled, checked for
+fixups/symbols, and applied offline to a public `mt6781.dtb` generated from
+the official SoC tree. The merge and structural round trip pass, but the base
+is not proven to be the unit's stock sea DTB, so the maximum overall level is
+`DT_STRUCTURALLY_VALID`, never `DT_SEA_CANDIDATE` or `DT_WORKING`.
 
 Wi-Fi remains enabled in the configuration through MediaTek combo and
 `cfg80211`, but the vendor WLAN driver/firmware acquisition context is not

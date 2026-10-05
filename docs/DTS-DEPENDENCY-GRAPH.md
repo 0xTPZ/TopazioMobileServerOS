@@ -53,3 +53,36 @@ O `dtc` gerou um overlay de 67.869 bytes, SHA-256
 Esse resultado é `DTBO_CANDIDATE / BUILT_UNTESTED`, não `CONFIRMED`: seus
 warnings são esperados para um overlay sem base tree e a procedência mista
 impede uso em boot image.
+
+## Auditoria da Missão 008
+
+Os grafos completos, com hash, origem, confiança, disponibilidade e
+obrigatoriedade por nó, estão em:
+
+- [`official-sea-dts-graph.json`](../devices/xiaomi-sea/reconstruction/official-sea-dts-graph.json)
+- [`official-k6781-dts-graph.json`](../devices/xiaomi-sea/reconstruction/official-k6781-dts-graph.json)
+- [`official-mt6781-base-dts-graph.json`](../devices/xiaomi-sea/reconstruction/official-mt6781-base-dts-graph.json)
+- [`dt-analysis.json`](../devices/xiaomi-sea/reconstruction/dt-analysis.json)
+
+O resultado reproduzível é deliberadamente limitado:
+
+- `sea.dts` é um overlay do projeto `sea`; não é a base DTB.
+- `k6781v1_64_k419.dts` é outro overlay de projeto e continua sem
+  `k6781v1_64_k419/cust.dtsi`.
+- O único `sea/cust.dtsi` público continua sendo um `STRONG_CANDIDATE`
+  comunitário, não uma equivalência oficial confirmada.
+- O DTBO externo SHA-256
+  `34febe33284575825169a1b46f6f438491bd5f7ffd7931ed44dc746f0f1b01ab` foi
+  decompilado e recompilado com `dtc`, preservando 65 fragments, 51 fixups,
+  134 símbolos e 11 nós de local-fixup.
+- `fdtoverlay` aplicou o DTBO offline ao `mt6781.dtb` público gerado do SoC;
+  o resultado foi decompilado e recompilado com sucesso. Isso é uma prova
+  mecânica para essa base, não prova de que ela seja a base stock exata da
+  unidade `sea`.
+- O grafo transitivo da base pública `mt6781.dts` está completo para o snapshot
+  resolvido, com 26 nós e 26 arestas; ele permanece uma base pública de análise,
+  não uma identificação do DTB stock da unidade.
+
+Assim, o maior nível honesto desta missão é `DT_STRUCTURALLY_VALID`. O projeto
+não promove o resultado a `DT_SEA_CANDIDATE`, não cria `boot.img` e não escreve
+no telefone.

@@ -7,10 +7,10 @@
 | kernel vendor público | CONFIRMED | `sea-t-oss`, commit fixado e arquivos `sea_*` presentes |
 | versão da fonte | CONFIRMED | Linux `4.19.191` no Makefile vendor |
 | kernel `sea_defconfig` | CONFIRMED | defconfig gera configuração out-of-tree |
-| kernel/device DTB | BLOCKED | Clang correto supera `tune.c`, mas faltam firmware cliente, `cust.dtsi` vendor e target DTS |
+| kernel/device DTB | PARTIAL / DT_STRUCTURALLY_VALID | overlay e merge offline no `mt6781.dtb` público são válidos estruturalmente; o DTB stock `sea` continua não provado |
 | contexto vendor público | PARTIAL | um candidato `sea/cust.dtsi`, nenhum `k6781v1_64_k419/cust.dtsi`, firmware Focaltech real ausente |
 | perfil VENDOR_REFERENCE | BLOCKED | manifesto controlado preserva a árvore Xiaomi sem substituições silenciosas |
-| perfil SERVER_MINIMAL | BUILT_UNTESTED / DTB BLOCKED | kernel/modules completos em PC/WSL; `sea` DTB, firmware, boot artifact e rootfs continuam bloqueados |
+| perfil SERVER_MINIMAL | BUILT_UNTESTED / DTB BLOCKED | baseline kernel preservado; `sea` DTB, firmware, boot artifact e rootfs continuam bloqueados |
 | ADB/fastboot live | BLOCKED | transporte/driver indisponível |
 | bootloader da unidade | UNKNOWN | nenhuma consulta acessível |
 | Linux mainline | UNKNOWN | não há validação neste projeto |
@@ -36,3 +36,11 @@ assinatura C do BQ2589x sem remover charging. O kernel `SERVER_MINIMAL` foi
 construído como `BUILT_UNTESTED`; o relatório completo está em
 `server-minimal/build-gate.json`. A decisão é `SEA_CONTINUE`, com recomendação
 de buscar um segundo dispositivo com DTB e recuperação publicamente verificáveis.
+
+Missão 008 preservou esse kernel como
+[`SEA_SERVER_MINIMAL_KERNEL_001`](server-minimal/kernel-baseline.json), com
+hashes, tamanhos, patches e procedimento validados por
+`host-tools/verify_kernel_baseline.py`. O DTBO externo foi reaplicado offline
+ao candidato público `mt6781.dtb`, mas a ausência do `cust.dtsi` oficial e do
+base stock impede `DT_SEA_CANDIDATE`. Recovery continua `BLOCKED` e nenhuma
+operação de escrita foi executada.

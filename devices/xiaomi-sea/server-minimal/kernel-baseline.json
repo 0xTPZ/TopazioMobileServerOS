@@ -1,0 +1,94 @@
+{
+  "schema": 1,
+  "profile": "SERVER_MINIMAL",
+  "baseline_id": "SEA_SERVER_MINIMAL_KERNEL_001",
+  "captured_mission": 7,
+  "status": "BUILT_UNTESTED",
+  "source": {
+    "repository": "https://github.com/MiCode/Xiaomi_Kernel_OpenSource.git",
+    "branch": "sea-t-oss",
+    "commit": "6f6b84e0e2fa8d474db66798a051ec1835257729",
+    "defconfig": "arch/arm64/configs/sea_defconfig"
+  },
+  "toolchain": {
+    "name": "clang-r433403b",
+    "commit": "0625305092d0cfa7e28b0e1b268aff1d3d751eca",
+    "compiler": "clang",
+    "linker": "ld.lld",
+    "llvm": true,
+    "llvm_ias": true
+  },
+  "configuration": {
+    "fragment": "devices/xiaomi-sea/server-minimal/config/topazio_sea_server_defconfig",
+    "fragment_sha256": "5bbd1383cf6d93a4f88e0d0f06dc25f92defe5d833d53c8ae9e39e21d80604ec",
+    "preserved_symbols": [
+      "CONFIG_MTK_CHARGER=y",
+      "CONFIG_CHARGER_BQ2589X=y",
+      "CONFIG_SCSI_UFSHCD=y",
+      "CONFIG_SCSI_UFSHCD_PLATFORM=y",
+      "CONFIG_SCSI_UFS_MEDIATEK=y",
+      "CONFIG_USB_MTK_HDRC=y",
+      "CONFIG_USB_MTK_OTG=y",
+      "CONFIG_MTK_COMBO_WIFI=y",
+      "CONFIG_THERMAL=y",
+      "CONFIG_DRM_MEDIATEK=y",
+      "CONFIG_TOUCHSCREEN_FTS=y"
+    ]
+  },
+  "patches": [
+    {
+      "id": "TPZ-M006-001",
+      "path": "devices/xiaomi-sea/server-minimal/patches/0001-focaltech-no-auto-upgrade.patch",
+      "sha256": "412e87de8e789fca7a12c56da30725bd7886f40bebff143aef2968a58134ce72"
+    },
+    {
+      "id": "TPZ-M007-002",
+      "path": "devices/xiaomi-sea/server-minimal/patches/0002-bq2589x-prototype.patch",
+      "sha256": "dc4101df985d8a81856ec0406a8f170f573f0f4fda319ca52b548096bea2f0fc"
+    }
+  ],
+  "artifacts": {
+    "image": {
+      "path": "build/out/sea-server-minimal-gate-007-final/artifacts/boot/Image",
+      "size_bytes": 27455504,
+      "sha256": "1913c3c0c659784eb7c6d8204a84923d9d5bc07be5d84e474d2919575e246adc"
+    },
+    "image_gz": {
+      "path": "build/out/sea-server-minimal-gate-007-final/artifacts/boot/Image.gz",
+      "size_bytes": 11482091,
+      "sha256": "d58c2bfdf13c71cd3ed2c505ed767adbb651728cf388394066d23db0205468bd"
+    },
+    "system_map": {
+      "path": "build/out/sea-server-minimal-gate-007-final/artifacts/System.map",
+      "size_bytes": 5639571,
+      "sha256": "c0e203d03099485cfe86541ff3d56b075c2e1d688efb0908958a15db2d3c4a31"
+    },
+    "config": {
+      "path": "build/out/sea-server-minimal-gate-007-final/artifacts/.config",
+      "size_bytes": 154943,
+      "sha256": "edc29e850fe9f52dc1a645bbe71951c7ae8b5369993ae4bf8694797870a87372"
+    },
+    "modules": [
+      {"path": "build/out/sea-server-minimal-gate-007-final/artifacts/modules/drivers/video/backlight/lcd.ko", "size_bytes": 220056, "sha256": "1b01c14d7f26c93d2b3931888a8e0dd87cc9ccc51d007eca9d706679487e394f"},
+      {"path": "build/out/sea-server-minimal-gate-007-final/artifacts/modules/kernel/kheaders.ko", "size_bytes": 3561872, "sha256": "2f931ed4267a3bd2073724a6f7241a23e33e4d02641fc3ca3c27ee187cadc0b8"},
+      {"path": "build/out/sea-server-minimal-gate-007-final/artifacts/modules/kernel/trace/trace_mmstat.ko", "size_bytes": 330232, "sha256": "8f1965c68f61d163e2c8b523e14889f8b398466de50c28e1ef396976888aaf36"},
+      {"path": "build/out/sea-server-minimal-gate-007-final/artifacts/modules/net/ipv4/tcp_htcp.ko", "size_bytes": 387008, "sha256": "dcbf453465917ea5b4a2fb6d501ecb3c35349e29295d5894e7bd8a330eca486a"},
+      {"path": "build/out/sea-server-minimal-gate-007-final/artifacts/modules/net/ipv4/tcp_westwood.ko", "size_bytes": 382808, "sha256": "32edf7252fccd89872107820db239b45aad2872df9f850a0f78a6ee0deed66ea"
+      }
+    ]
+  },
+  "procedure": {
+    "command_template": "make -C <patched-source> O=<build-dir> ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- LLVM=1 LLVM_IAS=1 CC=clang LD=ld.lld KCONFIG_CONFIG=<build-dir>/.config CFLAGS_KERNEL=-Wno-unused-but-set-variable -j2 olddefconfig Image.gz modules dtbs",
+    "final_manifest": "build/out/sea-server-minimal-gate-007-final/manifest.json",
+    "gate_report": "devices/xiaomi-sea/server-minimal/build-gate.json",
+    "source_checkout_modified": false,
+    "writes_to_device": false
+  },
+  "regression_policy": {
+    "must_match_source_toolchain_config_patches": true,
+    "must_match_artifact_hashes_and_sizes": true,
+    "missing_ignored_build_outputs_are_allowed": true,
+    "unexpected_change_is_failure": true,
+    "dt_work_must_not_change_this_baseline": true
+  }
+}
