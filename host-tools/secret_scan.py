@@ -11,6 +11,16 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 MAX_FILE_BYTES = 5 * 1024 * 1024
 FORBIDDEN_SUFFIXES = {".pem", ".key", ".p12", ".pfx", ".img", ".bin", ".elf", ".dtb", ".dtbo", ".zip", ".7z"}
+LOCAL_ONLY_DIRS = {
+    "cache",
+    "firmware",
+    "toolchains",
+    "sources",
+    "artifacts",
+    "logs",
+    "backups",
+    "quarantine",
+}
 PATTERNS = [
     ("private-key", re.compile(rb"-----BEGIN [A-Z0-9 ]+PRIVATE KEY-----")),
     ("github-token", re.compile(rb"(?:ghp_|gho_|github_pat_)[A-Za-z0-9_]{20,}")),
@@ -34,6 +44,12 @@ def _working_files() -> list[Path]:
     paths: list[Path] = []
     for path in ROOT.rglob("*"):
         if not path.is_file() or ".git" in path.parts or "build" in path.parts and "out" in path.parts:
+            continue
+        relative_parts = path.relative_to(ROOT).parts
+        if len(relative_parts) >= 2 and relative_parts[0] == "local" and relative_parts[1] in LOCAL_ONLY_DIRS:
+            # These directories are explicitly local-only storage. They may
+            # contain raw firmware or recovery backups and are never part of
+            # the Git working tree that this gate is intended to validate.
             continue
         paths.append(path)
     return paths

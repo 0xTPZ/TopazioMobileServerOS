@@ -47,6 +47,12 @@ captures/
 **/firmware/**
 **/blobs/**
 
+# Canonical local-only material: preserved caches, backups, quarantine, and
+# other evidence that must never enter the Git repository.
+local/cache/**
+local/backups/**
+local/quarantine/**
+
 # OS/editor files
 .DS_Store
 Thumbs.db
