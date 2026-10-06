@@ -1,6 +1,6 @@
-# Workspace map — Mission 012-D closeout
+# Workspace map — Mission 012-E closeout
 
-Status: `COMPLETE_EXCEPT_MANUAL_CLEANUP`, consolidated and documented on 2026-10-06.
+Status: `COMPLETE`, consolidated and documented on 2026-10-06.
 
 ## Canonical project
 
@@ -30,10 +30,10 @@ Important tracked areas:
 | `local/logs/mission012` | Host-only raw capture | Canonical local-only log |
 | `local/logs/mission012b` | Transport probe output | Canonical local-only log |
 
-The local caches remain outside Git intentionally: they are large, contain proprietary or raw firmware material, and are now under the canonical `local/` root. Their six original C:/E: locations were revalidated completely and remain as verified duplicate sources because the host blocked the separate recursive-removal step. Exact manual commands are in `docs/MANUAL-CLEANUP-REQUIRED.md`.
+The local caches remain outside Git intentionally: they are large, contain proprietary or raw firmware material, and are now under the canonical `local/` root. Their six original C:/E: locations were revalidated completely and then removed manually by the user. The exact commands remain in `docs/MANUAL-CLEANUP-REQUIRED.md` as a historical record; cleanup pending is `0`.
 
 ## Boundaries
 
 The following are explicitly outside this project's change scope: `E:\Topazio`, `E:\TopazioReader`, `E:\TopazioAudioVideo`, `E:\AFolha`, `E:\LocalCoder`, `E:\MuOnline`, `E:\TopazioProjectManager`, `E:\OpenCut`, `E:\informacoes vps.txt`, Windows system directories, and the contents of all WSL distributions. Independent Git repositories found at `E:\AlicePlatform`, `E:\TopazioAI`, and `E:\Zelvya` were not inspected or changed.
 
-No ADB, fastboot, WSL filesystem, driver installation, firmware operation, or Mission 013 activity belongs to this consolidation pass. The only pending housekeeping action is removal of the six verified duplicate source roots by the restricted manual commands in `docs/MANUAL-CLEANUP-REQUIRED.md`.
+No ADB, fastboot, WSL filesystem, driver installation, firmware operation, or Mission 013 activity belongs to this consolidation pass. The six known project-owned duplicate roots are absent, `PROJECT_OWNED_OUTSIDE_WORKSPACE = 0`, and no UNKNOWN path was identified.

@@ -26,7 +26,7 @@ The exact byte-identical local preservation is at:
 
 `E:\TopazioMobileServerOS\local\backups\mission-012c\redmi-lab-audit`
 
-Its SHA-256 manifest is at `local/backups/mission-012c/sha256-manifest.json`. The directory is ignored, and the raw report is not committed because it contains device/local-environment identifiers. The original `C:\RedmiLabAudit` remains as a verified duplicate only because the host blocked its separate recursive-removal operation.
+Its SHA-256 manifest is at `local/backups/mission-012c/sha256-manifest.json`. The directory is ignored, and the raw report is not committed because it contains device/local-environment identifiers. The original `C:\RedmiLabAudit` was removed manually after the exact duplicate was revalidated.
 
 ## Mission caches
 
@@ -38,7 +38,7 @@ Its SHA-256 manifest is at `local/backups/mission-012c/sha256-manifest.json`. Th
 | `E:\TopazioMobileServerOS\local\logs\mission012` | 1 | 9,274 | Host audit JSON |
 | `E:\TopazioMobileServerOS\local\logs\mission012b` | 4 | 28 | Empty/short transport command outputs |
 
-These are canonical local-only, ignored, and documented rather than copied into Git. The repository already contains the analytical metadata and hashes needed to identify them. Their original C:/E: trees were copied and verified file-by-file before the host blocked separate recursive cleanup; the originals remain documented duplicates awaiting a permitted cleanup operation.
+These are canonical local-only, ignored, and documented rather than copied into Git. The repository already contains the analytical metadata and hashes needed to identify them. Their original C:/E: trees were copied and verified file-by-file, then removed manually after the Mission 012-E cleanup gate. No duplicate cleanup remains pending.
 
 No separate `mt6781`, `k6781`, `sea-t-oss`, firmware, OTA, or toolchain checkout was adopted from the permitted C:/E: scan. The tracked repository is the source for reconstruction metadata; WSL Ubuntu 24.04 is the documented build environment. Other Topazio-named folders and independent Git repositories were classified as unrelated and were not made dependencies.
 

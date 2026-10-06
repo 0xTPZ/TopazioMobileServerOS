@@ -1,4 +1,4 @@
-# Disk report — Mission 012-D closeout
+# Disk report — Mission 012-E closeout
 
 Captured on 2026-10-06 (America/Sao_Paulo). Values are Windows `Get-PSDrive` byte counters.
 
@@ -18,8 +18,8 @@ The pre-preservation project tree was measured at approximately 2,586,613,766 by
 | `C:` | 203,252,379,648 | 36,563,238,912 | -314,494,976 |
 | `E:` | 133,502,304,256 | 866,174,398,464 | -1,789,427,712 |
 
-The canonical local copy contains 266 migrated payload files and 249,017,514 bytes; with its one local manifest file, `local/` contains 267 files and 249,019,935 bytes. The complete working tree, excluding `.git` metadata, currently measures 523 files and 2,832,388,685 bytes, including ignored local material and the manual cleanup runbook. Mission 012-D revalidated all six approved source/destination pairs by file set, count, bytes, timestamps, and SHA-256. The host blocked the explicit removal command before execution, so no source deletion was performed and no bytes were reclaimed.
+The canonical local copy contains 266 migrated payload files and 249,017,514 bytes; with its one local manifest file, `local/` contains 267 files and 249,019,935 bytes. The complete working tree, excluding `.git` metadata, currently measures 545 files and 2,835,120,649 bytes, including ignored local material and the cleanup record. Mission 012-E revalidated all six approved source/destination pairs by file set, count, bytes, timestamps, and SHA-256, then confirmed all six original paths were removed manually while all canonical destinations remained present.
 
 ## Interpretation
 
-The consolidation added a verified local recovery copy and documentation. Bytes liberated: 0. Bytes preserved in canonical local storage: 249,017,514 payload bytes (249,019,935 bytes including the local manifest). Shared dependencies remaining outside the workspace are Platform Tools and WSL. The six project-specific originals are exact verified duplicates pending the manual commands in `MANUAL-CLEANUP-REQUIRED.md`.
+The consolidation added a verified local recovery copy and documentation, then removed the six verified duplicate source trees. Bytes liberated: 249,017,514 across 266 files. Bytes preserved in canonical local storage: 249,017,514 payload bytes (249,019,935 bytes including the local manifest). Shared dependencies remaining outside the workspace are Platform Tools and WSL; no known project-owned path remains outside the workspace.

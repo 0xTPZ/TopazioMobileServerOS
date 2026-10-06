@@ -3,7 +3,7 @@
   "generated_at": "2026-10-06",
   "project": "Topazio Mobile Server OS",
   "canonical_repository": "E:\\TopazioMobileServerOS",
-  "closeout_status": "COMPLETE_EXCEPT_MANUAL_CLEANUP",
+  "closeout_status": "COMPLETE",
   "inventory_method": "Read-only PowerShell inventory of project-owned paths and explicitly named external dependencies. Windows, Program Files, WSL filesystems, and protected projects were not modified.",
   "classification_vocabulary": [
     "SOURCE",
@@ -81,7 +81,7 @@
     {
       "path": "E:\\TopazioMobileServerOS",
       "type": "directory",
-      "size_bytes": 2592407990,
+      "size_bytes": 2835120649,
       "modified": "2026-10-06T07:55:02",
       "sha256": null,
       "sha256_scope": "directory aggregate not meaningful; Git and file-level gates are authoritative",
@@ -111,8 +111,8 @@
       "sha256_scope": "per-file hashes are recorded in the canonical local backup manifest",
       "project_relationship": "historical evidence created by Mission 012",
       "classification": "DUPLICATE",
-      "recommended_action": "REMOVE_AFTER_HOST_CLEANUP_GATE",
-      "reason": "A byte-identical copy is preserved at E:\\TopazioMobileServerOS\\local\\backups\\mission-012c\\redmi-lab-audit. The original remains only because the host blocked the separate recursive-removal step."
+      "recommended_action": "REMOVED_AFTER_MANUAL_VERIFICATION",
+      "reason": "A byte-identical copy is preserved at E:\\TopazioMobileServerOS\\local\\backups\\mission-012c\\redmi-lab-audit. The original was removed manually after the documented revalidation."
     },
     {
       "path": "C:\\RedmiLabAudit\\Relatorio.md",
@@ -122,8 +122,8 @@
       "sha256": "78E01C9B417EECBB7C001967745B40A5120A3D80F02D87D8EF955E0B97B73A91",
       "project_relationship": "Mission 012 read-only hardware audit",
       "classification": "DUPLICATE",
-      "recommended_action": "REMOVE_AFTER_HOST_CLEANUP_GATE",
-      "reason": "Preserved byte-identically in the canonical local backup; the raw report remains outside Git because it includes device and local-environment identifiers."
+      "recommended_action": "REMOVED_AFTER_MANUAL_VERIFICATION",
+      "reason": "Preserved byte-identically in the canonical local backup; the original was removed manually and the raw report remains outside Git because it includes device and local-environment identifiers."
     },
     {
       "path": "C:\\RedmiLabAudit\\comandos-executados.txt",
@@ -133,8 +133,8 @@
       "sha256": "F396148D91FA6C7A69E310A3250756266EE6BDD1D0E0D3D94CAF72616A9297C3",
       "project_relationship": "Mission 012 read-only command history",
       "classification": "DUPLICATE",
-      "recommended_action": "REMOVE_AFTER_HOST_CLEANUP_GATE",
-      "reason": "Preserved byte-identically in the canonical local backup; the original is a removable duplicate after a separate host cleanup gate."
+      "recommended_action": "REMOVED_AFTER_MANUAL_VERIFICATION",
+      "reason": "Preserved byte-identically in the canonical local backup; the original was removed manually after the documented revalidation."
     },
     {
       "path": "C:\\AndroidTools\\platform-tools",
@@ -180,7 +180,7 @@
       "project_relationship": "Mission 009 firmware/boot analysis cache",
       "classification": "FIRMWARE_CACHE",
       "recommended_action": "KEEP_IGNORED",
-      "reason": "Canonical local preservation of the raw cache; Git excludes it and the external source is now a verified duplicate pending host cleanup."
+      "reason": "Canonical local preservation of the raw cache; Git excludes it and the external source was removed after verified manual cleanup."
     },
     {
       "path": "E:\\TopazioMobileServerOS\\local\\cache\\mission010",
@@ -192,7 +192,7 @@
       "project_relationship": "Mission 010 DTBO/vbmeta analysis cache",
       "classification": "FIRMWARE_CACHE",
       "recommended_action": "KEEP_IGNORED",
-      "reason": "Canonical local preservation of the raw cache; Git excludes it and the external source is now a verified duplicate pending host cleanup."
+      "reason": "Canonical local preservation of the raw cache; Git excludes it and the external source was removed after verified manual cleanup."
     },
     {
       "path": "E:\\TopazioMobileServerOS\\local\\cache\\mission011",
@@ -204,7 +204,7 @@
       "project_relationship": "Mission 011 vendor_dlkm reconstruction cache",
       "classification": "FIRMWARE_CACHE",
       "recommended_action": "KEEP_IGNORED",
-      "reason": "Canonical local preservation of proprietary vendor material; Git excludes it and the external source is now a verified duplicate pending host cleanup."
+      "reason": "Canonical local preservation of proprietary vendor material; Git excludes it and the external source was removed after verified manual cleanup."
     },
     {
       "path": "E:\\TopazioMobileServerOS\\local\\logs\\mission012",
@@ -216,7 +216,7 @@
       "project_relationship": "Mission 012 host-only raw capture",
       "classification": "LOG",
       "recommended_action": "KEEP_IGNORED",
-      "reason": "Canonical local preservation of the raw capture; the original temporary path is a verified duplicate pending host cleanup."
+      "reason": "Canonical local preservation of the raw capture; the original temporary path was removed after verified manual cleanup."
     },
     {
       "path": "E:\\TopazioMobileServerOS\\local\\logs\\mission012b",
@@ -228,7 +228,7 @@
       "project_relationship": "Mission 012-B transport probe output",
       "classification": "LOG",
       "recommended_action": "KEEP_IGNORED",
-      "reason": "Canonical local preservation of the raw transport output; the original temporary path is a verified duplicate pending host cleanup."
+      "reason": "Canonical local preservation of the raw transport output; the original temporary path was removed after verified manual cleanup."
     },
     {
       "path": "C:\\Users\\User\\AppData\\Local\\Temp\\topazio-mission009-cache",
@@ -239,8 +239,8 @@
       "sha256_scope": "selected file hashes remain in Mission 009 records; directory contains 15 files",
       "project_relationship": "Mission 009 firmware/boot analysis cache",
       "classification": "DUPLICATE",
-      "recommended_action": "REMOVE_AFTER_HOST_CLEANUP_GATE",
-      "reason": "The 15 files were copied and SHA-256 verified under local/cache/mission009. This exact temporary source remains only because the host blocked recursive removal."
+      "recommended_action": "REMOVED_AFTER_MANUAL_VERIFICATION",
+      "reason": "The 15 files were copied and SHA-256 verified under local/cache/mission009. The exact temporary source was removed manually after revalidation."
     },
     {
       "path": "E:\\TopazioMission010Cache",
@@ -251,8 +251,8 @@
       "sha256_scope": "selected file hashes remain in Mission 010 records; directory contains 13 files",
       "project_relationship": "Mission 010 DTBO/vbmeta analysis cache",
       "classification": "DUPLICATE",
-      "recommended_action": "REMOVE_AFTER_HOST_CLEANUP_GATE",
-      "reason": "The 13 files were copied and SHA-256 verified under local/cache/mission010. This source remains only because the host blocked recursive removal."
+      "recommended_action": "REMOVED_AFTER_MANUAL_VERIFICATION",
+      "reason": "The 13 files were copied and SHA-256 verified under local/cache/mission010. The source was removed manually after revalidation."
     },
     {
       "path": "E:\\TopazioMission011Cache",
@@ -263,8 +263,8 @@
       "sha256_scope": "selected file hashes remain in Mission 011 records; directory contains 220 files",
       "project_relationship": "Mission 011 vendor_dlkm reconstruction cache",
       "classification": "DUPLICATE",
-      "recommended_action": "REMOVE_AFTER_HOST_CLEANUP_GATE",
-      "reason": "The 220 files were copied and SHA-256 verified under local/cache/mission011. This source remains only because the host blocked recursive removal."
+      "recommended_action": "REMOVED_AFTER_MANUAL_VERIFICATION",
+      "reason": "The 220 files were copied and SHA-256 verified under local/cache/mission011. The source was removed manually after revalidation."
     },
     {
       "path": "C:\\Users\\User\\AppData\\Local\\Temp\\topazio-mission012-raw",
@@ -275,8 +275,8 @@
       "sha256_scope": "host-audit.json SHA-256 8CB97D565F587DF7233346B3EE715E1319255CCDE5CED05312B9F2D08E5F1531",
       "project_relationship": "Mission 012 host-only raw capture",
       "classification": "DUPLICATE",
-      "recommended_action": "REMOVE_AFTER_HOST_CLEANUP_GATE",
-      "reason": "The capture was copied and SHA-256 verified under local/logs/mission012. The temporary source remains only because the host blocked recursive removal."
+      "recommended_action": "REMOVED_AFTER_MANUAL_VERIFICATION",
+      "reason": "The capture was copied and SHA-256 verified under local/logs/mission012. The temporary source was removed manually after revalidation."
     },
     {
       "path": "C:\\Users\\User\\AppData\\Local\\Temp\\topazio-mission012b-raw",
@@ -287,8 +287,8 @@
       "sha256_scope": "four text outputs; all are represented by Mission 012-B's sanitized observations",
       "project_relationship": "Mission 012-B transport probe output",
       "classification": "DUPLICATE",
-      "recommended_action": "REMOVE_AFTER_HOST_CLEANUP_GATE",
-      "reason": "The four outputs were copied and SHA-256 verified under local/logs/mission012b. The temporary source remains only because the host blocked recursive removal."
+      "recommended_action": "REMOVED_AFTER_MANUAL_VERIFICATION",
+      "reason": "The four outputs were copied and SHA-256 verified under local/logs/mission012b. The temporary source was removed manually after revalidation."
     },
     {
       "path": "wsl://Ubuntu-24.04",
@@ -386,23 +386,33 @@
   "audit_results": {
     "standalone_kernel_sources": "No separate mt6781/k6781/sea-t-oss checkout was found in the permitted shallow scans; the canonical repository contains the tracked reconstruction metadata and generated build outputs.",
     "standalone_toolchains": "No standalone toolchain directory was identified in the permitted scan. WSL Ubuntu-24.04 remains the documented build environment.",
-    "firmware_and_ota": "All discovered raw firmware/OTA material is preserved in ignored canonical local/cache/mission009-011 directories; the six original roots are verified duplicates pending host cleanup. No raw firmware was added to Git.",
+    "firmware_and_ota": "All discovered raw firmware/OTA material is preserved in ignored canonical local/cache/mission009-011 directories; the six original roots were removed after verified manual cleanup. No raw firmware was added to Git.",
     "git_copies_and_worktrees": "The canonical repository has no additional worktree. Independent repositories at E:\\AlicePlatform, E:\\TopazioAI, and E:\\Zelvya were left untouched.",
-    "unknown_external_dependencies": "None are required by the canonical project after this audit; Platform Tools and WSL are documented shared dependencies, while original cache roots are verified duplicates pending cleanup."
+    "unknown_external_dependencies": "None are required by the canonical project after this audit; Platform Tools and WSL are documented shared dependencies, and no UNKNOWN project-owned path remains.",
+    "project_owned_outside_workspace": 0
   },
   "deletion_policy_result": {
-    "deleted_paths": [],
+    "deleted_paths": [
+      {"original_path": "C:\\RedmiLabAudit", "canonical_path": "E:\\TopazioMobileServerOS\\local\\backups\\mission-012c\\redmi-lab-audit", "files": 13, "bytes": 9077833, "removed": true, "removed_at": "2026-10-06", "bytes_reclaimed": 9077833},
+      {"original_path": "C:\\Users\\User\\AppData\\Local\\Temp\\topazio-mission009-cache", "canonical_path": "E:\\TopazioMobileServerOS\\local\\cache\\mission009", "files": 15, "bytes": 170505276, "removed": true, "removed_at": "2026-10-06", "bytes_reclaimed": 170505276},
+      {"original_path": "E:\\TopazioMission010Cache", "canonical_path": "E:\\TopazioMobileServerOS\\local\\cache\\mission010", "files": 13, "bytes": 10543474, "removed": true, "removed_at": "2026-10-06", "bytes_reclaimed": 10543474},
+      {"original_path": "E:\\TopazioMission011Cache", "canonical_path": "E:\\TopazioMobileServerOS\\local\\cache\\mission011", "files": 220, "bytes": 58881629, "removed": true, "removed_at": "2026-10-06", "bytes_reclaimed": 58881629},
+      {"original_path": "C:\\Users\\User\\AppData\\Local\\Temp\\topazio-mission012-raw", "canonical_path": "E:\\TopazioMobileServerOS\\local\\logs\\mission012", "files": 1, "bytes": 9274, "removed": true, "removed_at": "2026-10-06", "bytes_reclaimed": 9274},
+      {"original_path": "C:\\Users\\User\\AppData\\Local\\Temp\\topazio-mission012b-raw", "canonical_path": "E:\\TopazioMobileServerOS\\local\\logs\\mission012b", "files": 4, "bytes": 28, "removed": true, "removed_at": "2026-10-06", "bytes_reclaimed": 28}
+    ],
     "migrated_and_verified": [
-      {"from": "C:\\RedmiLabAudit", "to": "E:\\TopazioMobileServerOS\\local\\backups\\mission-012c\\redmi-lab-audit", "original_path": "C:\\RedmiLabAudit", "canonical_path": "E:\\TopazioMobileServerOS\\local\\backups\\mission-012c\\redmi-lab-audit", "files": 13, "bytes": 9077833, "verification": "2026-10-06 revalidation: file set, bytes, timestamps, SHA-256, and Mission 012-C backup manifest all matched", "removed": false, "removed_at": null, "bytes_reclaimed": 0},
-      {"from": "C:\\Users\\User\\AppData\\Local\\Temp\\topazio-mission009-cache", "to": "E:\\TopazioMobileServerOS\\local\\cache\\mission009", "original_path": "C:\\Users\\User\\AppData\\Local\\Temp\\topazio-mission009-cache", "canonical_path": "E:\\TopazioMobileServerOS\\local\\cache\\mission009", "files": 15, "bytes": 170505276, "verification": "2026-10-06 revalidation: file set, bytes, timestamps, and SHA-256 all matched", "removed": false, "removed_at": null, "bytes_reclaimed": 0},
-      {"from": "E:\\TopazioMission010Cache", "to": "E:\\TopazioMobileServerOS\\local\\cache\\mission010", "original_path": "E:\\TopazioMission010Cache", "canonical_path": "E:\\TopazioMobileServerOS\\local\\cache\\mission010", "files": 13, "bytes": 10543474, "verification": "2026-10-06 revalidation: file set, bytes, timestamps, and SHA-256 all matched", "removed": false, "removed_at": null, "bytes_reclaimed": 0},
-      {"from": "E:\\TopazioMission011Cache", "to": "E:\\TopazioMobileServerOS\\local\\cache\\mission011", "original_path": "E:\\TopazioMission011Cache", "canonical_path": "E:\\TopazioMobileServerOS\\local\\cache\\mission011", "files": 220, "bytes": 58881629, "verification": "2026-10-06 revalidation: file set, bytes, timestamps, and SHA-256 all matched", "removed": false, "removed_at": null, "bytes_reclaimed": 0},
-      {"from": "C:\\Users\\User\\AppData\\Local\\Temp\\topazio-mission012-raw", "to": "E:\\TopazioMobileServerOS\\local\\logs\\mission012", "original_path": "C:\\Users\\User\\AppData\\Local\\Temp\\topazio-mission012-raw", "canonical_path": "E:\\TopazioMobileServerOS\\local\\logs\\mission012", "files": 1, "bytes": 9274, "verification": "2026-10-06 revalidation: file set, bytes, timestamps, and SHA-256 all matched", "removed": false, "removed_at": null, "bytes_reclaimed": 0},
-      {"from": "C:\\Users\\User\\AppData\\Local\\Temp\\topazio-mission012b-raw", "to": "E:\\TopazioMobileServerOS\\local\\logs\\mission012b", "original_path": "C:\\Users\\User\\AppData\\Local\\Temp\\topazio-mission012b-raw", "canonical_path": "E:\\TopazioMobileServerOS\\local\\logs\\mission012b", "files": 4, "bytes": 28, "verification": "2026-10-06 revalidation: file set, bytes, timestamps, and SHA-256 all matched", "removed": false, "removed_at": null, "bytes_reclaimed": 0}
+      {"from": "C:\\RedmiLabAudit", "to": "E:\\TopazioMobileServerOS\\local\\backups\\mission-012c\\redmi-lab-audit", "original_path": "C:\\RedmiLabAudit", "canonical_path": "E:\\TopazioMobileServerOS\\local\\backups\\mission-012c\\redmi-lab-audit", "files": 13, "bytes": 9077833, "verification": "2026-10-06 revalidation: file set, bytes, timestamps, SHA-256, and Mission 012-C backup manifest all matched; post-cleanup Test-Path is False", "removed": true, "removed_at": "2026-10-06", "bytes_reclaimed": 9077833},
+      {"from": "C:\\Users\\User\\AppData\\Local\\Temp\\topazio-mission009-cache", "to": "E:\\TopazioMobileServerOS\\local\\cache\\mission009", "original_path": "C:\\Users\\User\\AppData\\Local\\Temp\\topazio-mission009-cache", "canonical_path": "E:\\TopazioMobileServerOS\\local\\cache\\mission009", "files": 15, "bytes": 170505276, "verification": "2026-10-06 revalidation: file set, bytes, timestamps, and SHA-256 all matched; post-cleanup Test-Path is False", "removed": true, "removed_at": "2026-10-06", "bytes_reclaimed": 170505276},
+      {"from": "E:\\TopazioMission010Cache", "to": "E:\\TopazioMobileServerOS\\local\\cache\\mission010", "original_path": "E:\\TopazioMission010Cache", "canonical_path": "E:\\TopazioMobileServerOS\\local\\cache\\mission010", "files": 13, "bytes": 10543474, "verification": "2026-10-06 revalidation: file set, bytes, timestamps, and SHA-256 all matched; post-cleanup Test-Path is False", "removed": true, "removed_at": "2026-10-06", "bytes_reclaimed": 10543474},
+      {"from": "E:\\TopazioMission011Cache", "to": "E:\\TopazioMobileServerOS\\local\\cache\\mission011", "original_path": "E:\\TopazioMission011Cache", "canonical_path": "E:\\TopazioMobileServerOS\\local\\cache\\mission011", "files": 220, "bytes": 58881629, "verification": "2026-10-06 revalidation: file set, bytes, timestamps, SHA-256 all matched; post-cleanup Test-Path is False", "removed": true, "removed_at": "2026-10-06", "bytes_reclaimed": 58881629},
+      {"from": "C:\\Users\\User\\AppData\\Local\\Temp\\topazio-mission012-raw", "to": "E:\\TopazioMobileServerOS\\local\\logs\\mission012", "original_path": "C:\\Users\\User\\AppData\\Local\\Temp\\topazio-mission012-raw", "canonical_path": "E:\\TopazioMobileServerOS\\local\\logs\\mission012", "files": 1, "bytes": 9274, "verification": "2026-10-06 revalidation: file set, bytes, timestamps, and SHA-256 all matched; post-cleanup Test-Path is False", "removed": true, "removed_at": "2026-10-06", "bytes_reclaimed": 9274},
+      {"from": "C:\\Users\\User\\AppData\\Local\\Temp\\topazio-mission012b-raw", "to": "E:\\TopazioMobileServerOS\\local\\logs\\mission012b", "original_path": "C:\\Users\\User\\AppData\\Local\\Temp\\topazio-mission012b-raw", "canonical_path": "E:\\TopazioMobileServerOS\\local\\logs\\mission012b", "files": 4, "bytes": 28, "verification": "2026-10-06 revalidation: file set, bytes, timestamps, SHA-256 all matched; post-cleanup Test-Path is False", "removed": true, "removed_at": "2026-10-06", "bytes_reclaimed": 28}
     ],
     "revalidated_at": "2026-10-06",
-    "revalidation_result": "All six candidates passed file-set, count, byte, timestamp, SHA-256, and canonical-destination checks.",
-    "pending_duplicate_cleanup": "The host blocked the explicit recursive removal command before execution. No source was deleted; all six remain classified as verified DUPLICATE entries.",
+    "revalidation_result": "All six candidates passed file-set, count, byte, timestamp, SHA-256, and canonical-destination checks; post-cleanup Test-Path confirmed all six original paths are absent.",
+    "pending_duplicate_cleanup": 0,
+    "bytes_reclaimed": 249017514,
+    "removal_method": "User manually executed the six exact restricted commands documented in docs/MANUAL-CLEANUP-REQUIRED.md.",
     "manual_cleanup_document": "docs/MANUAL-CLEANUP-REQUIRED.md"
   }
 }

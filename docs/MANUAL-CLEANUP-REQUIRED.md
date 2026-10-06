@@ -1,10 +1,10 @@
-# Manual cleanup required — Mission 012-D
+# Manual cleanup record — Mission 012-E
 
-Status: `COMPLETE_EXCEPT_MANUAL_CLEANUP`.
+Status: `COMPLETE`.
 
 The six original trees below were revalidated on 2026-10-06. For every tree, the source and canonical destination have identical relative file sets, file counts, byte totals, timestamps, and SHA-256 values. The `C:\RedmiLabAudit` files also match `local/backups/mission-012c/sha256-manifest.json`.
 
-The host blocked the first explicit `Remove-Item` call before execution. No protection was bypassed, no ACL was changed, and no source was removed. The commands below are intentionally separate and exact; run them manually only if the user wants to perform this final cleanup with the required Windows privilege.
+The user subsequently executed the six exact restricted commands below manually. No protection was bypassed and no ACL was changed. Post-cleanup checks confirmed that every original path is absent and every canonical destination remains present. This file is retained as the historical approval and command record; cleanup pending is `0`.
 
 ## Approved candidates
 
@@ -30,6 +30,6 @@ Remove-Item -LiteralPath 'C:\Users\User\AppData\Local\Temp\topazio-mission012-ra
 Remove-Item -LiteralPath 'C:\Users\User\AppData\Local\Temp\topazio-mission012b-raw' -Recurse -Force
 ```
 
-After each command, confirm that its exact original path no longer exists and that the canonical destination still exists. If any command fails or any comparison changes, stop and leave the remaining candidates intact. Do not remove `C:\AndroidTools\platform-tools`, any WSL distribution, `E:\TopazioMobileServerOS\local\`, its backup, or any protected/unrelated project.
+The commands were run one at a time, with the exact original paths and canonical destinations checked afterward. Do not remove `C:\AndroidTools\platform-tools`, any WSL distribution, `E:\TopazioMobileServerOS\local\`, its backup, or any protected/unrelated project.
 
-The six originals currently remain because the host denied the removal operation; current reclaimed bytes are zero.
+All six originals were removed; the canonical local copies remain intact. Files removed from the six duplicate source trees: 266. Bytes reclaimed: 249,017,514. No cleanup action remains pending.

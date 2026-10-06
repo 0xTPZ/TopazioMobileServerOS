@@ -27,7 +27,7 @@ If the local backup was carried separately, restore it to:
 
 `E:\TopazioMobileServerOS\local\backups\mission-012c\redmi-lab-audit`
 
-Validate every file against `local/backups/mission-012c/sha256-manifest.json`. The historical source was copied from `C:\RedmiLabAudit`; that original is currently a verified duplicate and should not be removed until the host permits the explicit cleanup gate. The raw audit should remain local-only.
+Validate every file against `local/backups/mission-012c/sha256-manifest.json`. The historical source was copied from `C:\RedmiLabAudit`; that original was removed manually after the Mission 012-E revalidation. The canonical raw audit should remain local-only.
 
 ## 4. Restore or regenerate caches
 
