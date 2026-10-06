@@ -3,6 +3,7 @@
   "generated_at": "2026-10-06",
   "project": "Topazio Mobile Server OS",
   "canonical_repository": "E:\\TopazioMobileServerOS",
+  "closeout_status": "COMPLETE_EXCEPT_MANUAL_CLEANUP",
   "inventory_method": "Read-only PowerShell inventory of project-owned paths and explicitly named external dependencies. Windows, Program Files, WSL filesystems, and protected projects were not modified.",
   "classification_vocabulary": [
     "SOURCE",
@@ -392,13 +393,16 @@
   "deletion_policy_result": {
     "deleted_paths": [],
     "migrated_and_verified": [
-      {"from": "C:\\RedmiLabAudit", "to": "E:\\TopazioMobileServerOS\\local\\backups\\mission-012c\\redmi-lab-audit", "files": 13, "bytes": 9077833},
-      {"from": "C:\\Users\\User\\AppData\\Local\\Temp\\topazio-mission009-cache", "to": "E:\\TopazioMobileServerOS\\local\\cache\\mission009", "files": 15, "bytes": 170505276},
-      {"from": "E:\\TopazioMission010Cache", "to": "E:\\TopazioMobileServerOS\\local\\cache\\mission010", "files": 13, "bytes": 10543474},
-      {"from": "E:\\TopazioMission011Cache", "to": "E:\\TopazioMobileServerOS\\local\\cache\\mission011", "files": 220, "bytes": 58881629},
-      {"from": "C:\\Users\\User\\AppData\\Local\\Temp\\topazio-mission012-raw", "to": "E:\\TopazioMobileServerOS\\local\\logs\\mission012", "files": 1, "bytes": 9274},
-      {"from": "C:\\Users\\User\\AppData\\Local\\Temp\\topazio-mission012b-raw", "to": "E:\\TopazioMobileServerOS\\local\\logs\\mission012b", "files": 4, "bytes": 28}
+      {"from": "C:\\RedmiLabAudit", "to": "E:\\TopazioMobileServerOS\\local\\backups\\mission-012c\\redmi-lab-audit", "original_path": "C:\\RedmiLabAudit", "canonical_path": "E:\\TopazioMobileServerOS\\local\\backups\\mission-012c\\redmi-lab-audit", "files": 13, "bytes": 9077833, "verification": "2026-10-06 revalidation: file set, bytes, timestamps, SHA-256, and Mission 012-C backup manifest all matched", "removed": false, "removed_at": null, "bytes_reclaimed": 0},
+      {"from": "C:\\Users\\User\\AppData\\Local\\Temp\\topazio-mission009-cache", "to": "E:\\TopazioMobileServerOS\\local\\cache\\mission009", "original_path": "C:\\Users\\User\\AppData\\Local\\Temp\\topazio-mission009-cache", "canonical_path": "E:\\TopazioMobileServerOS\\local\\cache\\mission009", "files": 15, "bytes": 170505276, "verification": "2026-10-06 revalidation: file set, bytes, timestamps, and SHA-256 all matched", "removed": false, "removed_at": null, "bytes_reclaimed": 0},
+      {"from": "E:\\TopazioMission010Cache", "to": "E:\\TopazioMobileServerOS\\local\\cache\\mission010", "original_path": "E:\\TopazioMission010Cache", "canonical_path": "E:\\TopazioMobileServerOS\\local\\cache\\mission010", "files": 13, "bytes": 10543474, "verification": "2026-10-06 revalidation: file set, bytes, timestamps, and SHA-256 all matched", "removed": false, "removed_at": null, "bytes_reclaimed": 0},
+      {"from": "E:\\TopazioMission011Cache", "to": "E:\\TopazioMobileServerOS\\local\\cache\\mission011", "original_path": "E:\\TopazioMission011Cache", "canonical_path": "E:\\TopazioMobileServerOS\\local\\cache\\mission011", "files": 220, "bytes": 58881629, "verification": "2026-10-06 revalidation: file set, bytes, timestamps, and SHA-256 all matched", "removed": false, "removed_at": null, "bytes_reclaimed": 0},
+      {"from": "C:\\Users\\User\\AppData\\Local\\Temp\\topazio-mission012-raw", "to": "E:\\TopazioMobileServerOS\\local\\logs\\mission012", "original_path": "C:\\Users\\User\\AppData\\Local\\Temp\\topazio-mission012-raw", "canonical_path": "E:\\TopazioMobileServerOS\\local\\logs\\mission012", "files": 1, "bytes": 9274, "verification": "2026-10-06 revalidation: file set, bytes, timestamps, and SHA-256 all matched", "removed": false, "removed_at": null, "bytes_reclaimed": 0},
+      {"from": "C:\\Users\\User\\AppData\\Local\\Temp\\topazio-mission012b-raw", "to": "E:\\TopazioMobileServerOS\\local\\logs\\mission012b", "original_path": "C:\\Users\\User\\AppData\\Local\\Temp\\topazio-mission012b-raw", "canonical_path": "E:\\TopazioMobileServerOS\\local\\logs\\mission012b", "files": 4, "bytes": 28, "verification": "2026-10-06 revalidation: file set, bytes, timestamps, and SHA-256 all matched", "removed": false, "removed_at": null, "bytes_reclaimed": 0}
     ],
-    "pending_duplicate_cleanup": "The host blocked the separate recursive removal of the six exact source roots. No source was deleted; all remain classified as verified DUPLICATE entries."
+    "revalidated_at": "2026-10-06",
+    "revalidation_result": "All six candidates passed file-set, count, byte, timestamp, SHA-256, and canonical-destination checks.",
+    "pending_duplicate_cleanup": "The host blocked the explicit recursive removal command before execution. No source was deleted; all six remain classified as verified DUPLICATE entries.",
+    "manual_cleanup_document": "docs/MANUAL-CLEANUP-REQUIRED.md"
   }
 }
