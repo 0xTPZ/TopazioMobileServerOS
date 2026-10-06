@@ -18,22 +18,22 @@ Important tracked areas:
 | `build/` | Generated build outputs; never treated as source of truth |
 | `local/` | Local-only cache, backup, and quarantine area; ignored by Git |
 
-## Preserved external material
+## Preserved non-Git material
 
 | Location | Classification | Action |
 | --- | --- | --- |
 | `C:\AndroidTools\platform-tools` | Shared external dependency | Keep in place; version and hashes are recorded in `EXTERNAL-DEPENDENCIES.md` |
-| `C:\RedmiLabAudit` | Historical evidence | Keep original for compatibility and preserve a byte-identical copy under `local/backups/mission-012c/` |
-| `%TEMP%\topazio-mission009-cache` | Firmware/boot analysis cache | Keep external and documented; do not commit raw images |
-| `E:\TopazioMission010Cache` | DTBO/vbmeta cache | Keep external and documented; do not commit raw images |
-| `E:\TopazioMission011Cache` | vendor_dlkm cache | Keep external and documented; do not commit proprietary modules |
-| `%TEMP%\topazio-mission012-raw` | Host-only raw capture | Keep external until a separately approved cleanup window |
-| `%TEMP%\topazio-mission012b-raw` | Transport probe output | Keep external until a separately approved cleanup window |
+| `local/backups/mission-012c/redmi-lab-audit` | Historical evidence | Canonical local-only preservation; raw identifiers stay out of Git |
+| `local/cache/mission009` | Firmware/boot analysis cache | Canonical local-only cache; raw images stay out of Git |
+| `local/cache/mission010` | DTBO/vbmeta cache | Canonical local-only cache; raw images stay out of Git |
+| `local/cache/mission011` | vendor_dlkm cache | Canonical local-only cache; proprietary modules stay out of Git |
+| `local/logs/mission012` | Host-only raw capture | Canonical local-only log |
+| `local/logs/mission012b` | Transport probe output | Canonical local-only log |
 
-The external caches remain outside Git intentionally: they are large, contain proprietary or raw firmware material, and their deletion was not proven safe. The canonical manifest records their relationship, size, and reason.
+The local caches remain outside Git intentionally: they are large, contain proprietary or raw firmware material, and are now under the canonical `local/` root. Their six original C:/E: locations remain as verified duplicate sources because the host blocked the separate recursive-removal step; the canonical manifest records those pending cleanups.
 
 ## Boundaries
 
 The following are explicitly outside this project's change scope: `E:\Topazio`, `E:\TopazioReader`, `E:\TopazioAudioVideo`, `E:\AFolha`, `E:\LocalCoder`, `E:\MuOnline`, `E:\TopazioProjectManager`, `E:\OpenCut`, `E:\informacoes vps.txt`, Windows system directories, and the contents of all WSL distributions. Independent Git repositories found at `E:\AlicePlatform`, `E:\TopazioAI`, and `E:\Zelvya` were not inspected or changed.
 
-No ADB, fastboot, WSL filesystem, driver installation, firmware operation, deletion, or Mission 013 activity belongs to this consolidation pass.
+No ADB, fastboot, WSL filesystem, driver installation, firmware operation, or Mission 013 activity belongs to this consolidation pass. The only pending housekeeping action is removal of the six verified duplicate source roots by a host cleanup operation that permits it.

@@ -47,9 +47,14 @@ captures/
 **/firmware/**
 **/blobs/**
 
-# Canonical local-only material: preserved caches, backups, quarantine, and
-# other evidence that must never enter the Git repository.
+# Canonical local-only material: preserved caches, backups, logs, quarantine,
+# and other evidence that must never enter the Git repository.
 local/cache/**
+local/firmware/**
+local/toolchains/**
+local/sources/**
+local/artifacts/**
+local/logs/**
 local/backups/**
 local/quarantine/**
 

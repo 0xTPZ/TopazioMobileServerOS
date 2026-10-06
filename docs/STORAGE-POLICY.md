@@ -16,6 +16,19 @@ Mission 012-C establishes this policy for Topazio Mobile Server OS.
 | `PROTECTED_UNRELATED_PROJECT` | Other user's or unrelated project material | Original location | Do not inspect, move, or change |
 | `UNKNOWN_REVIEW_REQUIRED` | Material whose ownership or purpose is not established | Quarantine only after planning | Never delete by assumption |
 
+## Operational storage categories
+
+| Category | Rule |
+| --- | --- |
+| `TRACKED` | Public source, documentation, tests, configuration, scripts, sanitized metadata, provenance, and recipes only. |
+| `LOCAL_REQUIRED` | Unique local evidence or a recovery artifact that cannot be reconstructed from Git alone; keep under `local/` with a manifest. |
+| `LOCAL_CACHE` | Large raw inputs retained for convenience; keep ignored and regenerate when practical. |
+| `REPRODUCIBLE` | Rebuildable output or download described by source, version, commit/range, and hash; metadata belongs in Git, bytes do not. |
+| `PROPRIETARY` | Firmware, OTA, vendor modules, or blobs; keep local-only and never publish. |
+| `SHARED_EXTERNAL` | Platform Tools, WSL, or another host resource used outside this project; do not move or delete during project housekeeping. |
+| `TEMPORARY` | Short-lived capture or staging material; preserve while evidence is needed, then remove only after proof. |
+| `QUARANTINE` | Unclassified material held under `local/quarantine/` with a reason and hash manifest. |
+
 ## Canonical layout
 
 `local/cache/`, `local/firmware/`, `local/toolchains/`, `local/sources/`, `local/artifacts/`, `local/logs/`, `local/backups/`, and `local/quarantine/` are reserved for local-only material. All are ignored by `.gitignore` where they contain raw or recoverable data. The committed `local-manifest.json` records what exists outside the checkout and why.

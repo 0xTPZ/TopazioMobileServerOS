@@ -27,11 +27,11 @@ If the local backup was carried separately, restore it to:
 
 `E:\TopazioMobileServerOS\local\backups\mission-012c\redmi-lab-audit`
 
-Validate every file against `local/backups/mission-012c/sha256-manifest.json`. If the original `C:\RedmiLabAudit` is retained, compare both copies before considering any future cleanup. The raw audit should remain local-only.
+Validate every file against `local/backups/mission-012c/sha256-manifest.json`. The historical source was copied from `C:\RedmiLabAudit`; that original is currently a verified duplicate and should not be removed until the host permits the explicit cleanup gate. The raw audit should remain local-only.
 
 ## 4. Restore or regenerate caches
 
-Mission 009, 010, and 011 caches are not part of the Git checkout. Prefer regenerating them from the recorded public source, URL, commit, and hash metadata. If a cache is restored from a disk backup, keep it at its documented external path and verify the hashes before use. Never add raw `.img`, `.bin`, `.dtb`, `.ko`, OTA, or proprietary vendor files to Git.
+Mission 009, 010, and 011 caches are not part of the Git checkout. The current canonical local locations are `local/cache/mission009`, `local/cache/mission010`, and `local/cache/mission011`; the raw material is ignored. Prefer regenerating them from the recorded public source, URL, commit, and hash metadata. If a cache is restored from a disk backup, verify the hashes before use. Never add raw `.img`, `.bin`, `.dtb`, `.ko`, OTA, or proprietary vendor files to Git.
 
 ## 5. WSL build environment
 

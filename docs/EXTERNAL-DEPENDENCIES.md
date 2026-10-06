@@ -18,27 +18,27 @@ Keep this installation external because it is shared by other Android work. If i
 
 Mission 012-C did not address a phone with ADB or fastboot. The last known transport result remains the sanitized Mission 012-B observation: both device lists were empty.
 
-## Historical Redmi audit
+## Historical Redmi audit and local caches
 
-`C:\RedmiLabAudit` is a project-owned historical audit directory with 13 files and 9,077,833 bytes. It includes the report, command history, a failed HTML download saved with a `.zip` suffix, and an extracted Google USB driver package that did not match the live MediaTek hardware ID.
+The project-owned historical audit is preserved canonically at `E:\TopazioMobileServerOS\local\backups\mission-012c\redmi-lab-audit` with 13 files and 9,077,833 bytes. It includes the report, command history, a failed HTML download saved with a `.zip` suffix, and an extracted Google USB driver package that did not match the live MediaTek hardware ID.
 
 The exact byte-identical local preservation is at:
 
 `E:\TopazioMobileServerOS\local\backups\mission-012c\redmi-lab-audit`
 
-Its SHA-256 manifest is at `local/backups/mission-012c/sha256-manifest.json`. The directory is ignored, and the raw report is not committed because it contains device/local-environment identifiers.
+Its SHA-256 manifest is at `local/backups/mission-012c/sha256-manifest.json`. The directory is ignored, and the raw report is not committed because it contains device/local-environment identifiers. The original `C:\RedmiLabAudit` remains as a verified duplicate only because the host blocked its separate recursive-removal operation.
 
 ## Mission caches
 
 | Path | Files | Bytes | Interpretation |
 | --- | ---: | ---: | --- |
-| `C:\Users\User\AppData\Local\Temp\topazio-mission009-cache` | 15 | 170,505,276 | OTA/boot image and extracted kernel/ramdisk material |
-| `E:\TopazioMission010Cache` | 13 | 10,543,474 | DTBO/vbmeta analysis and operation fragments |
-| `E:\TopazioMission011Cache` | 220 | 58,881,629 | vendor_dlkm image, extraction, and kernel modules |
-| `C:\Users\User\AppData\Local\Temp\topazio-mission012-raw` | 1 | 9,274 | Host audit JSON |
-| `C:\Users\User\AppData\Local\Temp\topazio-mission012b-raw` | 4 | 28 | Empty/short transport command outputs |
+| `E:\TopazioMobileServerOS\local\cache\mission009` | 15 | 170,505,276 | OTA/boot image and extracted kernel/ramdisk material |
+| `E:\TopazioMobileServerOS\local\cache\mission010` | 13 | 10,543,474 | DTBO/vbmeta analysis and operation fragments |
+| `E:\TopazioMobileServerOS\local\cache\mission011` | 220 | 58,881,629 | vendor_dlkm image, extraction, and kernel modules |
+| `E:\TopazioMobileServerOS\local\logs\mission012` | 1 | 9,274 | Host audit JSON |
+| `E:\TopazioMobileServerOS\local\logs\mission012b` | 4 | 28 | Empty/short transport command outputs |
 
-These are external, ignored, and documented rather than copied into Git. The repository already contains the analytical metadata and hashes needed to identify them. A future cleanup may remove a cache only after confirming that its source URL/commit is still available, the canonical metadata is complete, the local backup policy is satisfied, and no other project references the path.
+These are canonical local-only, ignored, and documented rather than copied into Git. The repository already contains the analytical metadata and hashes needed to identify them. Their original C:/E: trees were copied and verified file-by-file before the host blocked separate recursive cleanup; the originals remain documented duplicates awaiting a permitted cleanup operation.
 
 No separate `mt6781`, `k6781`, `sea-t-oss`, firmware, OTA, or toolchain checkout was adopted from the permitted C:/E: scan. The tracked repository is the source for reconstruction metadata; WSL Ubuntu 24.04 is the documented build environment. Other Topazio-named folders and independent Git repositories were classified as unrelated and were not made dependencies.
 

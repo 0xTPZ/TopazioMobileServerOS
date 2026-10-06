@@ -11,15 +11,15 @@ Captured on 2026-10-06 (America/Sao_Paulo). Values are Windows `Get-PSDrive` byt
 
 The pre-preservation project tree was measured at approximately 2,586,613,766 bytes. The exact method included the generated build tree and is retained as a baseline for this pass.
 
-## After preservation
+## After preservation and canonical copy
 
 | Volume | Used bytes | Free bytes | Delta used |
 | --- | ---: | ---: | ---: |
-| `C:` | 203,559,927,808 | 36,255,690,752 | -6,946,816 |
-| `E:` | 135,302,635,520 | 864,374,067,200 | +10,903,552 |
+| `C:` | 203,252,379,648 | 36,563,238,912 | -314,494,976 |
+| `E:` | 133,502,304,256 | 866,174,398,464 | -1,789,427,712 |
 
-The local preservation copy contains 9,077,833 bytes. The small discrepancy in volume deltas is normal filesystem allocation and concurrent host activity; no cleanup deletion was performed. The current repository working tree measurement, excluding `.git` metadata, is 2,592,407,990 bytes; it includes the ignored local backup.
+The canonical local copy contains 266 files and 249,017,514 bytes. The complete working tree, excluding `.git` metadata, currently measures 522 files and 2,832,383,050 bytes, including ignored local material. The volume counters changed substantially because of concurrent host filesystem activity; they are not treated as reclaimed space. No source deletion was performed: the six original roots remain verified duplicates after the host blocked the separate recursive-removal step.
 
 ## Interpretation
 
-The consolidation added a verified local recovery copy and documentation. It did not reclaim space because deletion of any external cache or evidence was not proven safe. Raw firmware caches remain documented external material and can be handled by a later, separately approved retention decision.
+The consolidation added a verified local recovery copy and documentation. Bytes liberated: 0. Bytes preserved in canonical local storage: 249,017,514. Shared dependencies remaining outside the workspace are Platform Tools and WSL; project-specific originals are pending safe host cleanup and are listed in `local-manifest.json`.
