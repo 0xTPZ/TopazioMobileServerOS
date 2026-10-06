@@ -18,7 +18,7 @@ The pre-preservation project tree was measured at approximately 2,586,613,766 by
 | `C:` | 203,252,379,648 | 36,563,238,912 | -314,494,976 |
 | `E:` | 133,502,304,256 | 866,174,398,464 | -1,789,427,712 |
 
-The canonical local copy contains 266 migrated payload files and 249,017,514 bytes; with its one local manifest file, `local/` contains 267 files and 249,019,935 bytes. The complete working tree, excluding `.git` metadata, currently measures 522 files and 2,832,383,292 bytes, including ignored local material. Mission 012-D revalidated all six approved source/destination pairs by file set, count, bytes, timestamps, and SHA-256. The host blocked the explicit removal command before execution, so no source deletion was performed and no bytes were reclaimed.
+The canonical local copy contains 266 migrated payload files and 249,017,514 bytes; with its one local manifest file, `local/` contains 267 files and 249,019,935 bytes. The complete working tree, excluding `.git` metadata, currently measures 523 files and 2,832,388,685 bytes, including ignored local material and the manual cleanup runbook. Mission 012-D revalidated all six approved source/destination pairs by file set, count, bytes, timestamps, and SHA-256. The host blocked the explicit removal command before execution, so no source deletion was performed and no bytes were reclaimed.
 
 ## Interpretation
 
